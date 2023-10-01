@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bookmark_Manager_Client.Communicator
+namespace Bookmark_Manager_Client.DataProvider
 {
-    public interface ICommunicator
+    public interface IDataProvider
     {
         void SetUpConnection();
         ObservableCollection<Category> GetCategories(uint id);

@@ -87,6 +87,8 @@
     <Compile Include="CategoryWindow.xaml.cs">
       <DependentUpon>CategoryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataProvider\FakeDataProvider.cs" />
+    <Compile Include="DataProvider\IDataProvider.cs" />
     <Compile Include="Configurators\AppConfiguration.cs" />
     <Compile Include="Configurators\GlobalConfigurator.cs" />
     <Compile Include="Controller\BookmarkController.cs" />
@@ -96,11 +98,12 @@
     <Compile Include="Controller\MainViewModelController.cs" />
     <Compile Include="Controller\PermissionManagerForCategoryController.cs" />
     <Compile Include="Controller\PermissionManagerForController.cs" />
-    <Compile Include="Controller\RestConnectionHandler.cs" />
+    <Compile Include="DataProvider\RestDataProvider.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\User.cs" />
+    <Compile Include="ObjectRepository.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="WindowLogin.xaml.cs">
       <DependentUpon>WindowLogin.xaml</DependentUpon>

@@ -10,11 +10,11 @@ using RestSharp.Serializers.NewtonsoftJson;
 using Bookmark_Manager_Client.Model;
 using Newtonsoft.Json;
 
-namespace Bookmark_Manager_Client.Communicator 
+namespace Bookmark_Manager_Client.DataProvider 
 {
-    public class RestCommunicator : ICommunicator
+    public class RestDataProvider : IDataProvider
     {
-        private static RestCommunicator instance;
+        private static RestDataProvider instance;
         private RestClient client;
         private string host;
         public string InternalUrl
@@ -64,7 +64,7 @@ namespace Bookmark_Manager_Client.Communicator
         {
             return false;
         }
-        private RestCommunicator()
+        private RestDataProvider()
         {
             
         }
@@ -95,12 +95,12 @@ namespace Bookmark_Manager_Client.Communicator
             return client.Get<User>(request);
         }
         private static readonly object _lock = new object();
-        public static RestCommunicator GetInstance()
+        public static RestDataProvider GetInstance()
         {
             if (instance == null)
             {
                 lock (_lock)
-                    instance = new RestCommunicator();
+                    instance = new RestDataProvider();
                 return instance;
             }
             else

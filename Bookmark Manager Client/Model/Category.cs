@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
 using Bookmark_Manager_Client.Controller;
+using Bookmark_Manager_Client.DataProvider;
 
 namespace Bookmark_Manager_Client.Model
 {
@@ -96,7 +97,7 @@ namespace Bookmark_Manager_Client.Model
         {
             if (childCategories.Count > 0)
                 return;
-            var cat = RestCommunicator.GetInstance().GetCategories(ID);
+            var cat = ObjectRepository.DataProvider.GetCategories(ID);
             foreach (var item in cat)
                 childCategories.Add(item);
         }
@@ -104,14 +105,14 @@ namespace Bookmark_Manager_Client.Model
         {
             if (bookmarks.Count > 0)
                 return;
-            var bm = RestCommunicator.GetInstance().GetBookmarks(ID);
+            var bm = ObjectRepository.DataProvider.GetBookmarks(ID);
             if(bm != null)
                 foreach (var item in bm)
                     bookmarks.Add(item);
         }
         public void GetPermissionUsers()
         {
-            var users = RestCommunicator.GetInstance().GetPermissionUsers(ID);
+            var users = ObjectRepository.DataProvider.GetPermittedUsers(ID);
             permissionUsers.Clear();
             if(users != null)
                 foreach (var user in users)
