@@ -26,7 +26,7 @@ namespace Bookmark_Manager_Client
     /// </summary>
     public partial class MainWindow
     {
-        public ModelViewController controller = new ModelViewController();
+        public MainViewModelController controller = new MainViewModelController();
         public ApplicationSettings settings = new ApplicationSettings();
         public MainWindow()
         {
@@ -55,6 +55,7 @@ namespace Bookmark_Manager_Client
 
         private void ButtonAddCategory_Click(object sender, RoutedEventArgs e)
         {
+            /*
             if(treeViewCategory.SelectedItem == null)
             {
                 var categoryWindow = new CategoryWindow(controller.Categories, CategoryWindow.WindowMode.CreateNewCategory);
@@ -77,11 +78,12 @@ namespace Bookmark_Manager_Client
                 }
                 
             }
-            
+            */
             
         }
         private void ButtonEditCategory_Click(object sender, RoutedEventArgs e)
         {
+            /*
             if(treeViewCategory.SelectedItem != null)
             {
                 if (((Category)treeViewCategory.SelectedItem).OwnerID == RestConnectionHandler.GetInstance().CurrentUser.ID)
@@ -93,6 +95,7 @@ namespace Bookmark_Manager_Client
                 else
                     MessageBox.Show("Sie sind kein Besitzer der Kategorie");
             }
+            */
         }
         private void ButtonRemoveCategory_Click(object sender, RoutedEventArgs e)
         {
@@ -102,7 +105,7 @@ namespace Bookmark_Manager_Client
                     MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if(result == MessageBoxResult.Yes)
                 {
-                    controller.DeleteCategory((Category)treeViewCategory.SelectedItem);
+                    //controller.DeleteCategory((Category)treeViewCategory.SelectedItem);
                 }
 
             }

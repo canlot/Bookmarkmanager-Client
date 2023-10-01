@@ -93,7 +93,7 @@
     <Compile Include="Controller\CategoryController.cs" />
     <Compile Include="Controller\IPermitableObjectController.cs" />
     <Compile Include="Controller\LoginController.cs" />
-    <Compile Include="Controller\ModelViewController.cs" />
+    <Compile Include="Controller\MainViewModelController.cs" />
     <Compile Include="Controller\PermissionManagerForCategoryController.cs" />
     <Compile Include="Controller\PermissionManagerForController.cs" />
     <Compile Include="Controller\RestConnectionHandler.cs" />
