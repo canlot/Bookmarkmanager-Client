@@ -10,11 +10,11 @@ using RestSharp.Serializers.NewtonsoftJson;
 using Bookmark_Manager_Client.Model;
 using Newtonsoft.Json;
 
-namespace Bookmark_Manager_Client.Controller
+namespace Bookmark_Manager_Client.Communicator 
 {
-    public class RestConnectionHandler
+    public class RestCommunicator : ICommunicator
     {
-        private static RestConnectionHandler instance;
+        private static RestCommunicator instance;
         private RestClient client;
         private string host;
         public string InternalUrl
@@ -64,7 +64,7 @@ namespace Bookmark_Manager_Client.Controller
         {
             return false;
         }
-        private RestConnectionHandler()
+        private RestCommunicator()
         {
             
         }
@@ -95,12 +95,12 @@ namespace Bookmark_Manager_Client.Controller
             return client.Get<User>(request);
         }
         private static readonly object _lock = new object();
-        public static RestConnectionHandler GetInstance()
+        public static RestCommunicator GetInstance()
         {
             if (instance == null)
             {
                 lock (_lock)
-                    instance = new RestConnectionHandler();
+                    instance = new RestCommunicator();
                 return instance;
             }
             else
@@ -130,7 +130,7 @@ namespace Bookmark_Manager_Client.Controller
             return client.Get<ObservableCollection<Bookmark>>(request);
         
         }
-        public ObservableCollection<User> GetPermissionUsers(uint id)
+        public ObservableCollection<User> GetPermittedUsers(uint id)
         {
             //var request = new RestRequest("categories/" + id.ToString() + "/permissions/", RestSharp.DataFormat.Json);
             var request = new RestRequest("categories/" + id.ToString() + "/permissions/", Method.Get);
@@ -235,6 +235,16 @@ namespace Bookmark_Manager_Client.Controller
                 return true;
             else
                 return false;
+        }
+
+        public bool PutBookmark(Bookmark bookmark)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteBookmark(Bookmark bookmark)
+        {
+            throw new NotImplementedException();
         }
     }
 }

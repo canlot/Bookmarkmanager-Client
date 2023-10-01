@@ -25,18 +25,18 @@ namespace Bookmark_Manager_Client.Controller
                 foreach (var user in categoryController.Category.PermissionUsers)
                     categoryController.PermittedUsers.Add(user);
             else
-                categoryController.PermittedUsers.Add(RestConnectionHandler.GetInstance().CurrentUser);
+                categoryController.PermittedUsers.Add(RestCommunicator.GetInstance().CurrentUser);
         }
         protected override void SaveAddedPermissions(ICollection<User> addedPermissions)
         {
-            if (RestConnectionHandler.GetInstance().PostPermission(addedPermissions, categoryController.Category.ID))
+            if (RestCommunicator.GetInstance().PostPermission(addedPermissions, categoryController.Category.ID))
             {
                 categoryController.Category.AddPermissionUser(addedPermissions);
             }
         }
         protected override void SaveRemovedPermissions(ICollection<User> removedPermissions)
         {
-            if (RestConnectionHandler.GetInstance().RemovePermission(removedPermissions, categoryController.Category.ID))
+            if (RestCommunicator.GetInstance().RemovePermission(removedPermissions, categoryController.Category.ID))
             {
                 categoryController.Category.RemovePermissionUser(removedPermissions);
             }

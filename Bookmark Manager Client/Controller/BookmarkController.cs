@@ -53,7 +53,7 @@ namespace Bookmark_Manager_Client.Controller
                 return false;
             bookmark = new Bookmark() { CategoryID = category.ID, Url = Url };
 
-            if (!RestConnectionHandler.GetInstance().PostBookmark(bookmark))
+            if (!RestCommunicator.GetInstance().PostBookmark(bookmark))
                 return false;
 
             category.Bookmarks.Add(bookmark);

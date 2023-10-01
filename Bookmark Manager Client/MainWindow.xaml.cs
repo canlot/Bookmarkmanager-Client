@@ -36,9 +36,9 @@ namespace Bookmark_Manager_Client
             settings.Username = "admin";
             settings.Password = "admin";
             settings.Url = "http://localhost:8080/apiv1";
-            RestConnectionHandler.GetInstance().UserName = settings.Username;
-            RestConnectionHandler.GetInstance().Password = settings.Password;
-            RestConnectionHandler.GetInstance().SetUpConnection();
+            RestCommunicator.GetInstance().UserName = settings.Username;
+            RestCommunicator.GetInstance().Password = settings.Password;
+            RestCommunicator.GetInstance().SetUpConnection();
             
             controller.getCategories();
         }
@@ -112,7 +112,7 @@ namespace Bookmark_Manager_Client
         }
         private void ButtonAddBookmark_Click(object sender, RoutedEventArgs e)
         {
-            if (treeViewCategory.SelectedItem == null || (((Category)treeViewCategory.SelectedItem).OwnerID != RestConnectionHandler.GetInstance().CurrentUser.ID))
+            if (treeViewCategory.SelectedItem == null || (((Category)treeViewCategory.SelectedItem).OwnerID != RestCommunicator.GetInstance().CurrentUser.ID))
                 return;
             BookmarkWindow bookmarkWindow = new BookmarkWindow(BookmarkWindow.WindowMode.CreateBookmark, (Category)treeViewCategory.SelectedItem);
             bookmarkWindow.Owner = this;
@@ -120,7 +120,7 @@ namespace Bookmark_Manager_Client
         }
         private void ButtonEditBookmark_Click(object sender, RoutedEventArgs e)
         {
-            if (treeViewCategory.SelectedItem == null || listBoxBookmarks.SelectedItem == null || (((Category)treeViewCategory.SelectedItem).OwnerID != RestConnectionHandler.GetInstance().CurrentUser.ID))
+            if (treeViewCategory.SelectedItem == null || listBoxBookmarks.SelectedItem == null || (((Category)treeViewCategory.SelectedItem).OwnerID != RestCommunicator.GetInstance().CurrentUser.ID))
                 return;
             BookmarkWindow bookmarkWindow = new BookmarkWindow(BookmarkWindow.WindowMode.ModifyBookmark, (Category)treeViewCategory.SelectedItem,
                 (Bookmark)listBoxBookmarks.SelectedItem);

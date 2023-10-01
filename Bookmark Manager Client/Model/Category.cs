@@ -96,7 +96,7 @@ namespace Bookmark_Manager_Client.Model
         {
             if (childCategories.Count > 0)
                 return;
-            var cat = RestConnectionHandler.GetInstance().GetCategories(ID);
+            var cat = RestCommunicator.GetInstance().GetCategories(ID);
             foreach (var item in cat)
                 childCategories.Add(item);
         }
@@ -104,14 +104,14 @@ namespace Bookmark_Manager_Client.Model
         {
             if (bookmarks.Count > 0)
                 return;
-            var bm = RestConnectionHandler.GetInstance().GetBookmarks(ID);
+            var bm = RestCommunicator.GetInstance().GetBookmarks(ID);
             if(bm != null)
                 foreach (var item in bm)
                     bookmarks.Add(item);
         }
         public void GetPermissionUsers()
         {
-            var users = RestConnectionHandler.GetInstance().GetPermissionUsers(ID);
+            var users = RestCommunicator.GetInstance().GetPermissionUsers(ID);
             permissionUsers.Clear();
             if(users != null)
                 foreach (var user in users)
