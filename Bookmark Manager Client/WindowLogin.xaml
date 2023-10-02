@@ -3,21 +3,59 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Bookmark_Manager_Client"
         mc:Ignorable="d"
-        Title="WindowLogin" Height="450" Width="800" ResizeMode="NoResize" Topmost="True" WindowStyle="None" Left="1500" Top="500">
-    <Grid Margin="0,0,206,0">
+        Title="WindowLogin"  ResizeMode="NoResize" Topmost="True" WindowStyle="None">
+    <Window.Resources>
+        <GridLength x:Key="RowHeight">40</GridLength>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Height" Value="30" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="131*"/>
-            <ColumnDefinition Width="265*"/>
+            <ColumnDefinition Width="1*" MinWidth="100"/>
+            <ColumnDefinition Width="2*" MinWidth="200"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="TextBoxUrl" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="108,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274" 
-                 />
-        <TextBox x:Name="TextBoxUsername" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="108,153,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274"/>
-        <TextBox x:Name="TextBoxPassword" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="108,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274"/>
-        <Button x:Name="ButtonLogin" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="10,212,0,0" VerticalAlignment="Top" Width="372" Height="26" Click="ButtonLogin_Click"/>
-        <Label Content="Url:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="93"/>
-        <Label Content="Username:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top" Width="93"/>
-        <Label Content="Password:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="93"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="{StaticResource RowHeight}"/>
+            <RowDefinition Height="{StaticResource RowHeight}"/>
+            <RowDefinition Height="{StaticResource RowHeight}"/>
+            <RowDefinition Height="{StaticResource RowHeight}"/>
+            <RowDefinition Height="{StaticResource RowHeight}"/>
+            <RowDefinition Height="{StaticResource RowHeight}"/>
+            <RowDefinition Height="{StaticResource RowHeight}"/>
+        </Grid.RowDefinitions>
+        <Border Grid.ColumnSpan="2" Grid.Row="0" Background="Blue"></Border>
+        <Label Content="Host:" Grid.Column="0" Grid.Row="1" />
+        <Label Content="Port: " Grid.Column="0" Grid.Row="2"/>
+        <Label Content="Username:" Grid.Column="0" Grid.Row="3" />
+        <Label Content="Password:" Grid.Column="0" Grid.Row="4" />
+        <TextBox x:Name="TextBoxHost" Grid.Column="1" Grid.Row="1" />
+        <TextBox x:Name="TextBoxPort" Grid.Column="1" Grid.Row="2" />
+        <TextBox x:Name="TextBoxUsername" Grid.Column="1" Grid.Row="3"/>
+        <PasswordBox x:Name="TextBoxPassword" Grid.Column="1" Grid.Row="4"/>
+        
+        <Button x:Name="ButtonLogin" Content="Login" Grid.ColumnSpan="2" Grid.Row="6" Click="ButtonLogin_Click"/>
+        <Button x:Name="ButtonAbort" Content="Cancel" Grid.ColumnSpan="2" Grid.Row="7" />
     </Grid>
 </Window>

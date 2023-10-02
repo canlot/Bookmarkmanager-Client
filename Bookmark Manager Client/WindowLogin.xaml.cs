@@ -28,7 +28,8 @@ namespace Bookmark_Manager_Client
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            settings.Url = TextBoxUrl.Text;
+            
+            //ObjectRepository.AppConfiguration. = TextBoxUrl.Text;
             settings.Username = TextBoxUsername.Text;
             settings.Password = TextBoxPassword.Text;
             this.Close();
