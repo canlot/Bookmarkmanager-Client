@@ -11,7 +11,8 @@ namespace Bookmark_Manager_Client.DataProvider
     public interface IDataProvider
     {
         void SetUpConnection();
-        ObservableCollection<Category> GetCategories(uint id);
+        User CurrentUser { get; }
+        ObservableCollection<Category> GetCategories(uint id = 0);
         ObservableCollection<Bookmark> GetBookmarks(uint id);
         ObservableCollection<User> GetPermittedUsers(uint id);
         ObservableCollection<User> GetAllUsers();

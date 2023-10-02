@@ -100,7 +100,7 @@ namespace Bookmark_Manager_Client.Controller
             else
                 category = new Category() { Name = CategoryName };
 
-            if (!RestCommunicator.GetInstance().PostCategory(category))
+            if (!ObjectRepository.DataProvider.PostCategory(category))
                 return;
 
             if(parentCategory != null)
@@ -119,7 +119,7 @@ namespace Bookmark_Manager_Client.Controller
             {
                 category.Name = CategoryName;
 
-                if (!RestCommunicator.GetInstance().PutCategory(category))
+                if (!ObjectRepository.DataProvider.PutCategory(category))
                     return;
             }
             ModifyPermissions();

@@ -112,7 +112,7 @@ namespace Bookmark_Manager_Client
         }
         private void ButtonAddBookmark_Click(object sender, RoutedEventArgs e)
         {
-            if (treeViewCategory.SelectedItem == null || (((Category)treeViewCategory.SelectedItem).OwnerID != RestCommunicator.GetInstance().CurrentUser.ID))
+            if (treeViewCategory.SelectedItem == null || (((Category)treeViewCategory.SelectedItem).OwnerID != ObjectRepository.DataProvider.CurrentUser.ID))
                 return;
             BookmarkWindow bookmarkWindow = new BookmarkWindow(BookmarkWindow.WindowMode.CreateBookmark, (Category)treeViewCategory.SelectedItem);
             bookmarkWindow.Owner = this;
@@ -120,7 +120,7 @@ namespace Bookmark_Manager_Client
         }
         private void ButtonEditBookmark_Click(object sender, RoutedEventArgs e)
         {
-            if (treeViewCategory.SelectedItem == null || listBoxBookmarks.SelectedItem == null || (((Category)treeViewCategory.SelectedItem).OwnerID != RestCommunicator.GetInstance().CurrentUser.ID))
+            if (treeViewCategory.SelectedItem == null || listBoxBookmarks.SelectedItem == null || (((Category)treeViewCategory.SelectedItem).OwnerID != ObjectRepository.DataProvider.CurrentUser.ID))
                 return;
             BookmarkWindow bookmarkWindow = new BookmarkWindow(BookmarkWindow.WindowMode.ModifyBookmark, (Category)treeViewCategory.SelectedItem,
                 (Bookmark)listBoxBookmarks.SelectedItem);

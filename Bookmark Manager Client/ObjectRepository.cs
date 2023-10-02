@@ -1,4 +1,5 @@
-﻿using Bookmark_Manager_Client.DataProvider;
+﻿using Bookmark_Manager_Client.Configurators;
+using Bookmark_Manager_Client.DataProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Bookmark_Manager_Client
     public static class ObjectRepository
     {
         private static bool dataProviderAlreadySet = false;
-        private static IDataProvider dataProvider { get; set; }
+        private static IDataProvider dataProvider;
         public static IDataProvider DataProvider 
         {
             get =>  dataProvider;
@@ -19,6 +20,21 @@ namespace Bookmark_Manager_Client
                 if (dataProviderAlreadySet) return;
                 else dataProvider = value;
                 dataProviderAlreadySet = true;
+            }
+        }
+
+        private static bool appConfigurationAlreadySet = false;
+
+        private static AppConfiguration appConfiguration;
+
+        public static AppConfiguration AppConfiguration
+        {
+            get => appConfiguration;
+            set 
+            {
+                if (appConfigurationAlreadySet) return;
+                else appConfiguration = value;
+                appConfigurationAlreadySet = true;
             }
         }
         

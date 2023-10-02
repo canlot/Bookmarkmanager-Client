@@ -10,7 +10,12 @@ namespace Bookmark_Manager_Client.Configurators
 {
     public class AppConfiguration
     {
-        private string appConfigurationFilePath;
+
+        public static string GlobalConfigurationPath = ".";
+        private static string AppConfigurationFilePath
+        {
+            get => GlobalConfigurationPath + "\\" + "config.ini";
+        }
 
         public string Host
         {
@@ -42,9 +47,9 @@ namespace Bookmark_Manager_Client.Configurators
             get;
             set;
         }
-        public AppConfiguration(string appConfigurationFilePath)
+        public AppConfiguration()
         {
-            this.appConfigurationFilePath = appConfigurationFilePath;
+            
         }
 
         public bool LoadConfig()
@@ -52,7 +57,7 @@ namespace Bookmark_Manager_Client.Configurators
             try
             {
                 var parser = new FileIniDataParser();
-                var configData = parser.ReadFile(appConfigurationFilePath);
+                var configData = parser.ReadFile(AppConfigurationFilePath);
                 string global = "Global";
                 Host = configData[global]["Host"];
                 Port = int.Parse(configData[global]["Port"]);
@@ -78,7 +83,7 @@ namespace Bookmark_Manager_Client.Configurators
                 configData[global]["SSL"] = Convert.ToString(SSL);
                 configData[global]["IgnoreCertificate"] = Convert.ToString(IgnoreCertificate);
                 configData[global]["UserName"] = UserName;
-                parser.WriteFile(appConfigurationFilePath, configData);
+                parser.WriteFile(AppConfigurationFilePath, configData);
                 return true;
             }
             catch

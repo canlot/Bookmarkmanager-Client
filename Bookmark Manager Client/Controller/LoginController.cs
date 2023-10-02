@@ -11,23 +11,23 @@ namespace Bookmark_Manager_Client.Controller
     {
         public string Username
         {
-            get => GlobalConfigurator.AppConfiguration.UserName;
-            set => GlobalConfigurator.AppConfiguration.UserName = value;
+            get => ObjectRepository.AppConfiguration.UserName;
+            set => ObjectRepository.AppConfiguration.UserName = value;
         }
         public string Host
         {
-            get => GlobalConfigurator.AppConfiguration.Host;
-            set => GlobalConfigurator.AppConfiguration.Host = value;
+            get => ObjectRepository.AppConfiguration.Host;
+            set => ObjectRepository.AppConfiguration.Host = value;
         }
         public string Port
         {
-            get => Convert.ToString(GlobalConfigurator.AppConfiguration.Port);
-            set => GlobalConfigurator.AppConfiguration.Port = int.Parse(value);
+            get => Convert.ToString(ObjectRepository.AppConfiguration.Port);
+            set => ObjectRepository.AppConfiguration.Port = int.Parse(value);
         }
         public string Password
         {
-            get => GlobalConfigurator.AppConfiguration.Password;
-            set => GlobalConfigurator.AppConfiguration.Password = Password;
+            get => ObjectRepository.AppConfiguration.Password;
+            set => ObjectRepository.AppConfiguration.Password = Password;
         }
 
         public LoginController()

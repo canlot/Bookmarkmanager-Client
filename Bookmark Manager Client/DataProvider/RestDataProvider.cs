@@ -52,7 +52,8 @@ namespace Bookmark_Manager_Client.DataProvider
             get => password;
             set => password = value;
         }
-        public User CurrentUser;
+        private User currentUser;
+        public User CurrentUser { get => currentUser; }
         private void recalculateInternalUrl()
         {
             string afterurl = "/apiv1";
@@ -84,7 +85,7 @@ namespace Bookmark_Manager_Client.DataProvider
             
             Console.WriteLine(InternalUrl);
 
-            CurrentUser = getCurrentUser();
+            currentUser = getCurrentUser();
         }
         private User getCurrentUser()
         {

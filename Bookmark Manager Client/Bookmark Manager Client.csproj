@@ -90,7 +90,6 @@
     <Compile Include="DataProvider\FakeDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />
     <Compile Include="Configurators\AppConfiguration.cs" />
-    <Compile Include="Configurators\GlobalConfigurator.cs" />
     <Compile Include="Controller\BookmarkController.cs" />
     <Compile Include="Controller\CategoryController.cs" />
     <Compile Include="Controller\IPermitableObjectController.cs" />

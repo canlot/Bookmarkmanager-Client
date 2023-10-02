@@ -20,7 +20,7 @@ namespace Bookmark_Manager_Client.Controller
         }
         public ObservableCollection<Category> getCategories()
         {
-            return RestCommunicator.GetInstance().GetCategories();
+            return ObjectRepository.DataProvider.GetCategories();
             
         }
 
@@ -39,7 +39,7 @@ namespace Bookmark_Manager_Client.Controller
 
         public void RemoveCategory(Category category)
         {
-            RestCommunicator.GetInstance().DeleteCategory(category);
+            ObjectRepository.DataProvider.DeleteCategory(category);
         }
     }
 }

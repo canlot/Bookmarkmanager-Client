@@ -14,6 +14,8 @@ namespace Bookmark_Manager_Client.DataProvider
         
         public FakeDataProvider() { }
 
+        public User CurrentUser => throw new NotImplementedException();
+
         public bool DeleteBookmark(Bookmark bookmark)
         {
             throw new NotImplementedException();
