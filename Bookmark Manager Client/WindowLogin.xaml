@@ -3,21 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Bookmark_Manager_Client"
         mc:Ignorable="d"
-        Title="WindowLogin" Height="450" Width="800" ResizeMode="NoResize" Topmost="True" WindowStyle="None" Left="1500" Top="500">
-    <Grid Margin="0,0,206,0">
+        Title="WindowLogin" Height="400" Width="400" ResizeMode="NoResize" Topmost="True" WindowStyle="None">
+    <Window.Resources>
+        <sys:Int32 x:Key="RowHeight">50</sys:Int32>
+    </Window.Resources>
+    <Grid Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="131*"/>
-            <ColumnDefinition Width="265*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="{StaticResource r}"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Label Content="Url:" Grid.Column="0" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="93"/>
+        <Label Content="Username:" Grid.Column="0" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top" Width="93"/>
+        <Label Content="Password:" Grid.Column="0" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="93"/>
         <TextBox x:Name="TextBoxUrl" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="108,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274" 
                  />
+        
         <TextBox x:Name="TextBoxUsername" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="108,153,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274"/>
         <TextBox x:Name="TextBoxPassword" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="108,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274"/>
         <Button x:Name="ButtonLogin" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="10,212,0,0" VerticalAlignment="Top" Width="372" Height="26" Click="ButtonLogin_Click"/>
-        <Label Content="Url:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="93"/>
-        <Label Content="Username:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top" Width="93"/>
-        <Label Content="Password:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="93"/>
     </Grid>
 </Window>
