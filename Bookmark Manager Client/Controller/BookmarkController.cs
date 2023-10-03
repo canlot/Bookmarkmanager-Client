@@ -52,8 +52,8 @@ namespace Bookmark_Manager_Client.Controller
             if (Url == "")
                 return false;
             bookmark = new Bookmark() { CategoryID = category.ID, Url = Url };
-
-            if (!RestCommunicator.GetInstance().PostBookmark(bookmark))
+            
+            if (!ObjectRepository.DataProvider.PostBookmark(bookmark))
                 return false;
 
             category.Bookmarks.Add(bookmark);

@@ -36,9 +36,7 @@ namespace Bookmark_Manager_Client
             settings.Username = "admin";
             settings.Password = "admin";
             settings.Url = "http://localhost:8080/apiv1";
-            RestCommunicator.GetInstance().UserName = settings.Username;
-            RestCommunicator.GetInstance().Password = settings.Password;
-            RestCommunicator.GetInstance().SetUpConnection();
+            ObjectRepository.DataProvider.SetUpConnection();
             
             controller.getCategories();
         }

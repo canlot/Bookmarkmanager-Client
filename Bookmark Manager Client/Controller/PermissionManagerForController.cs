@@ -33,7 +33,7 @@ namespace Bookmark_Manager_Client.Controller
         
         public void GetAllUsers()
         {
-            ObservableCollection<User> users = RestCommunicator.GetInstance().GetAllUsers();
+            ObservableCollection<User> users = ObjectRepository.DataProvider.GetAllUsers();
             if(users == null)
                 return;
             foreach (var user in users)
@@ -59,7 +59,7 @@ namespace Bookmark_Manager_Client.Controller
         }
         public void RemoveUserFromPermittedUsers(User user)
         {
-            if (user == RestCommunicator.GetInstance().CurrentUser)
+            if (user == ObjectRepository.DataProvider.CurrentUser)
                 return;
             controller.AllUsers.Add(user);
             controller.PermittedUsers.Remove(user);
