@@ -12,7 +12,51 @@ namespace Bookmark_Manager_Client.DataProvider
     {
         private ObservableCollection<Category> categories = new ObservableCollection<Category>();
         
-        public FakeDataProvider() { }
+        public FakeDataProvider() 
+        {
+            categories.Add(new Category()
+            {
+                ID = 1,
+                Name = "IT",
+                OwnerID = 1,
+                ParentID = 0,
+                ChildCategories = new ObservableCollection<Category>()
+                {
+                    new Category() 
+                    {
+                        ID = 2,
+                        Name = "Programmieren",
+                        OwnerID = 1,
+                        ParentID = 1,
+                        ChildCategories = new ObservableCollection<Category>()
+                        {
+                            new Category()
+                            {
+                                ID = 4,
+                                Name = "C#",
+                                OwnerID = 1,
+                                ParentID = 2,
+                            },
+                            new Category()
+                            {
+                                ID = 5,
+                                Name = "Go",
+                                OwnerID = 1,
+                                ParentID = 2,
+                            }
+                            
+                        }
+                    },
+                    new Category() 
+                    {
+                        ID = 3,
+                        Name = "Administration",
+                        OwnerID = 1,
+                        ParentID = 1,
+                    }
+                }
+            });
+        }
 
         public User CurrentUser => throw new NotImplementedException();
 
@@ -38,7 +82,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public ObservableCollection<Category> GetCategories(uint id)
         {
-            throw new NotImplementedException();
+            return categories;
         }
 
         public ObservableCollection<User> GetPermittedUsers(uint id)
@@ -78,7 +122,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public void SetUpConnection()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Bookmark_Manager_Client.Configurators
         }
         public AppConfiguration()
         {
-            
+            LoadConfig();
         }
 
         public bool LoadConfig()

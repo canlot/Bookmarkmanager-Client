@@ -31,14 +31,14 @@ namespace Bookmark_Manager_Client
         public MainWindow()
         {
             InitializeComponent();
-            //WindowLogin windowLogin = new WindowLogin(settings);
-            //windowLogin.ShowDialog();
+            LoginWindow windowLogin = new LoginWindow();
+            windowLogin.ShowDialog();
             settings.Username = "admin";
             settings.Password = "admin";
             settings.Url = "http://localhost:8080/apiv1";
             ObjectRepository.DataProvider.SetUpConnection();
             
-            controller.getCategories();
+            //controller.getCategories();
         }
 
         private void treeViewCategory_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

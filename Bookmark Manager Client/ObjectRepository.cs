@@ -38,6 +38,11 @@ namespace Bookmark_Manager_Client
             }
         }
         
+        static ObjectRepository()
+        {
+            DataProvider = new FakeDataProvider();
+            AppConfiguration = new AppConfiguration();
+        }
         
     }
 }
