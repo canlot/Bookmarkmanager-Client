@@ -13,7 +13,7 @@ namespace Bookmark_Manager_Client.DataProvider
         void SetUpConnection();
         User CurrentUser { get; }
         ObservableCollection<Category> GetCategories(uint id = 0);
-        ObservableCollection<Bookmark> GetBookmarks(uint id);
+        IEnumerable<Bookmark> GetBookmarks(uint id);
         ObservableCollection<User> GetPermittedUsers(uint id);
         ObservableCollection<User> GetAllUsers();
         bool PostCategory(Category category);

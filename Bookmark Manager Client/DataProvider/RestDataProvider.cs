@@ -122,7 +122,7 @@ namespace Bookmark_Manager_Client.DataProvider
             //return client.Get<ObservableCollection<Category>>(request).Data;
             return client.Get<ObservableCollection<Category>>(request); 
         }
-        public ObservableCollection<Bookmark> GetBookmarks( uint id)
+        public IEnumerable<Bookmark> GetBookmarks( uint id)
         {
             //var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", RestSharp.DataFormat.Json);
             var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", Method.Get);

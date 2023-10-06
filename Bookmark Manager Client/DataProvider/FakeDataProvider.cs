@@ -11,6 +11,7 @@ namespace Bookmark_Manager_Client.DataProvider
     public class FakeDataProvider : IDataProvider
     {
         private ObservableCollection<Category> categories = new ObservableCollection<Category>();
+        private ObservableCollection<Bookmark> bookmarks = new ObservableCollection<Bookmark>();
         
         public FakeDataProvider() 
         {
@@ -56,6 +57,18 @@ namespace Bookmark_Manager_Client.DataProvider
                     }
                 }
             });
+            bookmarks.Add(new Bookmark()
+            {
+                ID = 1,
+                CategoryID = 2,
+                Url = "www.mok-test.com"
+            });
+            bookmarks.Add(new Bookmark()
+            {
+                ID = 2,
+                CategoryID = 4,
+                Url = "https://learn.microsoft.com/de-de/dotnet/desktop/wpf/data/?view=netdesktop-7.0",
+            });
         }
 
         public User CurrentUser => throw new NotImplementedException();
@@ -75,9 +88,13 @@ namespace Bookmark_Manager_Client.DataProvider
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<Bookmark> GetBookmarks(uint id)
+        public IEnumerable<Bookmark> GetBookmarks(uint id)
         {
-            throw new NotImplementedException();
+            foreach(var bookmark in bookmarks)
+            {
+                if (bookmark.CategoryID == id)
+                    yield return bookmark;
+            }
         }
 
         public ObservableCollection<Category> GetCategories(uint id)
