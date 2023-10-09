@@ -21,9 +21,9 @@ namespace Bookmark_Manager_Client.DataProvider
                 Name = "IT",
                 OwnerID = 1,
                 ParentID = 0,
-                ChildCategories = new ObservableCollection<Category>()
+                ChildCategories = new ObservableCollection<Category>() 
                 {
-                    new Category() 
+                    new Category()
                     {
                         ID = 2,
                         Name = "Programmieren",
@@ -45,7 +45,6 @@ namespace Bookmark_Manager_Client.DataProvider
                                 OwnerID = 1,
                                 ParentID = 2,
                             }
-                            
                         }
                     },
                     new Category() 
@@ -57,6 +56,15 @@ namespace Bookmark_Manager_Client.DataProvider
                     }
                 }
             });
+
+            categories.Add(new Category()
+            {
+                ID = 6,
+                Name = "Elektronik",
+                OwnerID = 1,
+                ParentID = 0,
+            });
+
             bookmarks.Add(new Bookmark()
             {
                 ID = 1,
@@ -83,23 +91,24 @@ namespace Bookmark_Manager_Client.DataProvider
             throw new NotImplementedException();
         }
 
+        public ObservableCollection<Category> GetAllCategories()
+        {
+            return categories;
+        }
+
         public ObservableCollection<User> GetAllUsers()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Bookmark> GetBookmarks(uint id)
+        public ObservableCollection<Bookmark> GetBookmarks(uint id)
         {
             foreach(var bookmark in bookmarks)
             {
                 if (bookmark.CategoryID == id)
-                    yield return bookmark;
+                    bookmarks.Add(bookmark);
             }
-        }
-
-        public ObservableCollection<Category> GetCategories(uint id)
-        {
-            return categories;
+            return bookmarks;
         }
 
         public ObservableCollection<User> GetPermittedUsers(uint id)

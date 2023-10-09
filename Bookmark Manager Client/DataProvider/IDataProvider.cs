@@ -12,8 +12,9 @@ namespace Bookmark_Manager_Client.DataProvider
     {
         void SetUpConnection();
         User CurrentUser { get; }
-        ObservableCollection<Category> GetCategories(uint id = 0);
-        IEnumerable<Bookmark> GetBookmarks(uint id);
+        //IEnumerable<Category> GetCategories(uint id = 0);
+        ObservableCollection<Category> GetAllCategories();
+        ObservableCollection<Bookmark> GetBookmarks(uint id);
         ObservableCollection<User> GetPermittedUsers(uint id);
         ObservableCollection<User> GetAllUsers();
         bool PostCategory(Category category);

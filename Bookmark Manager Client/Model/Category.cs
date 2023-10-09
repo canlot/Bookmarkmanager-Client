@@ -97,7 +97,7 @@ namespace Bookmark_Manager_Client.Model
         {
             if (childCategories.Count > 0)
                 return;
-            var cat = ObjectRepository.DataProvider.GetCategories(ID);
+            var cat = ObjectRepository.DataProvider.GetAllCategories();
             foreach (var item in cat)
                 childCategories.Add(item);
         }

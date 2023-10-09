@@ -52,7 +52,7 @@ namespace Bookmark_Manager_Client.ViewModel
 
         public MainViewModel() 
         {
-            Categories = ObjectRepository.DataProvider.GetCategories();
+            Categories = ObjectRepository.DataProvider.GetAllCategories();
         }
 
     }

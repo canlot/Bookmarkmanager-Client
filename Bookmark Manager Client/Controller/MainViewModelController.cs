@@ -18,9 +18,9 @@ namespace Bookmark_Manager_Client.Controller
             //Categories = new ObservableCollection<Category>();
             //Categories.CollectionChanged += OnNewCategoryItems;
         }
-        public ObservableCollection<Category> getCategories()
+        public IEnumerable<Category> getCategories()
         {
-            return ObjectRepository.DataProvider.GetCategories();
+            return ObjectRepository.DataProvider.GetAllCategories();
             
         }
 

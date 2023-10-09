@@ -33,7 +33,7 @@ namespace Bookmark_Manager_Client.Controller
         
         public void GetAllUsers()
         {
-            ObservableCollection<User> users = ObjectRepository.DataProvider.GetAllUsers();
+            IEnumerable<User> users = ObjectRepository.DataProvider.GetAllUsers();
             if(users == null)
                 return;
             foreach (var user in users)

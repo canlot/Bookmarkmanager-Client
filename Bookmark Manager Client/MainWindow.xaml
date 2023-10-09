@@ -43,17 +43,34 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" HorizontalAlignment="Stretch" >
-                    <TreeView Background="White" x:Name="treeViewCategory" Margin="10,10" ItemsSource="{Binding Categories}" SelectedItemChanged="treeViewCategory_SelectedItemChanged" >
+                    <TreeView  x:Name="treeViewCategory" Margin="10,10" ItemsSource="{Binding Categories}" SelectedItemChanged="treeViewCategory_SelectedItemChanged" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                         <TreeView.ItemContainerStyle>
                             <Style TargetType="TreeViewItem" BasedOn="{StaticResource DefaultTreeViewItemStyle}">
                                 <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
                                 <Setter Property="IsExpanded" Value="{Binding IsExpanded}"/>
                                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                
                             </Style>
                         </TreeView.ItemContainerStyle>
+                        
                         <TreeView.ItemTemplate >
                             <HierarchicalDataTemplate ItemsSource="{Binding ChildCategories}">
-                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" Width="auto"></TextBlock>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Background="White" Grid.Row="0" BorderBrush="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" FontFamily="Bahnschrift" FontSize="12" ></TextBlock>
+                                            
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Row="1" Background="Gray" >
+                                        <Label Margin="3" Foreground="White" FontSize="8">Shared</Label>
+                                    </Border>
+                                </Grid>
+                                
                             </HierarchicalDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
