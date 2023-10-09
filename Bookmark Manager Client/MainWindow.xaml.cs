@@ -18,6 +18,7 @@ using System.Collections.ObjectModel;
 using RestSharp.Serializers.NewtonsoftJson;
 using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.Model;
+using Bookmark_Manager_Client.ViewModel;
 
 namespace Bookmark_Manager_Client
 {
@@ -26,16 +27,14 @@ namespace Bookmark_Manager_Client
     /// </summary>
     public partial class MainWindow
     {
-        public MainViewModelController controller = new MainViewModelController();
-        public ApplicationSettings settings = new ApplicationSettings();
         public MainWindow()
         {
             InitializeComponent();
             LoginWindow windowLogin = new LoginWindow();
             windowLogin.ShowDialog();
-            settings.Username = "admin";
-            settings.Password = "admin";
-            settings.Url = "http://localhost:8080/apiv1";
+            //settings.Username = "admin";
+            //settings.Password = "admin";
+            //settings.Url = "http://localhost:8080/apiv1";
             ObjectRepository.DataProvider.SetUpConnection();
             
             //controller.getCategories();
@@ -44,11 +43,10 @@ namespace Bookmark_Manager_Client
         private void treeViewCategory_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             Category category = (Category)treeViewCategory.SelectedItem;
-            category.GetBookmarks();
-            listBoxBookmarks.ItemsSource = category.Bookmarks;
 
-            category.GetPermissionUsers();
-            //listBoxFullAccessUser.ItemsSource = category.PermissionUsers;
+            MainViewModel vm = (MainViewModel)this.DataContext;
+            vm.GetBookmarks(category);
+
         }
 
         private void ButtonAddCategory_Click(object sender, RoutedEventArgs e)
@@ -131,12 +129,4 @@ namespace Bookmark_Manager_Client
 
         }
     }
-}
-
-public class ApplicationSettings
-{
-    public string Url;
-    public string Username;
-    public string Password;
-
 }

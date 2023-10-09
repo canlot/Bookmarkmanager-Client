@@ -63,6 +63,16 @@ namespace Bookmark_Manager_Client.DataProvider
                 Name = "Elektronik",
                 OwnerID = 1,
                 ParentID = 0,
+                Shared = false,
+            });
+
+            categories.Add(new Category()
+            {
+                ID = 7,
+                Name = "3D Zeugs",
+                OwnerID = 1,
+                ParentID = 0,
+                Shared = true,
             });
 
             bookmarks.Add(new Bookmark()
@@ -103,12 +113,13 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public ObservableCollection<Bookmark> GetBookmarks(uint id)
         {
+            ObservableCollection<Bookmark> requestedBookmarks = new ObservableCollection<Bookmark>();
             foreach(var bookmark in bookmarks)
             {
                 if (bookmark.CategoryID == id)
-                    bookmarks.Add(bookmark);
+                    requestedBookmarks.Add(bookmark);
             }
-            return bookmarks;
+            return requestedBookmarks;
         }
 
         public ObservableCollection<User> GetPermittedUsers(uint id)

@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:controller="clr-namespace:Bookmark_Manager_Client.Controller"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
-        Title="MainWindow" Height="1000" Width="1500" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid Background="#fafafa">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -55,28 +56,32 @@
                         
                         <TreeView.ItemTemplate >
                             <HierarchicalDataTemplate ItemsSource="{Binding ChildCategories}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Border Background="White" Grid.Row="0" BorderBrush="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5">
-                                        <StackPanel Orientation="Vertical">
-                                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" FontFamily="Bahnschrift" FontSize="12" ></TextBlock>
-                                            
-                                        </StackPanel>
-                                    </Border>
-                                    <Border Grid.Row="1" Background="Gray" >
-                                        <Label Margin="3" Foreground="White" FontSize="8">Shared</Label>
-                                    </Border>
-                                </Grid>
-                                
+                                <Border  BorderBrush="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" FontFamily="Bahnschrift" FontSize="12" ></TextBlock>
+                                        <Border Grid.Row="1" Background="Orange" Margin="10,0,0,0" CornerRadius="5">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=Shared}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=Shared}" Value="False">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Label Margin="3" Foreground="White" FontSize="7">Shared</Label>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
                             </HierarchicalDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
                 </Border>
                 <Border Grid.Column="1">
-                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10">
+                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

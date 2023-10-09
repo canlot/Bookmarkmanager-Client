@@ -54,6 +54,9 @@ namespace Bookmark_Manager_Client.ViewModel
         {
             Categories = ObjectRepository.DataProvider.GetAllCategories();
         }
-
+        public void GetBookmarks(Category category)
+        {
+            Bookmarks = ObjectRepository.DataProvider.GetBookmarks(category.ID);
+        }
     }
 }
