@@ -60,7 +60,7 @@ namespace Bookmark_Manager_Client.Model
             get => shared;
             set
             {
-                shared = Shared;
+                shared = value;
                 OnProperyChanged("Shared");
             }
         }
