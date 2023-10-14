@@ -87,6 +87,12 @@ namespace Bookmark_Manager_Client.DataProvider
                 CategoryID = 4,
                 Url = "https://learn.microsoft.com/de-de/dotnet/desktop/wpf/data/?view=netdesktop-7.0",
             });
+            bookmarks.Add(new Bookmark()
+            {
+                ID = 3,
+                CategoryID = 3,
+                Url = "https://administrator.de",
+            });
         }
 
         public User CurrentUser => throw new NotImplementedException();

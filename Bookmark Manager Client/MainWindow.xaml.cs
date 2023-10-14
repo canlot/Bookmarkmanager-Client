@@ -19,6 +19,7 @@ using RestSharp.Serializers.NewtonsoftJson;
 using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.Model;
 using Bookmark_Manager_Client.ViewModel;
+using ModernWpf.Controls;
 
 namespace Bookmark_Manager_Client
 {
@@ -125,6 +126,36 @@ namespace Bookmark_Manager_Client
             bookmarkWindow.Show();
         }
         private void ButtonDeleteBookmark_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void listBoxBookmarks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Bookmark bookmark = (Bookmark)listBoxBookmarks.SelectedItem;
+            if (bookmark == null) return;
+            WebBrowser.LoadUrl(bookmark.Url);
+        }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenInBrowserButton_Click(object sender, RoutedEventArgs e)
+        {
+            Bookmark bookmark = (Bookmark)listBoxBookmarks.SelectedItem;
+            AppBarButton button = (AppBarButton)sender;
+            
+            if (bookmark == null) return;
+            System.Diagnostics.Process.Start(bookmark.Url);
+        }
+
+        private void OpenInBrowserCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+
+        }
+        private void OpenInBrowserCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
 
         }

@@ -10,17 +10,52 @@
         xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
-        Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
-        <DrawingImage x:Key="AddIcon">
+        <DrawingImage x:Key="AddImage">
             <DrawingImage.Drawing>
-                <DrawingGroup>
-                    <GeometryDrawing Brush="Black" Geometry="M11 8C11 7.44772 11.4477 7 12 7C12.5523 7 13 7.44772 13 8V11H16C16.5523 11 17 11.4477 17 12C17 12.5523 16.5523 13 16 13H13V16C13 16.5523 12.5523 17 12 17C11.4477 17 11 16.5523 11 16V13H8C7.44771 13 7 12.5523 7 12C7 11.4477 7.44772 11 8 11H11V8Z"/>
-                    <GeometryDrawing Brush="Black" Geometry="M23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12ZM3.00683 12C3.00683 16.9668 7.03321 20.9932 12 20.9932C16.9668 20.9932 20.9932 16.9668 20.9932 12C20.9932 7.03321 16.9668 3.00683 12 3.00683C7.03321 3.00683 3.00683 7.03321 3.00683 12Z"/>
+                <DrawingGroup ClipGeometry="M0,0 V69.999992 H70 V0 H0 Z">
+                    <DrawingGroup.Transform>
+                        <TranslateTransform X="0" Y="130.3709" />
+                    </DrawingGroup.Transform>
+                    <DrawingGroup Opacity="1" Transform="1,0,0,1,-70.370874,-100.04572">
+                        <GeometryDrawing Brush="#FF000000">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="35" RadiusY="35" Center="105.3709,135.0457" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FFFFFFFF">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="30" RadiusY="30" Center="105.3709,135.0457" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF000000">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="102.6209,110.0457,5.5,50" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <DrawingGroup Transform="6.12303176911189E-17,1,-1,6.12303176911189E-17,0,0">
+                            <GeometryDrawing Brush="#FF000000">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="132.2957,-130.3709,5.5,50" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                    </DrawingGroup>
                 </DrawingGroup>
             </DrawingImage.Drawing>
         </DrawingImage>
+        <ImageDrawing x:Key="sdf">
+
+        </ImageDrawing>
+        <ui:PathIcon x:Key="Test" Data="M 393 119.458C393 27.636 492.401 -29.752 571.92 16.158C608.826 37.465 631.56 76.844 631.56 119.458C631.56 211.28 532.159 268.667,452.64,222.758C415.735,201.451,393,162.071,393,119.458M410.04,119.458C410.04,40.753,495.24,-8.438,563.4,30.914C595.033,49.178,614.52,82.931,614.52,119.458C614.52,198.162,529.32,247.353,461.16,208.001C429.527,189.738,410.04,155.985,410.04,119.458M502.908,204.658C502.908,204.658,502.908,34.258,502.908,34.258C502.908,34.258,521.652,34.258,521.652,34.258C521.652,34.258,521.652,204.658,521.652,204.658C521.652,204.658,502.908,204.658,502.908,204.658M604.041,1024C604.041,1024,604.041,853.6,604.041,853.6C604.041,853.6,622.785,853.6,622.785,853.6C622.785,853.6,622.785,1024,622.785,1024C622.785,1024,604.041,1024,604.041,1024"/>
+        <ui:PathIcon x:Key="OpenInBrowserIcon" Data="M 84 11 C 82.3 11 81 12.3 81 14 C 81 15.7 82.3 17 84 17 L 106.80078 17 L 60.400391 63.400391 C 59.200391 64.600391 59.200391 66.499609 60.400391 67.599609 C 61.000391 68.199609 61.8 68.5 62.5 68.5 C 63.2 68.5 63.999609 68.199609 64.599609 67.599609 L 111 21.199219 L 111 44 C 111 45.7 112.3 47 114 47 C 115.7 47 117 45.7 117 44 L 117 14 C 117 12.3 115.7 11 114 11 L 84 11 z M 24 31 C 16.8 31 11 36.8 11 44 L 11 104 C 11 111.2 16.8 117 24 117 L 84 117 C 91.2 117 97 111.2 97 104 L 97 59 C 97 57.3 95.7 56 94 56 C 92.3 56 91 57.3 91 59 L 91 104 C 91 107.9 87.9 111 84 111 L 24 111 C 20.1 111 17 107.9 17 104 L 17 44 C 17 40.1 20.1 37 24 37 L 69 37 C 70.7 37 72 35.7 72 34 C 72 32.3 70.7 31 69 31 L 24 31 z"/>
+        <ui:PathIcon x:Key="AddCategoryIcon" Data="M15.9,10c0,0.6 -0.4,1 -1,1h-3.9v3.9c0,0.6 -0.4,1 -1,1c-0.6,0 -1,-0.4 -1,-1v-3.9h-3.9c-0.6,0 -1,-0.4 -1,-1c0,-0.6 0.4,-1 1,-1h3.9v-3.9c0,-0.6 0.4,-1 1,-1c0.6,0 1,0.4 1,1v3.9h3.9c0.6,0 1,0.4 1,1zM20,10c0,5.5 -4.5,10 -10,10c-5.5,0 -10,-4.5 -10,-10c0,-5.5 4.5,-10 10,-10c5.5,0 10,4.5 10,10zM18,10c0,-4.4 -3.6,-8 -8,-8c-4.4,0 -8,3.6 -8,8c0,4.4 3.6,8 8,8c4.4,0 8,-3.6 8,-8z"/>
+
     </Window.Resources>
+    <Window.CommandBindings>
+        
+    </Window.CommandBindings>
     <Grid Background="#fafafa">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -33,7 +68,8 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
-                    <ui:AppBarButton Label="Kategorie erstellen"/>
+                    <ui:AppBarButton Label="Kategorie erstellen" >
+                    </ui:AppBarButton>
                     <ui:AppBarButton Label="Kategorie bearbeiten"/>
                     <ui:AppBarButton Label="Kategorie löschen"/>
                     <ui:AppBarSeparator />
@@ -92,7 +128,7 @@
                     </TreeView>
                 </Border>
                 <Border Grid.Column="1">
-                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}">
+                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}" SelectionChanged="listBoxBookmarks_SelectionChanged">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
@@ -107,17 +143,17 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="0" Text="{Binding Url}" Margin="5"></TextBlock>
                                     <ui:CommandBar Grid.Row="1" Height="35">
-                                        <ui:AppBarButton Icon="Add" Label="Add"  />
-                                        <ui:AppBarButton Icon="Remove" Label="Remove" />
+                                        <ui:AppBarButton x:Name="OpenInBrowserButton" Label="Open in Browser" Icon="{StaticResource OpenInBrowserIcon}" CommandParameter="{Binding Url}" Command="{Binding OpenInBrowserCommand}"  />
+                                        <ui:AppBarButton Label="Test">
+                                        </ui:AppBarButton>
                                     </ui:CommandBar>
-
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Border>
                 <Border Grid.Column="2">
-                    <wpf:ChromiumWebBrowser Address="https://www.google.com"/>
+                    <wpf:ChromiumWebBrowser x:Name="WebBrowser" Address="https://www.google.com"/>
                 </Border>
             </Grid>
         </DockPanel>
