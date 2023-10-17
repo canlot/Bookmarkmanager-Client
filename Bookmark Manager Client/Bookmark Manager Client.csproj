@@ -102,6 +102,12 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="ObjectRepository.cs" />
     <Compile Include="PortValidationRule.cs" />
+    <Compile Include="UserControls\BookmarkUserControl.xaml.cs">
+      <DependentUpon>BookmarkUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CategoryUserControl.xaml.cs">
+      <DependentUpon>CategoryUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="LoginWindow.xaml.cs">
@@ -134,6 +140,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\IconResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\BookmarkUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\CategoryUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

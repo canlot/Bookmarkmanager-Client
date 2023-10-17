@@ -12,145 +12,9 @@
         DataContext="{StaticResource MainViewModel}"
         Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
-        <DrawingImage x:Key="CategoryAddImage">
-            <DrawingImage.Drawing>
-                <DrawingGroup ClipGeometry="M0,0 V256 H256 V0 H0 Z">
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup.ClipGeometry>
-                            <PathGeometry FillRule="Nonzero" Figures="M0,256L0,0 256,0 256,256z M187,131C153.862,131 127,157.862 127,191 127,224.138 153.862,251 187,251 220.138,251 247,224.138 247,191 247,157.862 220.138,131 187,131z" />
-                        </DrawingGroup.ClipGeometry>
-                        <DrawingGroup Opacity="1" Transform="8,0,0,8,0,0">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M5,5L5,7 27,7 27,5z M5,10L5,12 24,12 24,10z M5,15L5,17 21,17 21,15z M5,20L5,22 18,22 18,20z M5,25L5,27 15,27 15,25z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup Opacity="1" Transform="6,0,0,6,139,143">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M8,16C3.6,16 0,12.4 0,8 0,3.6 3.6,0 8,0 12.4,0 16,3.6 16,8 16,12.4 12.4,16 8,16z M8,2C4.7,2 2,4.7 2,8 2,11.3 4.7,14 8,14 11.3,14 14,11.3 14,8 14,4.7 11.3,2 8,2z M12,7L9,7 9,4 7,4 7,7 4,7 4,9 7,9 7,12 9,12 9,9 12,9z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                </DrawingGroup>
-            </DrawingImage.Drawing>
-        </DrawingImage>
-        <DrawingImage x:Key="CategoryEditImage">
-            <DrawingImage.Drawing>
-                <DrawingGroup ClipGeometry="M0,0 V256 H256 V0 H0 Z">
-                    <DrawingGroup.Transform>
-                        <TranslateTransform X="0" Y="1.4432899320127035E-15" />
-                    </DrawingGroup.Transform>
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup.ClipGeometry>
-                            <PathGeometry FillRule="Nonzero" Figures="M0,256L0,0 256,0 256,256z M238.296,139.7104C232.1648,133.5792 224.1776,130.2 215.8,130.2 207.4224,130.2 199.4352,133.5792 193.3168,139.704L134.2832,198.7312 126.2,237.688 126.2,251.8 140.3184,251.8 179.2624,243.7168 238.2896,184.696C244.4208,178.5648 247.8,170.5776 247.8,162.2 247.8,153.8224 244.4208,145.8352 238.296,139.7104z" />
-                        </DrawingGroup.ClipGeometry>
-                        <DrawingGroup Opacity="1" Transform="8,0,0,8,0,0">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M5,5L5,7 27,7 27,5z M5,10L5,12 24,12 24,10z M5,15L5,17 21,17 21,15z M5,20L5,22 18,22 18,20z M5,25L5,27 15,27 15,25z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup Opacity="1" Transform="6.4,0,0,6.4,139,143">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M0,15L1.1,9.7 9.9,0.899999999999999C10.5,0.299999999999999 11.25,-1.4432899320127E-15 12,-1.4432899320127E-15 12.75,-1.4432899320127E-15 13.5,0.299999999999999 14.1,0.899999999999999 14.7,1.5 15,2.25 15,3 15,3.75 14.7,4.5 14.1,5.1L5.3,13.9z M2.9,10.7L2.6,12.4 4.3,12.1 12.7,3.7C13.1,3.3 13.1,2.7 12.7,2.3 12.3,1.9 11.7,1.9 11.3,2.3z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                </DrawingGroup>
-            </DrawingImage.Drawing>
-        </DrawingImage>
-        <DrawingImage x:Key="CategoryDeleteImage">
-            <DrawingImage.Drawing>
-                <DrawingGroup ClipGeometry="M0,0 V256 H256 V0 H0 Z">
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup.ClipGeometry>
-                            <PathGeometry FillRule="Nonzero" Figures="M0,256L0,0 256,0 256,256z M187,131C153.862,131 127,157.862 127,191 127,224.138 153.862,251 187,251 220.138,251 247,224.138 247,191 247,157.862 220.138,131 187,131z" />
-                        </DrawingGroup.ClipGeometry>
-                        <DrawingGroup Opacity="1" Transform="8,0,0,8,0,0">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M5,5L5,7 27,7 27,5z M5,10L5,12 24,12 24,10z M5,15L5,17 21,17 21,15z M5,20L5,22 18,22 18,20z M5,25L5,27 15,27 15,25z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup Opacity="1" Transform="6,0,0,6,139,143">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M8,16C3.6,16 0,12.4 0,8 0,3.6 3.6,0 8,0 12.4,0 16,3.6 16,8 16,12.4 12.4,16 8,16z M8,2C4.7,2 2,4.7 2,8 2,11.3 4.7,14 8,14 11.3,14 14,11.3 14,8 14,4.7 11.3,2 8,2z M11.7,5.7L10.3,4.3 8,6.6 5.7,4.3 4.3,5.7 6.6,8 4.3,10.3 5.7,11.7 8,9.4 10.3,11.7 11.7,10.3 9.4,8z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                </DrawingGroup>
-            </DrawingImage.Drawing>
-        </DrawingImage>
-        <DrawingImage x:Key="LinkAddImage">
-            <DrawingImage.Drawing>
-                <DrawingGroup ClipGeometry="M0,0 V256 H256 V0 H0 Z">
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup.ClipGeometry>
-                            <PathGeometry FillRule="Nonzero" Figures="M0,256L0,0 256,0 256,256z M187,131C153.862,131 127,157.862 127,191 127,224.138 153.862,251 187,251 220.138,251 247,224.138 247,191 247,157.862 220.138,131 187,131z" />
-                        </DrawingGroup.ClipGeometry>
-                        <DrawingGroup Opacity="1" Transform="8,0,0,8,0,0">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M21.75,4C20.07813,4,18.49219,4.66016,17.3125,5.84375L15.84375,7.3125C14.66016,8.49609 14,10.07813 14,11.75 14,12.54297 14.15234,13.31641 14.4375,14.03125L16.0625,12.40625C15.85938,11.10938,16.25391,9.71484,17.25,8.71875L18.71875,7.25C19.52344,6.44531 20.61328,6 21.75,6 22.88672,6 23.94531,6.44531 24.75,7.25 26.41016,8.91016 26.41016,11.62109 24.75,13.28125L23.28125,14.75C22.47656,15.55469 21.38672,16 20.25,16 20.02734,16 19.80859,15.97656 19.59375,15.9375L17.96875,17.5625C18.68359,17.84766 19.45703,18 20.25,18 21.92188,18 23.50781,17.33984 24.6875,16.15625L26.15625,14.6875C27.33984,13.50391 28,11.92188 28,10.25 28,8.57813 27.33984,7.02734 26.15625,5.84375 24.97656,4.66016 23.42188,4 21.75,4z M19.28125,11.28125L11.28125,19.28125 12.71875,20.71875 20.71875,12.71875z M11.75,14C10.07813,14,8.49219,14.66016,7.3125,15.84375L5.84375,17.3125C4.66016,18.49609 4,20.07813 4,21.75 4,23.42188 4.66016,24.97266 5.84375,26.15625 7.02344,27.33984 8.57813,28 10.25,28 11.92188,28 13.50781,27.33984 14.6875,26.15625L16.15625,24.6875C17.33984,23.50391 18,21.92188 18,20.25 18,19.45703 17.84766,18.68359 17.5625,17.96875L15.9375,19.59375C16.14063,20.89063,15.74609,22.28516,14.75,23.28125L13.28125,24.75C12.47656,25.55469 11.38672,26 10.25,26 9.11328,26 8.05469,25.55469 7.25,24.75 5.58984,23.08984 5.58984,20.37891 7.25,18.71875L8.71875,17.25C9.52344,16.44531 10.61328,16 11.75,16 11.97266,16 12.19141,16.02344 12.40625,16.0625L14.03125,14.4375C13.31641,14.15234,12.54297,14,11.75,14z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup Opacity="1" Transform="6,0,0,6,139,143">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M8,16C3.6,16 0,12.4 0,8 0,3.6 3.6,0 8,0 12.4,0 16,3.6 16,8 16,12.4 12.4,16 8,16z M8,2C4.7,2 2,4.7 2,8 2,11.3 4.7,14 8,14 11.3,14 14,11.3 14,8 14,4.7 11.3,2 8,2z M12,7L9,7 9,4 7,4 7,7 4,7 4,9 7,9 7,12 9,12 9,9 12,9z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                </DrawingGroup>
-            </DrawingImage.Drawing>
-        </DrawingImage>
-        <DrawingImage x:Key="LinkEditImage">
-            <DrawingImage.Drawing>
-                <DrawingGroup ClipGeometry="M0,0 V256 H256 V0 H0 Z">
-                    <DrawingGroup.Transform>
-                        <TranslateTransform X="0" Y="1.4432899320127035E-15" />
-                    </DrawingGroup.Transform>
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup.ClipGeometry>
-                            <PathGeometry FillRule="Nonzero" Figures="M0,256L0,0 256,0 256,256z M238.296,139.7104C232.1648,133.5792 224.1776,130.2 215.8,130.2 207.4224,130.2 199.4352,133.5792 193.3168,139.704L134.2832,198.7312 126.2,237.688 126.2,251.8 140.3184,251.8 179.2624,243.7168 238.2896,184.696C244.4208,178.5648 247.8,170.5776 247.8,162.2 247.8,153.8224 244.4208,145.8352 238.296,139.7104z" />
-                        </DrawingGroup.ClipGeometry>
-                        <DrawingGroup Opacity="1" Transform="8,0,0,8,0,0">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M21.75,4C20.07813,4,18.49219,4.66016,17.3125,5.84375L15.84375,7.3125C14.66016,8.49609 14,10.07813 14,11.75 14,12.54297 14.15234,13.31641 14.4375,14.03125L16.0625,12.40625C15.85938,11.10938,16.25391,9.71484,17.25,8.71875L18.71875,7.25C19.52344,6.44531 20.61328,6 21.75,6 22.88672,6 23.94531,6.44531 24.75,7.25 26.41016,8.91016 26.41016,11.62109 24.75,13.28125L23.28125,14.75C22.47656,15.55469 21.38672,16 20.25,16 20.02734,16 19.80859,15.97656 19.59375,15.9375L17.96875,17.5625C18.68359,17.84766 19.45703,18 20.25,18 21.92188,18 23.50781,17.33984 24.6875,16.15625L26.15625,14.6875C27.33984,13.50391 28,11.92188 28,10.25 28,8.57813 27.33984,7.02734 26.15625,5.84375 24.97656,4.66016 23.42188,4 21.75,4z M19.28125,11.28125L11.28125,19.28125 12.71875,20.71875 20.71875,12.71875z M11.75,14C10.07813,14,8.49219,14.66016,7.3125,15.84375L5.84375,17.3125C4.66016,18.49609 4,20.07813 4,21.75 4,23.42188 4.66016,24.97266 5.84375,26.15625 7.02344,27.33984 8.57813,28 10.25,28 11.92188,28 13.50781,27.33984 14.6875,26.15625L16.15625,24.6875C17.33984,23.50391 18,21.92188 18,20.25 18,19.45703 17.84766,18.68359 17.5625,17.96875L15.9375,19.59375C16.14063,20.89063,15.74609,22.28516,14.75,23.28125L13.28125,24.75C12.47656,25.55469 11.38672,26 10.25,26 9.11328,26 8.05469,25.55469 7.25,24.75 5.58984,23.08984 5.58984,20.37891 7.25,18.71875L8.71875,17.25C9.52344,16.44531 10.61328,16 11.75,16 11.97266,16 12.19141,16.02344 12.40625,16.0625L14.03125,14.4375C13.31641,14.15234,12.54297,14,11.75,14z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup Opacity="1" Transform="6.4,0,0,6.4,139,143">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M0,15L1.1,9.7 9.9,0.899999999999999C10.5,0.299999999999999 11.25,-1.4432899320127E-15 12,-1.4432899320127E-15 12.75,-1.4432899320127E-15 13.5,0.299999999999999 14.1,0.899999999999999 14.7,1.5 15,2.25 15,3 15,3.75 14.7,4.5 14.1,5.1L5.3,13.9z M2.9,10.7L2.6,12.4 4.3,12.1 12.7,3.7C13.1,3.3 13.1,2.7 12.7,2.3 12.3,1.9 11.7,1.9 11.3,2.3z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                </DrawingGroup>
-            </DrawingImage.Drawing>
-        </DrawingImage>
-        <DrawingImage x:Key="LinkDeleteImage">
-            <DrawingImage.Drawing>
-                <DrawingGroup ClipGeometry="M0,0 V256 H256 V0 H0 Z">
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup.ClipGeometry>
-                            <PathGeometry FillRule="Nonzero" Figures="M0,256L0,0 256,0 256,256z M187,131C153.862,131 127,157.862 127,191 127,224.138 153.862,251 187,251 220.138,251 247,224.138 247,191 247,157.862 220.138,131 187,131z" />
-                        </DrawingGroup.ClipGeometry>
-                        <DrawingGroup Opacity="1" Transform="8,0,0,8,0,0">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M21.75,4C20.07813,4,18.49219,4.66016,17.3125,5.84375L15.84375,7.3125C14.66016,8.49609 14,10.07813 14,11.75 14,12.54297 14.15234,13.31641 14.4375,14.03125L16.0625,12.40625C15.85938,11.10938,16.25391,9.71484,17.25,8.71875L18.71875,7.25C19.52344,6.44531 20.61328,6 21.75,6 22.88672,6 23.94531,6.44531 24.75,7.25 26.41016,8.91016 26.41016,11.62109 24.75,13.28125L23.28125,14.75C22.47656,15.55469 21.38672,16 20.25,16 20.02734,16 19.80859,15.97656 19.59375,15.9375L17.96875,17.5625C18.68359,17.84766 19.45703,18 20.25,18 21.92188,18 23.50781,17.33984 24.6875,16.15625L26.15625,14.6875C27.33984,13.50391 28,11.92188 28,10.25 28,8.57813 27.33984,7.02734 26.15625,5.84375 24.97656,4.66016 23.42188,4 21.75,4z M19.28125,11.28125L11.28125,19.28125 12.71875,20.71875 20.71875,12.71875z M11.75,14C10.07813,14,8.49219,14.66016,7.3125,15.84375L5.84375,17.3125C4.66016,18.49609 4,20.07813 4,21.75 4,23.42188 4.66016,24.97266 5.84375,26.15625 7.02344,27.33984 8.57813,28 10.25,28 11.92188,28 13.50781,27.33984 14.6875,26.15625L16.15625,24.6875C17.33984,23.50391 18,21.92188 18,20.25 18,19.45703 17.84766,18.68359 17.5625,17.96875L15.9375,19.59375C16.14063,20.89063,15.74609,22.28516,14.75,23.28125L13.28125,24.75C12.47656,25.55469 11.38672,26 10.25,26 9.11328,26 8.05469,25.55469 7.25,24.75 5.58984,23.08984 5.58984,20.37891 7.25,18.71875L8.71875,17.25C9.52344,16.44531 10.61328,16 11.75,16 11.97266,16 12.19141,16.02344 12.40625,16.0625L14.03125,14.4375C13.31641,14.15234,12.54297,14,11.75,14z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup Opacity="1" Transform="6,0,0,6,139,143">
-                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M256,256z M0,0z M8,16C3.6,16 0,12.4 0,8 0,3.6 3.6,0 8,0 12.4,0 16,3.6 16,8 16,12.4 12.4,16 8,16z M8,2C4.7,2 2,4.7 2,8 2,11.3 4.7,14 8,14 11.3,14 14,11.3 14,8 14,4.7 11.3,2 8,2z M11.7,5.7L10.3,4.3 8,6.6 5.7,4.3 4.3,5.7 6.6,8 4.3,10.3 5.7,11.7 8,9.4 10.3,11.7 11.7,10.3 9.4,8z" />
-                        </DrawingGroup>
-                    </DrawingGroup>
-                </DrawingGroup>
-            </DrawingImage.Drawing>
-        </DrawingImage>
-        <DrawingImage x:Key="SettingsImage">
-            <DrawingImage.Drawing>
-                <DrawingGroup ClipGeometry="M0,0 V32 H32 V0 H0 Z">
-                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M32,32z M0,0z M13.1875,3L13.03125,3.8125 12.4375,6.78125C11.484375,7.15625,10.625,7.683594,9.84375,8.3125L6.9375,7.3125 6.15625,7.0625 5.75,7.78125 3.75,11.21875 3.34375,11.9375 3.9375,12.46875 6.1875,14.4375C6.105469,14.949219 6,15.460938 6,16 6,16.539063 6.105469,17.050781 6.1875,17.5625L3.9375,19.53125 3.34375,20.0625 3.75,20.78125 5.75,24.21875 6.15625,24.9375 6.9375,24.6875 9.84375,23.6875C10.625,24.316406,11.484375,24.84375,12.4375,25.21875L13.03125,28.1875 13.1875,29 18.8125,29 18.96875,28.1875 19.5625,25.21875C20.515625,24.84375,21.375,24.316406,22.15625,23.6875L25.0625,24.6875 25.84375,24.9375 26.25,24.21875 28.25,20.78125 28.65625,20.0625 28.0625,19.53125 25.8125,17.5625C25.894531,17.050781 26,16.539063 26,16 26,15.460938 25.894531,14.949219 25.8125,14.4375L28.0625,12.46875 28.65625,11.9375 28.25,11.21875 26.25,7.78125 25.84375,7.0625 25.0625,7.3125 22.15625,8.3125C21.375,7.683594,20.515625,7.15625,19.5625,6.78125L18.96875,3.8125 18.8125,3z M14.8125,5L17.1875,5 17.6875,7.59375 17.8125,8.1875 18.375,8.375C19.511719,8.730469,20.542969,9.332031,21.40625,10.125L21.84375,10.53125 22.40625,10.34375 24.9375,9.46875 26.125,11.5 24.125,13.28125 23.65625,13.65625 23.8125,14.25C23.941406,14.820313 24,15.402344 24,16 24,16.597656 23.941406,17.179688 23.8125,17.75L23.6875,18.34375 24.125,18.71875 26.125,20.5 24.9375,22.53125 22.40625,21.65625 21.84375,21.46875 21.40625,21.875C20.542969,22.667969,19.511719,23.269531,18.375,23.625L17.8125,23.8125 17.6875,24.40625 17.1875,27 14.8125,27 14.3125,24.40625 14.1875,23.8125 13.625,23.625C12.488281,23.269531,11.457031,22.667969,10.59375,21.875L10.15625,21.46875 9.59375,21.65625 7.0625,22.53125 5.875,20.5 7.875,18.71875 8.34375,18.34375 8.1875,17.75C8.058594,17.179688 8,16.597656 8,16 8,15.402344 8.058594,14.820313 8.1875,14.25L8.34375,13.65625 7.875,13.28125 5.875,11.5 7.0625,9.46875 9.59375,10.34375 10.15625,10.53125 10.59375,10.125C11.457031,9.332031,12.488281,8.730469,13.625,8.375L14.1875,8.1875 14.3125,7.59375z M16,11C13.25,11 11,13.25 11,16 11,18.75 13.25,21 16,21 18.75,21 21,18.75 21,16 21,13.25 18.75,11 16,11z M16,13C17.667969,13 19,14.332031 19,16 19,17.667969 17.667969,19 16,19 14.332031,19 13,17.667969 13,16 13,14.332031 14.332031,13 16,13z" />
-                </DrawingGroup>
-            </DrawingImage.Drawing>
-        </DrawingImage>
-        <DrawingImage x:Key="OpenInBrowserImage">
-            <DrawingImage.Drawing>
-                <DrawingGroup ClipGeometry="M0,0 V128 H128 V0 H0 Z">
-                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M128,128z M0,0z M84,11C82.3,11 81,12.3 81,14 81,15.7 82.3,17 84,17L106.80078,17 60.400391,63.400391C59.200391,64.600391 59.200391,66.499609 60.400391,67.599609 61.000391,68.199609 61.8,68.5 62.5,68.5 63.2,68.5 63.999609,68.199609 64.599609,67.599609L111,21.199219 111,44C111,45.7 112.3,47 114,47 115.7,47 117,45.7 117,44L117,14C117,12.3,115.7,11,114,11L84,11z M24,31C16.8,31,11,36.8,11,44L11,104C11,111.2,16.8,117,24,117L84,117C91.2,117,97,111.2,97,104L97,59C97,57.3 95.7,56 94,56 92.3,56 91,57.3 91,59L91,104C91,107.9,87.9,111,84,111L24,111C20.1,111,17,107.9,17,104L17,44C17,40.1,20.1,37,24,37L69,37C70.7,37 72,35.7 72,34 72,32.3 70.7,31 69,31L24,31z" />
-                </DrawingGroup>
-            </DrawingImage.Drawing>
-        </DrawingImage>
-        
         <ui:PathIcon x:Key="Test" Data="M 393 119.458C393 27.636 492.401 -29.752 571.92 16.158C608.826 37.465 631.56 76.844 631.56 119.458C631.56 211.28 532.159 268.667,452.64,222.758C415.735,201.451,393,162.071,393,119.458M410.04,119.458C410.04,40.753,495.24,-8.438,563.4,30.914C595.033,49.178,614.52,82.931,614.52,119.458C614.52,198.162,529.32,247.353,461.16,208.001C429.527,189.738,410.04,155.985,410.04,119.458M502.908,204.658C502.908,204.658,502.908,34.258,502.908,34.258C502.908,34.258,521.652,34.258,521.652,34.258C521.652,34.258,521.652,204.658,521.652,204.658C521.652,204.658,502.908,204.658,502.908,204.658M604.041,1024C604.041,1024,604.041,853.6,604.041,853.6C604.041,853.6,622.785,853.6,622.785,853.6C622.785,853.6,622.785,1024,622.785,1024C622.785,1024,604.041,1024,604.041,1024"/>
         <ui:PathIcon x:Key="OpenInBrowserIcon" Data="M 84 11 C 82.3 11 81 12.3 81 14 C 81 15.7 82.3 17 84 17 L 106.80078 17 L 60.400391 63.400391 C 59.200391 64.600391 59.200391 66.499609 60.400391 67.599609 C 61.000391 68.199609 61.8 68.5 62.5 68.5 C 63.2 68.5 63.999609 68.199609 64.599609 67.599609 L 111 21.199219 L 111 44 C 111 45.7 112.3 47 114 47 C 115.7 47 117 45.7 117 44 L 117 14 C 117 12.3 115.7 11 114 11 L 84 11 z M 24 31 C 16.8 31 11 36.8 11 44 L 11 104 C 11 111.2 16.8 117 24 117 L 84 117 C 91.2 117 97 111.2 97 104 L 97 59 C 97 57.3 95.7 56 94 56 C 92.3 56 91 57.3 91 59 L 91 104 C 91 107.9 87.9 111 84 111 L 24 111 C 20.1 111 17 107.9 17 104 L 17 44 C 17 40.1 20.1 37 24 37 L 69 37 C 70.7 37 72 35.7 72 34 C 72 32.3 70.7 31 69 31 L 24 31 z"/>
         <ui:PathIcon x:Key="AddCategoryIcon" Data="M15.9,10c0,0.6 -0.4,1 -1,1h-3.9v3.9c0,0.6 -0.4,1 -1,1c-0.6,0 -1,-0.4 -1,-1v-3.9h-3.9c-0.6,0 -1,-0.4 -1,-1c0,-0.6 0.4,-1 1,-1h3.9v-3.9c0,-0.6 0.4,-1 1,-1c0.6,0 1,0.4 1,1v3.9h3.9c0.6,0 1,0.4 1,1zM20,10c0,5.5 -4.5,10 -10,10c-5.5,0 -10,-4.5 -10,-10c0,-5.5 4.5,-10 10,-10c5.5,0 10,4.5 10,10zM18,10c0,-4.4 -3.6,-8 -8,-8c-4.4,0 -8,3.6 -8,8c0,4.4 3.6,8 8,8c4.4,0 8,-3.6 8,-8z"/>
-
     </Window.Resources>
     <Window.CommandBindings>
         
@@ -173,7 +37,7 @@
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="{StaticResource CategoryAddImage}" SnapsToDevicePixels="True" Width="40" />
+                            <Image Grid.Row="0" Source="{StaticResource CategoryAddImage}" SnapsToDevicePixels="True" Width="38" />
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Kategorie erstellen</TextBlock>
                         </Grid>
                     </Button>
@@ -183,7 +47,7 @@
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="{StaticResource CategoryEditImage}" SnapsToDevicePixels="True" Width="40" />
+                            <Image Grid.Row="0" Source="{StaticResource CategoryEditImage}" SnapsToDevicePixels="True" Width="38" />
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Kategorie bearbeiten</TextBlock>
                         </Grid>
                     </Button>
@@ -193,7 +57,7 @@
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="{StaticResource CategoryDeleteImage}" SnapsToDevicePixels="True" Width="40" />
+                            <Image Grid.Row="0" Source="{StaticResource CategoryDeleteImage}" SnapsToDevicePixels="True" Width="38" />
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Kategorie löschen</TextBlock>
                         </Grid>
                     </Button>
@@ -204,7 +68,7 @@
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="{StaticResource LinkAddImage}" SnapsToDevicePixels="True" Width="40"/>
+                            <Image Grid.Row="0" Source="{StaticResource LinkAddImage}" SnapsToDevicePixels="True" Width="38"/>
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Lesezeichen erstellen</TextBlock>
                         </Grid>
                     </Button>
@@ -214,7 +78,7 @@
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="{StaticResource LinkEditImage}" SnapsToDevicePixels="True" Width="40"/>
+                            <Image Grid.Row="0" Source="{StaticResource LinkEditImage}" SnapsToDevicePixels="True" Width="38"/>
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Lesezeichen bearbeiten</TextBlock>
                         </Grid>
                     </Button>
@@ -224,7 +88,7 @@
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="{StaticResource LinkDeleteImage}" SnapsToDevicePixels="True" Width="40"/>
+                            <Image Grid.Row="0" Source="{StaticResource LinkDeleteImage}" SnapsToDevicePixels="True" Width="38"/>
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Lesezeichen löschen</TextBlock>
                         </Grid>
                     </Button>
@@ -235,7 +99,7 @@
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="{StaticResource SettingsImage}" SnapsToDevicePixels="True" Width="40"/>
+                            <Image Grid.Row="0" Source="{StaticResource SettingsImage}" SnapsToDevicePixels="True" Width="38"/>
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Einstellungen</TextBlock>
                         </Grid>
                     </Button>
