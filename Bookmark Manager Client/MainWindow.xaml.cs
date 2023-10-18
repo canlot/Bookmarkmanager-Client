@@ -134,7 +134,7 @@ namespace Bookmark_Manager_Client
         {
             Bookmark bookmark = (Bookmark)listBoxBookmarks.SelectedItem;
             if (bookmark == null) return;
-            WebBrowser.LoadUrl(bookmark.Url);
+            //WebBrowser.LoadUrl(bookmark.Url);
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)

@@ -3,10 +3,97 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:local="clr-namespace:Bookmark_Manager_Client.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <UserControl.Resources>
+        <Style x:Key="ColumnStyleLeft" TargetType="Border">
+            <Setter Property="Margin" Value="5,5,0,5"/>
+            <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="CornerRadius" Value="5,0,0,5"/>
+        </Style>
+        <Style x:Key="ColumnStyleCenter" TargetType="Border">
+            <Setter Property="Margin" Value="0,5,0,5"/>
+            <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+        <Style x:Key="ColumnStyleRight" TargetType="Border">
+            <Setter Property="Margin" Value="0,5,5,5"/>
+            <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="CornerRadius" Value="0,5,5,0"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="Name" Style="{StaticResource LabelStyle}"/>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+            <TextBox x:Name="NameTextBox" Text="{Binding SelectedCategory.Id, UpdateSourceTrigger=Explicit}" />
+        </Border>
+        
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="Top category" Style="{StaticResource LabelStyle}"/>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+            <ui:ToggleSwitch></ui:ToggleSwitch>
+        </Border>
+        
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="Parent category" Style="{StaticResource LabelStyle}"/>
+        </Border>
+        <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+            <TextBox x:Name="ParentCategoryTextBox" Text="" IsReadOnly="True"/>
+        </Border>
+        
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="Users with Access" Style="{StaticResource LabelStyle}"/>
+        </Border>
+        <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+            <Border>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ui:AutoSuggestBox Grid.Row="0" PlaceholderText="Username or email" QueryIcon="Add"/>
+                    <ListBox Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Stretch">
+                        <ListBoxItem Content="Jakob Jakobus"/>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </Border>
+        <Button Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" Style="{StaticResource AccentButtonStyle}" Content="Speichern"/>
+        <Button Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen"/>
     </Grid>
 </UserControl>

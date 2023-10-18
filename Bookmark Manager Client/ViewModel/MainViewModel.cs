@@ -6,9 +6,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using Bookmark_Manager_Client.Commands;
 using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.Model;
+using Bookmark_Manager_Client.UserControls;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -50,8 +52,26 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        
+        private UserControl detailsUserControl = new BrowserUserControl();
+        public UserControl DetailsUserControl 
+        { 
+            get => detailsUserControl; 
+            set
+            {
+                detailsUserControl = value;
+                OnPropertyChanged();
+            }
+        }
+        private ChangeUserControlCommand changeUserControlCommand = new ChangeUserControlCommand();
+        public ChangeUserControlCommand ChangeUserControlCommand 
+        {
+            get => changeUserControlCommand; 
+            set
+            {
+                changeUserControlCommand = value;
+                OnPropertyChanged();
+            }
+        }
 
         public MainViewModel() 
         {

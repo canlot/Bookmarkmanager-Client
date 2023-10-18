@@ -87,6 +87,7 @@
     <Compile Include="CategoryWindow.xaml.cs">
       <DependentUpon>CategoryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\ChangeUserControlCommand.cs" />
     <Compile Include="Commands\OpenInBrowserCommand.cs" />
     <Compile Include="DataProvider\FakeDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />
@@ -104,6 +105,9 @@
     <Compile Include="PortValidationRule.cs" />
     <Compile Include="UserControls\BookmarkUserControl.xaml.cs">
       <DependentUpon>BookmarkUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\BrowserUserControl.xaml.cs">
+      <DependentUpon>BrowserUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CategoryUserControl.xaml.cs">
       <DependentUpon>CategoryUserControl.xaml</DependentUpon>
@@ -143,11 +147,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Properties\DesignTimeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\IconResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\BookmarkUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\BrowserUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

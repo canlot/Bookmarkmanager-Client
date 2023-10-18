@@ -28,10 +28,10 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
-                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
+                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Command="{Binding ChangeUserControlCommand}" CommandParameter="CategoryUserControl">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
@@ -104,7 +104,7 @@
                         </Grid>
                     </Button>
                 </StackPanel>
-                <ui:AutoSuggestBox Margin="10" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxWidth="500" MinWidth="200" QueryIcon="Find"></ui:AutoSuggestBox>
+                <ui:AutoSuggestBox Margin="10" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch"  QueryIcon="Find"></ui:AutoSuggestBox>
             </Grid>
             
         </Border>
@@ -183,7 +183,7 @@
                     </ListBox>
                 </Border>
                 <Border Grid.Column="2">
-                    <wpf:ChromiumWebBrowser x:Name="WebBrowser" Address="https://www.google.com"/>
+                    <ContentControl Content="{Binding ChangeUserControlCommand.UserControl}"/>
                 </Border>
             </Grid>
         </DockPanel>
