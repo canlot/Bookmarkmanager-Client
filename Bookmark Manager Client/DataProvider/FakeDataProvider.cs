@@ -73,6 +73,17 @@ namespace Bookmark_Manager_Client.DataProvider
                 OwnerID = 1,
                 ParentID = 0,
                 Shared = true,
+                ChildCategories = new ObservableCollection<Category>()
+                {
+                    new Category()
+                    {
+                        ID = 8,
+                        Name = "Drucker",
+                        OwnerID = 1,
+                        ParentID = 1,
+                        Shared = true,
+                    }
+                }
             });
 
             bookmarks.Add(new Bookmark()
@@ -92,6 +103,24 @@ namespace Bookmark_Manager_Client.DataProvider
                 ID = 3,
                 CategoryID = 3,
                 Url = "https://administrator.de",
+            });
+            bookmarks.Add(new Bookmark()
+            {
+                ID = 4,
+                CategoryID = 8,
+                Url = "https://eu.store.bambulab.com/de/products/p1s?variant=47016782397788&gclid=EAIaIQobChMIh4eGoOmGggMV4ItoCR2zOADhEAYYCCABEgJdjvD_BwE"
+            });
+            bookmarks.Add(new Bookmark()
+            {
+                ID = 5,
+                CategoryID = 8,
+                Url = "https://eu.store.bambulab.com/de/products/x1-carbon-combo?utm_campaign=sag_organic&utm_content=sag_organic&utm_medium=product_sync&utm_source=google&variant=47035962851676&gclid=EAIaIQobChMIh4eGoOmGggMV4ItoCR2zOADhEAYYBCABEgIjOfD_BwE"
+            });
+            bookmarks.Add(new Bookmark()
+            {
+                ID = 6,
+                CategoryID = 8,
+                Url = "https://store.creality.com/de/products/ender-3-v2-3d-printer?utm_source=googleshopping&gclid=EAIaIQobChMI5P6Q2eqGggMVow8GAB1JmwGqEAYYASABEgKScvD_BwE"
             });
         }
 
