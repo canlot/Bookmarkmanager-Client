@@ -42,6 +42,9 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
+        private Category selectedCategory;
+        public Category SelectedCategory { get => selectedCategory; set { selectedCategory = value; OnPropertyChanged(); } }
+
         private ObservableCollection<Bookmark> bookmarks = new ObservableCollection<Bookmark>();
         public ObservableCollection<Bookmark> Bookmarks
         {
@@ -72,7 +75,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        public EventDispatcher EventDispatcher { get; set; }
         public MainViewModel() 
         {
             Categories = ObjectRepository.DataProvider.GetAllCategories();

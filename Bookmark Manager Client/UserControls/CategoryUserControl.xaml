@@ -4,10 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ui="http://schemas.modernwpf.com/2019"
-             xmlns:local="clr-namespace:Bookmark_Manager_Client.UserControls"
-             mc:Ignorable="d" 
+             xmlns:vm="clr-namespace:Bookmark_Manager_Client.ViewModel"
+             xmlns:local="clr-namespace:Bookmark_Manager_Client"
+             xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
+             mc:Ignorable="d"
+             DataContext="{StaticResource MainViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        
         <Style x:Key="ColumnStyleLeft" TargetType="Border">
             <Setter Property="Margin" Value="5,5,0,5"/>
             <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
@@ -38,7 +42,7 @@
             <Setter Property="FontSize" Value="15"/>
         </Style>
     </UserControl.Resources>
-    <Grid Margin="10">
+    <Grid Margin="10" DataContext="{StaticResource CategoryViewModel}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -63,7 +67,7 @@
         </Border>
         <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
-            <TextBox x:Name="NameTextBox" Text="{Binding SelectedCategory.Id, UpdateSourceTrigger=Explicit}" />
+            <TextBox x:Name="NameTextBox" Text="{Binding Category.Name}" />
         </Border>
         
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
@@ -71,16 +75,16 @@
         </Border>
         <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
-            <ui:ToggleSwitch>
+            <ui:ToggleSwitch IsEnabledChanged="ToggleSwitch_IsEnabledChanged" Toggled="ToggleSwitch_Toggled">
             </ui:ToggleSwitch>
         </Border>
         
         <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label Content="Parent category" Style="{StaticResource LabelStyle}"/>
+            <Label  Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
-            <TextBox x:Name="ParentCategoryTextBox" Text="" IsReadOnly="True" />
+            <TextBox  x:Name="ParentCategoryTextBox" Text="{Binding ParentCategory.Name}" IsReadOnly="True" />
         </Border>
         
         <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">

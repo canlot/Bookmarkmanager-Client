@@ -100,9 +100,13 @@
     <Compile Include="Controller\PermissionManagerForCategoryController.cs" />
     <Compile Include="Controller\PermissionManagerForController.cs" />
     <Compile Include="DataProvider\RestDataProvider.cs" />
+    <Compile Include="EventDispatcher.cs" />
+    <Compile Include="IObjectReceiver.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="ObjectRepository.cs" />
     <Compile Include="PortValidationRule.cs" />
+    <Compile Include="Receiver.cs" />
+    <Compile Include="ReceiverExceptions.cs" />
     <Compile Include="UserControls\BookmarkUserControl.xaml.cs">
       <DependentUpon>BookmarkUserControl.xaml</DependentUpon>
     </Compile>
@@ -112,6 +116,7 @@
     <Compile Include="UserControls\CategoryUserControl.xaml.cs">
       <DependentUpon>CategoryUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CategoryViewModel.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="LoginWindow.xaml.cs">

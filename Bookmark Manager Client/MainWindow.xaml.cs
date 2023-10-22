@@ -44,10 +44,9 @@ namespace Bookmark_Manager_Client
         private void treeViewCategory_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             Category category = (Category)treeViewCategory.SelectedItem;
-
             MainViewModel vm = (MainViewModel)this.DataContext;
             vm.GetBookmarks(category);
-
+            vm.SelectedCategory = category;
         }
 
         private void ButtonAddCategory_Click(object sender, RoutedEventArgs e)

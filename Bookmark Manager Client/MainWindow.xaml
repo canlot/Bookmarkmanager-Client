@@ -153,7 +153,7 @@
                     </TreeView>
                 </Border>
                 <Border Grid.Column="1">
-                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}" SelectionChanged="listBoxBookmarks_SelectionChanged">
+                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}" SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

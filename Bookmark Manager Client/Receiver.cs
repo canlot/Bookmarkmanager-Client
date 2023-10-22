@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Bookmark_Manager_Client
+{
+    public class Receiver
+    {
+        public object ReceiverObject { get; set; }
+        public Type ReceivingType { get; set; }
+        public Type ReturningType { get; set; }
+    }
+}
