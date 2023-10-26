@@ -20,28 +20,12 @@ namespace Bookmark_Manager_Client.UserControls
     /// <summary>
     /// Interaktionslogik für CategoryAddUserControl.xaml
     /// </summary>
-    public partial class CategoryUserControl : UserControl
+    public partial class CategoryUserControlNew : UserControl
     {
-        private bool isNewCategory;
-        public CategoryViewModel CategoryViewModel { get; set; }
-        public CategoryUserControl(bool isNewCategory)
+        public CategoryUserControlNew()
         {
             InitializeComponent();
-            
-            MainViewModel mainViewModel = (MainViewModel)this.DataContext;
-            
-            if(isNewCategory) 
-            {
-                //CategoryViewModel categoryViewModel = this.Resources["CategoryViewModel"] as CategoryViewModel;
-                CategoryViewModel = new CategoryViewModel(true);
-                CategoryViewModel.ParentCategory = mainViewModel.SelectedCategory;
-            }
-            else
-            {
-                CategoryViewModel = new CategoryViewModel(false, mainViewModel.SelectedCategory);
-                
-            }
-            this.Resources["CategoryViewModel"] = CategoryViewModel;
+
         }
 
         private void ToggleSwitch_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -51,7 +35,7 @@ namespace Bookmark_Manager_Client.UserControls
 
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            CategoryViewModel categoryViewModel = this.Resources["CategoryViewModel"] as CategoryViewModel;
+            CategoryViewModelNew categoryViewModel = (CategoryViewModelNew)this.DataContext;
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
             if (toggleSwitch != null)
             {

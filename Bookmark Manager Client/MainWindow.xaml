@@ -8,8 +8,8 @@
         xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:controller="clr-namespace:Bookmark_Manager_Client.Controller"
         xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
-        mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
+        mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
         <ui:PathIcon x:Key="Test" Data="M 393 119.458C393 27.636 492.401 -29.752 571.92 16.158C608.826 37.465 631.56 76.844 631.56 119.458C631.56 211.28 532.159 268.667,452.64,222.758C415.735,201.451,393,162.071,393,119.458M410.04,119.458C410.04,40.753,495.24,-8.438,563.4,30.914C595.033,49.178,614.52,82.931,614.52,119.458C614.52,198.162,529.32,247.353,461.16,208.001C429.527,189.738,410.04,155.985,410.04,119.458M502.908,204.658C502.908,204.658,502.908,34.258,502.908,34.258C502.908,34.258,521.652,34.258,521.652,34.258C521.652,34.258,521.652,204.658,521.652,204.658C521.652,204.658,502.908,204.658,502.908,204.658M604.041,1024C604.041,1024,604.041,853.6,604.041,853.6C604.041,853.6,622.785,853.6,622.785,853.6C622.785,853.6,622.785,1024,622.785,1024C622.785,1024,604.041,1024,604.041,1024"/>
@@ -31,7 +31,7 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
-                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Command="{Binding ChangeUserControlCommand}" CommandParameter="CategoryUserControl">
+                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Command="{Binding ChangeUserControlCommand}" CommandParameter="CategoryUserControlNew">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>

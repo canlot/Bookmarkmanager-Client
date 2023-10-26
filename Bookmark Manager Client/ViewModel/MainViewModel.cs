@@ -75,7 +75,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
-        public EventDispatcher EventDispatcher { get; set; }
+
         public MainViewModel() 
         {
             Categories = ObjectRepository.DataProvider.GetAllCategories();

@@ -47,8 +47,8 @@ namespace Bookmark_Manager_Client.Commands
             {
                 switch(parameter)
                 {
-                    case "CategoryUserControl":
-                        UserControl = new CategoryUserControl(true);
+                    case "CategoryUserControlNew":
+                        UserControl = new CategoryUserControlNew();
                         break;
                     case "BookmarkUserControl":
                         UserControl = new BookmarkUserControl();

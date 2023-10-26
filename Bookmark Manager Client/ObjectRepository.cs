@@ -1,5 +1,6 @@
 ﻿using Bookmark_Manager_Client.Configurators;
 using Bookmark_Manager_Client.DataProvider;
+using Bookmark_Manager_Client.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,7 @@ namespace Bookmark_Manager_Client
             }
         }
         
+
         static ObjectRepository()
         {
             DataProvider = new FakeDataProvider();

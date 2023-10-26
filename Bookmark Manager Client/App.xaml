@@ -13,8 +13,9 @@
                 <ui:XamlControlsResources />
                 <ResourceDictionary Source="./Resources/IconResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <local:EventDispatcher x:Key="EventDispatcher" />
-            <viewmodel:MainViewModel x:Key="MainViewModel" EventDispatcher="{StaticResource EventDispatcher}" />
+            <viewmodel:MainViewModel x:Key="MainViewModel"  />
+
+            
             <!-- Other app resources here -->
         </ResourceDictionary>
     </Application.Resources>

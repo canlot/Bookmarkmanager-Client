@@ -107,16 +107,16 @@
     <Compile Include="PortValidationRule.cs" />
     <Compile Include="Receiver.cs" />
     <Compile Include="ReceiverExceptions.cs" />
-    <Compile Include="UserControls\BookmarkUserControl.xaml.cs">
-      <DependentUpon>BookmarkUserControl.xaml</DependentUpon>
+    <Compile Include="UserControls\BookmarkUserControlNew.xaml.cs">
+      <DependentUpon>BookmarkUserControlNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\BrowserUserControl.xaml.cs">
       <DependentUpon>BrowserUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CategoryUserControl.xaml.cs">
-      <DependentUpon>CategoryUserControl.xaml</DependentUpon>
+    <Compile Include="UserControls\CategoryUserControlNew.xaml.cs">
+      <DependentUpon>CategoryUserControlNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\CategoryViewModelNew.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="LoginWindow.xaml.cs">
@@ -160,7 +160,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\BookmarkUserControl.xaml">
+    <Page Include="UserControls\BookmarkUserControlNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,7 +168,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\CategoryUserControl.xaml">
+    <Page Include="UserControls\CategoryUserControlNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

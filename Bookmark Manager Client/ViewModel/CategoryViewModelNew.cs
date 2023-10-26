@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
-    public class CategoryViewModel : INotifyPropertyChanged
+    public class CategoryViewModelNew : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         private Category parentCategory { get; set; }
         public Category ParentCategory 
-        { 
-            get => parentCategory; 
+        {
+            get => parentCategory;
             set
             {
                 parentCategory = value;
@@ -35,8 +35,19 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
-        public EventDispatcher EventDispatcher { get; set; }
-        public CategoryViewModel(bool isNew, Category category = null) 
+        private MainViewModel mainViewModel;
+        public MainViewModel MainViewModel 
+        {
+            get => mainViewModel;
+            set
+            {
+                mainViewModel = value;
+                parentCategory = MainViewModel.SelectedCategory;
+                OnPropertyChanged();
+            }
+        }
+
+        public CategoryViewModelNew()
         {
             
         }

@@ -37,7 +37,6 @@ namespace Bookmark_Manager_Client
             //settings.Password = "admin";
             //settings.Url = "http://localhost:8080/apiv1";
             ObjectRepository.DataProvider.SetUpConnection();
-            
             //controller.getCategories();
         }
 
