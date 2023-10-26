@@ -15,13 +15,18 @@ namespace Bookmark_Manager_Client.DataProvider
         
         public FakeDataProvider() 
         {
+            var adminUser = new User { Name = "Admin", ID = 1, Administrator =  true };
+            var user = new User { Name = "Jakob", ID = 2, Administrator = false };
+
+
             categories.Add(new Category()
             {
                 ID = 1,
                 Name = "IT",
                 OwnerID = 1,
                 ParentID = 0,
-                ChildCategories = new ObservableCollection<Category>() 
+                PermissionUsers = new ObservableCollection<User>() { adminUser },
+                ChildCategories = new ObservableCollection<Category>()
                 {
                     new Category()
                     {
@@ -29,6 +34,7 @@ namespace Bookmark_Manager_Client.DataProvider
                         Name = "Programmieren",
                         OwnerID = 1,
                         ParentID = 1,
+                        PermissionUsers = new ObservableCollection<User>() { adminUser },
                         ChildCategories = new ObservableCollection<Category>()
                         {
                             new Category()
@@ -37,6 +43,7 @@ namespace Bookmark_Manager_Client.DataProvider
                                 Name = "C#",
                                 OwnerID = 1,
                                 ParentID = 2,
+                                PermissionUsers = new ObservableCollection<User>() { adminUser },
                             },
                             new Category()
                             {
@@ -44,18 +51,20 @@ namespace Bookmark_Manager_Client.DataProvider
                                 Name = "Go",
                                 OwnerID = 1,
                                 ParentID = 2,
+                                PermissionUsers = new ObservableCollection<User>() { adminUser },
                             }
                         }
                     },
-                    new Category() 
+                    new Category()
                     {
                         ID = 3,
                         Name = "Administration",
                         OwnerID = 1,
                         ParentID = 1,
+                        PermissionUsers = new ObservableCollection<User>() { adminUser },
                     }
                 }
-            });
+            }) ;
 
             categories.Add(new Category()
             {
@@ -64,6 +73,7 @@ namespace Bookmark_Manager_Client.DataProvider
                 OwnerID = 1,
                 ParentID = 0,
                 Shared = false,
+                PermissionUsers = new ObservableCollection<User>() { adminUser }
             });
 
             categories.Add(new Category()
@@ -73,6 +83,7 @@ namespace Bookmark_Manager_Client.DataProvider
                 OwnerID = 1,
                 ParentID = 0,
                 Shared = true,
+                PermissionUsers = new ObservableCollection<User>() { adminUser, user },
                 ChildCategories = new ObservableCollection<Category>()
                 {
                     new Category()
@@ -82,6 +93,7 @@ namespace Bookmark_Manager_Client.DataProvider
                         OwnerID = 1,
                         ParentID = 1,
                         Shared = true,
+                        PermissionUsers = new ObservableCollection<User>() { adminUser, user }
                     }
                 }
             });

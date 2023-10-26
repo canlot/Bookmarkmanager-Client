@@ -50,6 +50,9 @@ namespace Bookmark_Manager_Client.Commands
                     case "CategoryUserControlNew":
                         UserControl = new CategoryUserControlNew();
                         break;
+                    case "CategoryUserControlEdit":
+                        UserControl = new CategoryUserControlEdit();
+                        break;
                     case "BookmarkUserControl":
                         UserControl = new BookmarkUserControl();
                         break;

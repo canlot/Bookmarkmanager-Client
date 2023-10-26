@@ -113,9 +113,13 @@
     <Compile Include="UserControls\BrowserUserControl.xaml.cs">
       <DependentUpon>BrowserUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\CategoryUserControlEdit.xaml.cs">
+      <DependentUpon>CategoryUserControlEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\CategoryUserControlNew.xaml.cs">
       <DependentUpon>CategoryUserControlNew.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CategoryViewModelEdit.cs" />
     <Compile Include="ViewModel\CategoryViewModelNew.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -167,6 +171,10 @@
     <Page Include="UserControls\BrowserUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\CategoryUserControlEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\CategoryUserControlNew.xaml">
       <SubType>Designer</SubType>

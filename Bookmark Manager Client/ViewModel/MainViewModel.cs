@@ -75,7 +75,34 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        public Category GetParentCategory(Category childCategory)
+        {
+            foreach(var category in Categories)
+            {
+                if(category.ChildCategories.Contains(childCategory))
+                    return category;
+                else
+                {
+                    var foundCategory = searchParentCategory(category, childCategory);
+                    if(foundCategory != null) return foundCategory;
+                }
+                    
+            }
+            return null;
+        }
+        private Category searchParentCategory(Category category, Category childCategory)
+        {
+            foreach(var cat in category.ChildCategories)
+            {
+                if (cat.ChildCategories.Contains(childCategory)) return cat;
+                else
+                {
+                    var foundCategory = searchParentCategory(cat, childCategory);
+                    if (foundCategory != null) return foundCategory;
+                }
+            }
+            return null;
+        }
         public MainViewModel() 
         {
             Categories = ObjectRepository.DataProvider.GetAllCategories();
