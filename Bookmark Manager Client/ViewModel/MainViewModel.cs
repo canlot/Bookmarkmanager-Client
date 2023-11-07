@@ -11,6 +11,7 @@ using Bookmark_Manager_Client.Commands;
 using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.Model;
 using Bookmark_Manager_Client.UserControls;
+using Bookmark_Manager_Client.Utils;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -103,9 +104,13 @@ namespace Bookmark_Manager_Client.ViewModel
             }
             return null;
         }
+
+        
+        
         public MainViewModel() 
         {
             Categories = ObjectRepository.DataProvider.GetAllCategories();
+            
         }
         public void GetBookmarks(Category category)
         {

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bookmark_Manager_Client.Utils;
 
 namespace Bookmark_Manager_Client.DataProvider
 {
@@ -12,12 +13,20 @@ namespace Bookmark_Manager_Client.DataProvider
     {
         private ObservableCollection<Category> categories = new ObservableCollection<Category>();
         private ObservableCollection<Bookmark> bookmarks = new ObservableCollection<Bookmark>();
+
+        private ObservableCollection<User> users = new ObservableCollection<User>();
         
         public FakeDataProvider() 
         {
             var adminUser = new User { Name = "Admin", ID = 1, Administrator =  true };
-            var user = new User { Name = "Jakob", ID = 2, Administrator = false };
+            var jakobUser = new User { Name = "Jakob", ID = 2, Administrator = false };
+            var danielUser = new User { Name = "Daniel", ID = 3, Administrator = false };
+            var bobUser = new User { Name = "Bob", ID=4, Administrator = false };
 
+            users.Add(adminUser);
+            users.Add(jakobUser);
+            users.Add(danielUser);
+            users.Add(bobUser);
 
             categories.Add(new Category()
             {
@@ -83,7 +92,7 @@ namespace Bookmark_Manager_Client.DataProvider
                 OwnerID = 1,
                 ParentID = 0,
                 Shared = true,
-                PermissionUsers = new ObservableCollection<User>() { adminUser, user },
+                PermissionUsers = new ObservableCollection<User>() { adminUser, jakobUser },
                 ChildCategories = new ObservableCollection<Category>()
                 {
                     new Category()
@@ -93,7 +102,7 @@ namespace Bookmark_Manager_Client.DataProvider
                         OwnerID = 1,
                         ParentID = 1,
                         Shared = true,
-                        PermissionUsers = new ObservableCollection<User>() { adminUser, user }
+                        PermissionUsers = new ObservableCollection<User>() { adminUser, jakobUser }
                     }
                 }
             });
@@ -196,12 +205,57 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public bool PutCategory(Category category)
         {
-            throw new NotImplementedException();
+            if(categories.ReplaceCategoryWithId(category.ID, category))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public Category FindCategory(Category category) 
+        {
+            foreach(var cat in categories)
+            {
+                if(cat.ID == category.ID) return cat;
+                var item = FindCategoryInChild(category, cat);
+                if(item != null) return item;
+            }
+            return null;
+        }
+        private Category FindCategoryInChild(Category seachCategory, Category currentCategory)
+        {
+            foreach (var category in currentCategory.ChildCategories)
+            {
+                if (category.ID == seachCategory.ID) return category;
+                else
+                {
+                    if (category.ChildCategories == null || category.ChildCategories.Count == 0)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return FindCategoryInChild(seachCategory, category);
+                    }
+                }
+            }
+            return null;
         }
 
         public bool RemovePermission(ICollection<User> users, uint id)
         {
             throw new NotImplementedException();
+        }
+
+        public ObservableCollection<User> SearchUser(string username)
+        {
+            var foundUsers = new ObservableCollection<User>();
+            foreach(var user in users)
+            {
+                if(user.Name.ToLower().Contains(username.ToLower()))
+                    foundUsers.Add(user);
+            }
+            return foundUsers;
         }
 
         public void SetUpConnection()

@@ -39,5 +39,9 @@ namespace Bookmark_Manager_Client.Model
         {
             return (int)ID;
         }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace Bookmark_Manager_Client.DataProvider
         ObservableCollection<Bookmark> GetBookmarks(uint id);
         ObservableCollection<User> GetPermittedUsers(uint id);
         ObservableCollection<User> GetAllUsers();
+        ObservableCollection<User> SearchUser(string username);
         bool PostCategory(Category category);
         bool PutCategory(Category category);
         bool DeleteCategory(Category category);

@@ -252,6 +252,9 @@ namespace Bookmark_Manager_Client.DataProvider
             throw new NotImplementedException();
         }
 
-        
+        public ObservableCollection<User> SearchUser(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

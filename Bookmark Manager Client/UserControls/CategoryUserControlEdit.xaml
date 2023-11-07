@@ -69,7 +69,7 @@
         </Border>
         <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
-            <TextBox x:Name="NameTextBox" Text="{Binding Category.Name}" />
+            <TextBox x:Name="NameTextBox" Text="{Binding CategoryName}" />
         </Border>
         
         
@@ -85,8 +85,8 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ui:AutoSuggestBox Grid.Row="0" PlaceholderText="Username or email" QueryIcon="Add"/>
-                    <ListBox Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Stretch" ItemsSource="{Binding Category.PermissionUsers}">
+                    <ui:AutoSuggestBox x:Name="UserSearchBox" Grid.Row="0" PlaceholderText="Username or email" QueryIcon="Add" QuerySubmitted="UserSearchBox_QuerySubmitted" SuggestionChosen="UserSearchBox_SuggestionChosen" TextChanged="UserSearchBox_TextChanged" />
+                    <ListBox x:Name="PermittedUsers" Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Stretch" ItemsSource="{Binding PermittedUsers, UpdateSourceTrigger=Explicit}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}"/>
@@ -97,7 +97,7 @@
                 </Grid>
             </Border>
         </Border>
-        <Button Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" Style="{StaticResource AccentButtonStyle}" Content="Speichern"/>
+        <Button x:Name="SaveCategory" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" Style="{StaticResource AccentButtonStyle}" Content="Speichern" Click="SaveCategory_Click" />
         <Button Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen"/>
     </Grid>
 </UserControl>
