@@ -29,28 +29,6 @@ namespace Bookmark_Manager_Client.UserControls
 
         }
 
-        private void ToggleSwitch_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            
-        }
-
-        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
-        {
-            CategoryViewModelEdit categoryViewModel = (CategoryViewModelEdit)this.DataContext;
-            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
-            if (toggleSwitch != null)
-            {
-                if (toggleSwitch.IsOn == true)
-                {
-                    categoryViewModel.ParentCategory = null;
-                }
-                else
-                {
-                    
-                }
-            }
-        }
-
         private void SaveCategory_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as CategoryViewModelEdit;
@@ -87,6 +65,12 @@ namespace Bookmark_Manager_Client.UserControls
                 sender.ItemsSource = users;
             else
                 sender.ItemsSource = new string[] { "No results found" };
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = this.DataContext as CategoryViewModelEdit;
+            vm.Exit();
         }
     }
 }

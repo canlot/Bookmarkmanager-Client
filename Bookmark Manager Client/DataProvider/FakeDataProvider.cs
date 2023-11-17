@@ -11,17 +11,23 @@ namespace Bookmark_Manager_Client.DataProvider
 {
     public class FakeDataProvider : IDataProvider
     {
-        private ObservableCollection<Category> categories = new ObservableCollection<Category>();
-        private ObservableCollection<Bookmark> bookmarks = new ObservableCollection<Bookmark>();
+        private List<Category> categories = new List<Category>();
+        private List<Bookmark> bookmarks = new List<Bookmark>();
 
-        private ObservableCollection<User> users = new ObservableCollection<User>();
-        
+        private Dictionary<uint, List<User>> categoryUserAssignment = new Dictionary<uint, List<User>>();
+
+        private List<User> users = new List<User>();
+
+        private User currentUser;
+
         public FakeDataProvider() 
         {
             var adminUser = new User { Name = "Admin", ID = 1, Administrator =  true };
             var jakobUser = new User { Name = "Jakob", ID = 2, Administrator = false };
             var danielUser = new User { Name = "Daniel", ID = 3, Administrator = false };
             var bobUser = new User { Name = "Bob", ID=4, Administrator = false };
+
+            currentUser = adminUser;
 
             users.Add(adminUser);
             users.Add(jakobUser);
@@ -34,46 +40,44 @@ namespace Bookmark_Manager_Client.DataProvider
                 Name = "IT",
                 OwnerID = 1,
                 ParentID = 0,
-                PermissionUsers = new ObservableCollection<User>() { adminUser },
-                ChildCategories = new ObservableCollection<Category>()
-                {
-                    new Category()
-                    {
-                        ID = 2,
-                        Name = "Programmieren",
-                        OwnerID = 1,
-                        ParentID = 1,
-                        PermissionUsers = new ObservableCollection<User>() { adminUser },
-                        ChildCategories = new ObservableCollection<Category>()
-                        {
-                            new Category()
-                            {
-                                ID = 4,
-                                Name = "C#",
-                                OwnerID = 1,
-                                ParentID = 2,
-                                PermissionUsers = new ObservableCollection<User>() { adminUser },
-                            },
-                            new Category()
-                            {
-                                ID = 5,
-                                Name = "Go",
-                                OwnerID = 1,
-                                ParentID = 2,
-                                PermissionUsers = new ObservableCollection<User>() { adminUser },
-                            }
-                        }
-                    },
-                    new Category()
-                    {
-                        ID = 3,
-                        Name = "Administration",
-                        OwnerID = 1,
-                        ParentID = 1,
-                        PermissionUsers = new ObservableCollection<User>() { adminUser },
-                    }
-                }
-            }) ;
+            });
+            categoryUserAssignment.Add(1, new List<User>() { adminUser});
+
+            categories.Add(new Category()
+            {
+                ID = 2,
+                Name = "Programmieren",
+                OwnerID = 1,
+                ParentID = 1,
+            });
+            categoryUserAssignment.Add(2, new List<User>() { adminUser });
+
+            categories.Add(new Category()
+            {
+                ID = 3,
+                Name = "Administration",
+                OwnerID = 1,
+                ParentID = 1,
+            });
+            categoryUserAssignment.Add(3, new List<User>() { adminUser });
+
+            categories.Add(new Category()
+            {
+                ID = 4,
+                Name = "C#",
+                OwnerID = 1,
+                ParentID = 2,
+            });
+            categoryUserAssignment.Add(4, new List<User>() { adminUser });
+
+            categories.Add(new Category()
+            {
+                ID = 5,
+                Name = "Go",
+                OwnerID = 1,
+                ParentID = 2,
+            });
+            categoryUserAssignment.Add(5, new List<User>() { adminUser });
 
             categories.Add(new Category()
             {
@@ -82,8 +86,8 @@ namespace Bookmark_Manager_Client.DataProvider
                 OwnerID = 1,
                 ParentID = 0,
                 Shared = false,
-                PermissionUsers = new ObservableCollection<User>() { adminUser }
             });
+            categoryUserAssignment.Add(6, new List<User>() { adminUser });
 
             categories.Add(new Category()
             {
@@ -92,20 +96,19 @@ namespace Bookmark_Manager_Client.DataProvider
                 OwnerID = 1,
                 ParentID = 0,
                 Shared = true,
-                PermissionUsers = new ObservableCollection<User>() { adminUser, jakobUser },
-                ChildCategories = new ObservableCollection<Category>()
-                {
-                    new Category()
-                    {
-                        ID = 8,
-                        Name = "Drucker",
-                        OwnerID = 1,
-                        ParentID = 1,
-                        Shared = true,
-                        PermissionUsers = new ObservableCollection<User>() { adminUser, jakobUser }
-                    }
-                }
             });
+            categoryUserAssignment.Add(7, new List<User>() { adminUser, jakobUser });
+
+            categories.Add(new Category()
+            {
+                ID = 8,
+                Name = "Drucker",
+                OwnerID = 1,
+                ParentID = 7,
+                Shared = true,
+            });
+            categoryUserAssignment.Add(8, new List<User>() { adminUser, jakobUser });
+
 
             bookmarks.Add(new Bookmark()
             {
@@ -145,7 +148,7 @@ namespace Bookmark_Manager_Client.DataProvider
             });
         }
 
-        public User CurrentUser => throw new NotImplementedException();
+        public User CurrentUser => currentUser;
 
         public bool DeleteBookmark(Bookmark bookmark)
         {
@@ -157,30 +160,41 @@ namespace Bookmark_Manager_Client.DataProvider
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<Category> GetAllCategories()
+        public IList<Category> GetCategories(uint parentCategoryId = 0)
         {
-            return categories;
+            var list = new List<Category>();
+            foreach (var category in categories) 
+            {
+                if(category.ParentID == parentCategoryId)
+                    list.Add(category);
+            }
+            return list;
         }
 
-        public ObservableCollection<User> GetAllUsers()
+        public IList<User> GetAllUsers()
         {
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<Bookmark> GetBookmarks(uint id)
+        public IList<Bookmark> GetBookmarks(uint id)
         {
-            ObservableCollection<Bookmark> requestedBookmarks = new ObservableCollection<Bookmark>();
+            var list = new List<Bookmark>();
             foreach(var bookmark in bookmarks)
             {
                 if (bookmark.CategoryID == id)
-                    requestedBookmarks.Add(bookmark);
+                    list.Add(bookmark);
             }
-            return requestedBookmarks;
+            return list;
         }
 
-        public ObservableCollection<User> GetPermittedUsers(uint id)
+        public IList<User> GetPermittedUsers(uint categoryId)
         {
-            throw new NotImplementedException();
+            foreach(var categoryIdPair in categoryUserAssignment)
+            {
+                if(categoryIdPair.Key == categoryId)
+                    return categoryIdPair.Value;
+            }
+            return null;
         }
 
         public bool PostBookmark(Bookmark bookmark)
@@ -190,12 +204,105 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public bool PostCategory(Category category)
         {
-            throw new NotImplementedException();
+            if(category == null) return false;
+            if(category.OwnerID != currentUser.ID) return false;
+            if(category.ParentID != 0)
+                if(getParentCategoryOwner(category).ID != category.OwnerID) return false;
+                
+            categories.Add(category);
+            categoryUserAssignment.Add(category.ID, new List<User>() { currentUser });
+            return true;
         }
 
-        public bool PostPermission(ICollection<User> users, uint id)
+        public bool PostPermission(ICollection<User> users, uint categoryId)
         {
-            throw new NotImplementedException();
+            var category = categories.Single(x => x.ID == categoryId);
+            if (category.OwnerID != currentUser.ID) return false;
+            if (category.ParentID != 0) return false;
+            
+
+            if(!addNewUsersToCategory(users, category))
+                return false;
+            if(!removeUsersFromCategory(users, category)) 
+                return false;
+
+            return true;
+
+        }
+
+        private bool addNewUsersToCategory(ICollection<User> incomingUsers,  Category category)
+        {
+            var categoryPermissionList = categoryUserAssignment[category.ID];
+
+            foreach (var incomingUser in incomingUsers)
+            {
+                bool userExists = false;
+                foreach (var existingUser in categoryPermissionList)
+                {
+                    if (existingUser.ID == incomingUser.ID)
+                    { userExists = true; break; }
+                }
+                if (!userExists)
+                {
+                    addPermissionsInChildRecursive(category, incomingUser);
+                }
+
+            }
+            return true;
+        }
+        private void addPermissionsInChildRecursive(Category category, User user)
+        {
+            var categoryPermissionList = categoryUserAssignment[category.ID];
+            categoryPermissionList.Add(user);
+            category.Shared = true;
+
+            List<Category> childCategories = categories.Where(x => x.ParentID == category.ID).ToList();
+            foreach (var childCategory in childCategories)
+            {
+                addPermissionsInChildRecursive(childCategory, user);
+            }
+        }
+        private bool removeUsersFromCategory(ICollection<User> incomingUsers, Category category)
+        {
+            var categoryPermissionList = categoryUserAssignment[category.ID];
+            foreach(var existingUser in categoryPermissionList)
+            {
+                bool userExistsInIncomingUsers = false;
+                foreach(var incomingUser in incomingUsers)
+                {
+                    if(incomingUser.ID == existingUser.ID)
+                    {
+                        userExistsInIncomingUsers = true;
+                        break;
+                    }
+                }
+                if(!userExistsInIncomingUsers)
+                {
+                    if(existingUser.ID == category.OwnerID) //cannot delete permission from owner
+                        return false;
+                    removePermissionsInChildRecursive(category, existingUser);
+                }
+            }
+            return true;
+        }
+        private void removePermissionsInChildRecursive(Category category, User user)
+        {
+            var categoryPermissionList = categoryUserAssignment[category.ID];
+            categoryPermissionList.Remove(user);
+            if (categoryPermissionList.Count < 2)
+                category.Shared = false;
+
+            List<Category> childCategories = categories.Where(x => x.ParentID == category.ID).ToList();
+            foreach (var childCategory in childCategories)
+            {
+                removePermissionsInChildRecursive(childCategory, user);
+            }
+        }
+
+        private User getParentCategoryOwner(Category category)
+        {
+            var parentCategory = categories.Single(x => x.ID == category.ParentID);
+            return users.Single(x => x.ID == parentCategory.OwnerID);
         }
 
         public bool PutBookmark(Bookmark bookmark)
@@ -205,49 +312,23 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public bool PutCategory(Category category)
         {
-            if(categories.ReplaceCategoryWithId(category.ID, category))
-            {
-                return true;
-            }
-            return false;
+            Category cat = categories.Single(x => x.ID == category.ID);
+            if(category.OwnerID != currentUser.ID) return false;
+            if(category.OwnerID != cat.OwnerID) return false;
+            if(category.ParentID != cat.ParentID) return false;
+            if(cat == null) return false;
+
+            cat = category;
+            return true;
         }
 
-        public Category FindCategory(Category category) 
-        {
-            foreach(var cat in categories)
-            {
-                if(cat.ID == category.ID) return cat;
-                var item = FindCategoryInChild(category, cat);
-                if(item != null) return item;
-            }
-            return null;
-        }
-        private Category FindCategoryInChild(Category seachCategory, Category currentCategory)
-        {
-            foreach (var category in currentCategory.ChildCategories)
-            {
-                if (category.ID == seachCategory.ID) return category;
-                else
-                {
-                    if (category.ChildCategories == null || category.ChildCategories.Count == 0)
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        return FindCategoryInChild(seachCategory, category);
-                    }
-                }
-            }
-            return null;
-        }
 
         public bool RemovePermission(ICollection<User> users, uint id)
         {
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<User> SearchUser(string username)
+        public IList<User> SearchUser(string username)
         {
             var foundUsers = new ObservableCollection<User>();
             foreach(var user in users)

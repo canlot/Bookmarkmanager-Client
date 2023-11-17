@@ -107,7 +107,7 @@ namespace Bookmark_Manager_Client.DataProvider
             else
                 return instance;
         }
-        public ObservableCollection<Category> GetCategories(uint id = 0)
+        public IList<Category> GetCategories(uint id = 0)
         {
 
             RestRequest request;
@@ -122,11 +122,11 @@ namespace Bookmark_Manager_Client.DataProvider
             //return client.Get<ObservableCollection<Category>>(request).Data;
             return client.Get<ObservableCollection<Category>>(request); 
         }
-        public ObservableCollection<Category> GetAllCategories()
+        public IList<Category> GetAllCategories()
         {
             throw new NotImplementedException();
         }
-        public ObservableCollection<Bookmark> GetBookmarks( uint id)
+        public IList<Bookmark> GetBookmarks( uint id)
         {
             //var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", RestSharp.DataFormat.Json);
             var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", Method.Get);
@@ -135,7 +135,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return client.Get<ObservableCollection<Bookmark>>(request);
         
         }
-        public ObservableCollection<User> GetPermittedUsers(uint id)
+        public IList<User> GetPermittedUsers(uint id)
         {
             //var request = new RestRequest("categories/" + id.ToString() + "/permissions/", RestSharp.DataFormat.Json);
             var request = new RestRequest("categories/" + id.ToString() + "/permissions/", Method.Get);
@@ -143,7 +143,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return client.Get<ObservableCollection<User>>(request);
             //return client.Get<ObservableCollection<User>>(request).Data;
         }
-        public ObservableCollection<User> GetAllUsers()
+        public IList<User> GetAllUsers()
         {
             //var request = new RestRequest("/users/", RestSharp.DataFormat.Json);
             var request = new RestRequest("/users/", Method.Get);
@@ -252,7 +252,7 @@ namespace Bookmark_Manager_Client.DataProvider
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<User> SearchUser(string username)
+        public IList<User> SearchUser(string username)
         {
             throw new NotImplementedException();
         }

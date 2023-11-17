@@ -85,7 +85,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ui:AutoSuggestBox x:Name="UserSearchBox" Grid.Row="0" PlaceholderText="Username or email" QueryIcon="Add" QuerySubmitted="UserSearchBox_QuerySubmitted" SuggestionChosen="UserSearchBox_SuggestionChosen" TextChanged="UserSearchBox_TextChanged" />
+                    <ui:AutoSuggestBox x:Name="UserSearchBox" Grid.Row="0" PlaceholderText="Username or email" QueryIcon="Add" QuerySubmitted="UserSearchBox_QuerySubmitted" SuggestionChosen="UserSearchBox_SuggestionChosen" TextChanged="UserSearchBox_TextChanged" IsEnabled="{Binding IsTopCategory}" />
                     <ListBox x:Name="PermittedUsers" Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Stretch" ItemsSource="{Binding PermittedUsers, UpdateSourceTrigger=Explicit}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -98,6 +98,6 @@
             </Border>
         </Border>
         <Button x:Name="SaveCategory" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" Style="{StaticResource AccentButtonStyle}" Content="Speichern" Click="SaveCategory_Click" />
-        <Button Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen"/>
+        <Button x:Name="Exit" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen" Click="Exit_Click"/>
     </Grid>
 </UserControl>

@@ -4,6 +4,7 @@
              xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:local="clr-namespace:Bookmark_Manager_Client"
              xmlns:viewmodel="clr-namespace:Bookmark_Manager_Client.ViewModel"
+             xmlns:converters="clr-namespace:Bookmark_Manager_Client.Converters"
              xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -14,8 +15,8 @@
                 <ResourceDictionary Source="./Resources/IconResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <viewmodel:MainViewModel x:Key="MainViewModel"  />
+            <converters:ParentIdToReadOnlyStateConverter x:Key="ParentIdToReadOnlyStateConverter" />
 
-            
             <!-- Other app resources here -->
         </ResourceDictionary>
     </Application.Resources>

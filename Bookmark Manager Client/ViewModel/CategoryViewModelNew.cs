@@ -1,6 +1,7 @@
 ﻿using Bookmark_Manager_Client.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -35,6 +36,17 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
+        private bool isTopCategory;
+        public bool IsTopCategory
+        {
+            get => isTopCategory;
+            private set
+            {
+                isTopCategory = value;
+                OnPropertyChanged();
+            }
+        }
+
         private MainViewModel mainViewModel;
         public MainViewModel MainViewModel 
         {
@@ -46,7 +58,16 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        private ObservableCollection<User> permittedUsers = new ObservableCollection<User>();
+        public ObservableCollection<User> PermittedUsers
+        {
+            get => permittedUsers;
+            set
+            {
+                permittedUsers = value;
+                OnPropertyChanged();
+            }
+        }
         public CategoryViewModelNew()
         {
             

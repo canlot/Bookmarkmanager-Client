@@ -76,6 +76,16 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
+        private Bookmark selectedBookmark;
+        public Bookmark SelectedBookmark
+        {
+            get => selectedBookmark;
+            set
+            {
+                selectedBookmark = value;
+                OnPropertyChanged();
+            }
+        }
         public Category GetParentCategory(Category childCategory)
         {
             foreach(var category in Categories)
@@ -105,16 +115,47 @@ namespace Bookmark_Manager_Client.ViewModel
             return null;
         }
 
+        public void GetTopCategoriesWithChild()
+        {
+            categories = new ObservableCollection<Category>(); 
+            foreach(var category in ObjectRepository.DataProvider.GetCategories())
+            {
+                categories.Add(category);
+                addChildCategoriesToCategory(category);
+            }
+        }
         
-        
+        private void addChildCategoriesToCategory(Category parentCategory)
+        {
+            foreach(var category in ObjectRepository.DataProvider.GetCategories(parentCategory.ID))
+            {
+                parentCategory.ChildCategories.Add(category);
+            }
+        }
+        public void AddCategoriesToChild(Category parentCategory)
+        {
+            foreach(var category in parentCategory.ChildCategories)
+            {
+                category.ChildCategories = new ObservableCollection<Category>();
+                addChildCategoriesToCategory(category);
+            }
+        }
+        public void SetDefaultView()
+        {
+            ChangeUserControlCommand.Execute("Browser");
+        }
         public MainViewModel() 
         {
-            Categories = ObjectRepository.DataProvider.GetAllCategories();
+            GetTopCategoriesWithChild();
             
         }
         public void GetBookmarks(Category category)
         {
-            Bookmarks = ObjectRepository.DataProvider.GetBookmarks(category.ID);
+            bookmarks.Clear();
+            foreach(var bookmark in ObjectRepository.DataProvider.GetBookmarks(category.ID))
+            {
+                bookmarks.Add(bookmark);
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Bookmark_Manager_Client.Controller
         }
         public IEnumerable<Category> getCategories()
         {
-            return ObjectRepository.DataProvider.GetAllCategories();
+            return ObjectRepository.DataProvider.GetCategories();
             
         }
 

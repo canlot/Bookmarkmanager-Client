@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Bookmark_Manager_Client.Utils;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -16,49 +17,38 @@ namespace Bookmark_Manager_Client.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        private Category parentCategory { get; set; }
-        public Category ParentCategory 
-        {
-            get
-            {
-                if (parentCategory == null)
-                {
-                    parentCategory = mainViewModel.GetParentCategory(Category);
-                    //OnPropertyChanged();
-                }
-                return parentCategory;
-            }
-            set
-            {
-                parentCategory = value;
-                OnPropertyChanged();
-            }
-        }
 
-        private Category category;
-        public Category Category 
-        {
-            get => category; 
-            set
-            {
-                category = value;
-                OnPropertyChanged();
-            }
-        }
         private MainViewModel mainViewModel;
-        public MainViewModel MainViewModel 
+        public MainViewModel MainViewModel
         {
             get => mainViewModel;
             set
             {
                 mainViewModel = value;
-                category = MainViewModel.SelectedCategory;
+                var category = MainViewModel.SelectedCategory;
                 CategoryName = category.Name;
-                category.PermissionUsers.ToList().ForEach(x => PermittedUsers.Add(x));
+                addPermittedUserToList(category.ID);
+
+                if(category.ParentID == 0)
+                    IsTopCategory = true;
+                else
+                    IsTopCategory = false;
+
                 OnPropertyChanged();
             }
         }
 
+
+        private bool isTopCategory;
+        public bool IsTopCategory
+        {
+            get => isTopCategory;
+            private set
+            {
+                isTopCategory = value;
+                OnPropertyChanged();
+            }
+        }
 
         private string categoryName;
         public string CategoryName
@@ -81,6 +71,12 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
+        private void addPermittedUserToList(uint categoryId)
+        {
+            var users = ObjectRepository.DataProvider.GetPermittedUsers(categoryId);
+            foreach(var user in users)
+                permittedUsers.Add(user);
+        }
         public void AddPermittedUser(User user)
         {
             if(PermittedUsers.IndexOf(user) == -1)
@@ -90,26 +86,21 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public bool UpdateCategory()
         {
-            var category = new Category
-            {
-                ID = MainViewModel.SelectedCategory.ID,
-                Name = categoryName,
-                Bookmarks = MainViewModel.SelectedCategory.Bookmarks,
-                ChildCategories = MainViewModel.SelectedCategory.ChildCategories,
-                OwnerID = MainViewModel.SelectedCategory.OwnerID,
-                ParentID = MainViewModel.SelectedCategory.ParentID,
-                PermissionUsers = PermittedUsers,
-                Shared = (PermittedUsers.Count > 1) ? true : false
-            };
-            if(ObjectRepository.DataProvider.PutCategory(category))
-            {
+            var category = MainViewModel.SelectedCategory;
+            category.Name = CategoryName;
+            category.Shared = (PermittedUsers.Count > 1) ? true : false;
 
-                MainViewModel.Categories.ReplaceCategory(MainViewModel.SelectedCategory, category);
-                return true;
-            }
-            return false;
-            //ObjectRepository.DataProvider.PutCategory()
+            if (!ObjectRepository.DataProvider.PutCategory(category))
+                return false;
+
+            if (category.ParentID == 0)
+                if (!ObjectRepository.DataProvider.PostPermission(PermittedUsers, category.ID))
+                    return false;
+
+            MainViewModel.SetDefaultView();
+            return true;
         }
+        public void Exit() => MainViewModel.SetDefaultView();
         public CategoryViewModelEdit()
         {
             

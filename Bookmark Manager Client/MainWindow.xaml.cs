@@ -44,53 +44,21 @@ namespace Bookmark_Manager_Client
         {
             Category category = (Category)treeViewCategory.SelectedItem;
             MainViewModel vm = (MainViewModel)this.DataContext;
-            vm.GetBookmarks(category);
-            vm.SelectedCategory = category;
+            if(category != null)
+            {
+                vm.GetBookmarks(category);
+                vm.SelectedCategory = category;
+            }
         }
 
         private void ButtonAddCategory_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            if(treeViewCategory.SelectedItem == null)
-            {
-                var categoryWindow = new CategoryWindow(controller.Categories, CategoryWindow.WindowMode.CreateNewCategory);
-                categoryWindow.Owner = this;
-                categoryWindow.ShowDialog();
-            }
-            else
-            {
-                if (((Category)treeViewCategory.SelectedItem).OwnerID == RestConnectionHandler.GetInstance().CurrentUser.ID)
-                {
-                    var categoryWindow = new CategoryWindow(controller.Categories, CategoryWindow.WindowMode.CreateNewCategoryWithParent, (Category)treeViewCategory.SelectedItem);
-                    categoryWindow.Owner = this;
-                    categoryWindow.ShowDialog();
-                }
-                else
-                {
-                    var categoryWindow = new CategoryWindow(controller.Categories, CategoryWindow.WindowMode.CreateNewCategory);
-                    categoryWindow.Owner = this;
-                    categoryWindow.ShowDialog();
-                }
-                
-            }
-            */
+
             
         }
         private void ButtonEditCategory_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            if(treeViewCategory.SelectedItem != null)
-            {
-                if (((Category)treeViewCategory.SelectedItem).OwnerID == RestConnectionHandler.GetInstance().CurrentUser.ID)
-                {
-                    var categegoryWindow = new CategoryWindow(controller.Categories, CategoryWindow.WindowMode.ModifyExistingCategory, (Category)treeViewCategory.SelectedItem);
-                    categegoryWindow.Owner = this;
-                    categegoryWindow.ShowDialog();
-                }
-                else
-                    MessageBox.Show("Sie sind kein Besitzer der Kategorie");
-            }
-            */
+
         }
         private void ButtonRemoveCategory_Click(object sender, RoutedEventArgs e)
         {
@@ -130,9 +98,10 @@ namespace Bookmark_Manager_Client
 
         private void listBoxBookmarks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Bookmark bookmark = (Bookmark)listBoxBookmarks.SelectedItem;
-            if (bookmark == null) return;
+            //Bookmark bookmark = (Bookmark)listBoxBookmarks.SelectedItem;
+            //if (bookmark == null) return;
             //WebBrowser.LoadUrl(bookmark.Url);
+            
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
@@ -154,6 +123,11 @@ namespace Bookmark_Manager_Client
 
         }
         private void OpenInBrowserCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void treeViewCategory_Expanded(object sender, RoutedEventArgs e)
         {
 
         }

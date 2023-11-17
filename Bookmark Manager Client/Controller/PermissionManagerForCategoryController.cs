@@ -18,27 +18,27 @@ namespace Bookmark_Manager_Client.Controller
         }
         protected override void getAllPermittedUsers()
         {
-            if (categoryController.ParentCategory != null)
-                foreach (var user in categoryController.ParentCategory.PermissionUsers)
-                    categoryController.PermittedUsers.Add(user);
-            else if (categoryController.Category != null)
-                foreach (var user in categoryController.Category.PermissionUsers)
-                    categoryController.PermittedUsers.Add(user);
-            else
+           // if (categoryController.ParentCategory != null)
+                //foreach (var user in categoryController.ParentCategory.PermissionUsers)
+                    //categoryController.PermittedUsers.Add(user);
+            //else if (categoryController.Category != null)
+                //foreach (var user in categoryController.Category.PermissionUsers)
+                    //categoryController.PermittedUsers.Add(user);
+           // else
                 categoryController.PermittedUsers.Add(ObjectRepository.DataProvider.CurrentUser);
         }
         protected override void SaveAddedPermissions(ICollection<User> addedPermissions)
         {
             if (ObjectRepository.DataProvider.PostPermission(addedPermissions, categoryController.Category.ID))
             {
-                categoryController.Category.AddPermissionUser(addedPermissions);
+                //categoryController.Category.AddPermissionUser(addedPermissions);
             }
         }
         protected override void SaveRemovedPermissions(ICollection<User> removedPermissions)
         {
             if (ObjectRepository.DataProvider.RemovePermission(removedPermissions, categoryController.Category.ID))
             {
-                categoryController.Category.RemovePermissionUser(removedPermissions);
+                //categoryController.Category.RemovePermissionUser(removedPermissions);
             }
         }
     }

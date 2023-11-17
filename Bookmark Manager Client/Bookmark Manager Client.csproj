@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="Commands\ChangeUserControlCommand.cs" />
     <Compile Include="Commands\OpenInBrowserCommand.cs" />
+    <Compile Include="Converters\ParentIdToStateConverter.cs" />
     <Compile Include="DataProvider\FakeDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />
     <Compile Include="Configurators\AppConfiguration.cs" />

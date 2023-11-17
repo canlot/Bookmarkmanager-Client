@@ -41,7 +41,7 @@ namespace Bookmark_Manager_Client.Utils
             return null;
         }
 
-        public static bool ReplaceCategory(this ObservableCollection<Category> categories, Category categoryToReplace, Category categoryReplaceble)
+        public static bool ReplaceCategory(this Collection<Category> categories, Category categoryToReplace, Category categoryReplaceble)
         {
             for (int i = 0; i < categories.Count; i++)
             {
@@ -74,7 +74,7 @@ namespace Bookmark_Manager_Client.Utils
             }
             return false;
         }
-        public static bool ReplaceCategoryWithId(this ObservableCollection<Category> categories, uint categoryToReplace, Category categoryReplaceble)
+        public static bool ReplaceCategoryWithId(this Collection<Category> categories, uint categoryToReplace, Category categoryReplaceble)
         {
             for (int i = 0; i < categories.Count; i++)
             {

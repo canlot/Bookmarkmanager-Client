@@ -64,6 +64,30 @@ namespace Bookmark_Manager_Client.Model
                 OnProperyChanged("Shared");
             }
         }
+        private bool isExpanded;
+        public bool IsExpanded
+        {
+            get => isExpanded;
+            set
+            {
+                isExpanded = value;
+                OnProperyChanged("IsExpanded");
+                if(value == true)
+                {
+                    foreach (var category in ChildCategories)
+                    {
+                        category.ChildCategories = new ObservableCollection<Category>();
+                        foreach(var cat in ObjectRepository.DataProvider.GetCategories(category.ID))
+                        {
+                            category.ChildCategories.Add(cat);
+                        }
+                    }
+                }
+                
+            }
+
+        }
+
         private ObservableCollection<Category> childCategories;
         public ObservableCollection<Category> ChildCategories
         {
@@ -78,8 +102,7 @@ namespace Bookmark_Manager_Client.Model
         {
             childCategories = new ObservableCollection<Category>();
             bookmarks = new ObservableCollection<Bookmark>();
-            permissionUsers = new ObservableCollection<User>();
-            childCategories.CollectionChanged += OnNewChildCategoryItems;
+            //childCategories.CollectionChanged += OnNewChildCategoryItems;
         }
         private ObservableCollection<Bookmark> bookmarks;
         public ObservableCollection<Bookmark> Bookmarks
@@ -87,17 +110,12 @@ namespace Bookmark_Manager_Client.Model
             get => bookmarks;
             set => bookmarks = value;
         }
-        private ObservableCollection<User> permissionUsers;
-        public ObservableCollection<User> PermissionUsers
-        {
-            get => permissionUsers;
-            set => permissionUsers = value;
-        }
+
         public void GetChildCategories()
         {
             if (childCategories.Count > 0)
                 return;
-            var cat = ObjectRepository.DataProvider.GetAllCategories();
+            var cat = ObjectRepository.DataProvider.GetCategories();
             foreach (var item in cat)
                 childCategories.Add(item);
         }
@@ -109,37 +127,6 @@ namespace Bookmark_Manager_Client.Model
             if(bm != null)
                 foreach (var item in bm)
                     bookmarks.Add(item);
-        }
-        public void GetPermissionUsers()
-        {
-            var users = ObjectRepository.DataProvider.GetPermittedUsers(ID);
-            permissionUsers.Clear();
-            if(users != null)
-                foreach (var user in users)
-                    permissionUsers.Add(user);
-        }
-        public void AddPermissionUser(ICollection<User> users)
-        {
-            foreach(var user in users)
-            {
-                var exists = false;
-                foreach (var ouser in permissionUsers)
-                {
-                    if (user == ouser)
-                        exists = true;
-                }
-                if(!exists)
-                    permissionUsers.Add(user);
-            }
-                
-
-        }
-        public void RemovePermissionUser(ICollection<User> users)
-        {
-            foreach(var user in users)
-            {
-                PermissionUsers.Remove(user);
-            }
         }
         private void OnNewChildCategoryItems(object sender, NotifyCollectionChangedEventArgs e)
         {

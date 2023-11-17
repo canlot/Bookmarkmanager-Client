@@ -116,11 +116,10 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" HorizontalAlignment="Stretch" >
-                    <TreeView  x:Name="treeViewCategory" Margin="10,10" ItemsSource="{Binding Categories}" SelectedItemChanged="treeViewCategory_SelectedItemChanged" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <TreeView  x:Name="treeViewCategory" Margin="10,10" ItemsSource="{Binding Categories}" SelectedItemChanged="treeViewCategory_SelectedItemChanged" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" TreeViewItem.Expanded="treeViewCategory_Expanded">
                         <TreeView.ItemContainerStyle>
                             <Style TargetType="TreeViewItem" BasedOn="{StaticResource DefaultTreeViewItemStyle}">
-                                <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
-                                <Setter Property="IsExpanded" Value="{Binding IsExpanded}"/>
+                                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
                                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                                 
                             </Style>
@@ -130,21 +129,41 @@
                             <HierarchicalDataTemplate ItemsSource="{Binding ChildCategories}">
                                 <Border  BorderBrush="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" FontFamily="Segoe UI" FontSize="12" ></TextBlock>
-                                        <Border Grid.Row="1" Background="Orange" Margin="10,0,0,0" CornerRadius="5" >
+                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="14" ></TextBlock>
+                                        <Border Grid.Row="1" Margin="10,0,0,0" CornerRadius="5" >
                                             <Border.Style>
                                                 <Style TargetType="Border">
+                                                    <Setter Property="BorderThickness" Value="2"/>
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding Path=Shared}" Value="True">
-                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                            <Setter Property="Background" Value="Orange"/>
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding Path=Shared}" Value="False">
-                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                            <Setter Property="Background" Value="Green"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
                                             </Border.Style>
-                                            <Label Margin="3" Foreground="White" FontSize="7">Shared</Label>
+                                            <Label>
+                                                <Label.Style>
+                                                    <Style TargetType="Label" >
+                                                        <Setter Property="Margin" Value="2"/>
+                                                        <Setter Property="Foreground" Value="White"/>
+                                                        <Setter Property="FontSize" Value="10"/>
+                                                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                                                        <Setter Property="Padding" Value="2"/>
+                                                        <Setter Property="FontWeight" Value="Bold"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=Shared}" Value="True">
+                                                                <Setter Property="Content" Value="Shared"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Path=Shared}" Value="False">
+                                                                <Setter Property="Content" Value="Private"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Label.Style>
+                                            </Label>
                                         </Border>
                                     </StackPanel>
                                 </Border>
@@ -153,7 +172,7 @@
                     </TreeView>
                 </Border>
                 <Border Grid.Column="1">
-                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}" SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}" SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedBookmark, Mode=TwoWay}">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
