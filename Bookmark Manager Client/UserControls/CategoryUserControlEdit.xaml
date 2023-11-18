@@ -7,34 +7,36 @@
              xmlns:vm="clr-namespace:Bookmark_Manager_Client.ViewModel"
              xmlns:local="clr-namespace:Bookmark_Manager_Client"
              xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:CategoryViewModelEdit MainViewModel="{StaticResource MainViewModel}"  />
     </UserControl.DataContext>
     <UserControl.Resources>
+        <SolidColorBrush x:Key="BorderColor" Color="Gray" Opacity="0.5"/>
         <Style x:Key="ColumnStyleLeft" TargetType="Border">
             <Setter Property="Margin" Value="5,5,0,5"/>
             <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="CornerRadius" Value="3,0,0,3"/>
-            <Setter Property="BorderThickness" Value="1,1,0,1"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0.5,0.5,0,0.5"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
         </Style>
         <Style x:Key="ColumnStyleCenter" TargetType="Border">
             <Setter Property="Margin" Value="0,5,0,5"/>
             <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
             <Setter Property="Padding" Value="10"/>
-            <Setter Property="BorderThickness" Value="0,1,0,1"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0,0.5,0,0.5"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
         </Style>
         <Style x:Key="ColumnStyleRight" TargetType="Border">
             <Setter Property="Margin" Value="0,5,5,5"/>
             <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="CornerRadius" Value="0,3,3,0"/>
-            <Setter Property="BorderThickness" Value="0,1,1,1"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0,0.5,0.5,0.5"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
         </Style>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="Margin" Value="5"/>
@@ -69,7 +71,7 @@
         </Border>
         <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
-            <TextBox x:Name="NameTextBox" Text="{Binding CategoryName}" />
+            <TextBox x:Name="NameTextBox" Text="{Binding CategoryName}" VerticalContentAlignment="Center" />
         </Border>
         
         
