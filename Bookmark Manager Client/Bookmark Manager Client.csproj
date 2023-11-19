@@ -122,6 +122,7 @@
       <DependentUpon>CategoryUserControlNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\CategoryUtils.cs" />
+    <Compile Include="ViewModel\BookmarkViewModelNew.cs" />
     <Compile Include="ViewModel\CategoryViewModelEdit.cs" />
     <Compile Include="ViewModel\CategoryViewModelNew.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />

@@ -56,7 +56,7 @@ namespace Bookmark_Manager_Client.Controller
             if (!ObjectRepository.DataProvider.PostBookmark(bookmark))
                 return false;
 
-            category.Bookmarks.Add(bookmark);
+            //category.Bookmarks.Add(bookmark);
             return true;
         }
 

@@ -101,14 +101,7 @@ namespace Bookmark_Manager_Client.Model
         public Category()
         {
             childCategories = new ObservableCollection<Category>();
-            bookmarks = new ObservableCollection<Bookmark>();
             //childCategories.CollectionChanged += OnNewChildCategoryItems;
-        }
-        private ObservableCollection<Bookmark> bookmarks;
-        public ObservableCollection<Bookmark> Bookmarks
-        {
-            get => bookmarks;
-            set => bookmarks = value;
         }
 
         public void GetChildCategories()
@@ -119,15 +112,7 @@ namespace Bookmark_Manager_Client.Model
             foreach (var item in cat)
                 childCategories.Add(item);
         }
-        public void GetBookmarks()
-        {
-            if (bookmarks.Count > 0)
-                return;
-            var bm = ObjectRepository.DataProvider.GetBookmarks(ID);
-            if(bm != null)
-                foreach (var item in bm)
-                    bookmarks.Add(item);
-        }
+
         private void OnNewChildCategoryItems(object sender, NotifyCollectionChangedEventArgs e)
         {
             Console.WriteLine("Hallo");

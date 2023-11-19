@@ -51,15 +51,6 @@ namespace Bookmark_Manager_Client
             }
         }
 
-        private void ButtonAddCategory_Click(object sender, RoutedEventArgs e)
-        {
-
-            
-        }
-        private void ButtonEditCategory_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void ButtonRemoveCategory_Click(object sender, RoutedEventArgs e)
         {
             if(treeViewCategory.SelectedItem != null)
@@ -91,10 +82,7 @@ namespace Bookmark_Manager_Client
             bookmarkWindow.Owner = this;
             bookmarkWindow.Show();
         }
-        private void ButtonDeleteBookmark_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void listBoxBookmarks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -102,11 +90,6 @@ namespace Bookmark_Manager_Client
             //if (bookmark == null) return;
             //WebBrowser.LoadUrl(bookmark.Url);
             
-        }
-
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void OpenInBrowserButton_Click(object sender, RoutedEventArgs e)
@@ -118,18 +101,5 @@ namespace Bookmark_Manager_Client
             System.Diagnostics.Process.Start(bookmark.Url);
         }
 
-        private void OpenInBrowserCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-
-        }
-        private void OpenInBrowserCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-
-        }
-
-        private void treeViewCategory_Expanded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

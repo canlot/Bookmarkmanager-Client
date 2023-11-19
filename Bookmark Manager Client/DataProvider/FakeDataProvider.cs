@@ -225,7 +225,13 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public bool PostBookmark(Bookmark bookmark)
         {
-            throw new NotImplementedException();
+            if(bookmark.CategoryID == 0) return false;
+            if(getCategoryOwnerById(bookmark.CategoryID).ID != CurrentUser.ID) return false;
+
+            bookmarks.Add(bookmark);
+            bookmark.ID = getBookmarkIdAndIncrementByOne();
+
+            return true;
         }
 
         public bool PostCategory(Category category) // should maybe return category id because it will set here, but because it is the same object it does not matter
@@ -233,7 +239,7 @@ namespace Bookmark_Manager_Client.DataProvider
             if(category == null) throw new Exception("No category");
             if(category.OwnerID == 0) category.OwnerID = currentUser.ID;
             if(category.OwnerID != currentUser.ID) throw new Exception("Category owner is not the same as the loged in user");
-            if(category.ParentID != 0)
+            if(category.ParentID != 0) 
                 if(getParentCategoryOwner(category).ID != category.OwnerID) throw new Exception("Parent Category has different owner");
 
             category.ID = getCategoryIdAndIncrementByOne();
@@ -343,6 +349,17 @@ namespace Bookmark_Manager_Client.DataProvider
         {
             var parentCategory = categories.Single(x => x.ID == category.ParentID);
             return users.Single(x => x.ID == parentCategory.OwnerID);
+        }
+
+        private User getCategoryOwnerById(uint categoryID)
+        {
+            var category = categories.Single(x => x.ID == categoryID);
+            return getCategoryOwner(category);
+        }
+
+        private User getCategoryOwner(Category category)
+        {
+            return users.Single(x => x.ID == category.OwnerID);
         }
 
         public bool PutBookmark(Bookmark bookmark)

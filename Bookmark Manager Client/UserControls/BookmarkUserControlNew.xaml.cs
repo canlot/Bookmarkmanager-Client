@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bookmark_Manager_Client.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,23 @@ namespace Bookmark_Manager_Client.UserControls
     /// <summary>
     /// Interaktionslogik für BookmarkUserControl.xaml
     /// </summary>
-    public partial class BookmarkUserControl : UserControl
+    public partial class BookmarkUserControlNew : UserControl
     {
-        public BookmarkUserControl()
+        public BookmarkUserControlNew()
         {
             InitializeComponent();
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = this.DataContext as BookmarkViewModelNew;
+            vm.Exit();
+        }
+
+        private void SaveCategory_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = this.DataContext as BookmarkViewModelNew;
+            vm.SaveBookmark();
         }
     }
 }
