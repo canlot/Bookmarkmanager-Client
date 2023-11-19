@@ -12,38 +12,7 @@
     <UserControl.DataContext>
         <vm:CategoryViewModelNew MainViewModel="{StaticResource MainViewModel}"  />
     </UserControl.DataContext>
-    <UserControl.Resources>
-        <Style x:Key="ColumnStyleLeft" TargetType="Border">
-            <Setter Property="Margin" Value="5,5,0,5"/>
-            <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="CornerRadius" Value="3,0,0,3"/>
-            <Setter Property="BorderThickness" Value="1,1,0,1"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
-        </Style>
-        <Style x:Key="ColumnStyleCenter" TargetType="Border">
-            <Setter Property="Margin" Value="0,5,0,5"/>
-            <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="BorderThickness" Value="0,1,0,1"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
-        </Style>
-        <Style x:Key="ColumnStyleRight" TargetType="Border">
-            <Setter Property="Margin" Value="0,5,5,5"/>
-            <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="CornerRadius" Value="0,3,3,0"/>
-            <Setter Property="BorderThickness" Value="0,1,1,1"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
-        </Style>
-        <Style x:Key="LabelStyle" TargetType="Label">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="FontSize" Value="15"/>
-        </Style>
-    </UserControl.Resources>
-    
+
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -69,7 +38,7 @@
         </Border>
         <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
-            <TextBox x:Name="NameTextBox" Text="{Binding Category.Name}" />
+            <TextBox x:Name="NameTextBox" Text="{Binding CategoryName}" VerticalContentAlignment="Center" />
         </Border>
         
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
@@ -77,16 +46,18 @@
         </Border>
         <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
-            <ui:ToggleSwitch IsEnabledChanged="ToggleSwitch_IsEnabledChanged" Toggled="ToggleSwitch_Toggled">
+            <ui:ToggleSwitch IsOn="{Binding IsTopCategory}">
             </ui:ToggleSwitch>
         </Border>
         
         <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label  Style="{StaticResource LabelStyle}"/>
+            <Label Content="Parent category" Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
-            <TextBox  x:Name="ParentCategoryTextBox" Text="{Binding ParentCategory.Name}" IsReadOnly="True" />
+            <TextBox  x:Name="ParentCategoryTextBox" Text="{Binding ParentCategory.Name}" IsReadOnly="True" 
+                      IsEnabled="{Binding IsTopCategory, Converter={StaticResource BoolInverterConverter}}" 
+                      VerticalContentAlignment="Center" />
         </Border>
         
         <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
@@ -100,14 +71,22 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ui:AutoSuggestBox Grid.Row="0" PlaceholderText="Username or email" QueryIcon="Add"/>
-                    <ListBox Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Stretch">
-                        <ListBoxItem Content="Jakob Jakobus"/>
+                    <ui:AutoSuggestBox x:Name="UserSearchBox" Grid.Row="0" PlaceholderText="Username or email" 
+                                       QueryIcon="Add" QuerySubmitted="UserSearchBox_QuerySubmitted" SuggestionChosen="UserSearchBox_SuggestionChosen" 
+                                       TextChanged="UserSearchBox_TextChanged" IsEnabled="{Binding IsTopCategory}" />
+                    <ListBox x:Name="PermittedUsers" Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Stretch" 
+                             ItemsSource="{Binding PermittedUsers, UpdateSourceTrigger=Explicit}" IsEnabled="{Binding IsTopCategory}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
             </Border>
         </Border>
-        <Button Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" Style="{StaticResource AccentButtonStyle}" Content="Speichern"/>
-        <Button Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen"/>
+        <Button x:Name="ButtonSave" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" 
+                Style="{StaticResource AccentButtonStyle}" Content="Speichern" Click="ButtonSave_Click"/>
+        <Button x:Name="ButtonAbort" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen" Click="ButtonAbort_Click"/>
     </Grid>
 </UserControl>

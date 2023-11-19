@@ -13,9 +13,11 @@
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
                 <ResourceDictionary Source="./Resources/IconResource.xaml"/>
+                <ResourceDictionary Source="./Resources/CustomStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <viewmodel:MainViewModel x:Key="MainViewModel"  />
             <converters:ParentIdToReadOnlyStateConverter x:Key="ParentIdToReadOnlyStateConverter" />
+            <converters:BoolInverterConverter x:Key="BoolInverterConverter" />
 
             <!-- Other app resources here -->
         </ResourceDictionary>

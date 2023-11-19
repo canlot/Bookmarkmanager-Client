@@ -61,7 +61,7 @@
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Kategorie löschen</TextBlock>
                         </Grid>
                     </Button>
-                    <Border VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="0.5" SnapsToDevicePixels="True"/>
+                    <Border VerticalAlignment="Stretch" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
                     <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -92,7 +92,7 @@
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Lesezeichen löschen</TextBlock>
                         </Grid>
                     </Button>
-                    <Border VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="0.5" SnapsToDevicePixels="True"/>
+                    <Border VerticalAlignment="Stretch" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
                     <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
                         <Grid>
                             <Grid.RowDefinitions>

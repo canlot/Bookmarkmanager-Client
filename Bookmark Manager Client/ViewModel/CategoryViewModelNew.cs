@@ -26,13 +26,13 @@ namespace Bookmark_Manager_Client.ViewModel
             }
         }
 
-        private Category category;
-        public Category Category 
+        private string categoryName;
+        public string CategoryName
         {
-            get => category; 
+            get => categoryName;
             set
             {
-                category = value;
+                categoryName = value;
                 OnPropertyChanged();
             }
         }
@@ -40,7 +40,7 @@ namespace Bookmark_Manager_Client.ViewModel
         public bool IsTopCategory
         {
             get => isTopCategory;
-            private set
+            set
             {
                 isTopCategory = value;
                 OnPropertyChanged();
@@ -55,6 +55,7 @@ namespace Bookmark_Manager_Client.ViewModel
             {
                 mainViewModel = value;
                 parentCategory = MainViewModel.SelectedCategory;
+                if (MainViewModel.SelectedCategory == null) IsTopCategory = true;
                 OnPropertyChanged();
             }
         }
@@ -70,7 +71,53 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public CategoryViewModelNew()
         {
-            
+            var user = ObjectRepository.DataProvider.CurrentUser;
+            PermittedUsers.Add(user);
         }
+        public void AddPermittedUser(User user)
+        {
+            if (PermittedUsers.IndexOf(user) == -1)
+            {
+                PermittedUsers.Add(user);
+            }
+        }
+        public bool SaveCategory()
+        {
+            if(CategoryName == "") return false;
+
+            var category = new Category()
+            {
+                Name = CategoryName,
+                ParentID = 0,
+                OwnerID = ObjectRepository.DataProvider.CurrentUser.ID,
+                Shared = (PermittedUsers.Count > 1) ? true : false
+            };
+
+            if(!isTopCategory && ParentCategory == null) return false;
+
+            if (!IsTopCategory) category.ParentID = ParentCategory.ID;
+
+            try
+            {
+                ObjectRepository.DataProvider.PostCategory(category); // no need to set the id, because category will be set in dataprovider and it is the same object
+
+                if(category.ParentID == 0)
+                    ObjectRepository.DataProvider.PostPermission(PermittedUsers, category.ID);
+
+                if(category.ParentID != 0)
+                    ParentCategory.ChildCategories.Add(category);
+                else
+                    MainViewModel.Categories.Add(category);
+
+                MainViewModel.SetDefaultView();
+
+            }
+            catch (Exception ex) { return false; }
+
+            return true;
+
+        }
+
+        public void Exit() => MainViewModel.SetDefaultView();
     }
 }

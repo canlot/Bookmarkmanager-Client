@@ -38,7 +38,6 @@ namespace Bookmark_Manager_Client.ViewModel
             }
         }
 
-
         private bool isTopCategory;
         public bool IsTopCategory
         {
@@ -71,24 +70,33 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
-        private void addPermittedUserToList(uint categoryId)
+        
+        public CategoryViewModelEdit()
         {
-            var users = ObjectRepository.DataProvider.GetPermittedUsers(categoryId);
-            foreach(var user in users)
-                permittedUsers.Add(user);
+            
         }
+        
         public void AddPermittedUser(User user)
         {
-            if(PermittedUsers.IndexOf(user) == -1)
+            if (PermittedUsers.IndexOf(user) == -1)
             {
                 PermittedUsers.Add(user);
             }
         }
+        private void addPermittedUserToList(uint categoryId)
+        {
+            var users = ObjectRepository.DataProvider.GetPermittedUsers(categoryId);
+            foreach (var user in users)
+                permittedUsers.Add(user);
+        }
+
         public bool UpdateCategory()
         {
+            if (CategoryName == "")
+                return false;
+
             var category = MainViewModel.SelectedCategory;
             category.Name = CategoryName;
-            category.Shared = (PermittedUsers.Count > 1) ? true : false;
 
             if (!ObjectRepository.DataProvider.PutCategory(category))
                 return false;
@@ -100,10 +108,7 @@ namespace Bookmark_Manager_Client.ViewModel
             MainViewModel.SetDefaultView();
             return true;
         }
+
         public void Exit() => MainViewModel.SetDefaultView();
-        public CategoryViewModelEdit()
-        {
-            
-        }
     }
 }

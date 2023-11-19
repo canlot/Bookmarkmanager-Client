@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="BorderColor" Color="Gray" Opacity="0.5"/>
+    <Style x:Key="ColumnStyleLeft" TargetType="Border">
+        <Setter Property="Margin" Value="5,5,0,5"/>
+        <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="CornerRadius" Value="3,0,0,3"/>
+        <Setter Property="BorderThickness" Value="0.5,0.5,0,0.5"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+    </Style>
+    <Style x:Key="ColumnStyleCenter" TargetType="Border">
+        <Setter Property="Margin" Value="0,5,0,5"/>
+        <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="BorderThickness" Value="0,0.5,0,0.5"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+    </Style>
+    <Style x:Key="ColumnStyleRight" TargetType="Border">
+        <Setter Property="Margin" Value="0,5,5,5"/>
+        <Setter Property="Background" Value="{DynamicResource SystemControlHighlightChromeWhiteBrush}"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="CornerRadius" Value="0,3,3,0"/>
+        <Setter Property="BorderThickness" Value="0,0.5,0.5,0.5"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+    </Style>
+    <Style x:Key="LabelStyle" TargetType="Label">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+</ResourceDictionary>

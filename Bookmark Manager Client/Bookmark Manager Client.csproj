@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="Commands\ChangeUserControlCommand.cs" />
     <Compile Include="Commands\OpenInBrowserCommand.cs" />
+    <Compile Include="Converters\BoolInverterConverter.cs" />
     <Compile Include="Converters\ParentIdToStateConverter.cs" />
     <Compile Include="DataProvider\FakeDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />
@@ -159,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Properties\DesignTimeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

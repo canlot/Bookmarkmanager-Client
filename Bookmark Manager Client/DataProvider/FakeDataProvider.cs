@@ -20,6 +20,9 @@ namespace Bookmark_Manager_Client.DataProvider
 
         private User currentUser;
 
+        private uint categoryId = 0;
+        private uint bookmarkId = 0;
+
         public FakeDataProvider() 
         {
             var adminUser = new User { Name = "Admin", ID = 1, Administrator =  true };
@@ -34,119 +37,142 @@ namespace Bookmark_Manager_Client.DataProvider
             users.Add(danielUser);
             users.Add(bobUser);
 
-            categories.Add(new Category()
+
+            var itCategory = new Category()
             {
-                ID = 1,
+                ID = getCategoryIdAndIncrementByOne(),
                 Name = "IT",
-                OwnerID = 1,
+                OwnerID = adminUser.ID,
                 ParentID = 0,
-            });
-            categoryUserAssignment.Add(1, new List<User>() { adminUser});
+            };
 
-            categories.Add(new Category()
+            categories.Add(itCategory);
+            categoryUserAssignment.Add(itCategory.ID, new List<User>() { adminUser}); // be aware that multiple categories could have the same name, but it is sufficuent for this case right now
+
+            var programmingCategory = new Category()
             {
-                ID = 2,
+                ID = getCategoryIdAndIncrementByOne(),
                 Name = "Programmieren",
-                OwnerID = 1,
-                ParentID = 1,
-            });
-            categoryUserAssignment.Add(2, new List<User>() { adminUser });
+                OwnerID = itCategory.OwnerID,
+                ParentID = itCategory.ID,
+            };
 
-            categories.Add(new Category()
+            categories.Add(programmingCategory);
+            categoryUserAssignment.Add(programmingCategory.ID, new List<User>() { adminUser });
+
+            var administrationCategory = new Category()
             {
-                ID = 3,
+                ID = getCategoryIdAndIncrementByOne(),
                 Name = "Administration",
-                OwnerID = 1,
-                ParentID = 1,
-            });
-            categoryUserAssignment.Add(3, new List<User>() { adminUser });
+                OwnerID = itCategory.OwnerID,
+                ParentID = itCategory.ID,
+            };
 
-            categories.Add(new Category()
+            categories.Add(administrationCategory);
+            categoryUserAssignment.Add(administrationCategory.ID, new List<User>() { adminUser });
+
+            var cSharpCategory = new Category()
             {
-                ID = 4,
+                ID = getCategoryIdAndIncrementByOne(),
                 Name = "C#",
-                OwnerID = 1,
-                ParentID = 2,
-            });
-            categoryUserAssignment.Add(4, new List<User>() { adminUser });
+                OwnerID = itCategory.OwnerID,
+                ParentID = programmingCategory.ID,
+            };
 
-            categories.Add(new Category()
+            categories.Add(cSharpCategory);
+            categoryUserAssignment.Add(cSharpCategory.ID, new List<User>() { adminUser });
+
+            var goCategory = new Category()
             {
-                ID = 5,
+                ID = getCategoryIdAndIncrementByOne(),
                 Name = "Go",
-                OwnerID = 1,
-                ParentID = 2,
-            });
-            categoryUserAssignment.Add(5, new List<User>() { adminUser });
+                OwnerID = itCategory.OwnerID,
+                ParentID = programmingCategory.ID,
+            };
 
-            categories.Add(new Category()
+            categories.Add(goCategory);
+            categoryUserAssignment.Add(goCategory.ID, new List<User>() { adminUser });
+
+            var electronicsCategory = new Category()
             {
-                ID = 6,
+                ID = getCategoryIdAndIncrementByOne(),
                 Name = "Elektronik",
-                OwnerID = 1,
+                OwnerID = adminUser.ID,
                 ParentID = 0,
                 Shared = false,
-            });
-            categoryUserAssignment.Add(6, new List<User>() { adminUser });
+            };
 
-            categories.Add(new Category()
+            categories.Add(electronicsCategory);
+            categoryUserAssignment.Add(electronicsCategory.ID, new List<User>() { adminUser });
+
+            var threeDStuffCategory = new Category()
             {
-                ID = 7,
+                ID = getCategoryIdAndIncrementByOne(),
                 Name = "3D Zeugs",
-                OwnerID = 1,
+                OwnerID = adminUser.ID,
                 ParentID = 0,
                 Shared = true,
-            });
-            categoryUserAssignment.Add(7, new List<User>() { adminUser, jakobUser });
+            };
 
-            categories.Add(new Category()
+            categories.Add(threeDStuffCategory);
+            categoryUserAssignment.Add(threeDStuffCategory.ID, new List<User>() { adminUser, jakobUser });
+
+            var printerCategory = new Category()
             {
-                ID = 8,
+                ID = getCategoryIdAndIncrementByOne(),
                 Name = "Drucker",
-                OwnerID = 1,
-                ParentID = 7,
-                Shared = true,
-            });
-            categoryUserAssignment.Add(8, new List<User>() { adminUser, jakobUser });
+                OwnerID = adminUser.ID,
+                ParentID = threeDStuffCategory.ID,
+                Shared = threeDStuffCategory.Shared,
+            };
+
+            categories.Add(printerCategory);
+            categoryUserAssignment.Add(printerCategory.ID, new List<User>() { adminUser, jakobUser });
 
 
             bookmarks.Add(new Bookmark()
             {
-                ID = 1,
-                CategoryID = 2,
+                ID = getBookmarkIdAndIncrementByOne(),
+                CategoryID = programmingCategory.ID,
                 Url = "www.mok-test.com"
             });
             bookmarks.Add(new Bookmark()
             {
-                ID = 2,
-                CategoryID = 4,
+                ID = getBookmarkIdAndIncrementByOne(),
+                CategoryID = cSharpCategory.ID,
                 Url = "https://learn.microsoft.com/de-de/dotnet/desktop/wpf/data/?view=netdesktop-7.0",
             });
             bookmarks.Add(new Bookmark()
             {
-                ID = 3,
-                CategoryID = 3,
+                ID = getBookmarkIdAndIncrementByOne(),
+                CategoryID = administrationCategory.ID,
                 Url = "https://administrator.de",
             });
             bookmarks.Add(new Bookmark()
             {
-                ID = 4,
-                CategoryID = 8,
+                ID = getBookmarkIdAndIncrementByOne(),
+                CategoryID = printerCategory.ID,
                 Url = "https://eu.store.bambulab.com/de/products/p1s?variant=47016782397788&gclid=EAIaIQobChMIh4eGoOmGggMV4ItoCR2zOADhEAYYCCABEgJdjvD_BwE"
             });
             bookmarks.Add(new Bookmark()
             {
-                ID = 5,
-                CategoryID = 8,
+                ID = getBookmarkIdAndIncrementByOne(),
+                CategoryID = printerCategory.ID,
                 Url = "https://eu.store.bambulab.com/de/products/x1-carbon-combo?utm_campaign=sag_organic&utm_content=sag_organic&utm_medium=product_sync&utm_source=google&variant=47035962851676&gclid=EAIaIQobChMIh4eGoOmGggMV4ItoCR2zOADhEAYYBCABEgIjOfD_BwE"
             });
             bookmarks.Add(new Bookmark()
             {
-                ID = 6,
-                CategoryID = 8,
+                ID = getBookmarkIdAndIncrementByOne(),
+                CategoryID = printerCategory.ID,
                 Url = "https://store.creality.com/de/products/ender-3-v2-3d-printer?utm_source=googleshopping&gclid=EAIaIQobChMI5P6Q2eqGggMVow8GAB1JmwGqEAYYASABEgKScvD_BwE"
             });
         }
+
+        private uint getCategoryIdAndIncrementByOne() =>  ++categoryId;
+        
+
+        private uint getBookmarkIdAndIncrementByOne() => ++bookmarkId;
+        
 
         public User CurrentUser => currentUser;
 
@@ -202,15 +228,29 @@ namespace Bookmark_Manager_Client.DataProvider
             throw new NotImplementedException();
         }
 
-        public bool PostCategory(Category category)
+        public bool PostCategory(Category category) // should maybe return category id because it will set here, but because it is the same object it does not matter
         {
-            if(category == null) return false;
-            if(category.OwnerID != currentUser.ID) return false;
+            if(category == null) throw new Exception("No category");
+            if(category.OwnerID == 0) category.OwnerID = currentUser.ID;
+            if(category.OwnerID != currentUser.ID) throw new Exception("Category owner is not the same as the loged in user");
             if(category.ParentID != 0)
-                if(getParentCategoryOwner(category).ID != category.OwnerID) return false;
-                
+                if(getParentCategoryOwner(category).ID != category.OwnerID) throw new Exception("Parent Category has different owner");
+
+            category.ID = getCategoryIdAndIncrementByOne();
             categories.Add(category);
-            categoryUserAssignment.Add(category.ID, new List<User>() { currentUser });
+            if(category.ParentID == 0)
+                categoryUserAssignment.Add(category.ID, new List<User>() { currentUser });
+            else
+            {
+                var users = new List<User>();
+                foreach (var user in categoryUserAssignment[category.ParentID])
+                    users.Add(user);
+
+                categoryUserAssignment.Add(category.ID, users);
+                if(users.Count > 1)
+                    category.Shared = true;
+            }
+                
             return true;
         }
 

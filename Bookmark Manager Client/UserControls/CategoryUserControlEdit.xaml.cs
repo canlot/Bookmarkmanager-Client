@@ -51,7 +51,7 @@ namespace Bookmark_Manager_Client.UserControls
 
         private void UserSearchBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            if (args.SelectedItem is User user)
+            if (args.SelectedItem is Bookmark_Manager_Client.Model.User user)
             {
                 sender.Text = user.ToString();
             }
