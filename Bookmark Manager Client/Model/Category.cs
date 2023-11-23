@@ -9,69 +9,41 @@ using System.Threading.Tasks;
 using RestSharp;
 using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.DataProvider;
+using System.Runtime.CompilerServices;
 
 namespace Bookmark_Manager_Client.Model
 {
     public class Category : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
         private uint id;
-        public uint ID 
-        {
-            get => id;
-            set
-            {
-                id = value;
-                OnProperyChanged("ID");
-            }
-        }
+        public uint ID { get => id; set { id = value; OnPropertyChanged(); } }
+
         private uint ownerID;
-        public uint OwnerID
-        {
-            get => ownerID;
-            set
-            {
-                ownerID = value;
-                OnProperyChanged("OwnerID");
-            }
-        }
+        public uint OwnerID { get => ownerID; set { ownerID = value; OnPropertyChanged(); } }
+
         private uint parentID;
-        public uint ParentID
-        {
-            get => parentID;
-            set
-            {
-                parentID = value;
-                OnProperyChanged("ParentID");
-            }
-        }
+        public uint ParentID { get => parentID; set { parentID = value; OnPropertyChanged(); } }
+
         private string name;
-        public string Name
-        {
-            get => name;
-            set
-            {
-                name = value;
-                OnProperyChanged("Name");
-            }
-        }
+        public string Name { get => name; set { name = value; OnPropertyChanged(); } }
+
+        private string description;
+        public string Description { get => description; set { description = value; OnPropertyChanged(); } }
+
         private bool shared;
-        public bool Shared
-        {
-            get => shared;
-            set
-            {
-                shared = value;
-                OnProperyChanged("Shared");
-            }
-        }
+        public bool Shared { get => shared; set { shared = value; OnPropertyChanged(); } }
+
         private bool isExpanded;
-        public bool IsExpanded
-        {
+        public bool IsExpanded 
+        { 
             get => isExpanded;
             set
             {
                 isExpanded = value;
-                OnProperyChanged("IsExpanded");
+                OnPropertyChanged();
                 if(value == true)
                 {
                     foreach (var category in ChildCategories)
@@ -89,15 +61,7 @@ namespace Bookmark_Manager_Client.Model
         }
 
         private ObservableCollection<Category> childCategories;
-        public ObservableCollection<Category> ChildCategories
-        {
-            get => childCategories;
-            set
-            {
-                childCategories = value;
-                OnProperyChanged("ChildCategories");
-            }
-        }
+        public ObservableCollection<Category> ChildCategories { get => childCategories; set { childCategories = value; OnPropertyChanged(); } }
         public Category()
         {
             childCategories = new ObservableCollection<Category>();
@@ -124,10 +88,7 @@ namespace Bookmark_Manager_Client.Model
                 }
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnProperyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        
+
     }
 }

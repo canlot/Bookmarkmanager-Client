@@ -66,7 +66,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
-        private ChangeUserControlCommand changeUserControlCommand = new ChangeUserControlCommand();
+        private ChangeUserControlCommand changeUserControlCommand;
         public ChangeUserControlCommand ChangeUserControlCommand 
         {
             get => changeUserControlCommand; 
@@ -146,6 +146,7 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public MainViewModel() 
         {
+            changeUserControlCommand = new ChangeUserControlCommand(this);
             GetTopCategoriesWithChild();
             
         }

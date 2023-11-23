@@ -41,9 +41,16 @@
         <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
             <TextBox x:Name="NameTextBox" Text="{Binding CategoryName}" VerticalContentAlignment="Center" />
         </Border>
-        
-        
-        
+
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="Description" Style="{StaticResource LabelStyle}"/>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+            <TextBox x:Name="DescriptionTextBox" Text="{Binding CategoryDescription}" VerticalContentAlignment="Center" />
+        </Border>
+
+
         <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
             <Label Content="Users with Access" Style="{StaticResource LabelStyle}"/>
         </Border>

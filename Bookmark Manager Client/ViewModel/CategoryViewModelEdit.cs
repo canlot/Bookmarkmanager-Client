@@ -27,6 +27,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 mainViewModel = value;
                 var category = MainViewModel.SelectedCategory;
                 CategoryName = category.Name;
+                categoryDescription = category.Description;
                 addPermittedUserToList(category.ID);
 
                 if(category.ParentID == 0)
@@ -39,37 +40,18 @@ namespace Bookmark_Manager_Client.ViewModel
         }
 
         private bool isTopCategory;
-        public bool IsTopCategory
-        {
-            get => isTopCategory;
-            private set
-            {
-                isTopCategory = value;
-                OnPropertyChanged();
-            }
-        }
+        public bool IsTopCategory { get => isTopCategory; private set { isTopCategory = value; OnPropertyChanged(); } }
 
         private string categoryName;
-        public string CategoryName
-        {
-            get => categoryName;
-            set
-            {
-                categoryName = value;
-                OnPropertyChanged();
-            }
-        }
+        public string CategoryName { get => categoryName; set { categoryName = value; OnPropertyChanged(); } }
+
+        private string categoryDescription;
+        public string CategoryDescription { get => categoryDescription; set { categoryDescription = value; OnPropertyChanged(); } }
+        
+        
 
         private ObservableCollection<User> permittedUsers = new ObservableCollection<User>();
-        public ObservableCollection<User> PermittedUsers
-        {
-            get => permittedUsers;
-            set
-            {
-                permittedUsers = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<User> PermittedUsers { get => permittedUsers; set { permittedUsers = value; OnPropertyChanged(); } }
         
         public CategoryViewModelEdit()
         {
@@ -97,6 +79,7 @@ namespace Bookmark_Manager_Client.ViewModel
 
             var category = MainViewModel.SelectedCategory;
             category.Name = CategoryName;
+            category.Description = CategoryDescription;
 
             if (!ObjectRepository.DataProvider.PutCategory(category))
                 return false;

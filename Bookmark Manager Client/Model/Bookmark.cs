@@ -1,17 +1,37 @@
 ﻿using Bookmark_Manager_Client.Commands;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace Bookmark_Manager_Client.Model
 {
     public class Bookmark
     {
-        public uint ID { get; set; }
-        public uint CategoryID { get; set; }
-        public string Url { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        private uint id;
+        public uint ID { get => id; set { id = value; OnPropertyChanged(); } }
+
+        private uint categoryID;
+        public uint CategoryID { get => categoryID; set { categoryID = value; OnPropertyChanged(); } }
+
+        private string url;
+        public string Url { get => url; set { url = value; OnPropertyChanged(); } }
+
+        private string title;
+        public string Title { get => title; set { title = value; OnPropertyChanged(); } }
+
+        private string description;
+        public string Description { get => description; set { description = value; OnPropertyChanged(); } }
+
+        private DateTime createDate;
+        public DateTime CreateDate { get => createDate; set { createDate = value; OnPropertyChanged(); } }
 
         public OpenInBrowserCommand OpenInBrowserCommand { get; set; }
 

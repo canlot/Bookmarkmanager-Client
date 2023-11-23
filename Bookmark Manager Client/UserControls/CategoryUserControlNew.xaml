@@ -29,6 +29,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
@@ -40,41 +41,49 @@
         <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
             <TextBox x:Name="NameTextBox" Text="{Binding CategoryName}" VerticalContentAlignment="Center" />
         </Border>
-        
+
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label Content="Top category" Style="{StaticResource LabelStyle}"/>
+            <Label Content="Description" Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+            <TextBox x:Name="DescriptionTextBox" Text="{Binding CategoryDescription}" VerticalContentAlignment="Center" />
+        </Border>
+
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="Top category" Style="{StaticResource LabelStyle}"/>
+        </Border>
+        <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
             <ui:ToggleSwitch IsOn="{Binding IsTopCategory}">
             </ui:ToggleSwitch>
         </Border>
         
-        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
             <Label Content="Parent category" Style="{StaticResource LabelStyle}"/>
         </Border>
-        <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
-        <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+        <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
             <TextBox  x:Name="ParentCategoryTextBox" Text="{Binding ParentCategory.Name}" IsReadOnly="True" 
                       IsEnabled="{Binding IsTopCategory, Converter={StaticResource BoolInverterConverter}}" 
                       VerticalContentAlignment="Center" />
         </Border>
         
-        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+        <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
             <Label Content="Users with Access" Style="{StaticResource LabelStyle}"/>
         </Border>
-        <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
-        <Border Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+        <Border Grid.Row="4" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
             <Border>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <ui:AutoSuggestBox x:Name="UserSearchBox" Grid.Row="0" PlaceholderText="Username or email" 
                                        QueryIcon="Add" QuerySubmitted="UserSearchBox_QuerySubmitted" SuggestionChosen="UserSearchBox_SuggestionChosen" 
                                        TextChanged="UserSearchBox_TextChanged" IsEnabled="{Binding IsTopCategory}" />
-                    <ListBox x:Name="PermittedUsers" Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Stretch" 
+                    <ListBox x:Name="PermittedUsers" Grid.Row="1" Margin="0,5,0,0"  
                              ItemsSource="{Binding PermittedUsers, UpdateSourceTrigger=Explicit}" IsEnabled="{Binding IsTopCategory}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -85,8 +94,8 @@
                 </Grid>
             </Border>
         </Border>
-        <Button x:Name="ButtonSave" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" 
+        <Button x:Name="ButtonSave" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="4" 
                 Style="{StaticResource AccentButtonStyle}" Content="Speichern" Click="ButtonSave_Click"/>
-        <Button x:Name="ButtonAbort" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen" Click="ButtonAbort_Click"/>
+        <Button x:Name="ButtonAbort" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="5" Content="Abbrechen" Click="ButtonAbort_Click"/>
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using Bookmark_Manager_Client.UserControls;
+using Bookmark_Manager_Client.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,14 +27,38 @@ namespace Bookmark_Manager_Client.Commands
                 OnPropertyChanged();
             }
         }
-        public ChangeUserControlCommand() 
+        private MainViewModel viewModel;
+        public ChangeUserControlCommand(MainViewModel viewModel) 
         {
-            
+            this.viewModel = viewModel;
         }
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
+            /*
+            if (parameter == null)
+            {
+                return true;
+            }
+            if (parameter is string)
+            {
+                switch (parameter)
+                {
+                    case "CategoryUserControlNew":
+                        return true;
+                    case "CategoryUserControlEdit":
+                        return true;
+                    case "BookmarkUserControlNew":
+                        if (viewModel.SelectedCategory == null)
+                            return false;
+                        else return true;
+                    default:
+                        return true;
+                }
+
+            }
+            */
             return true;
         }
 

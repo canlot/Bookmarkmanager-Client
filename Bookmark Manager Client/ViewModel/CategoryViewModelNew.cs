@@ -16,36 +16,16 @@ namespace Bookmark_Manager_Client.ViewModel
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         private Category parentCategory { get; set; }
-        public Category ParentCategory 
-        {
-            get => parentCategory;
-            set
-            {
-                parentCategory = value;
-                OnPropertyChanged();
-            }
-        }
+        public Category ParentCategory { get => parentCategory; set { parentCategory = value; OnPropertyChanged(); } }
 
         private string categoryName;
-        public string CategoryName
-        {
-            get => categoryName;
-            set
-            {
-                categoryName = value;
-                OnPropertyChanged();
-            }
-        }
+        public string CategoryName { get => categoryName; set { categoryName = value; OnPropertyChanged(); } }
+
         private bool isTopCategory;
-        public bool IsTopCategory
-        {
-            get => isTopCategory;
-            set
-            {
-                isTopCategory = value;
-                OnPropertyChanged();
-            }
-        }
+        public bool IsTopCategory { get => isTopCategory; set { isTopCategory = value; OnPropertyChanged(); } }
+
+        private string categoryDescription;
+        public string CategoryDescription { get => categoryDescription; set { categoryDescription = value; OnPropertyChanged(); } }
 
         private MainViewModel mainViewModel;
         public MainViewModel MainViewModel 
@@ -60,15 +40,8 @@ namespace Bookmark_Manager_Client.ViewModel
             }
         }
         private ObservableCollection<User> permittedUsers = new ObservableCollection<User>();
-        public ObservableCollection<User> PermittedUsers
-        {
-            get => permittedUsers;
-            set
-            {
-                permittedUsers = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<User> PermittedUsers { get => permittedUsers; set { permittedUsers = value; OnPropertyChanged(); } }
+
         public CategoryViewModelNew()
         {
             var user = ObjectRepository.DataProvider.CurrentUser;
@@ -88,6 +61,7 @@ namespace Bookmark_Manager_Client.ViewModel
             var category = new Category()
             {
                 Name = CategoryName,
+                Description = CategoryDescription,
                 ParentID = 0,
                 OwnerID = ObjectRepository.DataProvider.CurrentUser.ID,
                 Shared = (PermittedUsers.Count > 1) ? true : false

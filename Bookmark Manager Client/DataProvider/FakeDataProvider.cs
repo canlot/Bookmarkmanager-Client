@@ -42,6 +42,7 @@ namespace Bookmark_Manager_Client.DataProvider
             {
                 ID = getCategoryIdAndIncrementByOne(),
                 Name = "IT",
+                Description = "Hobby zum Beruf",
                 OwnerID = adminUser.ID,
                 ParentID = 0,
             };
@@ -64,6 +65,7 @@ namespace Bookmark_Manager_Client.DataProvider
             {
                 ID = getCategoryIdAndIncrementByOne(),
                 Name = "Administration",
+                Description = "Alles rund um Administration",
                 OwnerID = itCategory.OwnerID,
                 ParentID = itCategory.ID,
             };
@@ -75,6 +77,7 @@ namespace Bookmark_Manager_Client.DataProvider
             {
                 ID = getCategoryIdAndIncrementByOne(),
                 Name = "C#",
+                Description = "Eine der besten Sprachen die es gibt",
                 OwnerID = itCategory.OwnerID,
                 ParentID = programmingCategory.ID,
             };

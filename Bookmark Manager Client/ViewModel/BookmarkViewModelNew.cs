@@ -28,26 +28,16 @@ namespace Bookmark_Manager_Client.ViewModel
         }
 
         private Category category;
-        public Category Category
-        {
-            get => category;
-            set
-            {
-                category = value;
-                OnPropertyChanged();
-            }
-        }
+        public Category Category { get => category; set { category = value; OnPropertyChanged(); } }
 
         private string url;
-        public string Url
-        {
-            get => url;
-            set
-            {
-                url = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Url { get => url; set { url = value; OnPropertyChanged(); } }
+        private string title;
+        public string Title { get => title; set { title = value; OnPropertyChanged(); } }
+
+        private string description;
+        public string Description { get => description; set { description = value; OnPropertyChanged(); } }
+
         public bool SaveBookmark()
         {
             if(Url == "") return false;
@@ -57,6 +47,8 @@ namespace Bookmark_Manager_Client.ViewModel
             {
                 Url = Url,
                 CategoryID = Category.ID,
+                Title = Title,
+                Description = Description
             };
 
             if(!ObjectRepository.DataProvider.PostBookmark(bookmark)) return false;
