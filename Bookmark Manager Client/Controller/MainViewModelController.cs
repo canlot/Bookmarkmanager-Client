@@ -39,7 +39,7 @@ namespace Bookmark_Manager_Client.Controller
 
         public void RemoveCategory(Category category)
         {
-            ObjectRepository.DataProvider.DeleteCategory(category);
+            ObjectRepository.DataProvider.DeleteCategory(category.ID);
         }
     }
 }

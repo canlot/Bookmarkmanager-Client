@@ -188,9 +188,9 @@ namespace Bookmark_Manager_Client.DataProvider
             }
 
         }
-        public bool DeleteCategory(Category category)
+        public bool DeleteCategory(uint categoryId)
         {
-            var request = new RestRequest("/categories/" + category.ID.ToString() + "/", RestSharp.Method.Delete);
+            var request = new RestRequest("/categories/" + categoryId.ToString() + "/", RestSharp.Method.Delete);
             var response = client.Delete(request);
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {

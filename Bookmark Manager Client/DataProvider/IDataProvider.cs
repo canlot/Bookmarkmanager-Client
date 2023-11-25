@@ -20,7 +20,7 @@ namespace Bookmark_Manager_Client.DataProvider
         IList<User> SearchUser(string username);
         bool PostCategory(Category category);
         bool PutCategory(Category category);
-        bool DeleteCategory(Category category);
+        bool DeleteCategory(uint categoryId);
         bool PostBookmark(Bookmark bookmark);
         bool PutBookmark(Bookmark bookmark);
         bool DeleteBookmark(Bookmark bookmark);

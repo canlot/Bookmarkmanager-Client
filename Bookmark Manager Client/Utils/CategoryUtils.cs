@@ -11,34 +11,39 @@ namespace Bookmark_Manager_Client.Utils
 {
     public static class CategoryUtils
     {
-        public static Category FindCategory(this ObservableCollection<Category> categories, Category category)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        public static bool DeleteCategoryWithChildCategories(this Collection<Category> categories, Category category)
         {
-            foreach (var cat in categories)
+            foreach(var currentCategory in categories)
             {
-                if (cat.ID == category.ID) return cat;
-                var item = FindCategoryInChild(category, cat);
-                if (item != null) return item;
-            }
-            return null;
-        }
-        private static Category FindCategoryInChild(Category seachCategory, Category currentCategory)
-        {
-            foreach (var category in currentCategory.ChildCategories)
-            {
-                if (category.ID == seachCategory.ID) return category;
+                if(currentCategory.ID == category.ID)
+                {
+                    categories.Remove(currentCategory);
+                    return true;
+                }
                 else
                 {
-                    if (category.ChildCategories == null || category.ChildCategories.Count == 0)
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        return FindCategoryInChild(seachCategory, category);
-                    }
+                    if (deleteCategoryRecurse(currentCategory, category))
+                        return true;
                 }
             }
-            return null;
+            return false;
+        }
+        private static bool deleteCategoryRecurse(Category currentCategory, Category category) 
+        {
+            foreach(var childCategory in currentCategory.ChildCategories)
+            {
+                if(childCategory.ID == category.ID)
+                {
+                    currentCategory.ChildCategories.Remove(childCategory);
+                    return true;
+                }
+                else
+                    if(deleteCategoryRecurse(childCategory, category))
+                        return true;
+            }
+            return false;
         }
 
         public static bool ReplaceCategory(this Collection<Category> categories, Category categoryToReplace, Category categoryReplaceble)

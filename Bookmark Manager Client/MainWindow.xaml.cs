@@ -20,6 +20,8 @@ using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.Model;
 using Bookmark_Manager_Client.ViewModel;
 using ModernWpf.Controls;
+using Bookmark_Manager_Client.UserControls;
+using Bookmark_Manager_Client.Utils;
 
 namespace Bookmark_Manager_Client
 {
@@ -101,5 +103,20 @@ namespace Bookmark_Manager_Client
             System.Diagnostics.Process.Start(bookmark.Url);
         }
 
+        private async void CategoryDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Category category = (Category)treeViewCategory.SelectedItem;
+            var vm = this.DataContext as MainViewModel;
+            var popup = new CategoryUserControlDelete(category.Name);
+            var result = await popup.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                if(ObjectRepository.DataProvider.DeleteCategory(category.ID))
+                {
+                    vm.SelectedCategory = null;
+                    vm.Categories.DeleteCategoryWithChildCategories(category);
+                }
+            }
+        }
     }
 }

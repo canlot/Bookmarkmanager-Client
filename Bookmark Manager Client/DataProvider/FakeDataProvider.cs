@@ -184,9 +184,31 @@ namespace Bookmark_Manager_Client.DataProvider
             throw new NotImplementedException();
         }
 
-        public bool DeleteCategory(Category category)
+        public bool DeleteCategory(uint categoryID)
         {
-            throw new NotImplementedException();
+            var category = categories.Single(x => x.ID == categoryID);
+            if(category.OwnerID != CurrentUser.ID) return false;
+            if(category.ID == 0) return false;
+
+            if(!deleteChildCategories(category))
+                return false;
+            return true;
+        }
+
+
+
+        private bool deleteChildCategories(Category category)
+        {
+            var childCategories = categories.Where(x => x.ParentID == category.ID).ToList();
+            foreach (Category childCategory in childCategories)
+            {
+                if (!deleteChildCategories(childCategory))
+                    return false;
+            }
+            categoryUserAssignment.Remove(category.ID);
+            var cat = categories.Single(x => x.ID == category.ID);
+            categories.Remove(cat);
+            return true;
         }
 
         public IList<Category> GetCategories(uint parentCategoryId = 0)

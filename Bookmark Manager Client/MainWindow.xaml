@@ -41,7 +41,9 @@
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Kategorie erstellen</TextBlock>
                         </Grid>
                     </Button>
-                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Command="{Binding ChangeUserControlCommand}" CommandParameter="CategoryUserControlEdit">
+                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" 
+                            Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" 
+                            Command="{Binding ChangeUserControlCommand}" CommandParameter="CategoryUserControlEdit">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
@@ -51,7 +53,8 @@
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Kategorie bearbeiten</TextBlock>
                         </Grid>
                     </Button>
-                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
+                    <Button x:Name="CategoryDeleteButton" Width="100"  Background="{DynamicResource AppBarButtonBackground}" Click="CategoryDeleteButton_Click"
+                            Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
@@ -139,7 +142,7 @@
                             <HierarchicalDataTemplate ItemsSource="{Binding ChildCategories}">
                                 <Border  BorderBrush="{StaticResource BorderColor}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Padding="5" >
                                     <StackPanel Orientation="Horizontal">
-                                        <Border Margin="5" BorderThickness="1">
+                                        <Border Margin="0" BorderThickness="1">
                                             <Border.Style>
                                                 <Style TargetType="Border">
                                                     <Setter Property="BorderThickness" Value="1"/>
@@ -154,10 +157,10 @@
                                                 </Style>
                                             </Border.Style>
                                         </Border>
-                                        <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Vertical" Margin="5,0,0,0">
                                             <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="14" FontWeight="Bold" ></TextBlock>
                                             <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="10" FontStyle="Italic"></TextBlock>
-                                            <Border Grid.Row="1" Margin="-9,0,0,0" CornerRadius="0,5,5,0" HorizontalAlignment="Left" >
+                                            <Border Grid.Row="1" Margin="0,0,0,0" CornerRadius="5" HorizontalAlignment="Left" >
                                                 <Border.Style>
                                                     <Style TargetType="Border">
                                                         <Setter Property="BorderThickness" Value="2"/>

@@ -55,8 +55,10 @@
     <Reference Include="netstandard" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -114,6 +116,9 @@
     </Compile>
     <Compile Include="UserControls\BrowserUserControl.xaml.cs">
       <DependentUpon>BrowserUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CategoryUserControlDelete.xaml.cs">
+      <DependentUpon>CategoryUserControlDelete.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CategoryUserControlEdit.xaml.cs">
       <DependentUpon>CategoryUserControlEdit.xaml</DependentUpon>
@@ -177,6 +182,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\BrowserUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\CategoryUserControlDelete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
