@@ -14,12 +14,14 @@ namespace Bookmark_Manager_Client.Model
 
         public static bool operator ==(User a, User b)
         {
+            if(a == null || b == null) return false;
             if (a.ID == b.ID)
                 return true;
             return false;
         }
         public static bool operator !=(User a, User b)
         {
+            if( a == null || b == null) return true;
             if (a.ID != b.ID)
                 return true;
             return false;

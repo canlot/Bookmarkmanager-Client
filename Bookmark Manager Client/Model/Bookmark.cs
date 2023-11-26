@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace Bookmark_Manager_Client.Model
 {
-    public class Bookmark
+    public class Bookmark : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

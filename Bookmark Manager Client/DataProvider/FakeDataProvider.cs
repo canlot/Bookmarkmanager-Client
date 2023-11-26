@@ -389,7 +389,17 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public bool PutBookmark(Bookmark bookmark)
         {
-            throw new NotImplementedException();
+            if(bookmark.CategoryID == default) return false;
+            if(bookmark.Url == "") return false;
+            var owner = getCategoryOwnerById(bookmark.CategoryID);
+            if(owner.ID != currentUser.ID) return false;
+
+            var originalBookmark = bookmarks.Single(x => x.ID == bookmark.ID);
+            originalBookmark.Url = bookmark.Url;
+            originalBookmark.Title = bookmark.Title;
+            originalBookmark.Description = bookmark.Description;
+            return true;
+
         }
 
         public bool PutCategory(Category category)

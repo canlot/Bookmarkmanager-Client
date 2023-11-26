@@ -75,7 +75,9 @@
                             <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Lesezeichen erstellen</TextBlock>
                         </Grid>
                     </Button>
-                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
+                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" 
+                            Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}"
+                            Command="{Binding ChangeUserControlCommand}" CommandParameter="BookmarkUserControlEdit">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
@@ -205,7 +207,7 @@
                     </TreeView>
                 </Border>
                 <Border Grid.Column="1">
-                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}" SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedBookmark, Mode=TwoWay}">
+                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}" SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedBookmark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

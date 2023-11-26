@@ -111,6 +111,9 @@
     <Compile Include="PortValidationRule.cs" />
     <Compile Include="Receiver.cs" />
     <Compile Include="ReceiverExceptions.cs" />
+    <Compile Include="UserControls\BookmarkUserControlEdit.xaml.cs">
+      <DependentUpon>BookmarkUserControlEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\BookmarkUserControlNew.xaml.cs">
       <DependentUpon>BookmarkUserControlNew.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,7 @@
       <DependentUpon>CategoryUserControlNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\CategoryUtils.cs" />
+    <Compile Include="ViewModel\BookmarkViewModelEdit.cs" />
     <Compile Include="ViewModel\BookmarkViewModelNew.cs" />
     <Compile Include="ViewModel\CategoryViewModelEdit.cs" />
     <Compile Include="ViewModel\CategoryViewModelNew.cs" />
@@ -174,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\IconResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\BookmarkUserControlEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,7 +252,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CefSharp.Wpf">
-      <Version>116.0.230</Version>
+      <Version>119.4.30</Version>
+    </PackageReference>
+    <PackageReference Include="HandyControls">
+      <Version>3.5.0</Version>
     </PackageReference>
     <PackageReference Include="ini-parser">
       <Version>2.5.2</Version>

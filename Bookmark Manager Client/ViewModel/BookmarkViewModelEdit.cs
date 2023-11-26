@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
-    public class BookmarkViewModelNew : INotifyPropertyChanged
+    public class BookmarkViewModelEdit : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -25,6 +25,9 @@ namespace Bookmark_Manager_Client.ViewModel
             {
                 mainViewModel = value;
                 Category = MainViewModel.SelectedCategory;
+                Url = MainViewModel.SelectedBookmark.Url;
+                Title = MainViewModel.SelectedBookmark.Title;
+                Description = MainViewModel.SelectedBookmark.Description;
                 OnPropertyChanged();
             }
         }
@@ -33,7 +36,7 @@ namespace Bookmark_Manager_Client.ViewModel
         public Category Category { get => category; set { category = value; OnPropertyChanged(); } }
 
         private string url;
-        public string Url { get => url; set { grabTitleFromWeb(value); url = value; OnPropertyChanged();  } }
+        public string Url { get => url; set { grabTitleFromWeb(value); url = value; OnPropertyChanged(); } }
         private string title;
         public string Title { get => title; set { title = value; OnPropertyChanged(); } }
 
@@ -42,16 +45,10 @@ namespace Bookmark_Manager_Client.ViewModel
 
         private HttpClient client = new HttpClient();
 
-        public BookmarkViewModelNew()
-        {
-
-
-        }
-
         private void grabTitleFromWeb(string url)
         {
             if (string.IsNullOrEmpty(url)) return;
-            var result = Task.Run( async () =>
+            var result = Task.Run(async () =>
             {
                 if (string.IsNullOrWhiteSpace(url)) return;
 
@@ -64,7 +61,7 @@ namespace Bookmark_Manager_Client.ViewModel
                         Title = Regex.Match(responseBody, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>",
                         RegexOptions.IgnoreCase).Groups["Title"].Value;
                     }
-                    
+
                 }
                 catch (HttpRequestException e)
                 {
@@ -72,23 +69,18 @@ namespace Bookmark_Manager_Client.ViewModel
                 }
             });
         }
-
-        public bool SaveBookmark()
+        public bool UpdateBookmark()
         {
-            if(Url == "") return false;
-            if(Category == null) return false;
+            if (Url == "") return false;
+            if (Category == null) return false;
 
-            var bookmark = new Bookmark()
-            {
-                Url = Url,
-                CategoryID = Category.ID,
-                Title = Title,
-                Description = Description
-            };
+            MainViewModel.SelectedBookmark.Url = Url;
+            MainViewModel.SelectedBookmark.Title = Title;
+            MainViewModel.SelectedBookmark.Description = Description;
 
-            if(!ObjectRepository.DataProvider.PostBookmark(bookmark)) return false;
 
-            MainViewModel.Bookmarks.Add(bookmark);
+            if (!ObjectRepository.DataProvider.PutBookmark(MainViewModel.SelectedBookmark)) return false;
+            var bookmark = MainViewModel.Bookmarks.Single(x => x.ID == MainViewModel.SelectedBookmark.ID);
 
             MainViewModel.SetDefaultView();
             return true;

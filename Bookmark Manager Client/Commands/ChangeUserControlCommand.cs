@@ -76,12 +76,17 @@ namespace Bookmark_Manager_Client.Commands
                         UserControl = new CategoryUserControlNew();
                         break;
                     case "CategoryUserControlEdit":
+                        if (viewModel.SelectedCategory == null) return;
                         UserControl = new CategoryUserControlEdit();
                         break;
                     case "CategoryUserControlDelete":
                         break;
                     case "BookmarkUserControlNew":
                         UserControl = new BookmarkUserControlNew();
+                        break;
+                    case "BookmarkUserControlEdit":
+                        if(viewModel.SelectedBookmark == null) return;
+                        UserControl = new BookmarkUserControlEdit();
                         break;
                     default:
                         UserControl = new BrowserUserControl();
