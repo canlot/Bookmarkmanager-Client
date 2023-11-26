@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bookmark_Manager_Client.ViewModel
@@ -51,13 +52,17 @@ namespace Bookmark_Manager_Client.ViewModel
         private void grabTitleFromWeb(string url)
         {
             if (string.IsNullOrEmpty(url)) return;
+
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+            Task.Run(async () => { await Task.Delay(5000); cancellationTokenSource.Cancel(); });
+
             var result = Task.Run( async () =>
             {
-                if (string.IsNullOrWhiteSpace(url)) return;
-
+                
                 try
                 {
-                    using (HttpResponseMessage response = await client.GetAsync(url))
+                    using (HttpResponseMessage response = await client.GetAsync(url,cancellationTokenSource.Token))
                     {
                         response.EnsureSuccessStatusCode();
                         string responseBody = await response.Content.ReadAsStringAsync();

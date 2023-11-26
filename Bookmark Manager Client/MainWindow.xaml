@@ -160,7 +160,8 @@
                                             </Border.Style>
                                         </Border>
                                         <StackPanel Orientation="Vertical" Margin="5,0,0,0">
-                                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="14" FontWeight="Bold" ></TextBlock>
+                                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Segoe UI" 
+                                                       FontSize="15" FontWeight="Bold" ></TextBlock>
                                             <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="10" FontStyle="Italic"></TextBlock>
                                             <Border Grid.Row="1" Margin="0,0,0,0" CornerRadius="5" HorizontalAlignment="Left" >
                                                 <Border.Style>
@@ -208,20 +209,28 @@
                 </Border>
                 <Border Grid.Column="1">
                     <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}" SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedBookmark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <d:ListBox.ItemsSource>
+                            <x:Array Type="model:Bookmark">
+                                <model:Bookmark CategoryID="1" Url="https://google.de" Description="Best site that i use" Title="Google Site"></model:Bookmark>
+                            </x:Array>
+                        </d:ListBox.ItemsSource>
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                             </Style>
                         </ListBox.ItemContainerStyle>
+                        
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid  HorizontalAlignment="Stretch">
+                                <Grid  HorizontalAlignment="Stretch" Margin="5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="1*"/>
                                         <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" Text="{Binding Url}" Margin="5"></TextBlock>
-                                    <Border Grid.Row="1" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource CommandBarBackground}">
+                                    <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="15" Margin="5" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Row="1" Text="{Binding Url}" Margin="5" FontStyle="Italic"></TextBlock>
+                                    <Border Grid.Row="2" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource CommandBarBackground}">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" CommandParameter="{Binding Url}" Command="{Binding OpenInBrowserCommand}">
                                                 <StackPanel Orientation="Horizontal">
@@ -234,6 +243,7 @@
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+                        
                     </ListBox>
                 </Border>
                 <Border Grid.Column="2">
