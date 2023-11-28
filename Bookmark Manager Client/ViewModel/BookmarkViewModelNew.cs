@@ -41,6 +41,11 @@ namespace Bookmark_Manager_Client.ViewModel
         private string description;
         public string Description { get => description; set { description = value; OnPropertyChanged(); } }
 
+        private bool isWebLoading;
+
+        public bool IsWebLoading { get => isWebLoading; set { isWebLoading = value; OnPropertyChanged(); } }
+
+
         private HttpClient client = new HttpClient();
 
         public BookmarkViewModelNew()
@@ -52,6 +57,8 @@ namespace Bookmark_Manager_Client.ViewModel
         private void grabTitleFromWeb(string url)
         {
             if (string.IsNullOrEmpty(url)) return;
+
+            IsWebLoading = true;
 
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
@@ -75,6 +82,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 {
 
                 }
+                finally { cancellationTokenSource.Cancel(); IsWebLoading = false; }
             });
         }
 

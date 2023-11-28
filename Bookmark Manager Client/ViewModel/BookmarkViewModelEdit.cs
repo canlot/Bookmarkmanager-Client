@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bookmark_Manager_Client.ViewModel
@@ -43,18 +44,28 @@ namespace Bookmark_Manager_Client.ViewModel
         private string description;
         public string Description { get => description; set { description = value; OnPropertyChanged(); } }
 
+        private bool isWebLoading;
+
+        public bool IsWebLoading { get => isWebLoading; set { isWebLoading = value; OnPropertyChanged(); } }
+
         private HttpClient client = new HttpClient();
 
         private void grabTitleFromWeb(string url)
         {
             if (string.IsNullOrEmpty(url)) return;
+
+            IsWebLoading = true;
+
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+            Task.Run(async () => { await Task.Delay(5000); cancellationTokenSource.Cancel(); });
+
             var result = Task.Run(async () =>
             {
-                if (string.IsNullOrWhiteSpace(url)) return;
 
                 try
                 {
-                    using (HttpResponseMessage response = await client.GetAsync(url))
+                    using (HttpResponseMessage response = await client.GetAsync(url, cancellationTokenSource.Token))
                     {
                         response.EnsureSuccessStatusCode();
                         string responseBody = await response.Content.ReadAsStringAsync();
@@ -67,6 +78,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 {
 
                 }
+                finally { cancellationTokenSource.Cancel(); IsWebLoading = false; }
             });
         }
         public bool UpdateBookmark()
