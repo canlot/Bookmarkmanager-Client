@@ -56,7 +56,7 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public bool SaveCategory()
         {
-            if(CategoryName == "") return false;
+            if(string.IsNullOrEmpty(CategoryName)) return false;
 
             var category = new Category()
             {

@@ -7,6 +7,7 @@
              xmlns:viewmodel="clr-namespace:Bookmark_Manager_Client.ViewModel"
              xmlns:converters="clr-namespace:Bookmark_Manager_Client.Converters"
              xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
+             xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -21,7 +22,7 @@
             <viewmodel:MainViewModel x:Key="MainViewModel"  />
             <converters:ParentIdToReadOnlyStateConverter x:Key="ParentIdToReadOnlyStateConverter" />
             <converters:BoolInverterConverter x:Key="BoolInverterConverter" />
-
+            <loc:Localizationprovider x:Key="LocalizationProvider" />
             <!-- Other app resources here -->
         </ResourceDictionary>
     </Application.Resources>

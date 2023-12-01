@@ -6,6 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Bookmark_Manager_Client.UserControls"
              xmlns:vm="clr-namespace:Bookmark_Manager_Client.ViewModel"
+             xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -32,7 +33,7 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label Content="Url" Style="{StaticResource LabelStyle}"/>
+            <Label Content="{loc:Localization UrlString}" Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
@@ -40,7 +41,7 @@
         </Border>
 
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label Content="Titel" Style="{StaticResource LabelStyle}"/>
+            <Label Content="{loc:Localization TitleString}" Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}">
             <ui:ProgressRing IsActive="{Binding IsWebLoading}"></ui:ProgressRing>
@@ -51,7 +52,7 @@
         </Border>
 
         <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label Content="Description" Style="{StaticResource LabelStyle}"/>
+            <Label Content="{loc:Localization DescriptionString}" Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
@@ -59,7 +60,9 @@
         </Border>
 
         <Button x:Name="SaveCategory" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" 
-        Style="{StaticResource AccentButtonStyle}" Content="Speichern" Click="SaveCategory_Click" />
-        <Button x:Name="Exit" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen" Click="Exit_Click"/>
+                Style="{StaticResource AccentButtonStyle}" Content="{loc:Localization ButtonSaveString}" 
+                Click="SaveCategory_Click" />
+        <Button x:Name="Exit" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" 
+                Content="{loc:Localization ButtonCancelString}" Click="Exit_Click"/>
     </Grid>
 </UserControl>

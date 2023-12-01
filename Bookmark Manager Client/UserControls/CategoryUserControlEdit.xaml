@@ -7,6 +7,7 @@
              xmlns:vm="clr-namespace:Bookmark_Manager_Client.ViewModel"
              xmlns:local="clr-namespace:Bookmark_Manager_Client"
              xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
+             xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -35,7 +36,7 @@
         </Grid.RowDefinitions>
         
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label Content="Name" Style="{StaticResource LabelStyle}"/>
+            <Label Content="{loc:Localization NameString}" Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
@@ -43,7 +44,7 @@
         </Border>
 
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label Content="Description" Style="{StaticResource LabelStyle}"/>
+            <Label Content="{loc:Localization DescriptionString}" Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
@@ -52,7 +53,7 @@
 
 
         <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label Content="Users with Access" Style="{StaticResource LabelStyle}"/>
+            <Label Content="{loc:Localization UsersWithAccessString}" Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
@@ -62,7 +63,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ui:AutoSuggestBox x:Name="UserSearchBox" Grid.Row="0" PlaceholderText="Username or email" 
+                    <ui:AutoSuggestBox x:Name="UserSearchBox" Grid.Row="0" PlaceholderText="{loc:Localization UserSearchBoxQueryString}" 
                                        QueryIcon="Add" QuerySubmitted="UserSearchBox_QuerySubmitted" SuggestionChosen="UserSearchBox_SuggestionChosen" 
                                        TextChanged="UserSearchBox_TextChanged" IsEnabled="{Binding IsTopCategory}" />
                     <ListBox x:Name="PermittedUsers" Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Stretch" 
@@ -77,7 +78,7 @@
             </Border>
         </Border>
         <Button x:Name="SaveCategory" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" 
-                Style="{StaticResource AccentButtonStyle}" Content="Speichern" Click="SaveCategory_Click" />
-        <Button x:Name="Exit" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen" Click="Exit_Click"/>
+                Style="{StaticResource AccentButtonStyle}" Content="{loc:Localization ButtonSaveString}" Click="SaveCategory_Click" />
+        <Button x:Name="Exit" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="{loc:Localization ButtonCancelString}" Click="Exit_Click"/>
     </Grid>
 </UserControl>

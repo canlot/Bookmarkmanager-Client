@@ -5,6 +5,7 @@
              xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:Bookmark_Manager_Client.ViewModel"
+             xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
              xmlns:local="clr-namespace:Bookmark_Manager_Client.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -31,7 +32,7 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-                <Label Content="Url" Style="{StaticResource LabelStyle}"/>
+            <Label Content="{loc:Localization UrlString}" Style="{StaticResource LabelStyle}"/>
             </Border>
             <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
             <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
@@ -39,17 +40,17 @@
             </Border>
 
             <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-                <Label Content="Titel" Style="{StaticResource LabelStyle}"/>
+            <Label Content="{loc:Localization TitleString}" Style="{StaticResource LabelStyle}"/>
             </Border>
-        <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}">
-            <ui:ProgressRing IsActive="{Binding IsWebLoading}"></ui:ProgressRing>
-        </Border>
-        <Border Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+            <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}">
+                <ui:ProgressRing IsActive="{Binding IsWebLoading}"></ui:ProgressRing>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
                 <TextBox x:Name="TitleTextBox" Text="{Binding Title}" VerticalContentAlignment="Center"/>
             </Border>
 
             <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-                <Label Content="Description" Style="{StaticResource LabelStyle}"/>
+            <Label Content="{loc:Localization DescriptionString}" Style="{StaticResource LabelStyle}"/>
             </Border>
             <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
             <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
@@ -58,6 +59,7 @@
 
             <Button x:Name="UpdateBookmarkButton" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" 
                 Style="{StaticResource AccentButtonStyle}" Content="Speichern" Click="UpdateBookmarkButton_Click" />
-            <Button x:Name="ExitButton" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen" Click="ExitButton_Click"/>
+            <Button x:Name="ExitButton" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" 
+                    Grid.Row="5" Grid.ColumnSpan="5" Content="Abbrechen" Click="ExitButton_Click"/>
     </Grid>
 </UserControl>
