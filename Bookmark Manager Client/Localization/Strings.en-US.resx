@@ -117,14 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ButtonBookmarkCreateString" xml:space="preserve">
+    <value>Create bookmark</value>
+  </data>
+  <data name="ButtonBookmarkDeleteString" xml:space="preserve">
+    <value>Delete bookmark</value>
+  </data>
+  <data name="ButtonBookmarkEditString" xml:space="preserve">
+    <value>Edit bookmark</value>
+  </data>
+  <data name="ButtonBookmarkOpenInBrowserString" xml:space="preserve">
+    <value>Open in Browser</value>
+  </data>
   <data name="ButtonCancelString" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="ButtonCategoryCreateString" xml:space="preserve">
+    <value>Create category</value>
+  </data>
+  <data name="ButtonCategoryDeleteString" xml:space="preserve">
+    <value>Delete category</value>
+  </data>
+  <data name="ButtonCategoryEditString" xml:space="preserve">
+    <value>Edit category</value>
   </data>
   <data name="ButtonDeleteString" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="ButtonExitString" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="ButtonLoginString" xml:space="preserve">
+    <value>Login</value>
+  </data>
   <data name="ButtonSaveString" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="ButtonSettingsString" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="CategoryDeleteQuestionString" xml:space="preserve">
     <value>Delete category?</value>
@@ -144,14 +174,26 @@
   <data name="DescriptionString" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="HostString" xml:space="preserve">
+    <value>Host</value>
+  </data>
   <data name="NameString" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="PasswordString" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PortString" xml:space="preserve">
+    <value>Port</value>
   </data>
   <data name="TitleString" xml:space="preserve">
     <value>Title</value>
   </data>
   <data name="UrlString" xml:space="preserve">
     <value>Url</value>
+  </data>
+  <data name="UsernameString" xml:space="preserve">
+    <value>Username</value>
   </data>
   <data name="UserSearchBoxQueryString" xml:space="preserve">
     <value>Username or email</value>

@@ -422,6 +422,8 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public IList<User> SearchUser(string username)
         {
+            if(string.IsNullOrEmpty(username)) return null;
+            if(username.Length < 3) return null;
             var foundUsers = new ObservableCollection<User>();
             foreach(var user in users)
             {

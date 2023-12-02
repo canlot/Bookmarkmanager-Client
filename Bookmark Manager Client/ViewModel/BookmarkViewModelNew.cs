@@ -1,6 +1,7 @@
 ﻿using Bookmark_Manager_Client.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
@@ -45,12 +46,16 @@ namespace Bookmark_Manager_Client.ViewModel
 
         public bool IsWebLoading { get => isWebLoading; set { isWebLoading = value; OnPropertyChanged(); } }
 
+        public ObservableCollection<string> Tags { get; set; } = new ObservableCollection<string>();
+
 
         private HttpClient client = new HttpClient();
 
         public BookmarkViewModelNew()
         {
-
+            Tags.Add("Test");
+            Tags.Add("Was");
+            Tags.Add("Geht");
 
         }
 

@@ -61,11 +61,74 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create bookmark ähnelt.
+        /// </summary>
+        public static string ButtonBookmarkCreateString {
+            get {
+                return ResourceManager.GetString("ButtonBookmarkCreateString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete bookmark ähnelt.
+        /// </summary>
+        public static string ButtonBookmarkDeleteString {
+            get {
+                return ResourceManager.GetString("ButtonBookmarkDeleteString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Edit bookmark ähnelt.
+        /// </summary>
+        public static string ButtonBookmarkEditString {
+            get {
+                return ResourceManager.GetString("ButtonBookmarkEditString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Open in Browser ähnelt.
+        /// </summary>
+        public static string ButtonBookmarkOpenInBrowserString {
+            get {
+                return ResourceManager.GetString("ButtonBookmarkOpenInBrowserString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cancel ähnelt.
         /// </summary>
         public static string ButtonCancelString {
             get {
                 return ResourceManager.GetString("ButtonCancelString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create category ähnelt.
+        /// </summary>
+        public static string ButtonCategoryCreateString {
+            get {
+                return ResourceManager.GetString("ButtonCategoryCreateString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete category ähnelt.
+        /// </summary>
+        public static string ButtonCategoryDeleteString {
+            get {
+                return ResourceManager.GetString("ButtonCategoryDeleteString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Edit category ähnelt.
+        /// </summary>
+        public static string ButtonCategoryEditString {
+            get {
+                return ResourceManager.GetString("ButtonCategoryEditString", resourceCulture);
             }
         }
         
@@ -79,11 +142,38 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Exit ähnelt.
+        /// </summary>
+        public static string ButtonExitString {
+            get {
+                return ResourceManager.GetString("ButtonExitString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
+        /// </summary>
+        public static string ButtonLoginString {
+            get {
+                return ResourceManager.GetString("ButtonLoginString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Save ähnelt.
         /// </summary>
         public static string ButtonSaveString {
             get {
                 return ResourceManager.GetString("ButtonSaveString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Settings ähnelt.
+        /// </summary>
+        public static string ButtonSettingsString {
+            get {
+                return ResourceManager.GetString("ButtonSettingsString", resourceCulture);
             }
         }
         
@@ -142,11 +232,38 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Host ähnelt.
+        /// </summary>
+        public static string HostString {
+            get {
+                return ResourceManager.GetString("HostString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Name ähnelt.
         /// </summary>
         public static string NameString {
             get {
                 return ResourceManager.GetString("NameString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Password ähnelt.
+        /// </summary>
+        public static string PasswordString {
+            get {
+                return ResourceManager.GetString("PasswordString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Port ähnelt.
+        /// </summary>
+        public static string PortString {
+            get {
+                return ResourceManager.GetString("PortString", resourceCulture);
             }
         }
         
@@ -165,6 +282,15 @@ namespace Bookmark_Manager_Client.Localization {
         public static string UrlString {
             get {
                 return ResourceManager.GetString("UrlString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Username ähnelt.
+        /// </summary>
+        public static string UsernameString {
+            get {
+                return ResourceManager.GetString("UsernameString", resourceCulture);
             }
         }
         

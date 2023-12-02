@@ -1,5 +1,6 @@
 ﻿using Bookmark_Manager_Client.Model;
 using Bookmark_Manager_Client.ViewModel;
+using HandyControl.Tools.Extension;
 using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace Bookmark_Manager_Client.UserControls
     /// </summary>
     public partial class CategoryUserControlNew : UserControl
     {
+        DateTime lastSearched = DateTime.Now;
         public CategoryUserControlNew()
         {
             InitializeComponent();
@@ -54,7 +56,19 @@ namespace Bookmark_Manager_Client.UserControls
 
         private void UserSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
+            if (sender.Text.Length < 3) return;
+
+            if ((DateTime.Now.Ticks - lastSearched.Ticks) / 10000 < 500)
+            {
+                lastSearched = DateTime.Now;
+                return;
+            }
+            else
+                lastSearched = DateTime.Now;
+
             var users = ObjectRepository.DataProvider.SearchUser(sender.Text);
+
+            if (users is null) return;
 
             if (users.Count > 0)
                 sender.ItemsSource = users;

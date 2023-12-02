@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:controller="clr-namespace:Bookmark_Manager_Client.Controller"
@@ -31,14 +32,18 @@
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
-                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Command="{Binding ChangeUserControlCommand}" CommandParameter="CategoryUserControlNew">
+                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" 
+                            BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Command="{Binding ChangeUserControlCommand}" 
+                            CommandParameter="CategoryUserControlNew">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="{StaticResource CategoryAddImage}" SnapsToDevicePixels="True" Width="38" />
-                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Kategorie erstellen</TextBlock>
+                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
+                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" 
+                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonCategoryCreateString}"/>
                         </Grid>
                     </Button>
                     <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" 
@@ -50,7 +55,9 @@
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="{StaticResource CategoryEditImage}" SnapsToDevicePixels="True" Width="38" />
-                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Kategorie bearbeiten</TextBlock>
+                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
+                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
+                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonCategoryEditString}"/>
                         </Grid>
                     </Button>
                     <Button x:Name="CategoryDeleteButton" Width="100"  Background="{DynamicResource AppBarButtonBackground}" Click="CategoryDeleteButton_Click"
@@ -61,7 +68,9 @@
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="{StaticResource CategoryDeleteImage}" SnapsToDevicePixels="True" Width="38" />
-                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Kategorie löschen</TextBlock>
+                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
+                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
+                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonCategoryDeleteString}"/>
                         </Grid>
                     </Button>
                     <Border VerticalAlignment="Stretch" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
@@ -72,7 +81,9 @@
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="{StaticResource LinkAddImage}" SnapsToDevicePixels="True" Width="38"/>
-                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Lesezeichen erstellen</TextBlock>
+                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
+                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
+                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonBookmarkCreateString}"/>
                         </Grid>
                     </Button>
                     <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" 
@@ -84,7 +95,9 @@
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="{StaticResource LinkEditImage}" SnapsToDevicePixels="True" Width="38"/>
-                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Lesezeichen bearbeiten</TextBlock>
+                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
+                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
+                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonBookmarkEditString}"/>
                         </Grid>
                     </Button>
                     <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
@@ -94,7 +107,9 @@
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="{StaticResource LinkDeleteImage}" SnapsToDevicePixels="True" Width="38"/>
-                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Lesezeichen löschen</TextBlock>
+                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
+                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
+                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonBookmarkDeleteString}"/>
                         </Grid>
                     </Button>
                     <Border VerticalAlignment="Stretch" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
@@ -105,7 +120,9 @@
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="{StaticResource SettingsImage}" SnapsToDevicePixels="True" Width="38"/>
-                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True" FontSize="12">Einstellungen</TextBlock>
+                            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
+                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
+                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonSettingsString}"/>
                         </Grid>
                     </Button>
                 </StackPanel>
@@ -208,7 +225,9 @@
                     </TreeView>
                 </Border>
                 <Border Grid.Column="1">
-                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}" SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedBookmark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,10" ItemsSource="{Binding Bookmarks}" 
+                            SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedBookmark, Mode=TwoWay, 
+                            UpdateSourceTrigger=PropertyChanged}">
                         <d:ListBox.ItemsSource>
                             <x:Array Type="model:Bookmark">
                                 <model:Bookmark CategoryID="1" Url="https://google.de" Description="Best site that i use" Title="Google Site"></model:Bookmark>
@@ -232,10 +251,12 @@
                                     <TextBlock Grid.Row="1" Text="{Binding Url}" Margin="5" FontStyle="Italic"></TextBlock>
                                     <Border Grid.Row="2" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource CommandBarBackground}">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" CommandParameter="{Binding Url}" Command="{Binding OpenInBrowserCommand}">
+                                            <Button Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" 
+                                                    BorderBrush="{DynamicResource AppBarButtonBorderBrush}" CommandParameter="{Binding Url}" 
+                                                    Command="{Binding OpenInBrowserCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <Image Source="{StaticResource OpenInBrowserImage}" SnapsToDevicePixels="True"/>
-                                                    <Label Content="Open in Browser" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
+                                                    <Label Content="{loc:Localization ButtonBookmarkOpenInBrowserString}" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
                                                 </StackPanel>
                                             </Button>
                                         </StackPanel>

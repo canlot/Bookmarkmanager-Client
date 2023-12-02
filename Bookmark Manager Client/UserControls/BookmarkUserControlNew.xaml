@@ -58,7 +58,16 @@
         <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
             <TextBox x:Name="DescriptionTextBox" Text="{Binding Description}" VerticalContentAlignment="Center"/>
         </Border>
-
+        
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="Tags" Style="{StaticResource LabelStyle}"/>
+        </Border>
+        <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+            <hc:TagContainer ItemsSource="{Binding Tags}" Padding="5" ShowCloseButton="True">
+                
+            </hc:TagContainer>
+        </Border>
         <Button x:Name="SaveCategory" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" 
                 Style="{StaticResource AccentButtonStyle}" Content="{loc:Localization ButtonSaveString}" 
                 Click="SaveCategory_Click" />
