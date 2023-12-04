@@ -127,6 +127,9 @@
     <Compile Include="PortValidationRule.cs" />
     <Compile Include="Receiver.cs" />
     <Compile Include="ReceiverExceptions.cs" />
+    <Compile Include="UserControls\BookmarkUserControlDelete.xaml.cs">
+      <DependentUpon>BookmarkUserControlDelete.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\BookmarkUserControlEdit.xaml.cs">
       <DependentUpon>BookmarkUserControlEdit.xaml</DependentUpon>
     </Compile>
@@ -194,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\IconResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\BookmarkUserControlDelete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

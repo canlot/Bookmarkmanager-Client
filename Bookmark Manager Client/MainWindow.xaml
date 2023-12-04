@@ -100,7 +100,8 @@
                                        SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonBookmarkEditString}"/>
                         </Grid>
                     </Button>
-                    <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
+                    <Button x:Name="BookmarkDeleteButton" Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" 
+                            BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Click="BookmarkDeleteButton_Click">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>

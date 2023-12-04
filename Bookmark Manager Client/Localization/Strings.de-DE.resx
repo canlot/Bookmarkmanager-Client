@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BookmarkDeleteQuestionString" xml:space="preserve">
+    <value>Lesezeichen löschen?</value>
+  </data>
+  <data name="BookmarkDeleteTextString01" xml:space="preserve">
+    <value>Lesezeichen</value>
+  </data>
+  <data name="BookmarkDeleteTextString02" xml:space="preserve">
+    <value>endgültig löschen?</value>
+  </data>
   <data name="ButtonBookmarkCreateString" xml:space="preserve">
     <value>Lesezeichen erstellen</value>
   </data>

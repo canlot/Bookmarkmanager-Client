@@ -17,7 +17,7 @@ namespace Bookmark_Manager_Client.Commands
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        private UserControl userControl = new BrowserUserControl();
+        private UserControl userControl;
         public UserControl UserControl
         {
             get => userControl;
@@ -88,8 +88,12 @@ namespace Bookmark_Manager_Client.Commands
                         if(viewModel.SelectedBookmark == null) return;
                         UserControl = new BookmarkUserControlEdit();
                         break;
+                    case "BrowserUserControl":
+                        if (viewModel.SelectedBookmark == null) return;
+                        UserControl = new BrowserUserControl(viewModel.SelectedBookmark.Url);
+                        break;
                     default:
-                        UserControl = new BrowserUserControl();
+                        UserControl = new UserControl();
                         break;
                 }
                 

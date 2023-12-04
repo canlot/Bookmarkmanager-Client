@@ -61,6 +61,33 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete bookmark? ähnelt.
+        /// </summary>
+        public static string BookmarkDeleteQuestionString {
+            get {
+                return ResourceManager.GetString("BookmarkDeleteQuestionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete bookmark ähnelt.
+        /// </summary>
+        public static string BookmarkDeleteTextString01 {
+            get {
+                return ResourceManager.GetString("BookmarkDeleteTextString01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ? ähnelt.
+        /// </summary>
+        public static string BookmarkDeleteTextString02 {
+            get {
+                return ResourceManager.GetString("BookmarkDeleteTextString02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Create bookmark ähnelt.
         /// </summary>
         public static string ButtonBookmarkCreateString {

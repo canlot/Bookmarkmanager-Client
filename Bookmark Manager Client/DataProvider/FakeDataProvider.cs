@@ -181,7 +181,13 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public bool DeleteBookmark(Bookmark bookmark)
         {
-            throw new NotImplementedException();
+            if(bookmark == null) return false;
+            if(CurrentUser == null) return false;
+            var owner = getCategoryOwnerById(bookmark.CategoryID);
+            if(owner == null) return false;
+            if(owner.ID != CurrentUser.ID) return false;
+
+            return bookmarks.Remove(bookmark);
         }
 
         public bool DeleteCategory(uint categoryID)
@@ -250,6 +256,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public bool PostBookmark(Bookmark bookmark)
         {
+            if (bookmark == null) return false;
             if(bookmark.CategoryID == 0) return false;
             if(getCategoryOwnerById(bookmark.CategoryID).ID != CurrentUser.ID) return false;
 

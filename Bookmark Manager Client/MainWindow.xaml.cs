@@ -22,6 +22,7 @@ using Bookmark_Manager_Client.ViewModel;
 using ModernWpf.Controls;
 using Bookmark_Manager_Client.UserControls;
 using Bookmark_Manager_Client.Utils;
+using Windows.Storage.FileProperties;
 
 namespace Bookmark_Manager_Client
 {
@@ -106,6 +107,7 @@ namespace Bookmark_Manager_Client
         private async void CategoryDeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Category category = (Category)treeViewCategory.SelectedItem;
+            if (category == null) return;
             var vm = this.DataContext as MainViewModel;
             var popup = new CategoryUserControlDelete(category.Name);
             var result = await popup.ShowAsync();
@@ -115,6 +117,23 @@ namespace Bookmark_Manager_Client
                 {
                     vm.SelectedCategory = null;
                     vm.Categories.DeleteCategoryWithChildCategories(category);
+                }
+            }
+        }
+
+        private async void BookmarkDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Bookmark bookmark = (Bookmark)listBoxBookmarks.SelectedItem;
+            if(bookmark == null) return;
+            var vm = this.DataContext as MainViewModel;
+            var popup = new BookmarkUserControlDelete(bookmark.Title);
+            var result = await popup.ShowAsync();
+            if(result == ContentDialogResult.Primary) 
+            {
+                if(ObjectRepository.DataProvider.DeleteBookmark(bookmark))
+                {
+                    vm.SelectedBookmark = null;
+                    vm.Bookmarks.Remove(bookmark);
                 }
             }
         }

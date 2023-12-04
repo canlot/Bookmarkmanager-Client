@@ -56,7 +56,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
-        private UserControl detailsUserControl = new BrowserUserControl();
+        private UserControl detailsUserControl;
         public UserControl DetailsUserControl 
         { 
             get => detailsUserControl; 
@@ -83,6 +83,7 @@ namespace Bookmark_Manager_Client.ViewModel
             set
             {
                 selectedBookmark = value;
+                ChangeUserControlCommand.Execute("BrowserUserControl");
                 OnPropertyChanged();
             }
         }

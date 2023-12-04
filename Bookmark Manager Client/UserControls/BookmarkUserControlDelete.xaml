@@ -1,0 +1,22 @@
+﻿<ui:ContentDialog x:Class="Bookmark_Manager_Client.UserControls.BookmarkUserControlDelete"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:local="clr-namespace:Bookmark_Manager_Client.UserControls"
+            xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
+            xmlns:ui="http://schemas.modernwpf.com/2019"
+            DataContext="{Binding RelativeSource={RelativeSource Self}}"
+            Title="{loc:Localization BookmarkDeleteQuestionString}"
+            PrimaryButtonText="{loc:Localization ButtonDeleteString}"
+            CloseButtonText="{loc:Localization ButtonCancelString}"
+            DefaultButton="Primary"
+            mc:Ignorable="d" >
+    <Grid>
+        <TextBlock>
+            <Run Text="{loc:Localization BookmarkDeleteTextString01}"/>
+            <Run Text="{Binding BookmarkTitle}" FontWeight="Bold"/>
+            <Run Text="{loc:Localization BookmarkDeleteTextString02}"/>
+        </TextBlock>
+    </Grid>
+</ui:ContentDialog>
