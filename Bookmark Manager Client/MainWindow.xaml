@@ -177,18 +177,6 @@
                                                                 <DataTrigger Binding="{Binding Path=Shared}" Value="False">
                                                                     <Setter Property="Background" Value="Green"/>
                                                                 </DataTrigger>
-                                                                <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Trigger.EnterActions>
-                                                                        <BeginStoryboard>
-                                                                            <Storyboard Storyboard.TargetProperty="Width" Duration="0:0:8">
-                                                                                <DoubleAnimationUsingKeyFrames>
-                                                                                    <LinearDoubleKeyFrame Value="5" KeyTime="0:0:0"/>
-                                                                                    <LinearDoubleKeyFrame Value="30" KeyTime="0:0:1"/>
-                                                                                </DoubleAnimationUsingKeyFrames>
-                                                                            </Storyboard>
-                                                                        </BeginStoryboard>
-                                                                    </Trigger.EnterActions>
-                                                                </Trigger> 
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Border.Style>
