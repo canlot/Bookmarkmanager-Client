@@ -256,5 +256,15 @@ namespace Bookmark_Manager_Client.DataProvider
         {
             throw new NotImplementedException();
         }
+
+        public IList<Category> SearchCategories(string searchString)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Bookmark> SearchBookmarks(string searchString)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

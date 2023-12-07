@@ -18,6 +18,8 @@ namespace Bookmark_Manager_Client.DataProvider
         IList<User> GetPermittedUsers(uint id);
         IList<User> GetAllUsers();
         IList<User> SearchUser(string username);
+        IList<Category> SearchCategories(string searchString);
+        IList<Bookmark> SearchBookmarks(string searchString);
         bool PostCategory(Category category);
         bool PutCategory(Category category);
         bool DeleteCategory(uint categoryId);

@@ -444,5 +444,41 @@ namespace Bookmark_Manager_Client.DataProvider
         {
             
         }
+
+        private bool isUserPermitted(Category category, User user)
+        {
+            if(category == null) return false; //TODO: should use exceptions
+            if(user == null) return false;
+            var users = categoryUserAssignment[category.ID];
+            if(users.Contains(user)) return true;
+            return false;
+        }
+        private bool isUserPermitted(Bookmark bookmark, User user)
+        {
+            if (bookmark == null) return false;
+            if(user == null) return false;
+
+            var category = categories.Single(x => x.ID == bookmark.CategoryID);
+
+            return isUserPermitted(category, user);
+        }
+        public IList<Category> SearchCategories(string searchString)
+        {
+            if(string.IsNullOrEmpty(searchString)) return null;
+            searchString = searchString.ToLower();
+            var listCategories = categories.Where(x => isUserPermitted(x, CurrentUser) && 
+                ((!string.IsNullOrEmpty(x.Name) && x.Name.ToLower().Contains(searchString)) || 
+                (!string.IsNullOrEmpty(x.Description) && x.Description.ToLower().Contains(searchString)))).ToList(); // this is not healthy, this is a mess, technical dept 
+            return listCategories;
+        }
+
+        public IList<Bookmark> SearchBookmarks(string searchString)
+        {
+            if (string.IsNullOrEmpty(searchString)) return null;
+            var listBookmarks = bookmarks.Where(x => isUserPermitted(x, CurrentUser) && 
+                ((!string.IsNullOrEmpty(x.Title) && x.Title.ToLower().Contains(searchString)) || 
+                (!string.IsNullOrEmpty(x.Description) && x.Description.ToLower().Contains(searchString)))).ToList(); // this is the same mess
+            return listBookmarks;
+        }
     }
 }

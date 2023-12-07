@@ -34,8 +34,8 @@ namespace Bookmark_Manager_Client
         public MainWindow()
         {
             InitializeComponent();
-            LoginWindow windowLogin = new LoginWindow();
-            windowLogin.ShowDialog();
+            //LoginWindow windowLogin = new LoginWindow();
+            //windowLogin.ShowDialog();
             //settings.Username = "admin";
             //settings.Password = "admin";
             //settings.Url = "http://localhost:8080/apiv1";
@@ -135,6 +135,22 @@ namespace Bookmark_Manager_Client
                     vm.SelectedBookmark = null;
                     vm.Bookmarks.Remove(bookmark);
                 }
+            }
+        }
+
+        private void SearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            var vm = this.DataContext as MainViewModel;
+            vm.SearchForCategories(sender.Text);
+            vm.SearchForBookmarks(sender.Text);
+        }
+
+        private void SearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if(sender.Text.Length == 0)
+            {
+                var vm = this.DataContext as MainViewModel;
+                vm.GetTopCategoriesWithChild();
             }
         }
     }

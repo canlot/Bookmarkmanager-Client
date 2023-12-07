@@ -118,7 +118,7 @@ namespace Bookmark_Manager_Client.ViewModel
 
         public void GetTopCategoriesWithChild()
         {
-            categories = new ObservableCollection<Category>(); 
+            Categories.Clear();
             foreach(var category in ObjectRepository.DataProvider.GetCategories())
             {
                 categories.Add(category);
@@ -153,11 +153,25 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public void GetBookmarks(Category category)
         {
-            bookmarks.Clear();
+            Bookmarks.Clear();
             foreach(var bookmark in ObjectRepository.DataProvider.GetBookmarks(category.ID))
             {
                 bookmarks.Add(bookmark);
             }
+        }
+        public void SearchForCategories(string searchString)
+        {
+            Categories.Clear();
+            var categoryList = ObjectRepository.DataProvider.SearchCategories(searchString);
+            foreach(var category in categoryList)
+                Categories.Add(category);
+        }
+        public void SearchForBookmarks(string searchString)
+        {
+            Bookmarks.Clear();
+            var bookmarkList = ObjectRepository.DataProvider.SearchBookmarks(searchString);
+            foreach (var bookmark in bookmarkList)
+                Bookmarks.Add(bookmark);
         }
     }
 }

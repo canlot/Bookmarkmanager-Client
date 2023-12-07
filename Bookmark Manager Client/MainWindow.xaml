@@ -137,9 +137,9 @@
                 <ColumnDefinition Width="1*" MinWidth="500" MaxWidth="1000"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ui:AutoSuggestBox Grid.Column="1" Margin="15" VerticalAlignment="Center" 
+            <ui:AutoSuggestBox x:Name="SearchBox" Grid.Column="1" Margin="15" VerticalAlignment="Center" 
                                HorizontalAlignment="Stretch"  
-                               QueryIcon="Find"></ui:AutoSuggestBox>
+                               QueryIcon="Find" QuerySubmitted="SearchBox_QuerySubmitted" TextChanged="SearchBox_TextChanged"></ui:AutoSuggestBox>
         </Grid>
         <DockPanel Grid.Row="2">
             <Grid Margin="0,0,0,0">
