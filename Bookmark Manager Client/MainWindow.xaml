@@ -131,7 +131,7 @@
             </Grid>
             
         </Border>
-        <Grid Grid.Row="1" Background="{DynamicResource SystemControlForegroundListLowBrush}">
+        <Grid Grid.Row="1" Background="{DynamicResource SystemControlPageBackgroundChromeLowBrush }">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="1*" MinWidth="500" MaxWidth="1000"/>

@@ -119,6 +119,7 @@ namespace Bookmark_Manager_Client.ViewModel
         public void GetTopCategoriesWithChild()
         {
             Categories.Clear();
+            Bookmarks.Clear();
             foreach(var category in ObjectRepository.DataProvider.GetCategories())
             {
                 categories.Add(category);
@@ -130,7 +131,8 @@ namespace Bookmark_Manager_Client.ViewModel
         {
             foreach(var category in ObjectRepository.DataProvider.GetCategories(parentCategory.ID))
             {
-                parentCategory.ChildCategories.Add(category);
+                if(!parentCategory.ChildCategories.Contains(category))
+                    parentCategory.ChildCategories.Add(category);
             }
         }
         public void AddCategoriesToChild(Category parentCategory)
@@ -161,6 +163,7 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public void SearchForCategories(string searchString)
         {
+            if (string.IsNullOrEmpty(searchString)) return;
             Categories.Clear();
             var categoryList = ObjectRepository.DataProvider.SearchCategories(searchString);
             foreach(var category in categoryList)
@@ -168,6 +171,7 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public void SearchForBookmarks(string searchString)
         {
+            if (string.IsNullOrEmpty(searchString)) return;
             Bookmarks.Clear();
             var bookmarkList = ObjectRepository.DataProvider.SearchBookmarks(searchString);
             foreach (var bookmark in bookmarkList)

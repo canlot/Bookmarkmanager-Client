@@ -477,6 +477,7 @@ namespace Bookmark_Manager_Client.DataProvider
             if (string.IsNullOrEmpty(searchString)) return null;
             var listBookmarks = bookmarks.Where(x => isUserPermitted(x, CurrentUser) && 
                 ((!string.IsNullOrEmpty(x.Title) && x.Title.ToLower().Contains(searchString)) || 
+                (!string.IsNullOrEmpty(x.Url) && x.Url.ToLower().Contains(searchString)) ||
                 (!string.IsNullOrEmpty(x.Description) && x.Description.ToLower().Contains(searchString)))).ToList(); // this is the same mess
             return listBookmarks;
         }
