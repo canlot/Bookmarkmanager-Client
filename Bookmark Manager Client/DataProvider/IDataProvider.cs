@@ -10,7 +10,7 @@ namespace Bookmark_Manager_Client.DataProvider
 {
     public interface IDataProvider
     {
-        void SetUpConnection();
+        bool SetUpConnection();
         User CurrentUser { get; }
         IList<Category> GetCategories(uint id = 0);
         //IEnumerable<Category> GetAllCategories();
@@ -26,7 +26,7 @@ namespace Bookmark_Manager_Client.DataProvider
         bool PostBookmark(Bookmark bookmark);
         bool PutBookmark(Bookmark bookmark);
         bool DeleteBookmark(Bookmark bookmark);
-        bool PostPermission(ICollection<User> users, uint id);
+        bool ChangePermissions(ICollection<User> users, uint id);
         bool RemovePermission(ICollection<User> users, uint id);
     }
 }

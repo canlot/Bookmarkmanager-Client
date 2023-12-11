@@ -26,8 +26,10 @@ namespace Bookmark_Manager_Client
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
+            LoginViewModel.Password = PasswordBoxPassword.Password;
             LoginViewModel.SaveSettings();
-            this.Close();
+            if(ObjectRepository.DataProvider.SetUpConnection())
+                this.Close();
         }
 
         private void ButtonAbort_Click(object sender, RoutedEventArgs e)

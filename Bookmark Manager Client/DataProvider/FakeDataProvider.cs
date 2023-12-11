@@ -292,7 +292,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return true;
         }
 
-        public bool PostPermission(ICollection<User> users, uint categoryId)
+        public bool ChangePermissions(ICollection<User> users, uint categoryId)
         {
             var category = categories.Single(x => x.ID == categoryId);
             if (category.OwnerID != currentUser.ID) return false;
@@ -440,9 +440,9 @@ namespace Bookmark_Manager_Client.DataProvider
             return foundUsers;
         }
 
-        public void SetUpConnection()
+        public bool SetUpConnection()
         {
-            
+            return true;
         }
 
         private bool isUserPermitted(Category category, User user)

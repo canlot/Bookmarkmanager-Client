@@ -85,7 +85,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 return false;
 
             if (category.ParentID == 0)
-                if (!ObjectRepository.DataProvider.PostPermission(PermittedUsers, category.ID))
+                if (!ObjectRepository.DataProvider.ChangePermissions(PermittedUsers, category.ID))
                     return false;
 
             MainViewModel.SetDefaultView();

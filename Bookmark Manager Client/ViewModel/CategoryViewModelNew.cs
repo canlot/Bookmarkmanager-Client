@@ -76,7 +76,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 ObjectRepository.DataProvider.PostCategory(category); // no need to set the id, because category will be set in dataprovider and it is the same object
 
                 if(category.ParentID == 0)
-                    ObjectRepository.DataProvider.PostPermission(PermittedUsers, category.ID);
+                    ObjectRepository.DataProvider.ChangePermissions(PermittedUsers, category.ID);
 
                 if(category.ParentID != 0)
                     ParentCategory.ChildCategories.Add(category);

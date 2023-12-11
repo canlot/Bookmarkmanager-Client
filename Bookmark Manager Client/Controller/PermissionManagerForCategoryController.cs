@@ -29,7 +29,7 @@ namespace Bookmark_Manager_Client.Controller
         }
         protected override void SaveAddedPermissions(ICollection<User> addedPermissions)
         {
-            if (ObjectRepository.DataProvider.PostPermission(addedPermissions, categoryController.Category.ID))
+            if (ObjectRepository.DataProvider.ChangePermissions(addedPermissions, categoryController.Category.ID))
             {
                 //categoryController.Category.AddPermissionUser(addedPermissions);
             }

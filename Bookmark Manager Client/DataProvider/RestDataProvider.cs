@@ -16,65 +16,42 @@ namespace Bookmark_Manager_Client.DataProvider
     {
         private static RestDataProvider instance;
         private RestClient client;
-        private string host;
-        public string InternalUrl
-        {
-            get; private set;
-        }
-        private int port;
-        public int Port
-        {
-            get => port;
-            set
-            {
-                port = value;
-                recalculateInternalUrl();
-            }
-        }
-        public string Host
-        {
-            get => host;
-            set
-            {
-                host = value;
-                recalculateInternalUrl();
-            }
-        }
-        private string userName;
-        public string UserName
-        {
-            get => userName;
-            set => userName = value;
-        }
-        private string password;
-        public string Password
-        {
-            get => password;
-            set => password = value;
-        }
+
+        public int Port => ObjectRepository.AppConfiguration.Port;
+        public string Host => ObjectRepository.AppConfiguration.Host;
+        public string UserName => ObjectRepository.AppConfiguration.UserName;
+        public string Password => ObjectRepository.AppConfiguration.Password;
+
         private User currentUser;
         public User CurrentUser { get => currentUser; }
-        private void recalculateInternalUrl()
+
+        public string FullUrl
         {
-            string afterurl = "/apiv1";
-            string host = this.host ?? "localhost"; //If this.host == null then host = localhost
-            int port = this.port == 0 ? 8080 : this.port;
-            InternalUrl = "http://" + host + ":" + Convert.ToString(port) + afterurl;
+            get
+            {
+                string url = "";
+                if (!Host.StartsWith("http://"))
+                    url = "http://";
+                url = url + Host + ":";
+                url += Convert.ToString(Port);
+                url += "/apiv1";
+                return url;
+            }
         }
+
         public bool TestConnection()
         {
             return false;
         }
-        private RestDataProvider()
+        public RestDataProvider()
         {
             
         }
-        public void SetUpConnection()
+        public bool SetUpConnection()
         {
-            recalculateInternalUrl();
-            var options = new RestClientOptions(InternalUrl)
+            var options = new RestClientOptions(FullUrl)
             {
-                Authenticator = new HttpBasicAuthenticator(userName, password, Encoding.UTF8)
+                Authenticator = new HttpBasicAuthenticator(UserName, Password, Encoding.UTF8)
             };
             client = new RestClient(options);
 
@@ -83,29 +60,23 @@ namespace Bookmark_Manager_Client.DataProvider
 
             //client.UseNewtonsoftJson(jsonSerializerSettings);
             
-            Console.WriteLine(InternalUrl);
+            Console.WriteLine(FullUrl);
 
-            currentUser = getCurrentUser();
+            try
+            {
+                currentUser = getCurrentUser();
+                return true;
+            }
+            catch (Exception ex) 
+            {
+                return false;
+            }
         }
         private User getCurrentUser()
         {
-            //var request = new RestRequest("currentuser", RestSharp.DataFormat.Json);
-            var request = new RestRequest("currentuser", Method.Get);
+            var request = new RestRequest("/currentuser", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            //return client.Get<User>(request).Data;
             return client.Get<User>(request);
-        }
-        private static readonly object _lock = new object();
-        public static RestDataProvider GetInstance()
-        {
-            if (instance == null)
-            {
-                lock (_lock)
-                    instance = new RestDataProvider();
-                return instance;
-            }
-            else
-                return instance;
         }
         public IList<Category> GetCategories(uint id = 0)
         {
@@ -113,14 +84,11 @@ namespace Bookmark_Manager_Client.DataProvider
             RestRequest request;
             if(id == 0)
                 request = new RestRequest("categories/", Method.Get);
-            //request = new RestRequest("categories/", RestSharp.DataFormat.Json);
             else
                 request = new RestRequest("categories/" + id.ToString() + "/", Method.Get);
-            //request = new RestRequest("categories/" + id.ToString() + "/", RestSharp.DataFormat.Json);
 
             request.AddHeader("Cache-Control", "no-cache");
-            //return client.Get<ObservableCollection<Category>>(request).Data;
-            return client.Get<ObservableCollection<Category>>(request); 
+            return client.Get<List<Category>>(request); 
         }
         public IList<Category> GetAllCategories()
         {
@@ -128,28 +96,22 @@ namespace Bookmark_Manager_Client.DataProvider
         }
         public IList<Bookmark> GetBookmarks( uint id)
         {
-            //var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", RestSharp.DataFormat.Json);
             var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            //return client.Get<ObservableCollection<Bookmark>>(request).Data;
             return client.Get<ObservableCollection<Bookmark>>(request);
         
         }
         public IList<User> GetPermittedUsers(uint id)
         {
-            //var request = new RestRequest("categories/" + id.ToString() + "/permissions/", RestSharp.DataFormat.Json);
             var request = new RestRequest("categories/" + id.ToString() + "/permissions/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            return client.Get<ObservableCollection<User>>(request);
-            //return client.Get<ObservableCollection<User>>(request).Data;
+            return client.Get<List<User>>(request);
         }
         public IList<User> GetAllUsers()
         {
-            //var request = new RestRequest("/users/", RestSharp.DataFormat.Json);
             var request = new RestRequest("/users/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            //return client.Get<ObservableCollection<User>>(request).Data;
-            return client.Get<ObservableCollection<User>>(request);
+            return client.Get<List<User>>(request);
         }
         public bool PostCategory(Category category)
         {
@@ -217,13 +179,13 @@ namespace Bookmark_Manager_Client.DataProvider
             }
             
         }
-        public bool PostPermission(ICollection<User> users, uint id)
+        public bool ChangePermissions(ICollection<User> users, uint id)
         {
             var request = new RestRequest("/categories/" + id.ToString() + "/permissions/");
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(users);
 
-            var response = client.Post(request);
+            var response = client.Put(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 return true;
             else
