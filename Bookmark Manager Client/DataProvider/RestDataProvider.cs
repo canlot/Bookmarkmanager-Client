@@ -206,12 +206,46 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public bool PutBookmark(Bookmark bookmark)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/categories/" + bookmark.CategoryID + "/bookmarks/" + bookmark.ID, Method.Put);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(bookmark);
+
+            try
+            {
+                var response = client.Put(request);
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
 
         public bool DeleteBookmark(Bookmark bookmark)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/categories/" + bookmark.CategoryID + "/bookmarks/" + bookmark.ID, Method.Delete);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.RequestFormat = DataFormat.Json;
+
+            try
+            {
+                var response = client.Delete(request);
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public IList<User> SearchUser(string username)
