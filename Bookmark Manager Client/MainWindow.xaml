@@ -26,12 +26,14 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{StaticResource SystemControlBackgroundChromeMediumLowBrush}">
+        <Border Grid.Row="0" Background="{StaticResource SystemControlBackgroundChromeMediumLowBrush}" SnapsToDevicePixels="True">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
+                <Border Grid.Column="0" Margin="10" HorizontalAlignment="Left" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5">
+                <StackPanel Margin="5" Orientation="Horizontal" >
+                    
                     <Button Width="100"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" 
                             BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Command="{Binding ChangeUserControlCommand}" 
                             CommandParameter="CategoryUserControlNew">
@@ -126,9 +128,10 @@
                                        SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonSettingsString}"/>
                         </Grid>
                     </Button>
+                    
                 </StackPanel>
-                
-            </Grid>
+        </Border>
+    </Grid>
             
         </Border>
         <Grid Grid.Row="1" Background="{DynamicResource SystemControlPageBackgroundChromeLowBrush }">
@@ -162,6 +165,7 @@
                             <HierarchicalDataTemplate ItemsSource="{Binding ChildCategories}">
                                 <Border  BorderBrush="{StaticResource BorderColor}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3" Padding="3" >
                                     <StackPanel Orientation="Horizontal">
+                                        <Image Source="{StaticResource FolderImage}" Height="24" Margin="5"/>
                                         <StackPanel Orientation="Vertical" >
                                             <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Segoe UI" 
                                                        FontSize="14" FontWeight="Bold" ></TextBlock>
@@ -192,42 +196,12 @@
                                                                 <Setter Property="FontWeight" Value="Bold"/>
                                                                 <Setter Property="HorizontalAlignment" Value="Center"/>
                                                                 <Style.Triggers>
-                                                                    <MultiDataTrigger>
-                                                                        <MultiDataTrigger.Conditions>
-                                                                            <Condition Binding="{Binding Path=Shared}" Value="True"/>
-                                                                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
-                                                                        </MultiDataTrigger.Conditions>
-                                                                        <MultiDataTrigger.Setters>
-                                                                            <Setter Property="Content" Value="Shared"/>
-                                                                        </MultiDataTrigger.Setters>
-                                                                    </MultiDataTrigger>
-                                                                    <MultiDataTrigger>
-                                                                        <MultiDataTrigger.Conditions>
-                                                                            <Condition Binding="{Binding Path=Shared}" Value="True"/>
-                                                                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="False"/>
-                                                                        </MultiDataTrigger.Conditions>
-                                                                        <MultiDataTrigger.Setters>
-                                                                            <Setter Property="Content" Value="S"/>
-                                                                        </MultiDataTrigger.Setters>
-                                                                    </MultiDataTrigger>
-                                                                    <MultiDataTrigger>
-                                                                        <MultiDataTrigger.Conditions>
-                                                                            <Condition Binding="{Binding Path=Shared}" Value="False"/>
-                                                                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
-                                                                        </MultiDataTrigger.Conditions>
-                                                                        <MultiDataTrigger.Setters>
-                                                                            <Setter Property="Content" Value="Private"/>
-                                                                        </MultiDataTrigger.Setters>
-                                                                    </MultiDataTrigger>
-                                                                    <MultiDataTrigger>
-                                                                        <MultiDataTrigger.Conditions>
-                                                                            <Condition Binding="{Binding Path=Shared}" Value="False"/>
-                                                                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="False"/>
-                                                                        </MultiDataTrigger.Conditions>
-                                                                        <MultiDataTrigger.Setters>
-                                                                            <Setter Property="Content" Value="P"/>
-                                                                        </MultiDataTrigger.Setters>
-                                                                    </MultiDataTrigger>
+                                                                    <DataTrigger Binding="{Binding Path=Shared}" Value="True">
+                                                                        <Setter Property="Content" Value="{loc:Localization SharedString}"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Path=Shared}" Value="False">
+                                                                        <Setter Property="Content" Value="{loc:Localization PrivateString}"/>
+                                                                    </DataTrigger>
                                                                 </Style.Triggers>
                                                             </Style>
                                                         </Label.Style>

@@ -195,6 +195,12 @@
   <data name="PortString" xml:space="preserve">
     <value>Port</value>
   </data>
+  <data name="PrivateString" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="SharedString" xml:space="preserve">
+    <value>Shared</value>
+  </data>
   <data name="TitleString" xml:space="preserve">
     <value>Title</value>
   </data>

@@ -295,6 +295,24 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Private ähnelt.
+        /// </summary>
+        public static string PrivateString {
+            get {
+                return ResourceManager.GetString("PrivateString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shared ähnelt.
+        /// </summary>
+        public static string SharedString {
+            get {
+                return ResourceManager.GetString("SharedString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Title ähnelt.
         /// </summary>
         public static string TitleString {

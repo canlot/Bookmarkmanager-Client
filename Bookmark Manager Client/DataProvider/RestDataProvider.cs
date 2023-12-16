@@ -98,7 +98,7 @@ namespace Bookmark_Manager_Client.DataProvider
         {
             var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            return client.Get<ObservableCollection<Bookmark>>(request);
+            return client.Get<List<Bookmark>>(request);
         
         }
         public IList<User> GetPermittedUsers(uint id)
@@ -255,12 +255,34 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public IList<Category> SearchCategories(string searchString)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/categories/search/" +  searchString, Method.Get);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.RequestFormat = DataFormat.Json;
+            try
+            {
+                var response = client.Get<List<Category>>(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public IList<Bookmark> SearchBookmarks(string searchString)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/bookmarks/search/" + searchString, Method.Get);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.RequestFormat = DataFormat.Json;
+            try
+            {
+                var response = client.Get<List<Bookmark>>(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

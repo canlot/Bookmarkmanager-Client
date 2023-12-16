@@ -134,4 +134,11 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
+    <DrawingImage x:Key="FolderImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V32 H32 V0 H0 Z">
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M32,32z M0,0z M5,3L5,27.8125 5.78125,27.96875 17.78125,30.46875 19,30.71875 19,28 25,28 25,15.4375 26.71875,13.71875 27,13.40625 27,3z M14.125,5L25,5 25,12.5625 23.28125,14.28125 23,14.59375 23,26 19,26 19,17.09375 18.71875,16.78125 17,15.0625 17,5.71875z M7,5.28125L15,7.28125 15,15.90625 15.28125,16.21875 17,17.9375 17,28.28125 7,26.1875z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 </ResourceDictionary>
