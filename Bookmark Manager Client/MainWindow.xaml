@@ -31,10 +31,10 @@
         <Border Grid.Row="0" Background="{StaticResource SystemControlBackgroundListLowBrush }" SnapsToDevicePixels="True">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="3*" MaxWidth="500"/>
+                    <ColumnDefinition Width="5*" MinWidth="750"/>
+                    <ColumnDefinition Width="3*" MaxWidth="1000"/>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" Margin="10" HorizontalAlignment="Left" CornerRadius="10" Background="{StaticResource SystemControlBackgroundChromeMediumLowBrush}">
+                <Border Grid.Column="0" Margin="10" HorizontalAlignment="Left" CornerRadius="5" Background="{StaticResource SystemControlBackgroundChromeMediumLowBrush}">
                     <StackPanel Margin="5" Orientation="Horizontal" >
 
                         <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" 
