@@ -37,7 +37,7 @@ namespace Bookmark_Manager_Client.Configurators
             get;
             set;
         }
-        public string UserName
+        public string Email
         {
             get;
             set;
@@ -63,7 +63,7 @@ namespace Bookmark_Manager_Client.Configurators
                 Port = int.Parse(configData[global]["Port"]);
                 SSL = bool.Parse(configData[global]["SSL"]);
                 IgnoreCertificate = bool.Parse(configData[global]["IgnoreCertificate"]);
-                UserName = configData[global]["UserName"];
+                Email = configData[global]["UserName"];
                 return true;
             }
             catch
@@ -82,7 +82,7 @@ namespace Bookmark_Manager_Client.Configurators
                 configData[global]["Port"] = Convert.ToString(Port);
                 configData[global]["SSL"] = Convert.ToString(SSL);
                 configData[global]["IgnoreCertificate"] = Convert.ToString(IgnoreCertificate);
-                configData[global]["UserName"] = UserName;
+                configData[global]["UserName"] = Email;
                 parser.WriteFile(AppConfigurationFilePath, configData);
                 return true;
             }

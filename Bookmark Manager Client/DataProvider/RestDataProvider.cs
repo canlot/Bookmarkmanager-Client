@@ -19,7 +19,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public int Port => ObjectRepository.AppConfiguration.Port;
         public string Host => ObjectRepository.AppConfiguration.Host;
-        public string UserName => ObjectRepository.AppConfiguration.UserName;
+        public string UserName => ObjectRepository.AppConfiguration.Email;
         public string Password => ObjectRepository.AppConfiguration.Password;
 
         private User currentUser;

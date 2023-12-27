@@ -11,8 +11,8 @@ namespace Bookmark_Manager_Client.Controller
     {
         public string Username
         {
-            get => ObjectRepository.AppConfiguration.UserName;
-            set => ObjectRepository.AppConfiguration.UserName = value;
+            get => ObjectRepository.AppConfiguration.Email;
+            set => ObjectRepository.AppConfiguration.Email = value;
         }
         public string Host
         {

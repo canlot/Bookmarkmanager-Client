@@ -208,7 +208,7 @@
     <value>Url</value>
   </data>
   <data name="UsernameString" xml:space="preserve">
-    <value>Benutzername</value>
+    <value>E-Mail</value>
   </data>
   <data name="UserSearchBoxQueryString" xml:space="preserve">
     <value>Benutzername oder E-mail</value>

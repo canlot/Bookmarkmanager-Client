@@ -331,7 +331,7 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Username ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Email ähnelt.
         /// </summary>
         public static string UsernameString {
             get {

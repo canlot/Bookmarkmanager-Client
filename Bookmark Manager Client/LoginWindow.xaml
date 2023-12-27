@@ -91,7 +91,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="TextBoxUsername" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="3" Text="{Binding Username}"/>
+        <TextBox x:Name="TextBoxUsername" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="3" Text="{Binding Email}"/>
         <PasswordBox x:Name="PasswordBoxPassword" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="4" />
         
         <Label Content="{loc:Localization HostString}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
