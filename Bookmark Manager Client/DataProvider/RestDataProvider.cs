@@ -123,6 +123,7 @@ namespace Bookmark_Manager_Client.DataProvider
                 var cat = client.Post<Category>(request);
                 category.ID = cat.ID;
                 category.OwnerID = cat.OwnerID;
+                category.Shared = cat.Shared;
                 return true;
             }
             catch(Exception ex)

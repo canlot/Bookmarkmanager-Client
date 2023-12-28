@@ -9,6 +9,7 @@ namespace Bookmark_Manager_Client.Model
     public class User
     {
         public uint ID { get; set; }
+        public string Email { get; set; }
         public string Name { get; set; }
         public bool Administrator { get; set; }
 

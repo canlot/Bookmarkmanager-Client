@@ -42,7 +42,7 @@ namespace Bookmark_Manager_Client
 
         static ObjectRepository()
         {
-            DataProvider = new FakeDataProvider();
+            DataProvider = new RestDataProvider();
             AppConfiguration = new AppConfiguration();
         }
         
