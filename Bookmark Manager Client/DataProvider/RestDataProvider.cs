@@ -182,7 +182,7 @@ namespace Bookmark_Manager_Client.DataProvider
         }
         public bool ChangePermissions(ICollection<User> users, uint id)
         {
-            var request = new RestRequest("/categories/" + id.ToString() + "/permissions/");
+            var request = new RestRequest("/categories/" + id + "/permissions/");
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(users);
 
@@ -194,7 +194,7 @@ namespace Bookmark_Manager_Client.DataProvider
         }
         public bool RemovePermission(ICollection<User> users, uint id)
         {
-            var request = new RestRequest("/categories/" + id.ToString() + "/permissions/");
+            var request = new RestRequest("/categories/" + id + "/permissions/");
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(users);
 
@@ -251,7 +251,19 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public IList<User> SearchUser(string username)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/users/search/" + username, Method.Get);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.RequestFormat = DataFormat.Json;
+            try
+            {
+                var response = client.Get<List<User>>(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
         }
 
         public IList<Category> SearchCategories(string searchString)
