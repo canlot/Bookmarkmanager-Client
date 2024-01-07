@@ -26,10 +26,10 @@ namespace Bookmark_Manager_Client.UserControls
             InitializeComponent();
         }
 
-        private void UpdateBookmarkButton_Click(object sender, RoutedEventArgs e)
+        private async void UpdateBookmarkButton_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as BookmarkViewModelEdit;
-            vm.UpdateBookmark();
+            await vm.UpdateBookmarkAsync();
             vm.Exit();
         }
 

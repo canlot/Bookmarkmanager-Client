@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Data;
 using Bookmark_Manager_Client.Commands;
 using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.Model;
@@ -17,8 +18,7 @@ namespace Bookmark_Manager_Client.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public MainViewModelController controller = new MainViewModelController();
-
+        object categorylock = new object ();
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
@@ -116,31 +116,35 @@ namespace Bookmark_Manager_Client.ViewModel
             return null;
         }
 
-        public void GetTopCategoriesWithChild()
+        public async Task GetTopCategoriesWithChildAsync()
         {
             Categories.Clear();
             Bookmarks.Clear();
-            foreach(var category in ObjectRepository.DataProvider.GetCategories())
+            var list = await ObjectRepository.DataProvider.GetCategoriesAsync();
+            foreach (var category in list)
             {
-                categories.Add(category);
-                addChildCategoriesToCategory(category);
+                lock(categorylock)
+                    categories.Add(category);
+                await addChildCategoriesToCategoryAsync(category);
             }
         }
         
-        private void addChildCategoriesToCategory(Category parentCategory)
+        private async Task addChildCategoriesToCategoryAsync(Category parentCategory)
         {
-            foreach(var category in ObjectRepository.DataProvider.GetCategories(parentCategory.ID))
+            foreach(var category in await ObjectRepository.DataProvider.GetCategoriesAsync(parentCategory.ID))
             {
                 if(!parentCategory.ChildCategories.Contains(category))
-                    parentCategory.ChildCategories.Add(category);
+                    lock(categorylock)
+                        parentCategory.ChildCategories.Add(category);
             }
         }
-        public void AddCategoriesToChild(Category parentCategory)
+        public async Task AddCategoriesToChildTask(Category parentCategory)
         {
             foreach(var category in parentCategory.ChildCategories)
             {
-                category.ChildCategories = new ObservableCollection<Category>();
-                addChildCategoriesToCategory(category);
+                lock(categorylock)
+                    category.ChildCategories = new ObservableCollection<Category>();
+                await addChildCategoriesToCategoryAsync(category);
             }
         }
         public void SetDefaultView()
@@ -149,31 +153,32 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public MainViewModel() 
         {
+            BindingOperations.EnableCollectionSynchronization(Categories, categorylock);
             changeUserControlCommand = new ChangeUserControlCommand(this);
-            GetTopCategoriesWithChild();
+            Task.Run(async () => await GetTopCategoriesWithChildAsync());
             
         }
-        public void GetBookmarks(Category category)
+        public async Task GetBookmarksAsync(Category category)
         {
             Bookmarks.Clear();
-            foreach(var bookmark in ObjectRepository.DataProvider.GetBookmarks(category.ID))
+            foreach(var bookmark in await ObjectRepository.DataProvider.GetBookmarksAsync(category.ID))
             {
                 bookmarks.Add(bookmark);
             }
         }
-        public void SearchForCategories(string searchString)
+        public async Task SearchForCategoriesAsync(string searchString)
         {
             if (string.IsNullOrEmpty(searchString)) return;
             Categories.Clear();
-            var categoryList = ObjectRepository.DataProvider.SearchCategories(searchString);
+            var categoryList = await ObjectRepository.DataProvider.SearchCategoriesAsync(searchString);
             foreach(var category in categoryList)
                 Categories.Add(category);
         }
-        public void SearchForBookmarks(string searchString)
+        public async Task SearchForBookmarksAsync(string searchString)
         {
             if (string.IsNullOrEmpty(searchString)) return;
             Bookmarks.Clear();
-            var bookmarkList = ObjectRepository.DataProvider.SearchBookmarks(searchString);
+            var bookmarkList = await ObjectRepository.DataProvider.SearchBookmarksAsync(searchString);
             foreach (var bookmark in bookmarkList)
                 Bookmarks.Add(bookmark);
         }

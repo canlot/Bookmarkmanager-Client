@@ -54,7 +54,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 PermittedUsers.Add(user);
             }
         }
-        public bool SaveCategory()
+        public async Task<bool> SaveCategoryAsync()
         {
             if(string.IsNullOrEmpty(CategoryName)) return false;
 
@@ -73,10 +73,10 @@ namespace Bookmark_Manager_Client.ViewModel
 
             try
             {
-                ObjectRepository.DataProvider.PostCategory(category); // no need to set the id, because category will be set in dataprovider and it is the same object
+                await ObjectRepository.DataProvider.PostCategoryAsync(category); // no need to set the id, because category will be set in dataprovider and it is the same object
 
                 if(category.ParentID == 0)
-                    ObjectRepository.DataProvider.ChangePermissions(PermittedUsers, category.ID);
+                    await ObjectRepository.DataProvider.ChangePermissionsAsync(PermittedUsers, category.ID);
 
                 if(category.ParentID != 0)
                     ParentCategory.ChildCategories.Add(category);

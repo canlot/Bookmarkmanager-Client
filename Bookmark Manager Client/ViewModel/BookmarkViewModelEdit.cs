@@ -81,7 +81,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 finally { cancellationTokenSource.Cancel(); IsWebLoading = false; }
             });
         }
-        public bool UpdateBookmark()
+        public async Task<bool> UpdateBookmarkAsync()
         {
             if (Url == "") return false;
             if (Category == null) return false;
@@ -91,7 +91,7 @@ namespace Bookmark_Manager_Client.ViewModel
             MainViewModel.SelectedBookmark.Description = Description;
 
 
-            if (!ObjectRepository.DataProvider.PutBookmark(MainViewModel.SelectedBookmark)) return false;
+            if (!await ObjectRepository.DataProvider.PutBookmarkAsync(MainViewModel.SelectedBookmark)) return false;
             var bookmark = MainViewModel.Bookmarks.Single(x => x.ID == MainViewModel.SelectedBookmark.ID);
 
             MainViewModel.SetDefaultView();

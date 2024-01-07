@@ -54,7 +54,7 @@ namespace Bookmark_Manager_Client.UserControls
             }
         }
 
-        private void UserSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private async void UserSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (sender.Text.Length < 3) return;
 
@@ -66,7 +66,7 @@ namespace Bookmark_Manager_Client.UserControls
             else
                 lastSearched = DateTime.Now;
 
-            var users = ObjectRepository.DataProvider.SearchUser(sender.Text);
+            var users = await ObjectRepository.DataProvider.SearchUsersAsync(sender.Text);
 
             if (users is null) return;
 
@@ -76,10 +76,10 @@ namespace Bookmark_Manager_Client.UserControls
                 sender.ItemsSource = new string[] { "No results found" };
         }
 
-        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        private async void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = (CategoryViewModelNew)this.DataContext;
-            viewModel.SaveCategory();
+            await viewModel.SaveCategoryAsync();
         }
 
         private void ButtonAbort_Click(object sender, RoutedEventArgs e)

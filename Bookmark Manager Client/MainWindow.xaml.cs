@@ -39,13 +39,13 @@ namespace Bookmark_Manager_Client
             InitializeComponent();
         }
 
-        private void treeViewCategory_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private async void treeViewCategory_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             Category category = (Category)treeViewCategory.SelectedItem;
             MainViewModel vm = (MainViewModel)this.DataContext;
             if(category != null)
             {
-                vm.GetBookmarks(category);
+                await vm.GetBookmarksAsync(category);
                 vm.SelectedCategory = category;
             }
         }
@@ -63,24 +63,7 @@ namespace Bookmark_Manager_Client
 
             }
         }
-        private void ButtonAddBookmark_Click(object sender, RoutedEventArgs e)
-        {
-            if (treeViewCategory.SelectedItem == null || (((Category)treeViewCategory.SelectedItem).OwnerID != ObjectRepository.DataProvider.CurrentUser.ID))
-                return;
-            BookmarkWindow bookmarkWindow = new BookmarkWindow(BookmarkWindow.WindowMode.CreateBookmark, (Category)treeViewCategory.SelectedItem);
-            bookmarkWindow.Owner = this;
-            bookmarkWindow.Show();
-        }
-        private void ButtonEditBookmark_Click(object sender, RoutedEventArgs e)
-        {
-            if (treeViewCategory.SelectedItem == null || listBoxBookmarks.SelectedItem == null || (((Category)treeViewCategory.SelectedItem).OwnerID != ObjectRepository.DataProvider.CurrentUser.ID))
-                return;
-            BookmarkWindow bookmarkWindow = new BookmarkWindow(BookmarkWindow.WindowMode.ModifyBookmark, (Category)treeViewCategory.SelectedItem,
-                (Bookmark)listBoxBookmarks.SelectedItem);
-
-            bookmarkWindow.Owner = this;
-            bookmarkWindow.Show();
-        }
+        
 
 
         private void listBoxBookmarks_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -109,7 +92,7 @@ namespace Bookmark_Manager_Client
             var result = await popup.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                if(ObjectRepository.DataProvider.DeleteCategory(category.ID))
+                if(await ObjectRepository.DataProvider.DeleteCategoryAsync(category.ID))
                 {
                     vm.SelectedCategory = null;
                     vm.Categories.DeleteCategoryWithChildCategories(category);
@@ -126,7 +109,7 @@ namespace Bookmark_Manager_Client
             var result = await popup.ShowAsync();
             if(result == ContentDialogResult.Primary) 
             {
-                if(ObjectRepository.DataProvider.DeleteBookmark(bookmark))
+                if(await ObjectRepository.DataProvider.DeleteBookmarkAsync(bookmark))
                 {
                     vm.SelectedBookmark = null;
                     vm.Bookmarks.Remove(bookmark);
@@ -134,19 +117,19 @@ namespace Bookmark_Manager_Client
             }
         }
 
-        private void SearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        private async void SearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             var vm = this.DataContext as MainViewModel;
-            vm.SearchForCategories(sender.Text);
-            vm.SearchForBookmarks(sender.Text);
+            await vm.SearchForCategoriesAsync(sender.Text);
+            await vm.SearchForBookmarksAsync(sender.Text);
         }
 
-        private void SearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private async void SearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if(sender.Text.Length == 0)
             {
                 var vm = this.DataContext as MainViewModel;
-                vm.GetTopCategoriesWithChild();
+                await vm.GetTopCategoriesWithChildAsync();
             }
         }
     }

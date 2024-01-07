@@ -46,14 +46,7 @@ namespace Bookmark_Manager_Client.Model
                 OnPropertyChanged();
                 if(value == true)
                 {
-                    foreach (var category in ChildCategories)
-                    {
-                        category.ChildCategories = new ObservableCollection<Category>();
-                        foreach(var cat in ObjectRepository.DataProvider.GetCategories(category.ID))
-                        {
-                            category.ChildCategories.Add(cat);
-                        }
-                    }
+                    getChildCategoriesForThisCategory();
                 }
                 
             }
@@ -67,24 +60,38 @@ namespace Bookmark_Manager_Client.Model
             childCategories = new ObservableCollection<Category>();
             //childCategories.CollectionChanged += OnNewChildCategoryItems;
         }
-
-        public void GetChildCategories()
+        private void getChildCategoriesForThisCategory()
+        {
+            Task.Run(async () =>
+            {
+                foreach (var category in ChildCategories)
+                {
+                    category.ChildCategories = new ObservableCollection<Category>();
+                    foreach (var cat in await ObjectRepository.DataProvider.GetCategoriesAsync(category.ID))
+                    {
+                        category.ChildCategories.Add(cat);
+                    }
+                }
+            });
+            
+        }
+        public async Task GetChildCategoriesAsync()
         {
             if (childCategories.Count > 0)
                 return;
-            var cat = ObjectRepository.DataProvider.GetCategories();
+            var cat = await ObjectRepository.DataProvider.GetCategoriesAsync();
             foreach (var item in cat)
                 childCategories.Add(item);
         }
 
-        private void OnNewChildCategoryItems(object sender, NotifyCollectionChangedEventArgs e)
+        private async Task OnNewChildCategoryItemsAsync(object sender, NotifyCollectionChangedEventArgs e)
         {
             Console.WriteLine("Hallo");
             if (e.NewItems != null)
             {
                 foreach (Category item in e.NewItems)
                 {
-                    item.GetChildCategories();
+                    await item.GetChildCategoriesAsync();
                 }
             }
         }

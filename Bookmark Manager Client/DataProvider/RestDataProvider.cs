@@ -41,7 +41,29 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public async Task<bool> LoginAsync()
         {
-            return false;
+            var options = new RestClientOptions(FullUrl)
+            {
+                Authenticator = new HttpBasicAuthenticator(UserName, Password, Encoding.UTF8)
+            };
+            var loginClient = new RestClient(options);
+            var request = new RestRequest("/login", Method.Post);
+            request.AddHeader("Cache-Control", "no-cache");
+            var answer = await loginClient.PostAsync(request);
+
+            options = new RestClientOptions(FullUrl)
+            {
+                Authenticator = new JwtAuthenticator(answer.Content)
+            };
+            client = new RestClient(options);
+            try
+            {
+                currentUser = await getCurrentUserAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
         public RestDataProvider()
         {
@@ -86,7 +108,9 @@ namespace Bookmark_Manager_Client.DataProvider
                 request = new RestRequest("categories/" + id.ToString() + "/", Method.Get);
 
             request.AddHeader("Cache-Control", "no-cache");
-            return await client.GetAsync<List<Category>>(request); 
+            var list = await client.GetAsync<List<Category>>(request);
+            Console.WriteLine("Hallo");
+            return list;
         }
 
         public async Task<IList<Bookmark>> GetBookmarksAsync( uint id)
@@ -115,7 +139,7 @@ namespace Bookmark_Manager_Client.DataProvider
             request.AddJsonBody(category);
             try
             {
-                var cat = await client.GetAsync<Category>(request);
+                var cat = await client.PostAsync<Category>(request);
                 category.ID = cat.ID;
                 category.OwnerID = cat.OwnerID;
                 category.Shared = cat.Shared;
@@ -135,7 +159,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
             try
             {
-                var cat = await client.GetAsync<Category>(request);
+                var cat = await client.PutAsync<Category>(request);
                 category.ID = cat.ID;
                 category.OwnerID = cat.OwnerID;
                 return true;

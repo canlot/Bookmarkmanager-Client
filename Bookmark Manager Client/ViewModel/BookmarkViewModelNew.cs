@@ -91,7 +91,7 @@ namespace Bookmark_Manager_Client.ViewModel
             });
         }
 
-        public bool SaveBookmark()
+        public async Task<bool> SaveBookmarkAsync()
         {
             if(Url == "") return false;
             if(Category == null) return false;
@@ -104,7 +104,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 Description = Description
             };
 
-            if(!ObjectRepository.DataProvider.PostBookmark(bookmark)) return false;
+            if(!await ObjectRepository.DataProvider.PostBookmarkAsync(bookmark)) return false;
 
             MainViewModel.Bookmarks.Add(bookmark);
 

@@ -24,11 +24,11 @@ namespace Bookmark_Manager_Client
             InitializeComponent();
         }
 
-        private void ButtonLogin_Click(object sender, RoutedEventArgs e)
+        private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
             LoginViewModel.Password = PasswordBoxPassword.Password;
             LoginViewModel.SaveSettings();
-            if(ObjectRepository.DataProvider.SetUpConnection())
+            if(await ObjectRepository.DataProvider.LoginAsync())
                 this.Close();
         }
 

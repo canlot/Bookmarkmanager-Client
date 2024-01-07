@@ -67,12 +67,16 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         private void addPermittedUserToList(uint categoryId)
         {
-            var users = ObjectRepository.DataProvider.GetPermittedUsers(categoryId);
-            foreach (var user in users)
-                permittedUsers.Add(user);
+            Task.Run(async () =>
+            {
+                var users = await ObjectRepository.DataProvider.GetPermittedUsersAsync(categoryId);
+                foreach (var user in users)
+                    permittedUsers.Add(user);
+            });
+            
         }
 
-        public bool UpdateCategory()
+        public async Task<bool> UpdateCategoryAsync()
         {
             if (CategoryName == "")
                 return false;
@@ -81,11 +85,11 @@ namespace Bookmark_Manager_Client.ViewModel
             category.Name = CategoryName;
             category.Description = CategoryDescription;
 
-            if (!ObjectRepository.DataProvider.PutCategory(category))
+            if (!await ObjectRepository.DataProvider.PutCategoryAsync(category))
                 return false;
 
             if (category.ParentID == 0)
-                if (!ObjectRepository.DataProvider.ChangePermissions(PermittedUsers, category.ID))
+                if (!await ObjectRepository.DataProvider.ChangePermissionsAsync(PermittedUsers, category.ID))
                     return false;
 
             MainViewModel.SetDefaultView();

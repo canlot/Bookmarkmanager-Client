@@ -80,15 +80,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BookmarkListControl.xaml.cs">
-      <DependentUpon>BookmarkListControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="BookmarkWindow.xaml.cs">
-      <DependentUpon>BookmarkWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CategoryWindow.xaml.cs">
-      <DependentUpon>CategoryWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Commands\ChangeUserControlCommand.cs" />
     <Compile Include="Commands\OpenInBrowserCommand.cs" />
     <Compile Include="Converters\BoolInverterConverter.cs" />
@@ -96,13 +87,8 @@
     <Compile Include="DataProvider\FakeDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />
     <Compile Include="Configurators\AppConfiguration.cs" />
-    <Compile Include="Controller\BookmarkController.cs" />
-    <Compile Include="Controller\CategoryController.cs" />
     <Compile Include="Controller\IPermitableObjectController.cs" />
     <Compile Include="Controller\LoginController.cs" />
-    <Compile Include="Controller\MainViewModelController.cs" />
-    <Compile Include="Controller\PermissionManagerForCategoryController.cs" />
-    <Compile Include="Controller\PermissionManagerForController.cs" />
     <Compile Include="DataProvider\RestDataProvider.cs" />
     <Compile Include="EventDispatcher.cs" />
     <Compile Include="IObjectReceiver.cs" />
@@ -162,18 +148,6 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\SettingsViewModel.cs" />
-    <Page Include="BookmarkListControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="BookmarkWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CategoryWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

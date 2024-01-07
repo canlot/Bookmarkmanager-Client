@@ -30,10 +30,10 @@ namespace Bookmark_Manager_Client.UserControls
 
         }
 
-        private void SaveCategory_Click(object sender, RoutedEventArgs e)
+        private async void SaveCategory_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as CategoryViewModelEdit;
-            vm.UpdateCategory();
+            await vm.UpdateCategoryAsync();
         }
 
         private void UserSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
@@ -58,7 +58,7 @@ namespace Bookmark_Manager_Client.UserControls
             }
         }
 
-        private void UserSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private async void UserSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (sender.Text.Length < 3) return;
 
@@ -70,7 +70,7 @@ namespace Bookmark_Manager_Client.UserControls
             else
                 lastSearched = DateTime.Now;
 
-            var users = ObjectRepository.DataProvider.SearchUser(sender.Text);
+            var users = await ObjectRepository.DataProvider.SearchUsersAsync(sender.Text);
 
             if (users is null) return;
 

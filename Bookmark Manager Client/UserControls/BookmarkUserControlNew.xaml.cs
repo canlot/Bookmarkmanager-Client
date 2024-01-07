@@ -32,10 +32,10 @@ namespace Bookmark_Manager_Client.UserControls
             vm.Exit();
         }
 
-        private void SaveCategory_Click(object sender, RoutedEventArgs e)
+        private async void SaveCategory_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as BookmarkViewModelNew;
-            vm.SaveBookmark();
+            await vm.SaveBookmarkAsync();
         }
     }
 }
