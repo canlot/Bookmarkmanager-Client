@@ -179,7 +179,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public User CurrentUser => currentUser;
 
-        public bool DeleteBookmark(Bookmark bookmark)
+        public async Task<bool> DeleteBookmarkAsync(Bookmark bookmark)
         {
             if(bookmark == null) return false;
             if(CurrentUser == null) return false;
@@ -190,7 +190,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return bookmarks.Remove(bookmark);
         }
 
-        public bool DeleteCategory(uint categoryID)
+        public async Task<bool> DeleteCategoryAsync(uint categoryID)
         {
             var category = categories.Single(x => x.ID == categoryID);
             if(category.OwnerID != CurrentUser.ID) return false;
@@ -217,7 +217,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return true;
         }
 
-        public IList<Category> GetCategories(uint parentCategoryId = 0)
+        public async Task<IList<Category>> GetCategoriesAsync(uint parentCategoryId = 0)
         {
             var list = new List<Category>();
             foreach (var category in categories) 
@@ -228,12 +228,12 @@ namespace Bookmark_Manager_Client.DataProvider
             return list;
         }
 
-        public IList<User> GetAllUsers()
+        public async Task<IList<User>> GetAllUsersAsync()
         {
             throw new NotImplementedException();
         }
 
-        public IList<Bookmark> GetBookmarks(uint id)
+        public async Task<IList<Bookmark>> GetBookmarksAsync(uint id)
         {
             var list = new List<Bookmark>();
             foreach(var bookmark in bookmarks)
@@ -244,7 +244,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return list;
         }
 
-        public IList<User> GetPermittedUsers(uint categoryId)
+        public async Task<IList<User>> GetPermittedUsersAsync(uint categoryId)
         {
             foreach(var categoryIdPair in categoryUserAssignment)
             {
@@ -254,7 +254,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return null;
         }
 
-        public bool PostBookmark(Bookmark bookmark)
+        public async Task<bool> PostBookmarkAsync(Bookmark bookmark)
         {
             if (bookmark == null) return false;
             if(bookmark.CategoryID == 0) return false;
@@ -266,7 +266,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return true;
         }
 
-        public bool PostCategory(Category category) // should maybe return category id because it will set here, but because it is the same object it does not matter
+        public async Task<bool> PostCategoryAsync(Category category) // should maybe return category id because it will set here, but because it is the same object it does not matter
         {
             if(category == null) throw new Exception("No category");
             if(category.OwnerID == 0) category.OwnerID = currentUser.ID;
@@ -292,7 +292,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return true;
         }
 
-        public bool ChangePermissions(ICollection<User> users, uint categoryId)
+        public async Task<bool> ChangePermissionsAsync(ICollection<User> users, uint categoryId)
         {
             var category = categories.Single(x => x.ID == categoryId);
             if (category.OwnerID != currentUser.ID) return false;
@@ -394,7 +394,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return users.Single(x => x.ID == category.OwnerID);
         }
 
-        public bool PutBookmark(Bookmark bookmark)
+        public async Task<bool> PutBookmarkAsync(Bookmark bookmark)
         {
             if(bookmark.CategoryID == default) return false;
             if(bookmark.Url == "") return false;
@@ -409,7 +409,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         }
 
-        public bool PutCategory(Category category)
+        public async Task<bool> PutCategoryAsync(Category category)
         {
             Category cat = categories.Single(x => x.ID == category.ID);
             if(category.OwnerID != currentUser.ID) return false;
@@ -422,12 +422,7 @@ namespace Bookmark_Manager_Client.DataProvider
         }
 
 
-        public bool RemovePermission(ICollection<User> users, uint id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<User> SearchUser(string username)
+        public async Task<IList<User>> SearchUsersAsync(string username)
         {
             if(string.IsNullOrEmpty(username)) return null;
             if(username.Length < 3) return null;
@@ -440,7 +435,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return foundUsers;
         }
 
-        public bool SetUpConnection()
+        public async Task<bool> LoginAsync()
         {
             return true;
         }
@@ -462,7 +457,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
             return isUserPermitted(category, user);
         }
-        public IList<Category> SearchCategories(string searchString)
+        public async Task<IList<Category>> SearchCategoriesAsync(string searchString)
         {
             if(string.IsNullOrEmpty(searchString)) return null;
             searchString = searchString.ToLower();
@@ -472,7 +467,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return listCategories;
         }
 
-        public IList<Bookmark> SearchBookmarks(string searchString)
+        public async Task<IList<Bookmark>> SearchBookmarksAsync(string searchString)
         {
             if (string.IsNullOrEmpty(searchString)) return null;
             var listBookmarks = bookmarks.Where(x => isUserPermitted(x, CurrentUser) && 

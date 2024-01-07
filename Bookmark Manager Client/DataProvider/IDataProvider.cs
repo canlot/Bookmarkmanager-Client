@@ -10,23 +10,22 @@ namespace Bookmark_Manager_Client.DataProvider
 {
     public interface IDataProvider
     {
-        bool SetUpConnection();
+        Task<bool> LoginAsync();
         User CurrentUser { get; }
-        IList<Category> GetCategories(uint id = 0);
-        //IEnumerable<Category> GetAllCategories();
-        IList<Bookmark> GetBookmarks(uint id);
-        IList<User> GetPermittedUsers(uint id);
-        IList<User> GetAllUsers();
-        IList<User> SearchUser(string username);
-        IList<Category> SearchCategories(string searchString);
-        IList<Bookmark> SearchBookmarks(string searchString);
-        bool PostCategory(Category category);
-        bool PutCategory(Category category);
-        bool DeleteCategory(uint categoryId);
-        bool PostBookmark(Bookmark bookmark);
-        bool PutBookmark(Bookmark bookmark);
-        bool DeleteBookmark(Bookmark bookmark);
-        bool ChangePermissions(ICollection<User> users, uint id);
-        bool RemovePermission(ICollection<User> users, uint id);
+        Task<IList<Category>> GetCategoriesAsync(uint id = 0);
+
+        Task<IList<Bookmark>> GetBookmarksAsync(uint id);
+        Task<IList<User>> GetPermittedUsersAsync(uint id);
+        Task<IList<User>> GetAllUsersAsync();
+        Task<IList<User>> SearchUsersAsync(string username);
+        Task<IList<Category>> SearchCategoriesAsync(string searchString);
+        Task<IList<Bookmark>> SearchBookmarksAsync(string searchString);
+        Task<bool> PostCategoryAsync(Category category);
+        Task<bool> PutCategoryAsync(Category category);
+        Task<bool> DeleteCategoryAsync(uint categoryId);
+        Task<bool> PostBookmarkAsync(Bookmark bookmark);
+        Task<bool> PutBookmarkAsync(Bookmark bookmark);
+        Task<bool> DeleteBookmarkAsync(Bookmark bookmark);
+        Task <bool> ChangePermissionsAsync(ICollection<User> users, uint id);
     }
 }

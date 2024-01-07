@@ -39,7 +39,7 @@ namespace Bookmark_Manager_Client.DataProvider
             }
         }
 
-        public bool TestConnection()
+        public async Task<bool> LoginAsync()
         {
             return false;
         }
@@ -47,7 +47,7 @@ namespace Bookmark_Manager_Client.DataProvider
         {
             
         }
-        public bool SetUpConnection()
+        public async Task<bool> SetUpConnectionAsync()
         {
             var options = new RestClientOptions(FullUrl)
             {
@@ -60,11 +60,10 @@ namespace Bookmark_Manager_Client.DataProvider
 
             //client.UseNewtonsoftJson(jsonSerializerSettings);
             
-            Console.WriteLine(FullUrl);
 
             try
             {
-                currentUser = getCurrentUser();
+                currentUser = await getCurrentUserAsync();
                 return true;
             }
             catch (Exception ex) 
@@ -72,15 +71,14 @@ namespace Bookmark_Manager_Client.DataProvider
                 return false;
             }
         }
-        private User getCurrentUser()
+        private async Task<User> getCurrentUserAsync()
         {
             var request = new RestRequest("/currentuser", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            return client.Get<User>(request);
+            return await client.GetAsync<User>(request);
         }
-        public IList<Category> GetCategories(uint id = 0)
+        public async Task<IList<Category>> GetCategoriesAsync(uint id = 0)
         {
-
             RestRequest request;
             if(id == 0)
                 request = new RestRequest("categories/", Method.Get);
@@ -88,39 +86,36 @@ namespace Bookmark_Manager_Client.DataProvider
                 request = new RestRequest("categories/" + id.ToString() + "/", Method.Get);
 
             request.AddHeader("Cache-Control", "no-cache");
-            return client.Get<List<Category>>(request); 
+            return await client.GetAsync<List<Category>>(request); 
         }
-        public IList<Category> GetAllCategories()
-        {
-            throw new NotImplementedException();
-        }
-        public IList<Bookmark> GetBookmarks( uint id)
+
+        public async Task<IList<Bookmark>> GetBookmarksAsync( uint id)
         {
             var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            return client.Get<List<Bookmark>>(request);
+            return await client.GetAsync<List<Bookmark>>(request);
         
         }
-        public IList<User> GetPermittedUsers(uint id)
+        public async Task<IList<User>> GetPermittedUsersAsync(uint id)
         {
             var request = new RestRequest("categories/" + id.ToString() + "/permissions/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            return client.Get<List<User>>(request);
+            return await client.GetAsync<List<User>>(request);
         }
-        public IList<User> GetAllUsers()
+        public async Task<IList<User>> GetAllUsersAsync()
         {
             var request = new RestRequest("/users/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            return client.Get<List<User>>(request);
+            return await client.GetAsync<List<User>>(request);
         }
-        public bool PostCategory(Category category)
+        public async Task<bool> PostCategoryAsync(Category category)
         {
             var request = new RestRequest("/categories/", RestSharp.Method.Post);
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(category);
             try
             {
-                var cat = client.Post<Category>(request);
+                var cat = await client.GetAsync<Category>(request);
                 category.ID = cat.ID;
                 category.OwnerID = cat.OwnerID;
                 category.Shared = cat.Shared;
@@ -132,7 +127,7 @@ namespace Bookmark_Manager_Client.DataProvider
             }
             
         }
-        public bool PutCategory(Category category)
+        public async Task<bool> PutCategoryAsync(Category category)
         {
             var request = new RestRequest("/categories/" + category.ID.ToString() + "/", RestSharp.Method.Put);
             request.RequestFormat = DataFormat.Json;
@@ -140,7 +135,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
             try
             {
-                var cat = client.Put<Category>(request);
+                var cat = await client.GetAsync<Category>(request);
                 category.ID = cat.ID;
                 category.OwnerID = cat.OwnerID;
                 return true;
@@ -151,17 +146,17 @@ namespace Bookmark_Manager_Client.DataProvider
             }
 
         }
-        public bool DeleteCategory(uint categoryId)
+        public async Task<bool> DeleteCategoryAsync(uint categoryId)
         {
             var request = new RestRequest("/categories/" + categoryId.ToString() + "/", RestSharp.Method.Delete);
-            var response = client.Delete(request);
+            var response = await client.DeleteAsync(request);
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return true;
             }
             return false;
         }
-        public bool PostBookmark(Bookmark bookmark)
+        public async Task<bool> PostBookmarkAsync(Bookmark bookmark)
         {
             var request = new RestRequest("/categories/" + bookmark.CategoryID + "/bookmarks/", Method.Post);
             request.AddHeader("Cache-Control", "no-cache");
@@ -170,7 +165,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
             try
             {
-                var bm = client.Post<Category>(request);
+                var bm = await client.PostAsync<Category>(request);
                 bookmark.ID = bm.ID;
                 return true;
             }
@@ -180,32 +175,20 @@ namespace Bookmark_Manager_Client.DataProvider
             }
             
         }
-        public bool ChangePermissions(ICollection<User> users, uint id)
+        public async Task<bool> ChangePermissionsAsync(ICollection<User> users, uint id)
         {
             var request = new RestRequest("/categories/" + id + "/permissions/");
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(users);
 
-            var response = client.Put(request);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return true;
-            else
-                return false;
-        }
-        public bool RemovePermission(ICollection<User> users, uint id)
-        {
-            var request = new RestRequest("/categories/" + id + "/permissions/");
-            request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(users);
-
-            var response = client.Delete(request);
+            var response = await client.PutAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 return true;
             else
                 return false;
         }
 
-        public bool PutBookmark(Bookmark bookmark)
+        public async Task<bool> PutBookmarkAsync(Bookmark bookmark)
         {
             var request = new RestRequest("/categories/" + bookmark.CategoryID + "/bookmarks/" + bookmark.ID, Method.Put);
             request.AddHeader("Cache-Control", "no-cache");
@@ -214,7 +197,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
             try
             {
-                var response = client.Put(request);
+                var response = await client.PutAsync(request);
                 if (response.IsSuccessStatusCode)
                     return true;
                 else
@@ -228,7 +211,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         }
 
-        public bool DeleteBookmark(Bookmark bookmark)
+        public async Task<bool> DeleteBookmarkAsync(Bookmark bookmark)
         {
             var request = new RestRequest("/categories/" + bookmark.CategoryID + "/bookmarks/" + bookmark.ID, Method.Delete);
             request.AddHeader("Cache-Control", "no-cache");
@@ -236,7 +219,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
             try
             {
-                var response = client.Delete(request);
+                var response = await client.DeleteAsync(request);
                 if (response.IsSuccessStatusCode)
                     return true;
                 else
@@ -249,14 +232,14 @@ namespace Bookmark_Manager_Client.DataProvider
             }
         }
 
-        public IList<User> SearchUser(string username)
+        public async Task<IList<User>> SearchUsersAsync(string username)
         {
             var request = new RestRequest("/users/search/" + username, Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
             request.RequestFormat = DataFormat.Json;
             try
             {
-                var response = client.Get<List<User>>(request);
+                var response = await client.GetAsync<List<User>>(request);
                 return response;
             }
             catch (Exception ex)
@@ -266,14 +249,14 @@ namespace Bookmark_Manager_Client.DataProvider
 
         }
 
-        public IList<Category> SearchCategories(string searchString)
+        public async Task<IList<Category>> SearchCategoriesAsync(string searchString)
         {
             var request = new RestRequest("/categories/search/" +  searchString, Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
             request.RequestFormat = DataFormat.Json;
             try
             {
-                var response = client.Get<List<Category>>(request);
+                var response = await client.GetAsync<List<Category>>(request);
                 return response;
             }
             catch (Exception ex)
@@ -282,14 +265,14 @@ namespace Bookmark_Manager_Client.DataProvider
             }
         }
 
-        public IList<Bookmark> SearchBookmarks(string searchString)
+        public async Task<IList<Bookmark>> SearchBookmarksAsync(string searchString)
         {
             var request = new RestRequest("/bookmarks/search/" + searchString, Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
             request.RequestFormat = DataFormat.Json;
             try
             {
-                var response = client.Get<List<Bookmark>>(request);
+                var response = await client.GetAsync<List<Bookmark>>(request);
                 return response;
             }
             catch (Exception ex)
