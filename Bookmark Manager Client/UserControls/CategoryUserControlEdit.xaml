@@ -77,8 +77,8 @@
                 </Grid>
             </Border>
         </Border>
-        <Button x:Name="SaveCategory" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" 
+        <Button x:Name="SaveCategory" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" 
                 Style="{StaticResource AccentButtonStyle}" Content="{loc:Localization ButtonSaveString}" Click="SaveCategory_Click" />
-        <Button x:Name="Exit" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="{loc:Localization ButtonCancelString}" Click="Exit_Click"/>
+        <Button x:Name="Exit" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="5" Content="{loc:Localization ButtonCancelString}" Click="Exit_Click"/>
     </Grid>
 </UserControl>

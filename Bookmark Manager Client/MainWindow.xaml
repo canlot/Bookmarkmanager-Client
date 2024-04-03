@@ -163,13 +163,13 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}" SnapsToDevicePixels="True" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1">
+        <Border Grid.Row="0" Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}" SnapsToDevicePixels="True" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*" MinWidth="750"/>
                     <ColumnDefinition Width="3*" MaxWidth="1000"/>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="0"  HorizontalAlignment="Left" CornerRadius="5" >
+                <Border Grid.Column="0"  HorizontalAlignment="Left" CornerRadius="5"  BorderThickness="1" Margin="5" Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}">
                     <StackPanel Margin="5" Orientation="Horizontal" >
 
                         <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" 
@@ -347,8 +347,8 @@
                         </TreeView.ItemTemplate>
                     </TreeView>
                 </Border>
-                <Border Grid.Column="1">
-                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1" Margin="10,0" ItemsSource="{Binding Bookmarks}" 
+                <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="1,0,0,0">
+                    <ListBox x:Name="listBoxBookmarks" Grid.Column="1"  ItemsSource="{Binding Bookmarks}" 
                             SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedBookmark, Mode=TwoWay, 
                             UpdateSourceTrigger=PropertyChanged}">
                         <d:ListBox.ItemsSource>

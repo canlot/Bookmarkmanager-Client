@@ -9,46 +9,21 @@
         xmlns:viewmodel="clr-namespace:Bookmark_Manager_Client.ViewModel"
         xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
         mc:Ignorable="d"
-        Title="WindowLogin" Topmost="True" WindowStyle="None" Width="500" Height="320" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderBrush="Gray" BorderThickness="1">
+        Title="WindowLogin" Topmost="True" WindowStyle="None" Width="500" Height="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderBrush="Gray" BorderThickness="1">
     <Window.DataContext>
         <viewmodel:LoginWindowViewModel x:Name="LoginViewModel" />
     </Window.DataContext>
     <Window.Resources>
-        <GridLength x:Key="RowHeight">40</GridLength>
         <sys:Double x:Key="MinColumnLenght">75</sys:Double>
-        <Style TargetType="Label">
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="5"/>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Height" Value="30" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Margin" Value="5"/>
-        </Style>
-        <Style TargetType="PasswordBox">
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Height" Value="30" />
-            <Setter Property="Margin" Value="5"/>
-        </Style>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="5"/>
-        </Style>
+
+
         <ControlTemplate x:Key="PortValidationTemplate" TargetType="TextBox">
             <DockPanel>
                 <TextBlock Background="Red">!</TextBlock>
                 <AdornedElementPlaceholder/>
             </DockPanel>
         </ControlTemplate>
-        <Style x:Key="textBoxPort" TargetType="{x:Type TextBox}">
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Height" Value="30" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Margin" Value="5"/>
+        <Style x:Key="textBoxPort" TargetType="{x:Type TextBox}" >
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
                     <Setter Property="ToolTip"
@@ -70,36 +45,62 @@
             <ColumnDefinition Width="1*" MinWidth="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="{StaticResource RowHeight}"/>
-            <RowDefinition Height="{StaticResource RowHeight}"/>
-            <RowDefinition Height="{StaticResource RowHeight}"/>
-            <RowDefinition Height="{StaticResource RowHeight}"/>
-            <RowDefinition Height="{StaticResource RowHeight}"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Border Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="0" Background="Gray" Margin="0,0,0,5">
-            <Label Content="Login" Margin="10" FontSize="15" FontWeight="Bold" Foreground="White"/>
+            <Label Content="Login" Margin="10" FontSize="15" FontWeight="Bold" Foreground="White" Style="{StaticResource LabelStyle}"/>
         </Border>
-        <TextBox x:Name="TextBoxHost" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="1" Text="{Binding Path=Host}" />
-        <TextBox x:Name="TextBoxPort" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="2" Style="{StaticResource textBoxPort}" Validation.ErrorTemplate="{StaticResource PortValidationTemplate}">
-            <TextBox.Text>
-                <Binding Path="Port" >
-                    <Binding.ValidationRules>
-                        <local:PortValidationRule/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <TextBox x:Name="TextBoxUsername" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="3" Text="{Binding Email}"/>
-        <PasswordBox x:Name="PasswordBoxPassword" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="4" />
-        
-        <Label Content="{loc:Localization HostString}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
-        <Label Content="{loc:Localization PortString}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"/>
-        <Label Content="{loc:Localization UsernameString}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" />
-        <Label Content="{loc:Localization PasswordString}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4"/>
+        <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="{loc:Localization HostString}" Style="{StaticResource LabelStyle}" />
+        </Border>
+        <Border Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="1" Style="{StaticResource ColumnStyleRight}">
+            <TextBox x:Name="TextBoxHost" Text="{Binding Path=Host}" />
+        </Border>
+        <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="{loc:Localization PortString}" Style="{StaticResource LabelStyle}" />
+        </Border>
+        <Border Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="2" Style="{StaticResource ColumnStyleRight}">
+            <TextBox x:Name="TextBoxPort"  Validation.ErrorTemplate="{StaticResource PortValidationTemplate}">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="ToolTip"
+                                Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                Path=(Validation.Errors)/ErrorContent}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+                <TextBox.Text>
+                    <Binding Path="Port" >
+                        <Binding.ValidationRules>
+                            <local:PortValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </Border>
+        <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="{loc:Localization UsernameString}" Style="{StaticResource LabelStyle}" />
+        </Border>
+        <Border Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="3" Style="{StaticResource ColumnStyleRight}">
+            <TextBox x:Name="TextBoxUsername"  Text="{Binding Email}"/>
+        </Border>
+        <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="{loc:Localization PasswordString}" Style="{StaticResource LabelStyle}"/>
+        </Border>
+        <Border  Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="4" Style="{StaticResource ColumnStyleRight}">
+            <PasswordBox x:Name="PasswordBoxPassword" />
+        </Border>
 
-        <Button x:Name="ButtonLogin" Content="{loc:Localization ButtonLoginString}" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6" Margin="5"  Click="ButtonLogin_Click"/>
-        <Button x:Name="ButtonAbort" Content="{loc:Localization ButtonExitString}" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="6" Margin="5" Click="ButtonAbort_Click" />
+
+        <Button x:Name="ButtonLogin" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{loc:Localization ButtonLoginString}" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6" Margin="5"  Click="ButtonLogin_Click"/>
+        <Button x:Name="ButtonAbort" Content="{loc:Localization ButtonExitString}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="6" Margin="5" Click="ButtonAbort_Click" />
     </Grid>
 </Window>
