@@ -48,6 +48,7 @@ namespace Bookmark_Manager_Client
                 await vm.GetBookmarksAsync(category);
                 vm.SelectedCategory = category;
             }
+            
         }
 
         private void ButtonRemoveCategory_Click(object sender, RoutedEventArgs e)
