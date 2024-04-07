@@ -18,6 +18,7 @@
         <ui:PathIcon x:Key="AddCategoryIcon" Data="M15.9,10c0,0.6 -0.4,1 -1,1h-3.9v3.9c0,0.6 -0.4,1 -1,1c-0.6,0 -1,-0.4 -1,-1v-3.9h-3.9c-0.6,0 -1,-0.4 -1,-1c0,-0.6 0.4,-1 1,-1h3.9v-3.9c0,-0.6 0.4,-1 1,-1c0.6,0 1,0.4 1,1v3.9h3.9c0.6,0 1,0.4 1,1zM20,10c0,5.5 -4.5,10 -10,10c-5.5,0 -10,-4.5 -10,-10c0,-5.5 4.5,-10 10,-10c5.5,0 10,4.5 10,10zM18,10c0,-4.4 -3.6,-8 -8,-8c-4.4,0 -8,3.6 -8,8c0,4.4 3.6,8 8,8c4.4,0 8,-3.6 8,-8z"/>
         <sys:Double x:Key="MenuButtonImageWidth">32</sys:Double>
         <sys:Double x:Key="MenuButtonWidth">100</sys:Double>
+        <sys:Double x:Key="FontSize">11</sys:Double>
         <Style x:Key="TreeViewItemFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -163,16 +164,16 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}" SnapsToDevicePixels="True" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" >
+        <Border Grid.Row="0"  SnapsToDevicePixels="True" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*" MinWidth="750"/>
                     <ColumnDefinition Width="3*" MaxWidth="1000"/>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="0"  HorizontalAlignment="Left" CornerRadius="5"  BorderThickness="1" Margin="5" Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}">
+                <Border Grid.Column="0"  HorizontalAlignment="Left" CornerRadius="5"  BorderThickness="1" Margin="5" >
                     <StackPanel Margin="5" Orientation="Horizontal" >
 
-                        <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" 
+                        <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" 
                             BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Command="{Binding ChangeUserControlCommand}" 
                             CommandParameter="CategoryUserControlNew">
                             <Grid>
@@ -180,11 +181,11 @@
                                     <RowDefinition Height="1*"/>
                                     <RowDefinition Height="1*"/>
                                 </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="{StaticResource CategoryAddImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}" />
+                                <Image Grid.Row="0" Source="{StaticResource CategoryAddImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}"  />
                                 <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
-                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" 
-                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonCategoryCreateString}"/>
-                            </Grid>
+                                   TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" 
+                                   SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonCategoryCreateString}"/>
+                                </Grid>
                         </Button>
                         <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" 
                             Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" 
@@ -197,7 +198,7 @@
                                 <Image Grid.Row="0" Source="{StaticResource CategoryEditImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}" />
                                 <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
                                        TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonCategoryEditString}"/>
+                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonCategoryEditString}"/>
                             </Grid>
                         </Button>
                         <Button x:Name="CategoryDeleteButton" Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" Click="CategoryDeleteButton_Click"
@@ -210,7 +211,7 @@
                                 <Image Grid.Row="0" Source="{StaticResource CategoryDeleteImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}" />
                                 <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
                                        TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonCategoryDeleteString}"/>
+                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonCategoryDeleteString}"/>
                             </Grid>
                         </Button>
                         <Border VerticalAlignment="Stretch" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
@@ -223,7 +224,7 @@
                                 <Image Grid.Row="0" Source="{StaticResource LinkAddImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}"/>
                                 <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
                                        TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonBookmarkCreateString}"/>
+                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonBookmarkCreateString}"/>
                             </Grid>
                         </Button>
                         <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" 
@@ -237,7 +238,7 @@
                                 <Image Grid.Row="0" Source="{StaticResource LinkEditImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}"/>
                                 <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
                                        TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonBookmarkEditString}"/>
+                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonBookmarkEditString}"/>
                             </Grid>
                         </Button>
                         <Button x:Name="BookmarkDeleteButton" Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" 
@@ -250,7 +251,7 @@
                                 <Image Grid.Row="0" Source="{StaticResource LinkDeleteImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}"/>
                                 <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
                                        TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonBookmarkDeleteString}"/>
+                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonBookmarkDeleteString}"/>
                             </Grid>
                         </Button>
                         <Border VerticalAlignment="Stretch" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
@@ -263,7 +264,7 @@
                                 <Image Grid.Row="0" Source="{StaticResource SettingsImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}"/>
                                 <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
                                        TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="12" Text="{loc:Localization ButtonSettingsString}"/>
+                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonSettingsString}"/>
                             </Grid>
                         </Button>
 

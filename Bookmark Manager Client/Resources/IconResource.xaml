@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- https://stackoverflow.com/questions/25188349/how-to-set-pathicon-from-code-behind -->
     <DrawingImage x:Key="CategoryAddImage">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V256 H256 V0 H0 Z">
