@@ -352,6 +352,11 @@
                     <ListBox x:Name="listBoxBookmarks" Grid.Column="1"  ItemsSource="{Binding Bookmarks}" 
                             SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedBookmark, Mode=TwoWay, 
                             UpdateSourceTrigger=PropertyChanged}" SelectionMode="Extended">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Ausschneiden" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=SelectedItem}" />
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
                         <d:ListBox.ItemsSource>
                             <x:Array Type="model:Bookmark">
                                 <model:Bookmark CategoryID="1" Url="https://google.de" Description="Best site that i use" Title="Google Site"></model:Bookmark>
