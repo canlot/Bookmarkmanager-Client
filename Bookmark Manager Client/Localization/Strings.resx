@@ -180,6 +180,9 @@
   <data name="CategoryParentString" xml:space="preserve">
     <value>Parent category</value>
   </data>
+  <data name="CutString" xml:space="preserve">
+    <value>Cut</value>
+  </data>
   <data name="DescriptionString" xml:space="preserve">
     <value>Description</value>
   </data>

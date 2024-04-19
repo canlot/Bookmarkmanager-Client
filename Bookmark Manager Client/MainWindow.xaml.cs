@@ -123,6 +123,7 @@ namespace Bookmark_Manager_Client
             var vm = this.DataContext as MainViewModel;
             await vm.SearchForCategoriesAsync(sender.Text);
             await vm.SearchForBookmarksAsync(sender.Text);
+
         }
 
         private async void SearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
