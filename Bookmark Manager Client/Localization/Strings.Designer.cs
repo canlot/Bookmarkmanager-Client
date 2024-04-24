@@ -277,6 +277,15 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Insert ähnelt.
+        /// </summary>
+        public static string InsertString {
+            get {
+                return ResourceManager.GetString("InsertString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Name ähnelt.
         /// </summary>
         public static string NameString {

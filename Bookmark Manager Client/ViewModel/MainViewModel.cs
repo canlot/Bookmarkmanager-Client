@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -78,6 +79,25 @@ namespace Bookmark_Manager_Client.ViewModel
                 OnPropertyChanged();
             }
         }
+        private List<Bookmark> selectedBookmarksCopySource = new List<Bookmark>();
+        public List<Bookmark> SelectedBookmarksCopySource
+        {
+            get { return selectedBookmarksCopySource; }
+            set { selectedBookmarksCopySource = value;}
+        }
+        private Category categoryCopySource;
+        public Category CategoryCopySource
+        {
+            get { return categoryCopySource; }
+            set { categoryCopySource = value;}
+        }
+        private Category categoryCopyDestination;
+        public Category CategoryCopyDestination
+        {
+            get { return categoryCopyDestination; }
+            set { categoryCopyDestination = value;}
+        }
+
         public Category GetParentCategory(Category childCategory)
         {
             foreach(var category in Categories)
@@ -177,6 +197,37 @@ namespace Bookmark_Manager_Client.ViewModel
             if (bookmarkList == null) return;
             foreach (var bookmark in bookmarkList)
                 lock(bookmarklock) Bookmarks.Add(bookmark);
+        }
+        public async Task MoveBookmarksAsync()
+        {
+            try
+            {
+                if (SelectedBookmarksCopySource.Count == 0) return;
+                if (CategoryCopySource == null) return;
+                if (CategoryCopyDestination == null) return;
+                if (CategoryCopySource == CategoryCopyDestination) return;
+
+                await ObjectRepository.DataProvider.MoveBookmarksAsync(CategoryCopySource, CategoryCopyDestination, SelectedBookmarksCopySource);
+                
+                if (CategoryCopySource == SelectedCategory)
+                {
+                    foreach(var bookmark in SelectedBookmarksCopySource)
+                    {
+                        Bookmarks.Remove(bookmark);
+                    }
+                }
+                if (CategoryCopyDestination == SelectedCategory)
+                {
+                    foreach(var bookmark in SelectedBookmarksCopySource)
+                    {
+                        Bookmarks.Add(bookmark);
+                    }
+                }
+            }
+            catch (Exception ex) 
+            {
+
+            }
         }
     }
 }

@@ -189,6 +189,9 @@
   <data name="HostString" xml:space="preserve">
     <value>Host</value>
   </data>
+  <data name="InsertString" xml:space="preserve">
+    <value>Insert</value>
+  </data>
   <data name="NameString" xml:space="preserve">
     <value>Name</value>
   </data>

@@ -134,5 +134,27 @@ namespace Bookmark_Manager_Client
                 await vm.GetTopCategoriesWithChildAsync();
             }
         }
+
+        private void CutBookmarksButton_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = this.DataContext as MainViewModel;
+            
+            //vm.SelectedBookmarksCopySource = (List<Bookmark>)listBoxBookmarks.SelectedItems;
+            vm.SelectedBookmarksCopySource.Clear();
+            foreach(var bookmark in listBoxBookmarks.SelectedItems)
+            {
+                vm.SelectedBookmarksCopySource.Add((Bookmark) bookmark);
+            }
+
+            vm.CategoryCopySource = treeViewCategory.SelectedItem as Category;
+
+        }
+
+        private async void InsertBookmarksButton_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = this.DataContext as MainViewModel;
+            vm.CategoryCopyDestination = (Category)(sender as MenuItem).DataContext;
+            await vm.MoveBookmarksAsync();
+        }
     }
 }

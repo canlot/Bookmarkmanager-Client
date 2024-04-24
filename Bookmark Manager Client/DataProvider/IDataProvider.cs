@@ -26,6 +26,7 @@ namespace Bookmark_Manager_Client.DataProvider
         Task<bool> PostBookmarkAsync(Bookmark bookmark);
         Task<bool> PutBookmarkAsync(Bookmark bookmark);
         Task<bool> DeleteBookmarkAsync(Bookmark bookmark);
-        Task <bool> ChangePermissionsAsync(ICollection<User> users, uint id);
+        Task<bool> ChangePermissionsAsync(ICollection<User> users, uint id);
+        Task<bool> MoveBookmarksAsync(Category categorySource, Category categoryDestination, IList<Bookmark> bookmarks);
     }
 }

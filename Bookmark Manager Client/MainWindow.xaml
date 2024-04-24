@@ -299,6 +299,13 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
+                                        <Grid.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem x:Name="InsertBookmarksButton" Header="{loc:Localization InsertString}" 
+                                                      IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled}" Click="InsertBookmarksButton_Click" 
+                                                      />
+                                            </ContextMenu>
+                                        </Grid.ContextMenu>
                                         <Image Source="{StaticResource FolderImage}" Height="20" Margin="5" Grid.Column="0"/>
                                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Segoe UI" 
                                                        FontSize="12" FontWeight="Bold" Grid.Column="1" Foreground="{DynamicResource SystemControlForegroundChromeBlackMediumBrush}"></TextBlock>

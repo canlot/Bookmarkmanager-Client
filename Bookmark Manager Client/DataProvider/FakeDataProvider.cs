@@ -476,5 +476,18 @@ namespace Bookmark_Manager_Client.DataProvider
                 (!string.IsNullOrEmpty(x.Description) && x.Description.ToLower().Contains(searchString)))).ToList(); // this is the same mess
             return listBookmarks;
         }
+
+        public async Task<bool> MoveBookmarksAsync(Category categorySource, Category categoryDestination, IList<Bookmark> bookmarksToBeMoved)
+        {
+            foreach (var bookmark in bookmarksToBeMoved)
+            {
+                var b = bookmarks.Where(x => x.ID == bookmark.ID).FirstOrDefault();
+                if (b != null)
+                {
+                    b.CategoryID = categoryDestination.ID;
+                }
+            }
+            return true;
+        }
     }
 }

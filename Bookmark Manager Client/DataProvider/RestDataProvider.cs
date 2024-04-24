@@ -304,5 +304,10 @@ namespace Bookmark_Manager_Client.DataProvider
                 return null;
             }
         }
+
+        public Task<bool> MoveBookmarksAsync(Category categorySource, Category categoryDestination, IList<Bookmark> bookmarks)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
