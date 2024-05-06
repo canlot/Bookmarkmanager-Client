@@ -137,6 +137,12 @@
     <Compile Include="UserControls\SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserUserControlAdd.xaml.cs">
+      <DependentUpon>UserUserControlAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserUserControlEdit.xaml.cs">
+      <DependentUpon>UserUserControlEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\CategoryUtils.cs" />
     <Compile Include="ViewModel\BookmarkViewModelEdit.cs" />
     <Compile Include="ViewModel\BookmarkViewModelNew.cs" />
@@ -148,6 +154,8 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModelAdd.cs" />
+    <Compile Include="ViewModel\UserViewModelEdit.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -207,6 +215,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\SettingsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserUserControlAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserUserControlEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -25,7 +25,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public FakeDataProvider() 
         {
-            var adminUser = new User { Name = "Admin", ID = 1, Administrator =  true };
+            var adminUser = new User { Name = "Admin", Email = "admin@test.intern", ID = 1, Administrator =  true };
             var jakobUser = new User { Name = "Jakob", ID = 2, Administrator = false };
             var danielUser = new User { Name = "Daniel", ID = 3, Administrator = false };
             var bobUser = new User { Name = "Bob", ID=4, Administrator = false };
@@ -230,7 +230,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         public async Task<IList<User>> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            return users;
         }
 
         public async Task<IList<Bookmark>> GetBookmarksAsync(uint id)

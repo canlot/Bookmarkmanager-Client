@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddNewUserString" xml:space="preserve">
+    <value>Benutzer hinzufügen</value>
+  </data>
+  <data name="AddString" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="AdministratorString" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
   <data name="BookmarkDeleteQuestionString" xml:space="preserve">
     <value>Lesezeichen löschen?</value>
   </data>
@@ -180,11 +189,23 @@
   <data name="CategoryParentString" xml:space="preserve">
     <value>Übergeordnete Kategorie</value>
   </data>
+  <data name="ChangePasswordString" xml:space="preserve">
+    <value>Passwort ändern</value>
+  </data>
   <data name="CutString" xml:space="preserve">
     <value>Ausschneiden</value>
   </data>
+  <data name="DeleteString" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
   <data name="DescriptionString" xml:space="preserve">
     <value>Beschreibung</value>
+  </data>
+  <data name="EditString" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="EmailString" xml:space="preserve">
+    <value>E-Mail</value>
   </data>
   <data name="HostString" xml:space="preserve">
     <value>Host</value>
@@ -214,10 +235,13 @@
     <value>Url</value>
   </data>
   <data name="UsernameString" xml:space="preserve">
-    <value>E-Mail</value>
+    <value>Benutzername</value>
   </data>
   <data name="UserSearchBoxQueryString" xml:space="preserve">
     <value>Benutzername oder E-mail</value>
+  </data>
+  <data name="UsersString" xml:space="preserve">
+    <value>Benutzer</value>
   </data>
   <data name="UsersWithAccessString" xml:space="preserve">
     <value>Berechtigte Benutzer</value>

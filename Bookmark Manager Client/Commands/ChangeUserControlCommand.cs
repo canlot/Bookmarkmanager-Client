@@ -88,6 +88,9 @@ namespace Bookmark_Manager_Client.Commands
                         if(viewModel.SelectedBookmark == null) return;
                         UserControl = new BookmarkUserControlEdit();
                         break;
+                    case "SettingsUserControl":
+                        UserControl = new SettingsUserControl();
+                        break;
                     case "BrowserUserControl":
                         if (viewModel.SelectedBookmark == null) return;
                         UserControl = new BrowserUserControl(viewModel.SelectedBookmark.Url);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bookmark_Manager_Client.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,29 @@ namespace Bookmark_Manager_Client.UserControls
         public SettingsUserControl()
         {
             InitializeComponent();
+        }
+
+        private void ButtonAbort_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (SettingsViewModel)this.DataContext;
+            viewModel.Exit();
+        }
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void addUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new UserUserControlAdd(this.DataContext as SettingsViewModel);
+            await dialog?.ShowAsync();
+        }
+
+        private async void editUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new UserUserControlEdit(this.DataContext as SettingsViewModel);
+            await dialog?.ShowAsync();
         }
     }
 }

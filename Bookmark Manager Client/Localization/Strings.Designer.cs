@@ -61,6 +61,33 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add User ähnelt.
+        /// </summary>
+        public static string AddNewUserString {
+            get {
+                return ResourceManager.GetString("AddNewUserString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add ähnelt.
+        /// </summary>
+        public static string AddString {
+            get {
+                return ResourceManager.GetString("AddString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Administrator ähnelt.
+        /// </summary>
+        public static string AdministratorString {
+            get {
+                return ResourceManager.GetString("AdministratorString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Delete bookmark? ähnelt.
         /// </summary>
         public static string BookmarkDeleteQuestionString {
@@ -250,6 +277,15 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Change password ähnelt.
+        /// </summary>
+        public static string ChangePasswordString {
+            get {
+                return ResourceManager.GetString("ChangePasswordString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cut ähnelt.
         /// </summary>
         public static string CutString {
@@ -259,11 +295,38 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete ähnelt.
+        /// </summary>
+        public static string DeleteString {
+            get {
+                return ResourceManager.GetString("DeleteString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
         /// </summary>
         public static string DescriptionString {
             get {
                 return ResourceManager.GetString("DescriptionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Edit ähnelt.
+        /// </summary>
+        public static string EditString {
+            get {
+                return ResourceManager.GetString("EditString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Email ähnelt.
+        /// </summary>
+        public static string EmailString {
+            get {
+                return ResourceManager.GetString("EmailString", resourceCulture);
             }
         }
         
@@ -349,7 +412,7 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Email ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Username ähnelt.
         /// </summary>
         public static string UsernameString {
             get {
@@ -363,6 +426,15 @@ namespace Bookmark_Manager_Client.Localization {
         public static string UserSearchBoxQueryString {
             get {
                 return ResourceManager.GetString("UserSearchBoxQueryString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Users ähnelt.
+        /// </summary>
+        public static string UsersString {
+            get {
+                return ResourceManager.GetString("UsersString", resourceCulture);
             }
         }
         

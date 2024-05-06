@@ -18,7 +18,7 @@
         <ui:PathIcon x:Key="AddCategoryIcon" Data="M15.9,10c0,0.6 -0.4,1 -1,1h-3.9v3.9c0,0.6 -0.4,1 -1,1c-0.6,0 -1,-0.4 -1,-1v-3.9h-3.9c-0.6,0 -1,-0.4 -1,-1c0,-0.6 0.4,-1 1,-1h3.9v-3.9c0,-0.6 0.4,-1 1,-1c0.6,0 1,0.4 1,1v3.9h3.9c0.6,0 1,0.4 1,1zM20,10c0,5.5 -4.5,10 -10,10c-5.5,0 -10,-4.5 -10,-10c0,-5.5 4.5,-10 10,-10c5.5,0 10,4.5 10,10zM18,10c0,-4.4 -3.6,-8 -8,-8c-4.4,0 -8,3.6 -8,8c0,4.4 3.6,8 8,8c4.4,0 8,-3.6 8,-8z"/>
         <sys:Double x:Key="MenuButtonImageWidth">32</sys:Double>
         <sys:Double x:Key="MenuButtonWidth">100</sys:Double>
-        <sys:Double x:Key="FontSize">11</sys:Double>
+        <sys:Double x:Key="FontSize">12</sys:Double>
         <Style x:Key="TreeViewItemFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -255,7 +255,9 @@
                             </Grid>
                         </Button>
                         <Border VerticalAlignment="Stretch" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
-                        <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
+                        <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}"
+                                Command="{Binding ChangeUserControlCommand}" CommandParameter="SettingsUserControl"
+                                Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"/>
@@ -292,6 +294,13 @@
                         <TreeView.ItemTemplate >
                             <HierarchicalDataTemplate ItemsSource="{Binding ChildCategories}">
                                 <Border x:Name="brd" BorderBrush="{StaticResource BorderColor}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Padding="2" >
+                                    <Border.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem x:Name="InsertBookmarksButton" Header="{loc:Localization InsertString}" 
+                                              IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled}" Click="InsertBookmarksButton_Click" 
+                                              />
+                                        </ContextMenu>
+                                    </Border.ContextMenu>
                                     <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
@@ -299,13 +308,7 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <Grid.ContextMenu>
-                                            <ContextMenu>
-                                                <MenuItem x:Name="InsertBookmarksButton" Header="{loc:Localization InsertString}" 
-                                                      IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled}" Click="InsertBookmarksButton_Click" 
-                                                      />
-                                            </ContextMenu>
-                                        </Grid.ContextMenu>
+                                        
                                         <Image Source="{StaticResource FolderImage}" Height="20" Margin="5" Grid.Column="0"/>
                                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Segoe UI" 
                                                        FontSize="12" FontWeight="Bold" Grid.Column="1" Foreground="{DynamicResource SystemControlForegroundChromeBlackMediumBrush}"></TextBlock>

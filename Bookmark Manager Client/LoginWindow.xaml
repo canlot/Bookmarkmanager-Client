@@ -87,7 +87,7 @@
             </TextBox>
         </Border>
         <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label Content="{loc:Localization UsernameString}" Style="{StaticResource LabelStyle}" />
+            <Label Content="{loc:Localization EmailString}" Style="{StaticResource LabelStyle}" />
         </Border>
         <Border Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="3" Style="{StaticResource ColumnStyleRight}">
             <TextBox x:Name="TextBoxUsername"  Text="{Binding Email}"/>

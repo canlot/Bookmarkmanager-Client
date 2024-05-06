@@ -5,13 +5,91 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Bookmark_Manager_Client.UserControls"
              xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
-             xmlns:vm="clr-namespace:Bookmark_Manager_Client.ViewModel"
+             xmlns:vm="clr-namespace:Bookmark_Manager_Client.ViewModel" xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
-        <vm:SettingsViewModel />
+        <vm:SettingsViewModel MainViewModel="{StaticResource MainViewModel}"/>
     </UserControl.DataContext>
-    <Grid>
+    <TabControl Margin="10">
+        <TabItem Header="Allgemein">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+                    <Label Content="{loc:Localization HostString}" Style="{StaticResource LabelStyle}"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+                <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+                    <TextBox x:Name="HostTextBox" Text="{Binding Host}" VerticalContentAlignment="Center" />
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+                    <Label Content="{loc:Localization PortString}" Style="{StaticResource LabelStyle}"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+                <Border Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+                    <TextBox x:Name="PortTextBox" Text="{Binding Port}" VerticalContentAlignment="Center" />
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+                    <Label Content="{loc:Localization ChangePasswordString}" Style="{StaticResource LabelStyle}"/>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+                <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+                    <Button Content="{loc:Localization ChangePasswordString}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </Border>
+                <Button x:Name="ButtonSave" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="4" 
+        VerticalAlignment="Stretch"
+        Style="{StaticResource AccentButtonStyle}" Content="{loc:Localization ButtonSaveString}" Click="ButtonSave_Click"/>
+                <Button x:Name="ButtonAbort" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="6" 
+        Grid.ColumnSpan="5" Content="{loc:Localization ButtonCancelString}" Click="ButtonAbort_Click"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Benutzerverwaltung">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ui:CommandBar Grid.Row="0" x:Name="UserCommandBar" Margin="5">
+                <ui:AppBarButton x:Name="addUserButton" Icon="Add" Label="{loc:Localization AddString}" Click="addUserButton_Click"  />
+                <ui:AppBarButton x:Name="editUserButton" Icon="Edit" Label="{loc:Localization EditString}" Click="editUserButton_Click" />
+                <ui:AppBarButton x:Name="deleteUserButton" Icon="Delete" Label="{loc:Localization DeleteString}"  />
+            </ui:CommandBar>
+            <ListBox Grid.Row="1" x:Name="UsersListBox" Margin="0,5,0,0" VerticalAlignment="Stretch" 
+        ItemsSource="{Binding Users }" SelectedItem="{Binding SelectedUser}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        
             
-    </Grid>
+        </TabItem>
+    </TabControl>
+    
+
+        
+
+
+    
 </UserControl>
