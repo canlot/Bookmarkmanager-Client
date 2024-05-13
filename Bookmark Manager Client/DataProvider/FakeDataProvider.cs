@@ -254,7 +254,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return null;
         }
 
-        public async Task<bool> PostBookmarkAsync(Bookmark bookmark)
+        public async Task<bool> AddBookmarkAsync(Bookmark bookmark)
         {
             if (bookmark == null) return false;
             if(bookmark.CategoryID == 0) return false;
@@ -266,7 +266,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return true;
         }
 
-        public async Task<bool> PostCategoryAsync(Category category) // should maybe return category id because it will set here, but because it is the same object it does not matter
+        public async Task<bool> AddCategoryAsync(Category category) // should maybe return category id because it will set here, but because it is the same object it does not matter
         {
             if(category == null) throw new Exception("No category");
             if(category.OwnerID == 0) category.OwnerID = currentUser.ID;
@@ -394,7 +394,7 @@ namespace Bookmark_Manager_Client.DataProvider
             return users.Single(x => x.ID == category.OwnerID);
         }
 
-        public async Task<bool> PutBookmarkAsync(Bookmark bookmark)
+        public async Task<bool> ChangeBookmarkAsync(Bookmark bookmark)
         {
             if(bookmark.CategoryID == default) return false;
             if(bookmark.Url == "") return false;
@@ -409,7 +409,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         }
 
-        public async Task<bool> PutCategoryAsync(Category category)
+        public async Task<bool> ChangeCategoryAsync(Category category)
         {
             Category cat = categories.Single(x => x.ID == category.ID);
             if(category.OwnerID != currentUser.ID) return false;
@@ -487,6 +487,21 @@ namespace Bookmark_Manager_Client.DataProvider
                     b.CategoryID = categoryDestination.ID;
                 }
             }
+            return true;
+        }
+
+        public Task<bool> AddUserAsync(User user, string password)
+        {
+            return true;
+        }
+
+        public Task<bool> ChangeUserAsync(User user, string password)
+        {
+            return true;
+        }
+
+        public Task<bool> DeleteUserAsync(uint userId)
+        {
             return true;
         }
     }

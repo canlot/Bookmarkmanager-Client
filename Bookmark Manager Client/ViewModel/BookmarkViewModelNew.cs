@@ -104,7 +104,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 Description = Description
             };
 
-            if(!await ObjectRepository.DataProvider.PostBookmarkAsync(bookmark)) return false;
+            if(!await ObjectRepository.DataProvider.AddBookmarkAsync(bookmark)) return false;
 
             MainViewModel.Bookmarks.Add(bookmark);
 

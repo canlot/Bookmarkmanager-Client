@@ -20,13 +20,16 @@ namespace Bookmark_Manager_Client.DataProvider
         Task<IList<User>> SearchUsersAsync(string username);
         Task<IList<Category>> SearchCategoriesAsync(string searchString);
         Task<IList<Bookmark>> SearchBookmarksAsync(string searchString);
-        Task<bool> PostCategoryAsync(Category category);
-        Task<bool> PutCategoryAsync(Category category);
+        Task<bool> AddCategoryAsync(Category category);
+        Task<bool> ChangeCategoryAsync(Category category);
         Task<bool> DeleteCategoryAsync(uint categoryId);
-        Task<bool> PostBookmarkAsync(Bookmark bookmark);
-        Task<bool> PutBookmarkAsync(Bookmark bookmark);
+        Task<bool> AddBookmarkAsync(Bookmark bookmark);
+        Task<bool> ChangeBookmarkAsync(Bookmark bookmark);
         Task<bool> DeleteBookmarkAsync(Bookmark bookmark);
         Task<bool> ChangePermissionsAsync(ICollection<User> users, uint id);
         Task<bool> MoveBookmarksAsync(Category categorySource, Category categoryDestination, IList<Bookmark> bookmarks);
+        Task<bool> AddUserAsync(User user, string password);
+        Task<bool> ChangeUserAsync(User user, string password);
+        Task<bool> DeleteUserAsync(uint userId);
     }
 }

@@ -234,6 +234,15 @@
   <data name="UrlString" xml:space="preserve">
     <value>Url</value>
   </data>
+  <data name="UserDeleteQuestionString" xml:space="preserve">
+    <value>Delete user?</value>
+  </data>
+  <data name="UserDeleteTextString01" xml:space="preserve">
+    <value>Delete user</value>
+  </data>
+  <data name="UserDeleteTextString02" xml:space="preserve">
+    <value>? All categories and bookmarks will be deleted.</value>
+  </data>
   <data name="UsernameString" xml:space="preserve">
     <value>Username</value>
   </data>

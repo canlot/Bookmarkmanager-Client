@@ -40,7 +40,7 @@ namespace Bookmark_Manager_Client.ViewModel
         public async Task Save()
         {
             var user = new User() { Administrator = Administrator, Email = Email, Name = Username };
-            await SettingsViewModel.AddUser(user, Password);
+            await SettingsViewModel.AddUserSync(user, Password);
         }
         
 

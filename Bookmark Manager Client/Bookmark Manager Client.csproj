@@ -140,6 +140,9 @@
     <Compile Include="UserControls\UserUserControlAdd.xaml.cs">
       <DependentUpon>UserUserControlAdd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserUserControlDelete.xaml.cs">
+      <DependentUpon>UserUserControlDelete.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UserUserControlEdit.xaml.cs">
       <DependentUpon>UserUserControlEdit.xaml</DependentUpon>
     </Compile>
@@ -219,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UserUserControlAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserUserControlDelete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

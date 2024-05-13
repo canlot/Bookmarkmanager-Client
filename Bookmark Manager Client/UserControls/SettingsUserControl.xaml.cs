@@ -1,4 +1,7 @@
-﻿using Bookmark_Manager_Client.ViewModel;
+﻿using Bookmark_Manager_Client.Model;
+using Bookmark_Manager_Client.Utils;
+using Bookmark_Manager_Client.ViewModel;
+using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +50,19 @@ namespace Bookmark_Manager_Client.UserControls
         {
             var dialog = new UserUserControlEdit(this.DataContext as SettingsViewModel);
             await dialog?.ShowAsync();
+        }
+
+        private async void deleteUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            User user = (User)UsersListBox.SelectedItem;
+            if (user == null) return;
+            var vm = this.DataContext as SettingsViewModel;
+            var popup = new UserUserControlDelete(user.Name);
+            var result = await popup.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                await vm.DeleteUserAsync();
+            }
         }
     }
 }

@@ -132,7 +132,7 @@ namespace Bookmark_Manager_Client.DataProvider
             request.AddHeader("Cache-Control", "no-cache");
             return await client.GetAsync<List<User>>(request);
         }
-        public async Task<bool> PostCategoryAsync(Category category)
+        public async Task<bool> AddCategoryAsync(Category category)
         {
             var request = new RestRequest("/categories/", RestSharp.Method.Post);
             request.RequestFormat = DataFormat.Json;
@@ -151,7 +151,7 @@ namespace Bookmark_Manager_Client.DataProvider
             }
             
         }
-        public async Task<bool> PutCategoryAsync(Category category)
+        public async Task<bool> ChangeCategoryAsync(Category category)
         {
             var request = new RestRequest("/categories/" + category.ID.ToString() + "/", RestSharp.Method.Put);
             request.RequestFormat = DataFormat.Json;
@@ -180,7 +180,7 @@ namespace Bookmark_Manager_Client.DataProvider
             }
             return false;
         }
-        public async Task<bool> PostBookmarkAsync(Bookmark bookmark)
+        public async Task<bool> AddBookmarkAsync(Bookmark bookmark)
         {
             var request = new RestRequest("/categories/" + bookmark.CategoryID + "/bookmarks/", Method.Post);
             request.AddHeader("Cache-Control", "no-cache");
@@ -212,7 +212,7 @@ namespace Bookmark_Manager_Client.DataProvider
                 return false;
         }
 
-        public async Task<bool> PutBookmarkAsync(Bookmark bookmark)
+        public async Task<bool> ChangeBookmarkAsync(Bookmark bookmark)
         {
             var request = new RestRequest("/categories/" + bookmark.CategoryID + "/bookmarks/" + bookmark.ID, Method.Put);
             request.AddHeader("Cache-Control", "no-cache");

@@ -85,7 +85,7 @@ namespace Bookmark_Manager_Client.ViewModel
             category.Name = CategoryName;
             category.Description = CategoryDescription;
 
-            if (!await ObjectRepository.DataProvider.PutCategoryAsync(category))
+            if (!await ObjectRepository.DataProvider.ChangeCategoryAsync(category))
                 return false;
 
             if (category.ParentID == 0)

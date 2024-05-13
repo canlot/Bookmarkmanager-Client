@@ -91,7 +91,7 @@ namespace Bookmark_Manager_Client.ViewModel
             MainViewModel.SelectedBookmark.Description = Description;
 
 
-            if (!await ObjectRepository.DataProvider.PutBookmarkAsync(MainViewModel.SelectedBookmark)) return false;
+            if (!await ObjectRepository.DataProvider.ChangeBookmarkAsync(MainViewModel.SelectedBookmark)) return false;
             var bookmark = MainViewModel.Bookmarks.Single(x => x.ID == MainViewModel.SelectedBookmark.ID);
 
             MainViewModel.SetDefaultView();

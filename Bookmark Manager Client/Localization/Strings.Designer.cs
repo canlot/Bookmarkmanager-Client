@@ -412,6 +412,33 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete user? ähnelt.
+        /// </summary>
+        public static string UserDeleteQuestionString {
+            get {
+                return ResourceManager.GetString("UserDeleteQuestionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete user ähnelt.
+        /// </summary>
+        public static string UserDeleteTextString01 {
+            get {
+                return ResourceManager.GetString("UserDeleteTextString01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ? All categories and bookmarks will be deleted. ähnelt.
+        /// </summary>
+        public static string UserDeleteTextString02 {
+            get {
+                return ResourceManager.GetString("UserDeleteTextString02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Username ähnelt.
         /// </summary>
         public static string UsernameString {

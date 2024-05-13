@@ -55,18 +55,32 @@ namespace Bookmark_Manager_Client.ViewModel
             });
         }
 
-        public async Task AddUser(User user, string userPassword)
+        public async Task AddUserSync(User user, string userPassword)
         {
-            Users.Add(user);
+            if(await ObjectRepository.DataProvider.AddUserAsync(user, userPassword))
+            {
+                Users.Add(user);
+            }
         }
-        public async Task SaveUser(User user, string userPassword)
+        public async Task SaveUserAsync(User user, string userPassword)
         {
-            if(SelectedUser.Name != user.Name)
-                SelectedUser.Name = user.Name;
-            if(SelectedUser.Email != user.Email)
-                SelectedUser.Email = user.Email;
-            if(SelectedUser.Administrator != user.Administrator)
-                SelectedUser.Administrator = user.Administrator;
+            if(await ObjectRepository.DataProvider.ChangeUserAsync(user, userPassword))
+            {
+                if (SelectedUser.Name != user.Name)
+                    SelectedUser.Name = user.Name;
+                if (SelectedUser.Email != user.Email)
+                    SelectedUser.Email = user.Email;
+                if (SelectedUser.Administrator != user.Administrator)
+                    SelectedUser.Administrator = user.Administrator;
+            }
+        }
+        public async Task DeleteUserAsync()
+        {
+            if(await ObjectRepository.DataProvider.DeleteUserAsync(SelectedUser.ID)) 
+            {
+                Users.Remove(SelectedUser);
+                SelectedUser = null;
+            }
         }
 
         public SettingsViewModel() 
