@@ -309,5 +309,20 @@ namespace Bookmark_Manager_Client.DataProvider
         {
             throw new NotImplementedException();
         }
+
+        public Task<bool> AddUserAsync(User user, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ChangeUserAsync(User user, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteUserAsync(uint userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

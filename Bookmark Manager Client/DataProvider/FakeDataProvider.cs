@@ -490,18 +490,21 @@ namespace Bookmark_Manager_Client.DataProvider
             return true;
         }
 
-        public Task<bool> AddUserAsync(User user, string password)
+        public async Task<bool> AddUserAsync(User user, string password)
         {
+
             return true;
         }
 
-        public Task<bool> ChangeUserAsync(User user, string password)
+        public async Task<bool> ChangeUserAsync(User user, string password)
         {
+
             return true;
         }
 
-        public Task<bool> DeleteUserAsync(uint userId)
+        public async Task<bool> DeleteUserAsync(uint userId)
         {
+
             return true;
         }
     }
