@@ -207,21 +207,15 @@ namespace Bookmark_Manager_Client.ViewModel
                 if (CategoryCopyDestination == null) return;
                 if (CategoryCopySource == CategoryCopyDestination) return;
 
-                await ObjectRepository.DataProvider.MoveBookmarksAsync(CategoryCopySource, CategoryCopyDestination, SelectedBookmarksCopySource);
-                
-                if (CategoryCopySource == SelectedCategory)
+                foreach(var bookmark in SelectedBookmarksCopySource)
                 {
-                    foreach(var bookmark in SelectedBookmarksCopySource)
-                    {
+                    if (!await ObjectRepository.DataProvider.MoveBookmarkAsync(CategoryCopySource, CategoryCopyDestination, bookmark))
+                        return;
+                    if (CategoryCopySource == SelectedCategory)
                         Bookmarks.Remove(bookmark);
-                    }
-                }
-                if (CategoryCopyDestination == SelectedCategory)
-                {
-                    foreach(var bookmark in SelectedBookmarksCopySource)
-                    {
+                    if (CategoryCopyDestination == SelectedCategory)
                         Bookmarks.Add(bookmark);
-                    }
+
                 }
             }
             catch (Exception ex) 

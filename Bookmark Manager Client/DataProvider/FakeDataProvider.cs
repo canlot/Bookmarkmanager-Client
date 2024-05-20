@@ -477,16 +477,15 @@ namespace Bookmark_Manager_Client.DataProvider
             return listBookmarks;
         }
 
-        public async Task<bool> MoveBookmarksAsync(Category categorySource, Category categoryDestination, IList<Bookmark> bookmarksToBeMoved)
+        public async Task<bool> MoveBookmarkAsync(Category categorySource, Category categoryDestination, Bookmark bookmark)
         {
-            foreach (var bookmark in bookmarksToBeMoved)
+
+            var b = bookmarks.Where(x => x.ID == bookmark.ID).FirstOrDefault();
+            if (b != null)
             {
-                var b = bookmarks.Where(x => x.ID == bookmark.ID).FirstOrDefault();
-                if (b != null)
-                {
-                    b.CategoryID = categoryDestination.ID;
-                }
+                b.CategoryID = categoryDestination.ID;
             }
+
             return true;
         }
 

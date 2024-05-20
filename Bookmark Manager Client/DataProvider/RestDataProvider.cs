@@ -305,24 +305,92 @@ namespace Bookmark_Manager_Client.DataProvider
             }
         }
 
-        public Task<bool> MoveBookmarksAsync(Category categorySource, Category categoryDestination, IList<Bookmark> bookmarks)
+        public async Task<bool> MoveBookmarkAsync(Category categorySource, Category categoryDestination, Bookmark bookmark)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/categories/" + categorySource.ID + "/bookmarks/" + bookmark.ID + "/to/" +categoryDestination.ID, Method.Put);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.RequestFormat = DataFormat.Json;
+
+            try
+            {
+                var answer = await client.PutAsync(request);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            
         }
 
-        public Task<bool> AddUserAsync(User user, string password)
+        public async Task<bool> AddUserAsync(User user, string password)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/users/" + password, Method.Post);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(user);
+
+            try
+            {
+                var u = await client.PostAsync<User>(request);
+                user.ID = u.ID;
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
 
-        public Task<bool> ChangeUserAsync(User user, string password)
+        public async Task<bool> ChangeUserAsync(User user, string password = "")
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/users/" + user.ID, Method.Put);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(user);
+
+            try
+            {
+                var answer = await client.PutAsync<User>(request);
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+
+            if (password == "")
+                return true;
+
+            request = new RestRequest("/users/" + user.ID + "/" + password, Method.Put);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.RequestFormat = DataFormat.Json;
+
+            try
+            {
+                var answer = await client.PutAsync(request);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+
         }
 
-        public Task<bool> DeleteUserAsync(uint userId)
+        public async Task<bool> DeleteUserAsync(uint userId)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/users/" +  userId, Method.Delete);
+            request.AddHeader("Cache-Control", "no-cache");
+            
+            try
+            {
+                var answer = await client.DeleteAsync(request);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

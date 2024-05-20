@@ -64,6 +64,7 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public async Task SaveUserAsync(User user, string userPassword)
         {
+            user.ID = SelectedUser.ID;
             if(await ObjectRepository.DataProvider.ChangeUserAsync(user, userPassword))
             {
                 if (SelectedUser.Name != user.Name)
