@@ -292,9 +292,8 @@ namespace Bookmark_Manager_Client.DataProvider
             return true;
         }
 
-        public async Task<bool> ChangePermissionsAsync(ICollection<User> users, uint categoryId)
+        public async Task<bool> ChangePermissionsAsync(ICollection<User> users, Category category)
         {
-            var category = categories.Single(x => x.ID == categoryId);
             if (category.OwnerID != currentUser.ID) return false;
             if (category.ParentID != 0) return false;
             

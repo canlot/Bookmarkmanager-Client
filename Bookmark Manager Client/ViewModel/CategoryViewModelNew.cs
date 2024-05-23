@@ -76,7 +76,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 await ObjectRepository.DataProvider.AddCategoryAsync(category); // no need to set the id, because category will be set in dataprovider and it is the same object
 
                 if(category.ParentID == 0)
-                    await ObjectRepository.DataProvider.ChangePermissionsAsync(PermittedUsers, category.ID);
+                    await ObjectRepository.DataProvider.ChangePermissionsAsync(PermittedUsers, category);
 
                 if(category.ParentID != 0)
                     ParentCategory.ChildCategories.Add(category);

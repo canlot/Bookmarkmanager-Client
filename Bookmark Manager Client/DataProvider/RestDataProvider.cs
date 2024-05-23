@@ -199,17 +199,28 @@ namespace Bookmark_Manager_Client.DataProvider
             }
             
         }
-        public async Task<bool> ChangePermissionsAsync(ICollection<User> users, uint id)
+        public async Task<bool> ChangePermissionsAsync(ICollection<User> users, Category category)
         {
-            var request = new RestRequest("/categories/" + id + "/permissions/");
+            var request = new RestRequest("/categories/" + category.ID + "/permissions/");
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(users);
-
-            var response = await client.PutAsync(request);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return true;
-            else
+            try
+            {
+                var response = await client.PutAsync(request);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    if(users.Count > 1)
+                        category.Shared = true;
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch(Exception ex)
+            {
                 return false;
+            }
+            
         }
 
         public async Task<bool> ChangeBookmarkAsync(Bookmark bookmark)
