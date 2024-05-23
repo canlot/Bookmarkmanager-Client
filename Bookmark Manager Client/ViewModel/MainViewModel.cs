@@ -149,14 +149,6 @@ namespace Bookmark_Manager_Client.ViewModel
                 if(!parentCategory.ChildCategories.Contains(category))
                     lock(categorylock)
                         parentCategory.ChildCategories.Add(category);
-            }
-        }
-        public async Task AddCategoriesToChildAsync(Category parentCategory)
-        {
-            foreach(var category in parentCategory.ChildCategories)
-            {
-                lock(categorylock)
-                    category.ChildCategories = new ObservableCollection<Category>();
                 await addChildCategoriesToCategoryAsync(category);
             }
         }
