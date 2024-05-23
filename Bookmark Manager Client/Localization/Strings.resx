@@ -192,6 +192,9 @@
   <data name="ChangePasswordString" xml:space="preserve">
     <value>Change password</value>
   </data>
+  <data name="CommonString" xml:space="preserve">
+    <value>Common</value>
+  </data>
   <data name="CutString" xml:space="preserve">
     <value>Cut</value>
   </data>
@@ -242,6 +245,9 @@
   </data>
   <data name="UserDeleteTextString02" xml:space="preserve">
     <value>? All categories and bookmarks will be deleted.</value>
+  </data>
+  <data name="UserManagementString" xml:space="preserve">
+    <value>User management</value>
   </data>
   <data name="UsernameString" xml:space="preserve">
     <value>Username</value>

@@ -286,6 +286,15 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Common ähnelt.
+        /// </summary>
+        public static string CommonString {
+            get {
+                return ResourceManager.GetString("CommonString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cut ähnelt.
         /// </summary>
         public static string CutString {
@@ -435,6 +444,15 @@ namespace Bookmark_Manager_Client.Localization {
         public static string UserDeleteTextString02 {
             get {
                 return ResourceManager.GetString("UserDeleteTextString02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die User management ähnelt.
+        /// </summary>
+        public static string UserManagementString {
+            get {
+                return ResourceManager.GetString("UserManagementString", resourceCulture);
             }
         }
         

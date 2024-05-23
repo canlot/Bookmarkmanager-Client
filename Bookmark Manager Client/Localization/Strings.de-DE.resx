@@ -192,6 +192,9 @@
   <data name="ChangePasswordString" xml:space="preserve">
     <value>Passwort ändern</value>
   </data>
+  <data name="CommonString" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
   <data name="CutString" xml:space="preserve">
     <value>Ausschneiden</value>
   </data>
@@ -242,6 +245,9 @@
   </data>
   <data name="UserDeleteTextString02" xml:space="preserve">
     <value>endgültig löschen? Alle Kategorien und Lesezeichen werden gelöscht.</value>
+  </data>
+  <data name="UserManagementString" xml:space="preserve">
+    <value>Benutzerverwaltung</value>
   </data>
   <data name="UsernameString" xml:space="preserve">
     <value>Benutzername</value>

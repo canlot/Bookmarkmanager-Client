@@ -12,7 +12,7 @@
         <vm:SettingsViewModel MainViewModel="{StaticResource MainViewModel}"/>
     </UserControl.DataContext>
     <TabControl Margin="10">
-        <TabItem Header="Allgemein">
+        <TabItem Header="{loc:Localization CommonString}">
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -62,7 +62,7 @@
         Grid.ColumnSpan="5" Content="{loc:Localization ButtonCancelString}" Click="ButtonAbort_Click"/>
             </Grid>
         </TabItem>
-        <TabItem Header="Benutzerverwaltung">
+        <TabItem Header="{loc:Localization UserManagementString}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
