@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Bookmark_Manager_Client.Utils;
 using Windows.UI.Xaml.Media.Animation;
+using System.Threading;
+using System.Windows.Data;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -17,6 +19,7 @@ namespace Bookmark_Manager_Client.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+        object permissionLock = new object();
 
         private MainViewModel mainViewModel;
         public MainViewModel MainViewModel
@@ -55,14 +58,15 @@ namespace Bookmark_Manager_Client.ViewModel
         
         public CategoryViewModelEdit()
         {
-            
+            BindingOperations.EnableCollectionSynchronization(PermittedUsers, permissionLock);
         }
         
         public void AddPermittedUser(User user)
         {
             if (PermittedUsers.IndexOf(user) == -1)
             {
-                PermittedUsers.Add(user);
+                lock(permissionLock)
+                    PermittedUsers.Add(user);
             }
         }
         private void addPermittedUserToList(uint categoryId)
@@ -71,7 +75,10 @@ namespace Bookmark_Manager_Client.ViewModel
             {
                 var users = await ObjectRepository.DataProvider.GetPermittedUsersAsync(categoryId);
                 foreach (var user in users)
-                    permittedUsers.Add(user);
+                {
+                    lock (permissionLock)
+                        PermittedUsers.Add(user);
+                }
             });
             
         }
