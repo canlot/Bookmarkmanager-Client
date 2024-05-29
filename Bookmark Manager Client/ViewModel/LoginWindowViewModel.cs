@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Security.Credentials;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -30,8 +31,13 @@ namespace Bookmark_Manager_Client.ViewModel
             Host = ObjectRepository.AppConfiguration.Host;
             Port = Convert.ToString(ObjectRepository.AppConfiguration.Port);
             Email = ObjectRepository.AppConfiguration.Email;
-            Password = ObjectRepository.AppConfiguration.Password;
+            //Password = ObjectRepository.AppConfiguration.Password;
+
+            PasswordVault vault = new Windows.Security.Credentials.PasswordVault();
+            PasswordCredential credential = vault.Retrieve("Bookmarkmanager", ObjectRepository.AppConfiguration.Email);
+            Password = credential.Password;
         }
+
 
         public void SaveSettings()
         {
@@ -40,6 +46,12 @@ namespace Bookmark_Manager_Client.ViewModel
             ObjectRepository.AppConfiguration.Email = Email;
             ObjectRepository.AppConfiguration.Password = Password;
             ObjectRepository.AppConfiguration.SaveConfig();
+
+
+
+            PasswordVault vault = new Windows.Security.Credentials.PasswordVault();
+            PasswordCredential credential = new PasswordCredential("Bookmarkmanager", ObjectRepository.AppConfiguration.Email, ObjectRepository.AppConfiguration.Password);
+            vault.Add(credential);
         }
     }
 }

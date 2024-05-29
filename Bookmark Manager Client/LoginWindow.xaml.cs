@@ -22,6 +22,7 @@ namespace Bookmark_Manager_Client
         public LoginWindow()
         {
             InitializeComponent();
+            PasswordBoxPassword.Password = LoginViewModel.Password;
         }
 
         private async void ButtonLogin_Click(object sender, RoutedEventArgs e)

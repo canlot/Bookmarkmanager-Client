@@ -9,6 +9,7 @@ using RestSharp.Authenticators;
 using RestSharp.Serializers.NewtonsoftJson;
 using Bookmark_Manager_Client.Model;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace Bookmark_Manager_Client.DataProvider 
 {
@@ -109,6 +110,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
             request.AddHeader("Cache-Control", "no-cache");
             var list = await client.GetAsync<List<Category>>(request);
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
             return list;
         }
 

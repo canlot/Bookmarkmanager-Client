@@ -14,6 +14,7 @@ using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.Model;
 using Bookmark_Manager_Client.UserControls;
 using Bookmark_Manager_Client.Utils;
+using Windows.Security.Credentials;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -169,6 +170,8 @@ namespace Bookmark_Manager_Client.ViewModel
         {
             BindingOperations.EnableCollectionSynchronization(Categories, categorylock);
             BindingOperations.EnableCollectionSynchronization(Bookmarks, bookmarklock);
+
+            
             changeUserControlCommand = new ChangeUserControlCommand(this);
             Task.Run(async () => await GetTopCategoriesWithChildAsync());
             

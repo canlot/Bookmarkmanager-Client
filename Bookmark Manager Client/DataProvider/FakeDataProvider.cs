@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bookmark_Manager_Client.Utils;
+using System.Threading;
 
 namespace Bookmark_Manager_Client.DataProvider
 {
@@ -226,6 +227,7 @@ namespace Bookmark_Manager_Client.DataProvider
                     list.Add(category);
             }
             await Task.Delay(100);
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
             return list;
         }
 
