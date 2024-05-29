@@ -62,7 +62,10 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo_BMGR_32.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="netstandard" />
@@ -321,6 +324,12 @@
     <PackageReference Include="RestSharp.Serializers.NewtonsoftJson">
       <Version>110.2.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo_BMGR.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo_BMGR_32.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

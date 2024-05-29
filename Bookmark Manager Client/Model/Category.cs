@@ -10,11 +10,13 @@ using RestSharp;
 using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.DataProvider;
 using System.Runtime.CompilerServices;
+using System.Windows.Data;
 
 namespace Bookmark_Manager_Client.Model
 {
     public class Category : INotifyPropertyChanged
     {
+        public object ChildCategorylock = new object();
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
@@ -58,6 +60,7 @@ namespace Bookmark_Manager_Client.Model
         public Category()
         {
             childCategories = new ObservableCollection<Category>();
+            BindingOperations.EnableCollectionSynchronization(ChildCategories, ChildCategorylock);
             //childCategories.CollectionChanged += OnNewChildCategoryItems;
         }
         private void getChildCategoriesForThisCategory()

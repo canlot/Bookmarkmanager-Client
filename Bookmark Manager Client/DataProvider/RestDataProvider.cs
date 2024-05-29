@@ -31,7 +31,7 @@ namespace Bookmark_Manager_Client.DataProvider
             {
                 string url = "";
                 if (!Host.StartsWith("http://"))
-                    url = "http://";
+                    url = "https://";
                 url = url + Host + ":";
                 url += Convert.ToString(Port);
                 url += "/apiv1";
@@ -109,7 +109,6 @@ namespace Bookmark_Manager_Client.DataProvider
 
             request.AddHeader("Cache-Control", "no-cache");
             var list = await client.GetAsync<List<Category>>(request);
-            Console.WriteLine("Hallo");
             return list;
         }
 

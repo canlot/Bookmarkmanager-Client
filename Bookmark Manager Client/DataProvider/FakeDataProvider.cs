@@ -225,6 +225,7 @@ namespace Bookmark_Manager_Client.DataProvider
                 if(category.ParentID == parentCategoryId)
                     list.Add(category);
             }
+            await Task.Delay(100);
             return list;
         }
 

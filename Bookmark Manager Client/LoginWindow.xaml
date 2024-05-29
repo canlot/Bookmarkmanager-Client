@@ -9,7 +9,7 @@
         xmlns:viewmodel="clr-namespace:Bookmark_Manager_Client.ViewModel"
         xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
         mc:Ignorable="d"
-        Title="WindowLogin" Topmost="True" WindowStyle="None" Width="500" Height="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderBrush="Gray" BorderThickness="1">
+        Title="Login" Topmost="True" WindowStyle="None" Width="500" Height="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderBrush="Gray" BorderThickness="1">
     <Window.DataContext>
         <viewmodel:LoginWindowViewModel x:Name="LoginViewModel" />
     </Window.DataContext>

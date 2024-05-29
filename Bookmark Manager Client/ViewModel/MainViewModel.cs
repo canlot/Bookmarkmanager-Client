@@ -135,20 +135,29 @@ namespace Bookmark_Manager_Client.ViewModel
             if (categoryList == null) return;
             foreach (var category in categoryList)
             {
-                lock(categorylock) Categories.Add(category);
+                lock (categorylock)
+                {
+                    Categories.Add(category);
+                }
                 await addChildCategoriesToCategoryAsync(category);
             }
         }
         
         private async Task addChildCategoriesToCategoryAsync(Category parentCategory)
         {
+
+            
             var categoryList = await ObjectRepository.DataProvider.GetCategoriesAsync(parentCategory.ID);
-            if (categoryList == null) return;
-            foreach (var category in categoryList)
+
+            if (categoryList == null) {  return; }
+  
+            foreach (var category in categoryList) // could still be necessary to lock foreach loop as well to avoid a race condition
             {
-                if(!parentCategory.ChildCategories.Contains(category))
-                    lock(categorylock)
+                lock (parentCategory.ChildCategorylock)
+                {
+                    if (!parentCategory.ChildCategories.Contains(category))
                         parentCategory.ChildCategories.Add(category);
+                }
                 await addChildCategoriesToCategoryAsync(category);
             }
         }
