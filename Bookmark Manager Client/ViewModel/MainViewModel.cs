@@ -133,7 +133,7 @@ namespace Bookmark_Manager_Client.ViewModel
             lock(categorylock) Categories.Clear();
             lock(bookmarklock) Bookmarks.Clear();
             var categoryList = await ObjectRepository.DataProvider.GetCategoriesAsync();
-            if (categoryList == null) return;
+            if (categoryList == null || categoryList.Count == 0) return;
             foreach (var category in categoryList)
             {
                 lock (categorylock)
@@ -150,15 +150,16 @@ namespace Bookmark_Manager_Client.ViewModel
             
             var categoryList = await ObjectRepository.DataProvider.GetCategoriesAsync(parentCategory.ID);
 
-            if (categoryList == null) {  return; }
+            if (categoryList == null || categoryList.Count == 0) {  return; }
   
-            foreach (var category in categoryList) // could still be necessary to lock foreach loop as well to avoid a race condition
+            foreach (var category in categoryList) 
             {
                 lock (parentCategory.ChildCategorylock)
                 {
                     if (!parentCategory.ChildCategories.Contains(category))
                         parentCategory.ChildCategories.Add(category);
                 }
+                
                 await addChildCategoriesToCategoryAsync(category);
             }
         }
@@ -173,8 +174,10 @@ namespace Bookmark_Manager_Client.ViewModel
 
             
             changeUserControlCommand = new ChangeUserControlCommand(this);
-            Task.Run(async () => await GetTopCategoriesWithChildAsync());
-            
+            //Task.Run(async () => await GetTopCategoriesWithChildAsync());
+            //Task.Run(() => GetTopCategoriesWithChildAsync());
+
+
         }
         public async Task GetBookmarksAsync(Category category)
         {

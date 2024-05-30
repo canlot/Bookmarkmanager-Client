@@ -156,5 +156,17 @@ namespace Bookmark_Manager_Client
             vm.CategoryCopyDestination = (Category)(sender as MenuItem).DataContext;
             await vm.MoveBookmarksAsync();
         }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private async void Window_Initialized(object sender, EventArgs e)
+        {
+            var vm = this.DataContext as MainViewModel;
+            await vm.GetTopCategoriesWithChildAsync();
+        }
+
     }
 }
