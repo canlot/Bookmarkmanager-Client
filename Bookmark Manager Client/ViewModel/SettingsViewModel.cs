@@ -22,7 +22,6 @@ namespace Bookmark_Manager_Client.ViewModel
             set
             {
                 mainViewModel = value;
-                getAllUsers();
             }
         }
         private string host;
@@ -43,16 +42,14 @@ namespace Bookmark_Manager_Client.ViewModel
         private ObservableCollection<User> users = new ObservableCollection<User>();
         public ObservableCollection<User> Users { get => users; set { users = value; OnPropertyChanged(); } }
 
-        private void getAllUsers()
+        public async Task GetAllUsers()
         {
-            Task.Run(async () =>
+
+            var retUsers = await ObjectRepository.DataProvider.GetAllUsersAsync();
+            foreach (var user in retUsers)
             {
-                var retUsers = await ObjectRepository.DataProvider.GetAllUsersAsync();
-                foreach (var user in retUsers)
-                {
-                    Users.Add(user);
-                }
-            });
+                Users.Add(user);
+            }
         }
 
         public async Task AddUserSync(User user, string userPassword)

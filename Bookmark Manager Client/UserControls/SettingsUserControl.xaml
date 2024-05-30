@@ -11,7 +11,7 @@
     <UserControl.DataContext>
         <vm:SettingsViewModel MainViewModel="{StaticResource MainViewModel}"/>
     </UserControl.DataContext>
-    <TabControl Margin="10">
+    <TabControl Margin="10" Initialized="TabControl_Initialized">
         <TabItem Header="{loc:Localization CommonString}">
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>

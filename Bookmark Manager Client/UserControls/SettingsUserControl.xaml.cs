@@ -64,5 +64,11 @@ namespace Bookmark_Manager_Client.UserControls
                 await vm.DeleteUserAsync();
             }
         }
+
+        private async void TabControl_Initialized(object sender, EventArgs e)
+        {
+            var vm = this.DataContext as SettingsViewModel;
+            await vm.GetAllUsers();
+        }
     }
 }
