@@ -210,8 +210,6 @@ namespace Bookmark_Manager_Client.DataProvider
                 var response = await client.PutAsync(request);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    if(users.Count > 1)
-                        category.Shared = true;
                     return true;
                 }
                 else

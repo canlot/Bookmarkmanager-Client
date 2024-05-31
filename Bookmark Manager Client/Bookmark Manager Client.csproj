@@ -98,6 +98,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\ChangeUserControlCommand.cs" />
     <Compile Include="Commands\OpenInBrowserCommand.cs" />
+    <Compile Include="Commands\RemoveUserFromListCommand.cs" />
     <Compile Include="Converters\BoolInverterConverter.cs" />
     <Compile Include="Converters\ParentIdToStateConverter.cs" />
     <Compile Include="DataProvider\FakeDataProvider.cs" />

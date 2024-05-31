@@ -11,6 +11,7 @@ using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.DataProvider;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
+using Windows.System;
 
 namespace Bookmark_Manager_Client.Model
 {
@@ -77,6 +78,12 @@ namespace Bookmark_Manager_Client.Model
                 }
             });
             
+        }
+        public void SetSharedState(bool shared)
+        {
+            this.Shared = shared;
+            foreach (var category in ChildCategories)
+                category.SetSharedState(shared);
         }
         public async Task GetChildCategoriesAsync()
         {

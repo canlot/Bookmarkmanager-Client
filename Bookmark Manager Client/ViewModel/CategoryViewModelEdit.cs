@@ -98,6 +98,11 @@ namespace Bookmark_Manager_Client.ViewModel
             if (category.ParentID == 0)
                 if (!await ObjectRepository.DataProvider.ChangePermissionsAsync(PermittedUsers, category))
                     return false;
+                else
+                {
+                    if(PermittedUsers.Count > 1) category.SetSharedState(true);
+                    else category.SetSharedState(false);
+                }
 
             MainViewModel.SetDefaultView();
             return true;
