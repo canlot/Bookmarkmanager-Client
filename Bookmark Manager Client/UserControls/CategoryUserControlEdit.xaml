@@ -68,9 +68,30 @@
                                        TextChanged="UserSearchBox_TextChanged" IsEnabled="{Binding IsTopCategory}" />
                     <ListBox x:Name="PermittedUsers" Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Stretch" 
                              ItemsSource="{Binding PermittedUsers, UpdateSourceTrigger=Explicit}" IsEnabled="{Binding IsTopCategory}">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <Border>
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Margin="10" Grid.Column="0" HorizontalAlignment="Stretch" Text="{Binding Name}"/>
+                                        <ui:AppBarButton Grid.Column="1" HorizontalAlignment="Stretch" Height="40" Width="40" 
+                                                         Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},Path=DataContext.RemoveUserFromListCommand}"
+                                                         CommandParameter="{Binding .}">
+                                            <ui:AppBarButton.Icon>
+                                                <ui:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74D;"></ui:FontIcon>
+                                            </ui:AppBarButton.Icon>
+                                        </ui:AppBarButton>
+                                    </Grid>
+                                </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

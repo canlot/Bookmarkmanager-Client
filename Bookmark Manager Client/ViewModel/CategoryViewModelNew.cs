@@ -1,4 +1,5 @@
-﻿using Bookmark_Manager_Client.Model;
+﻿using Bookmark_Manager_Client.Commands;
+using Bookmark_Manager_Client.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,9 +42,11 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         private ObservableCollection<User> permittedUsers = new ObservableCollection<User>();
         public ObservableCollection<User> PermittedUsers { get => permittedUsers; set { permittedUsers = value; OnPropertyChanged(); } }
+        public RemoveUserFromListCommand RemoveUserFromListCommand { get; set; }
 
         public CategoryViewModelNew()
         {
+            RemoveUserFromListCommand = new RemoveUserFromListCommand(PermittedUsers);
             var user = ObjectRepository.DataProvider.CurrentUser;
             PermittedUsers.Add(user);
         }

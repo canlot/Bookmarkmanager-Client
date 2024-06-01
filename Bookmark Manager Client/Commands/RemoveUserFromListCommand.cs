@@ -20,14 +20,16 @@ namespace Bookmark_Manager_Client.Commands
 
         public bool CanExecute(object parameter)
         {
-            
-            throw new NotImplementedException();
+
+            if (parameter is User && (parameter as User).ID != ObjectRepository.DataProvider.CurrentUser.ID)
+                return true;
+            return false;
         }
 
         public void Execute(object parameter)
         {
-            
-            throw new NotImplementedException();
+            if (parameter is User && (parameter as User).ID != ObjectRepository.DataProvider.CurrentUser.ID)
+                users.Remove(parameter as User);
         }
     }
 }

@@ -11,6 +11,7 @@ using Bookmark_Manager_Client.Utils;
 using Windows.UI.Xaml.Media.Animation;
 using System.Threading;
 using System.Windows.Data;
+using Bookmark_Manager_Client.Commands;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -55,9 +56,12 @@ namespace Bookmark_Manager_Client.ViewModel
 
         private ObservableCollection<User> permittedUsers = new ObservableCollection<User>();
         public ObservableCollection<User> PermittedUsers { get => permittedUsers; set { permittedUsers = value; OnPropertyChanged(); } }
-        
+
+        public RemoveUserFromListCommand RemoveUserFromListCommand { get; set; }
+
         public CategoryViewModelEdit()
         {
+            RemoveUserFromListCommand = new RemoveUserFromListCommand(PermittedUsers);
             BindingOperations.EnableCollectionSynchronization(PermittedUsers, permissionLock);
         }
         
