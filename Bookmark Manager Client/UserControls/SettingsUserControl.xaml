@@ -11,7 +11,7 @@
     <UserControl.DataContext>
         <vm:SettingsViewModel MainViewModel="{StaticResource MainViewModel}"/>
     </UserControl.DataContext>
-    <TabControl Margin="10" Initialized="TabControl_Initialized">
+    <TabControl Initialized="TabControl_Initialized">
         <TabItem Header="{loc:Localization CommonString}">
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
@@ -68,7 +68,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ui:CommandBar Grid.Row="0" x:Name="UserCommandBar" Margin="5">
+            <ui:CommandBar Grid.Row="0" x:Name="UserCommandBar" >
                 <ui:AppBarButton x:Name="addUserButton" Icon="Add" Label="{loc:Localization AddString}" Click="addUserButton_Click"  />
                 <ui:AppBarButton x:Name="editUserButton" Icon="Edit" Label="{loc:Localization EditString}" Click="editUserButton_Click" />
                 <ui:AppBarButton x:Name="deleteUserButton" Icon="Delete" Label="{loc:Localization DeleteString}" Click="deleteUserButton_Click" />

@@ -358,7 +358,7 @@
                         </TreeView.ItemTemplate>
                     </TreeView>
                 </Border>
-                <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="1,0,0,0">
+                <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="1,0,1,0">
                     <ListBox x:Name="listBoxBookmarks" Grid.Column="1"  ItemsSource="{Binding Bookmarks}" 
                             SelectionChanged="listBoxBookmarks_SelectionChanged" SelectedItem="{Binding SelectedBookmark, Mode=TwoWay, 
                             UpdateSourceTrigger=PropertyChanged}" SelectionMode="Extended">
