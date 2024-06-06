@@ -59,7 +59,7 @@ namespace Bookmark_Manager_Client.ViewModel
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
             Task.Run(async () => { await Task.Delay(5000); cancellationTokenSource.Cancel(); });
-
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
             var result = Task.Run(async () =>
             {
 
