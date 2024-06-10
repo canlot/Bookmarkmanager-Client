@@ -98,43 +98,35 @@ namespace Bookmark_Manager_Client.DataProvider
             var result = await client.ExecuteAsync<T>(request);
             if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
+                await LoginAsync();
                 goto retry;
             }
             return result;
         }
-
+        private async Task<bool> MakeRequestAsync(RestRequest request)
+        {
+            retry:
+            var result = await client.ExecuteAsync(request);
+            if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                await LoginAsync();
+                goto retry;
+            }
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+                return false;
+            else
+                return true;
+        }
         public async Task<IList<Category>> GetCategoriesAsync(uint id = 0)
         {
-            /*
-            Func<Task<RestResponse<List<Category>>>> sdg = async () =>
-            {
-
-                RestRequest request;
-                if (id == 0)
-                    request = new RestRequest("categories/", Method.Get);
-                else
-                    request = new RestRequest("categories/" + id.ToString() + "/", Method.Get);
-
-
-                request.AddHeader("Cache-Control", "no-cache");
-
-                var response = await client.ExecuteAsync<List<Category>>(request);
-                return response;
-            };
-            */
-            //var data = await MakeRequestAsync<List<Category>>(sdg);
-            //return data.Data;
             RestRequest request;
             if (id == 0)
                 request = new RestRequest("categories/", Method.Get);
             else
                 request = new RestRequest("categories/" + id.ToString() + "/", Method.Get);
 
-
             request.AddHeader("Cache-Control", "no-cache");
             return (await MakeRequestAsync<List<Category>>(request)).Data;
-
-
 
         }
 
@@ -142,20 +134,20 @@ namespace Bookmark_Manager_Client.DataProvider
         {
             var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            return await client.GetAsync<List<Bookmark>>(request);
+            return (await MakeRequestAsync<List<Bookmark>>(request)).Data;
         
         }
         public async Task<IList<User>> GetPermittedUsersAsync(uint id)
         {
             var request = new RestRequest("categories/" + id.ToString() + "/permissions/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            return await client.GetAsync<List<User>>(request);
+            return (await MakeRequestAsync<List<User>>(request)).Data;
         }
         public async Task<IList<User>> GetAllUsersAsync()
         {
             var request = new RestRequest("/users/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            return await client.GetAsync<List<User>>(request);
+            return (await MakeRequestAsync<List<User>>(request)).Data;
         }
         public async Task<bool> AddCategoryAsync(Category category)
         {
