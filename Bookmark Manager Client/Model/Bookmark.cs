@@ -34,10 +34,12 @@ namespace Bookmark_Manager_Client.Model
         public DateTime CreateDate { get => createDate; set { createDate = value; OnPropertyChanged(); } }
 
         public OpenInBrowserCommand OpenInBrowserCommand { get; set; }
+        public CopyToClipboardCommand CopyToClipboardCommand { get; set; }
 
         public Bookmark() 
         {
             OpenInBrowserCommand = new OpenInBrowserCommand();
+            CopyToClipboardCommand = new CopyToClipboardCommand();
         }
     }
 }

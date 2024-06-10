@@ -10,6 +10,9 @@ using RestSharp.Serializers.NewtonsoftJson;
 using Bookmark_Manager_Client.Model;
 using Newtonsoft.Json;
 using System.Threading;
+using System.Net.Http;
+using System.Windows.Documents;
+using System.Net.Http.Headers;
 
 namespace Bookmark_Manager_Client.DataProvider 
 {
@@ -70,48 +73,69 @@ namespace Bookmark_Manager_Client.DataProvider
         {
             
         }
-        public async Task<bool> SetUpConnectionAsync()
-        {
-            var options = new RestClientOptions(FullUrl)
-            {
-                Authenticator = new HttpBasicAuthenticator(UserName, Password, Encoding.UTF8)
-            };
-            client = new RestClient(options);
 
-            //JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings();
-            //jsonSerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-
-            //client.UseNewtonsoftJson(jsonSerializerSettings);
-            
-
-            try
-            {
-                currentUser = await getCurrentUserAsync();
-                return true;
-            }
-            catch (Exception ex) 
-            {
-                return false;
-            }
-        }
         private async Task<User> getCurrentUserAsync()
         {
             var request = new RestRequest("/currentuser", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
             return await client.GetAsync<User>(request);
         }
+
+        private async Task<RestResponse<T>> MakeRequestAsync<T>(Func<Task<RestResponse<T>>> func)
+        {
+            retry:
+            var result = await func();
+            if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized) 
+            {
+                goto retry;
+            }
+            return result;
+        }
+
+        private async Task<RestResponse<T>> MakeRequestAsync<T>(RestRequest request)
+        {
+            retry:
+            var result = await client.ExecuteAsync<T>(request);
+            if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                goto retry;
+            }
+            return result;
+        }
+
         public async Task<IList<Category>> GetCategoriesAsync(uint id = 0)
         {
+            /*
+            Func<Task<RestResponse<List<Category>>>> sdg = async () =>
+            {
+
+                RestRequest request;
+                if (id == 0)
+                    request = new RestRequest("categories/", Method.Get);
+                else
+                    request = new RestRequest("categories/" + id.ToString() + "/", Method.Get);
+
+
+                request.AddHeader("Cache-Control", "no-cache");
+
+                var response = await client.ExecuteAsync<List<Category>>(request);
+                return response;
+            };
+            */
+            //var data = await MakeRequestAsync<List<Category>>(sdg);
+            //return data.Data;
             RestRequest request;
-            if(id == 0)
+            if (id == 0)
                 request = new RestRequest("categories/", Method.Get);
             else
                 request = new RestRequest("categories/" + id.ToString() + "/", Method.Get);
 
+
             request.AddHeader("Cache-Control", "no-cache");
-            var list = await client.GetAsync<List<Category>>(request);
-            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-            return list;
+            return (await MakeRequestAsync<List<Category>>(request)).Data;
+
+
+
         }
 
         public async Task<IList<Bookmark>> GetBookmarksAsync( uint id)

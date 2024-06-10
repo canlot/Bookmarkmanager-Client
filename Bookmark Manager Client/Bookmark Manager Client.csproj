@@ -97,6 +97,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\ChangeUserControlCommand.cs" />
+    <Compile Include="Commands\CopyToClipboardCommand.cs" />
     <Compile Include="Commands\OpenInBrowserCommand.cs" />
     <Compile Include="Commands\RemoveUserFromListCommand.cs" />
     <Compile Include="Converters\BoolInverterConverter.cs" />
