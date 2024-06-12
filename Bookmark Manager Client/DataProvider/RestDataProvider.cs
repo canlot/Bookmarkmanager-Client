@@ -103,7 +103,7 @@ namespace Bookmark_Manager_Client.DataProvider
             }
             return result;
         }
-        private async Task<bool> MakeRequestAsync(RestRequest request)
+        private async Task<RestResponse> MakeRequestAsync(RestRequest request)
         {
             retry:
             var result = await client.ExecuteAsync(request);
@@ -112,10 +112,7 @@ namespace Bookmark_Manager_Client.DataProvider
                 await LoginAsync();
                 goto retry;
             }
-            if (result.StatusCode != System.Net.HttpStatusCode.OK)
-                return false;
-            else
-                return true;
+            return result;
         }
         public async Task<IList<Category>> GetCategoriesAsync(uint id = 0)
         {
@@ -154,18 +151,16 @@ namespace Bookmark_Manager_Client.DataProvider
             var request = new RestRequest("/categories/", RestSharp.Method.Post);
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(category);
-            try
+
+            var response = await MakeRequestAsync<Category>(request);
+            if (response.IsSuccessful)
             {
-                var cat = await client.PostAsync<Category>(request);
-                category.ID = cat.ID;
-                category.OwnerID = cat.OwnerID;
-                category.Shared = cat.Shared;
+                category.ID = response.Data.ID;
+                category.OwnerID = response.Data.OwnerID;
+                category.Shared = response.Data.Shared;
                 return true;
             }
-            catch(Exception ex)
-            {
-                return false;
-            }
+            return false;
             
         }
         public async Task<bool> ChangeCategoryAsync(Category category)
@@ -174,24 +169,22 @@ namespace Bookmark_Manager_Client.DataProvider
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(category);
 
-            try
+            var response = await MakeRequestAsync<Category>(request);
+            if (response.IsSuccessful)
             {
-                var cat = await client.PutAsync<Category>(request);
-                category.ID = cat.ID;
-                category.OwnerID = cat.OwnerID;
+                category.ID = response.Data.ID;
+                category.OwnerID = response.Data.OwnerID;
+                category.Shared = response.Data.Shared;
                 return true;
             }
-            catch(Exception ex) 
-            {
-                return false;
-            }
+            return false;
 
         }
         public async Task<bool> DeleteCategoryAsync(uint categoryId)
         {
             var request = new RestRequest("/categories/" + categoryId.ToString() + "/", RestSharp.Method.Delete);
-            var response = await client.DeleteAsync(request);
-            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            var response = await MakeRequestAsync(request);
+            if(response.IsSuccessful)
             {
                 return true;
             }
