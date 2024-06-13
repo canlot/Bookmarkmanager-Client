@@ -115,6 +115,15 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Copy ähnelt.
+        /// </summary>
+        public static string ButtonBookmarkCopyString {
+            get {
+                return ResourceManager.GetString("ButtonBookmarkCopyString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Create bookmark ähnelt.
         /// </summary>
         public static string ButtonBookmarkCreateString {
