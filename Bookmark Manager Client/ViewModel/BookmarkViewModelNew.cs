@@ -53,9 +53,9 @@ namespace Bookmark_Manager_Client.ViewModel
 
         public BookmarkViewModelNew()
         {
-            Tags.Add("Test");
-            Tags.Add("Was");
-            Tags.Add("Geht");
+            //Tags.Add("Test");
+            //Tags.Add("Was");
+            //Tags.Add("Geht");
 
         }
 
