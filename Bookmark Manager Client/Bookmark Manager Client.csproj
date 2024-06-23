@@ -165,6 +165,7 @@
       <DependentUpon>UserUserControlEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\CategoryUtils.cs" />
+    <Compile Include="Utils\IconUtils.cs" />
     <Compile Include="ViewModel\BookmarkViewModelEdit.cs" />
     <Compile Include="ViewModel\BookmarkViewModelNew.cs" />
     <Compile Include="ViewModel\CategoryViewModelEdit.cs" />
