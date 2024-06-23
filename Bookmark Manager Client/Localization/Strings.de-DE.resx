@@ -135,6 +135,9 @@
   <data name="BookmarkDeleteTextString02" xml:space="preserve">
     <value>endgültig löschen?</value>
   </data>
+  <data name="ButtonBookmarkCopyString" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
   <data name="ButtonBookmarkCreateString" xml:space="preserve">
     <value>Lesezeichen erstellen</value>
   </data>

@@ -13,6 +13,8 @@ using System.Threading;
 using System.Net.Http;
 using System.Windows.Documents;
 using System.Net.Http.Headers;
+using CefSharp.DevTools.Network;
+using CefSharp;
 
 namespace Bookmark_Manager_Client.DataProvider 
 {
@@ -94,28 +96,50 @@ namespace Bookmark_Manager_Client.DataProvider
 
         private async Task<RestResponse<T>> MakeRequestAsync<T>(RestRequest request)
         {
-            retry:
-            var result = await client.ExecuteAsync<T>(request);
-            if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            int retryMax = 1;
+            int trys = 0;
+
+            while(true)
             {
-                await LoginAsync();
-                goto retry;
+                var response = await client.ExecuteAsync<T>(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    if(trys < retryMax)
+                    {
+                        await LoginAsync();
+                        trys++;
+                        continue;
+                    }
+                    else
+                        return response;
+                }
+                
+                return response;
             }
-            return result;
+            
         }
-        private async Task<bool> MakeRequestAsync(RestRequest request)
+        private async Task<RestResponse> MakeRequestAsync(RestRequest request)
         {
-            retry:
-            var result = await client.ExecuteAsync(request);
-            if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            int retryMax = 1;
+            int trys = 0;
+
+            while(true)
             {
-                await LoginAsync();
-                goto retry;
+                var response = await client.ExecuteAsync(request);
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    if (trys < retryMax)
+                    {
+                        await LoginAsync();
+                        trys++;
+                        continue;
+                    }
+                    else
+                        return response;
+                }
+                return response;
             }
-            if (result.StatusCode != System.Net.HttpStatusCode.OK)
-                return false;
-            else
-                return true;
         }
         public async Task<IList<Category>> GetCategoriesAsync(uint id = 0)
         {
@@ -154,18 +178,16 @@ namespace Bookmark_Manager_Client.DataProvider
             var request = new RestRequest("/categories/", RestSharp.Method.Post);
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(category);
-            try
+
+            var response = await MakeRequestAsync<Category>(request);
+            if (response.IsSuccessful)
             {
-                var cat = await client.PostAsync<Category>(request);
-                category.ID = cat.ID;
-                category.OwnerID = cat.OwnerID;
-                category.Shared = cat.Shared;
+                category.ID = response.Data.ID;
+                category.OwnerID = response.Data.OwnerID;
+                category.Shared = response.Data.Shared;
                 return true;
             }
-            catch(Exception ex)
-            {
-                return false;
-            }
+            return false;
             
         }
         public async Task<bool> ChangeCategoryAsync(Category category)
@@ -174,24 +196,22 @@ namespace Bookmark_Manager_Client.DataProvider
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(category);
 
-            try
+            var response = await MakeRequestAsync<Category>(request);
+            if (response.IsSuccessful)
             {
-                var cat = await client.PutAsync<Category>(request);
-                category.ID = cat.ID;
-                category.OwnerID = cat.OwnerID;
+                category.ID = response.Data.ID;
+                category.OwnerID = response.Data.OwnerID;
+                category.Shared = response.Data.Shared;
                 return true;
             }
-            catch(Exception ex) 
-            {
-                return false;
-            }
+            return false;
 
         }
         public async Task<bool> DeleteCategoryAsync(uint categoryId)
         {
             var request = new RestRequest("/categories/" + categoryId.ToString() + "/", RestSharp.Method.Delete);
-            var response = await client.DeleteAsync(request);
-            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            var response = await MakeRequestAsync(request);
+            if(response.IsSuccessful)
             {
                 return true;
             }
@@ -204,16 +224,13 @@ namespace Bookmark_Manager_Client.DataProvider
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(bookmark);
 
-            try
+            var response = await MakeRequestAsync<Category>(request);
+            if (response.IsSuccessful)
             {
-                var bm = await client.PostAsync<Category>(request);
-                bookmark.ID = bm.ID;
+                bookmark.ID = response.Data.ID;
                 return true;
             }
-            catch(Exception ex)
-            {
-                return false;
-            }
+            return false;
             
         }
         public async Task<bool> ChangePermissionsAsync(ICollection<User> users, Category category)
@@ -221,20 +238,13 @@ namespace Bookmark_Manager_Client.DataProvider
             var request = new RestRequest("/categories/" + category.ID + "/permissions/");
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(users);
-            try
-            {
-                var response = await client.PutAsync(request);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    return true;
-                }
-                else
-                    return false;
-            }
-            catch(Exception ex)
-            {
+
+            var response = await MakeRequestAsync(request);
+
+            if (response.IsSuccessStatusCode)
+                return true;
+            else
                 return false;
-            }
             
         }
 
@@ -245,19 +255,12 @@ namespace Bookmark_Manager_Client.DataProvider
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(bookmark);
 
-            try
-            {
-                var response = await client.PutAsync(request);
-                if (response.IsSuccessStatusCode)
-                    return true;
-                else
-                    return false;
+            var response = await MakeRequestAsync(request);
 
-            }
-            catch (Exception ex)
-            {
+            if (response.IsSuccessStatusCode)
+                return true;
+            else
                 return false;
-            }
 
         }
 
@@ -267,14 +270,15 @@ namespace Bookmark_Manager_Client.DataProvider
             request.AddHeader("Cache-Control", "no-cache");
             request.RequestFormat = DataFormat.Json;
 
+            
             try
             {
-                var response = await client.DeleteAsync(request);
+                var response = await MakeRequestAsync(request);
+
                 if (response.IsSuccessStatusCode)
                     return true;
                 else
                     return false;
-
             }
             catch (Exception ex)
             {
@@ -289,8 +293,13 @@ namespace Bookmark_Manager_Client.DataProvider
             request.RequestFormat = DataFormat.Json;
             try
             {
-                var response = await client.GetAsync<List<User>>(request);
-                return response;
+                var response = await MakeRequestAsync<List<User>>(request);
+
+                if (response.IsSuccessStatusCode)
+                    return response.Data;
+                else
+                    return null;
+                
             }
             catch (Exception ex)
             {
@@ -306,8 +315,12 @@ namespace Bookmark_Manager_Client.DataProvider
             request.RequestFormat = DataFormat.Json;
             try
             {
-                var response = await client.GetAsync<List<Category>>(request);
-                return response;
+                var response = await MakeRequestAsync<List<Category>>(request);
+
+                if (response.IsSuccessStatusCode)
+                    return response.Data;
+                else
+                    return null;
             }
             catch (Exception ex)
             {
@@ -322,8 +335,12 @@ namespace Bookmark_Manager_Client.DataProvider
             request.RequestFormat = DataFormat.Json;
             try
             {
-                var response = await client.GetAsync<List<Bookmark>>(request);
-                return response;
+                var response = await MakeRequestAsync<List<Bookmark>>(request);
+
+                if (response.IsSuccessStatusCode)
+                    return response.Data;
+                else
+                    return null;
             }
             catch (Exception ex)
             {
@@ -339,8 +356,12 @@ namespace Bookmark_Manager_Client.DataProvider
 
             try
             {
-                var answer = await client.PutAsync(request);
-                return true;
+                var response = await MakeRequestAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
             }
             catch (Exception ex)
             {
@@ -358,9 +379,15 @@ namespace Bookmark_Manager_Client.DataProvider
 
             try
             {
-                var u = await client.PostAsync<User>(request);
-                user.ID = u.ID;
-                return true;
+                var response = await MakeRequestAsync<User>(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    user.ID = response.Data.ID;
+                    return true;
+                }
+                else
+                    return false;
             }
             catch(Exception ex)
             {
@@ -377,7 +404,10 @@ namespace Bookmark_Manager_Client.DataProvider
 
             try
             {
-                var answer = await client.PutAsync<User>(request);
+                var response = await MakeRequestAsync<User>(request);
+
+                if (!response.IsSuccessStatusCode)
+                    return false;
             }
             catch(Exception ex)
             {
@@ -393,8 +423,11 @@ namespace Bookmark_Manager_Client.DataProvider
 
             try
             {
-                var answer = await client.PutAsync(request);
-                return true;
+                var response = await MakeRequestAsync(request);
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
             }
             catch(Exception ex)
             {
@@ -410,8 +443,12 @@ namespace Bookmark_Manager_Client.DataProvider
             
             try
             {
-                var answer = await client.DeleteAsync(request);
-                return true;
+                var response = await MakeRequestAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
             }
             catch(Exception ex)
             {
