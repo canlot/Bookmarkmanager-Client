@@ -1,4 +1,5 @@
 ﻿using Bookmark_Manager_Client.Model;
+using Bookmark_Manager_Client.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -106,6 +107,8 @@ namespace Bookmark_Manager_Client.ViewModel
             };
 
             if(!await ObjectRepository.DataProvider.AddBookmarkAsync(bookmark)) return false;
+
+            await ObjectRepository.DataProvider.UploadIconAsync(bookmark, new IconUtils().DownloadIcon(Url));
 
             MainViewModel.Bookmarks.Add(bookmark);
 

@@ -14,10 +14,11 @@ namespace Bookmark_Manager_Client.Utils
         public string DownloadIcon(string url)
         {
             var fetcher = new Fetcher();
-            var image = fetcher.FetchClosest(new Uri(url), new IconSize(32, 32));
-            var iconPath = ObjectRepository.AppConfiguration.UploadPath + "\\" + "upload.png";
+            var image = fetcher.FetchClosest(new Uri(url), new IconSize(64, 64));
+            var iconPath = ObjectRepository.AppConfiguration.UploadPath + @"\" + "upload.png";
             image.Save(iconPath);
-
+            image.Dispose();
+            
             return iconPath;
         }
     }

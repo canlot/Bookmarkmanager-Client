@@ -15,6 +15,7 @@ using System.Windows.Documents;
 using System.Net.Http.Headers;
 using CefSharp.DevTools.Network;
 using CefSharp;
+using System.IO;
 
 namespace Bookmark_Manager_Client.DataProvider 
 {
@@ -285,7 +286,60 @@ namespace Bookmark_Manager_Client.DataProvider
                 return false;
             }
         }
+        public async Task<bool> UploadIconAsync(Bookmark bookmark, string iconPath)
+        {
+            var request = new RestRequest("/categories/" + bookmark.CategoryID + "/bookmarks/" + bookmark.ID + "/icon", Method.Post);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.AddHeader("Content-Type", "image/png");
+            var iconbytes = File.ReadAllBytes(iconPath);
+            request.AddBody(iconbytes,ContentType.Binary);
+            
+            request.RequestFormat = DataFormat.Binary;
 
+
+            try
+            {
+                var response = await MakeRequestAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public async Task<bool> DownloadIconAsync(Bookmark bookmark)
+        {
+            var request = new RestRequest("/categories/" + bookmark.CategoryID + "/bookmarks/" + bookmark.ID + "/icon", Method.Get);
+            request.AddHeader("Cache-Control", "no-cache");
+            request.RequestFormat = DataFormat.Binary;
+
+            try
+            {
+                var response = await MakeRequestAsync<byte[]>(request);
+
+                if (!response.IsSuccessStatusCode)
+                    return false;
+
+                var iconPath = ObjectRepository.AppConfiguration.IconsPath + @"\" + bookmark.ID.ToString() + ".png";
+
+                if (!File.Exists(iconPath))
+                    File.WriteAllBytes(iconPath, response.RawBytes);
+                //File.WriteAllText(iconPath, response.Content);
+
+                bookmark.IconPath = iconPath;
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
         public async Task<IList<User>> SearchUsersAsync(string username)
         {
             var request = new RestRequest("/users/search/" + username, Method.Get);

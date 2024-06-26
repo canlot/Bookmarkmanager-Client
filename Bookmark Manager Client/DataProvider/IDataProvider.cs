@@ -24,6 +24,8 @@ namespace Bookmark_Manager_Client.DataProvider
         Task<bool> ChangeCategoryAsync(Category category);
         Task<bool> DeleteCategoryAsync(uint categoryId);
         Task<bool> AddBookmarkAsync(Bookmark bookmark);
+        Task<bool> UploadIconAsync(Bookmark bookmark, string iconPath);
+        Task<bool> DownloadIconAsync(Bookmark bookmark);
         Task<bool> ChangeBookmarkAsync(Bookmark bookmark);
         Task<bool> DeleteBookmarkAsync(Bookmark bookmark);
         Task<bool> ChangePermissionsAsync(ICollection<User> users, Category category);

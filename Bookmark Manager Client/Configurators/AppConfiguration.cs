@@ -73,9 +73,10 @@ namespace Bookmark_Manager_Client.Configurators
         public AppConfiguration()
         {
             LoadConfig();
+            var currentDir = Directory.GetCurrentDirectory();
             clientCachePath = "cache";
-            iconsPath = clientCachePath + "\\" + "icons";
-            uploadPath = clientCachePath + "\\" + "upload";
+            iconsPath = currentDir + @"\" + clientCachePath + @"\" + "icons";
+            uploadPath = currentDir + @"\" +  clientCachePath + @"\" + "upload";
             createPathIfNotExist(clientCachePath);
             createPathIfNotExist(iconsPath);
             createPathIfNotExist(uploadPath);

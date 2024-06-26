@@ -184,6 +184,7 @@ namespace Bookmark_Manager_Client.ViewModel
             lock(bookmarklock) Bookmarks.Clear();
             foreach(var bookmark in await ObjectRepository.DataProvider.GetBookmarksAsync(category.ID))
             {
+                await ObjectRepository.DataProvider.DownloadIconAsync(bookmark);
                 lock(bookmarklock) Bookmarks.Add(bookmark);
             }
         }
@@ -203,7 +204,10 @@ namespace Bookmark_Manager_Client.ViewModel
             var bookmarkList = await ObjectRepository.DataProvider.SearchBookmarksAsync(searchString);
             if (bookmarkList == null) return;
             foreach (var bookmark in bookmarkList)
-                lock(bookmarklock) Bookmarks.Add(bookmark);
+            {
+                await ObjectRepository.DataProvider.DownloadIconAsync(bookmark);
+                lock (bookmarklock) Bookmarks.Add(bookmark);
+            }
         }
         public async Task MoveBookmarksAsync()
         {

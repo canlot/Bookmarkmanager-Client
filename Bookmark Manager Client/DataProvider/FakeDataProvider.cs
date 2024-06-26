@@ -508,5 +508,15 @@ namespace Bookmark_Manager_Client.DataProvider
 
             return true;
         }
+
+        public Task<bool> UploadIconAsync(Bookmark bookmark, string iconPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DownloadIconAsync(Bookmark bookmark)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
