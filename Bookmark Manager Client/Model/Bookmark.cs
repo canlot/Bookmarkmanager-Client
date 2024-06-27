@@ -33,14 +33,15 @@ namespace Bookmark_Manager_Client.Model
         private DateTime createDate;
         public DateTime CreateDate { get => createDate; set { createDate = value; OnPropertyChanged(); } }
 
-        private string iconPath;
+        private string iconName;
 
-        public string IconPath
+        public string IconName
         {
-            get { return iconPath; }
-            set { iconPath = value; OnPropertyChanged(); }
+            get { return iconName; }
+            set { iconName = value; OnPropertyChanged(); OnPropertyChanged("IconPath"); }
         }
 
+        public string IconPath => ObjectRepository.AppConfiguration.IconsPath + @"\" + IconName;
 
         public OpenInBrowserCommand OpenInBrowserCommand { get; set; }
         public CopyToClipboardCommand CopyToClipboardCommand { get; set; }
