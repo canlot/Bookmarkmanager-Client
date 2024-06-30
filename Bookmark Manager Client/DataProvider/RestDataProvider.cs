@@ -16,6 +16,7 @@ using System.Net.Http.Headers;
 using CefSharp.DevTools.Network;
 using CefSharp;
 using System.IO;
+using Bookmark_Manager_Client.Utils;
 
 namespace Bookmark_Manager_Client.DataProvider 
 {
@@ -302,7 +303,21 @@ namespace Bookmark_Manager_Client.DataProvider
                 var response = await MakeRequestAsync(request);
 
                 if (response.IsSuccessStatusCode)
+                {
+                    var iconName = IconUtils.ComputeIconHash(iconPath) + ".png";
+                    var iconPathNew = ObjectRepository.AppConfiguration.IconsPath + @"\" + iconName;
+                    try
+                    {
+                        if(!File.Exists(iconPathNew))
+                            File.Move(iconPath, iconPathNew);
+                        bookmark.IconName = iconName;
+                    }
+                    catch
+                    {
+
+                    }
                     return true;
+                }
                 else
                     return false;
             }
@@ -313,6 +328,10 @@ namespace Bookmark_Manager_Client.DataProvider
         }
         public async Task<bool> DownloadIconAsync(Bookmark bookmark)
         {
+            if (bookmark.IconName == null || bookmark.IconName == "") return false;
+
+            if (File.Exists(bookmark.IconPath)) return true;
+                    
             var request = new RestRequest("/categories/" + bookmark.CategoryID + "/bookmarks/" + bookmark.ID + "/icon", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
             request.RequestFormat = DataFormat.Binary;
@@ -324,13 +343,9 @@ namespace Bookmark_Manager_Client.DataProvider
                 if (!response.IsSuccessStatusCode)
                     return false;
 
-                var iconPath = ObjectRepository.AppConfiguration.IconsPath + @"\" + bookmark.ID.ToString() + ".png";
+                if (!File.Exists(bookmark.IconPath))
+                    File.WriteAllBytes(bookmark.IconPath, response.RawBytes);
 
-                if (!File.Exists(iconPath))
-                    File.WriteAllBytes(iconPath, response.RawBytes);
-                //File.WriteAllText(iconPath, response.Content);
-
-                bookmark.IconPath = iconPath;
                 return true;
 
             }

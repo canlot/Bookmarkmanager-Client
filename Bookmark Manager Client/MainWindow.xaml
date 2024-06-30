@@ -397,7 +397,7 @@
                                     <!--
                                         <ui:FontIcon Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" FontFamily="Segoe MDL2 Assets" Glyph="&#xE909;" Foreground="{StaticResource IconColor}"/>
                                     -->
-                                    <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="{Binding IconName}" Width="32" Height="32"/>
+                                    <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="{Binding IconPath}" Width="32" Height="32"/>
                                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Title}" FontSize="14" FontFamily="Segoe UI" Margin="5" TextWrapping="Wrap"/>
                                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Url}" Margin="5" FontSize="12" FontStyle="Italic"></TextBlock>
                                     <Border Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource CommandBarBackground}">

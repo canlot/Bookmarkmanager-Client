@@ -108,7 +108,7 @@ namespace Bookmark_Manager_Client.ViewModel
 
             if(!await ObjectRepository.DataProvider.AddBookmarkAsync(bookmark)) return false;
 
-            await ObjectRepository.DataProvider.UploadIconAsync(bookmark, new IconUtils().DownloadIcon(Url));
+            await ObjectRepository.DataProvider.UploadIconAsync(bookmark, IconUtils.DownloadIcon(Url));
 
             MainViewModel.Bookmarks.Add(bookmark);
 
