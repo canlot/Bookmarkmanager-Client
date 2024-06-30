@@ -36,7 +36,7 @@ namespace Bookmark_Manager_Client.ViewModel
         public Category Category { get => category; set { category = value; OnPropertyChanged(); } }
 
         private string url;
-        public string Url { get => url; set { grabTitleFromWeb(value); url = value; OnPropertyChanged();  } }
+        public string Url { get => url; set { if (Title == "") grabTitleFromWeb(value); url = value; OnPropertyChanged();  } }
         private string title;
         public string Title { get => title; set { title = value; OnPropertyChanged(); } }
 
@@ -108,7 +108,16 @@ namespace Bookmark_Manager_Client.ViewModel
 
             if(!await ObjectRepository.DataProvider.AddBookmarkAsync(bookmark)) return false;
 
-            await ObjectRepository.DataProvider.UploadIconAsync(bookmark, IconUtils.DownloadIcon(Url));
+
+            try
+            {
+                var iconPath = IconUtils.DownloadIcon(Url);
+                await ObjectRepository.DataProvider.UploadIconAsync(MainViewModel.SelectedBookmark, iconPath);
+            }
+            catch (Exception e)
+            {
+
+            }
 
             MainViewModel.Bookmarks.Add(bookmark);
 

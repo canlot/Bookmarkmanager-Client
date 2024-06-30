@@ -1,4 +1,5 @@
 ﻿using Bookmark_Manager_Client.Model;
+using Bookmark_Manager_Client.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,7 +38,7 @@ namespace Bookmark_Manager_Client.ViewModel
         public Category Category { get => category; set { category = value; OnPropertyChanged(); } }
 
         private string url;
-        public string Url { get => url; set { grabTitleFromWeb(value); url = value; OnPropertyChanged(); } }
+        public string Url { get => url; set { if (Title == "") grabTitleFromWeb(value); url = value; OnPropertyChanged(); } }
         private string title;
         public string Title { get => title; set { title = value; OnPropertyChanged(); } }
 
@@ -92,6 +93,16 @@ namespace Bookmark_Manager_Client.ViewModel
 
 
             if (!await ObjectRepository.DataProvider.ChangeBookmarkAsync(MainViewModel.SelectedBookmark)) return false;
+            try
+            {
+                var iconPath = IconUtils.DownloadIcon(Url);
+                await ObjectRepository.DataProvider.UploadIconAsync(MainViewModel.SelectedBookmark, iconPath);
+            }
+            catch (Exception e) 
+            {
+
+            }
+
             var bookmark = MainViewModel.Bookmarks.Single(x => x.ID == MainViewModel.SelectedBookmark.ID);
 
             MainViewModel.SetDefaultView();
