@@ -38,7 +38,7 @@ namespace Bookmark_Manager_Client.ViewModel
         public Category Category { get => category; set { category = value; OnPropertyChanged(); } }
 
         private string url;
-        public string Url { get => url; set { if (Title == "") { grabTitleFromWeb(value); } url = value; OnPropertyChanged(); } }
+        public string Url { get => url; set { if (Title == null || Title == "") { grabTitleFromWeb(value); } url = value; OnPropertyChanged(); } }
         private string title;
         public string Title { get => title; set { title = value; OnPropertyChanged(); } }
 
