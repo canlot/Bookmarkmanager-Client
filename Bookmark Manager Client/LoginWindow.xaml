@@ -96,7 +96,7 @@
             <Label Content="{loc:Localization PasswordString}" Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border  Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="4" Style="{StaticResource ColumnStyleRight}">
-            <PasswordBox x:Name="PasswordBoxPassword" />
+            <PasswordBox x:Name="PasswordBoxPassword" KeyDown="PasswordBoxPassword_KeyDown"  />
         </Border>
 
 

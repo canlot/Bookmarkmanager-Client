@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Animation;
 
@@ -30,8 +31,13 @@ namespace Bookmark_Manager_Client.Model
         private string description;
         public string Description { get => description; set { description = value; OnPropertyChanged(); } }
 
-        private DateTime createDate;
-        public DateTime CreateDate { get => createDate; set { createDate = value; OnPropertyChanged(); } }
+        private DateTime createdAt;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DateTime CreatedAt { get => createdAt; set { createdAt = value; OnPropertyChanged(); } }
+
+        private DateTime updatedAt;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DateTime UpdatedAt { get => updatedAt; set { updatedAt = value; OnPropertyChanged(); } }
 
         private string iconName;
 
@@ -48,6 +54,7 @@ namespace Bookmark_Manager_Client.Model
 
         public Bookmark() 
         {
+            CreatedAt = DateTime.Now;
             OpenInBrowserCommand = new OpenInBrowserCommand();
             CopyToClipboardCommand = new CopyToClipboardCommand();
         }

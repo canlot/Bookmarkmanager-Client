@@ -17,9 +17,27 @@ using CefSharp.DevTools.Network;
 using CefSharp;
 using System.IO;
 using Bookmark_Manager_Client.Utils;
+using System.Diagnostics;
+using System.Text.Json;
+using RestSharp.Serializers.Json;
+using HandyControl.Tools.Extension;
 
 namespace Bookmark_Manager_Client.DataProvider 
 {
+    public class DateTimeConverterUsingDateTimeParse : System.Text.Json.Serialization.JsonConverter<DateTime>
+    {
+        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            Debug.Assert(typeToConvert == typeof(DateTime));
+            var stringDate = reader.GetString();
+            return DateTime.Parse(stringDate);
+        }
+
+        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+        {
+            writer.WriteStringValue(value.ToString());
+        }
+    }
     public class RestDataProvider : IDataProvider
     {
         private static RestDataProvider instance;
@@ -62,6 +80,13 @@ namespace Bookmark_Manager_Client.DataProvider
             {
                 Authenticator = new JwtAuthenticator(answer.Content)
             };
+            //var jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+
+            //jsonSerializerOptions.Converters.Add(new DateTimeConverterUsingDateTimeParse());
+
+
+
+            //client = new RestClient(options, configureSerialization: s => s.UseSystemTextJson(jsonSerializerOptions));
             client = new RestClient(options);
             try
             {
@@ -160,7 +185,8 @@ namespace Bookmark_Manager_Client.DataProvider
         {
             var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
-            return (await MakeRequestAsync<List<Bookmark>>(request)).Data;
+            var response = await MakeRequestAsync<List<Bookmark>>(request);
+            return response.Data;
         
         }
         public async Task<IList<User>> GetPermittedUsersAsync(uint id)

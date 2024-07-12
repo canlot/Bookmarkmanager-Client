@@ -8,6 +8,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:controller="clr-namespace:Bookmark_Manager_Client.Controller"
+        xmlns:converter="clr-namespace:Bookmark_Manager_Client.Converters"
         xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
         DataContext="{StaticResource MainViewModel}"
         mc:Ignorable="d"
@@ -29,7 +30,7 @@
             </Setter>
         </Style>
 
-
+        <converter:DateTimeConverter x:Key="DateTimeConverter"/>
 
 
         <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Fill" Color="#FF595959"/>
@@ -393,6 +394,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="48" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="100"/>
                                     </Grid.ColumnDefinitions>
                                     <!--
                                         <ui:FontIcon Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" FontFamily="Segoe MDL2 Assets" Glyph="&#xE909;" Foreground="{StaticResource IconColor}"/>
@@ -400,7 +402,8 @@
                                     <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="{Binding IconPath}" Width="32" Height="32"/>
                                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Title}" FontSize="14" FontFamily="Segoe UI" Margin="5" TextWrapping="Wrap"/>
                                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Url}" Margin="5" FontSize="12" FontStyle="Italic"></TextBlock>
-                                    <Border Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource CommandBarBackground}">
+                                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Path= CreatedAt, Converter={StaticResource DateTimeConverter}}" Margin="5" FontSize="10"/>
+                                    <Border Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource CommandBarBackground}">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" 
                                                     BorderBrush="{DynamicResource AppBarButtonBorderBrush}" CommandParameter="{Binding Url}" 

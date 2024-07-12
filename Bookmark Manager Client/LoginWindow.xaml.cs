@@ -37,5 +37,16 @@ namespace Bookmark_Manager_Client
         {
             this.Close();
         }
+
+        private async void PasswordBoxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LoginViewModel.Password = PasswordBoxPassword.Password;
+                LoginViewModel.SaveSettings();
+                if (await ObjectRepository.DataProvider.LoginAsync())
+                    this.Close();
+            }
+        }
     }
 }
