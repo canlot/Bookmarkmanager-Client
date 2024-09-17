@@ -35,6 +35,7 @@ namespace Bookmark_Manager_Client
 
         private void ButtonAbort_Click(object sender, RoutedEventArgs e)
         {
+            
             this.Close();
         }
 
