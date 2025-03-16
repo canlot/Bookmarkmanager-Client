@@ -34,6 +34,7 @@
 
     <SolidColorBrush x:Key="BookmarkSelectedColor" Color="#44e"/>
     <SolidColorBrush x:Key="BookmarkBackground" Color="#fdfdfd"/>
+    <SolidColorBrush x:Key="BookmarkSelectedBackground" Color="#f9f9fd" />
 
     <Style x:Key="DefaultListBoxItemStyleCustom" TargetType="{x:Type ListBoxItem}">
         <Setter Property="BorderBrush" Value="#cccccc"/>
@@ -70,6 +71,7 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{StaticResource BookmarkSelectedColor}"/>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{StaticResource BookmarkSelectedBackground}"/>
                             <Setter TargetName="PressedBackground" Property="Fill" Value="Transparent" />
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{StaticResource BookmarkSelectedColor}" />
                         </Trigger>
@@ -81,6 +83,7 @@
                                 <Condition Property="IsMouseOver" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{StaticResource BookmarkSelectedColor}"/>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{StaticResource BookmarkSelectedBackground}"/>
                             <Setter TargetName="PressedBackground" Property="Fill" Value="{DynamicResource ListBoxItemBackgroundSelected}" />
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{StaticResource BookmarkSelectedColor}" />
                         </MultiTrigger>
@@ -92,6 +95,7 @@
                                 <Condition Property="IsMouseOver" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{StaticResource BookmarkSelectedColor}"/>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{StaticResource BookmarkSelectedBackground}"/>
                             <Setter TargetName="PressedBackground" Property="Fill" Value="Transparent" />
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{StaticResource BookmarkSelectedColor}" />
                         </MultiTrigger>
@@ -102,6 +106,7 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{StaticResource BookmarkSelectedColor}"/>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{StaticResource BookmarkSelectedBackground}"/>
                             <Setter TargetName="PressedBackground" Property="Fill" Value="{DynamicResource ListBoxItemBackgroundSelectedPointerOver}" />
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{StaticResource BookmarkSelectedColor}" />
                         </MultiTrigger>
