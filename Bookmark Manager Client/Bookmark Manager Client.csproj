@@ -108,6 +108,7 @@
     <Compile Include="Configurators\AppConfiguration.cs" />
     <Compile Include="Controller\IPermitableObjectController.cs" />
     <Compile Include="Controller\LoginController.cs" />
+    <Compile Include="DataProvider\ResponseHandler.cs" />
     <Compile Include="DataProvider\RestDataProvider.cs" />
     <Compile Include="EventDispatcher.cs" />
     <Compile Include="IObjectReceiver.cs" />
@@ -127,6 +128,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.en-US.resx</DependentUpon>
     </Compile>
+    <Compile Include="LogEvent.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="ObjectRepository.cs" />
     <Compile Include="PortValidationRule.cs" />

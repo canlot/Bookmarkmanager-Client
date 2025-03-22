@@ -264,4 +264,13 @@
   <data name="UsersWithAccessString" xml:space="preserve">
     <value>Users with access</value>
   </data>
+  <data name="EventInfoDownloadIcon" xml:space="preserve">
+    <value>Icon download</value>
+  </data>
+  <data name="EventErrorDownloadIcon" xml:space="preserve">
+    <value>Could't download icon</value>
+  </data>
+  <data name="EventErrorDownloadTitle" xml:space="preserve">
+    <value>Could't get page title</value>
+  </data>
 </root>

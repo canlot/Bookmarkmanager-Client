@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Bookmark_Manager_Client.Localization;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -80,6 +81,7 @@ namespace Bookmark_Manager_Client.ViewModel
                     {
                         response.EnsureSuccessStatusCode();
                         string responseBody = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine(responseBody);
                         Title = Regex.Match(responseBody, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>",
                         RegexOptions.IgnoreCase).Groups["Title"].Value;
                     }
@@ -87,7 +89,8 @@ namespace Bookmark_Manager_Client.ViewModel
                 }
                 catch (HttpRequestException e)
                 {
-
+                    var errString = Localizationprovider.Instance["EventErrorDownloadTitle"];
+                    ObjectRepository.EventDispatcher.Send(new LogEvent { EventType = EventType.Error, Message = errString + ": " + e.Message });
                 }
                 finally { cancellationTokenSource.Cancel(); IsWebLoading = false; }
             });
@@ -112,11 +115,14 @@ namespace Bookmark_Manager_Client.ViewModel
             try
             {
                 var iconPath = IconUtils.DownloadIcon(Url);
+                var message = Localizationprovider.Instance["EventInfoDownloadIcon"];
+                ObjectRepository.EventDispatcher.Send(new LogEvent { EventType = EventType.Informational, Message = message });
                 await ObjectRepository.DataProvider.UploadIconAsync(bookmark, iconPath);
             }
             catch (Exception e)
             {
-
+                var message = Localizationprovider.Instance["EventErrorDownloadIcon"];
+                ObjectRepository.EventDispatcher.Send(new LogEvent { EventType = EventType.Error, Message = message });
             }
 
             MainViewModel.Bookmarks.Add(bookmark);

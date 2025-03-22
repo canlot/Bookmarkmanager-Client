@@ -73,7 +73,7 @@ namespace Bookmark_Manager_Client
                 }
 
             }
-            throw new EventNotRegisteredException();
+            //throw new EventNotRegisteredException();
         }
         public TReturn Send<T, TReturn>(T obj)
         {
@@ -85,7 +85,8 @@ namespace Bookmark_Manager_Client
                     return (receiverObject.ReceiverObject as IObjectReceiver<T, TReturn>).Receive(obj);
                 }
             }
-            throw new EventNotRegisteredException();
+            return default(TReturn);
+            //throw new EventNotRegisteredException();
         }
 
     }

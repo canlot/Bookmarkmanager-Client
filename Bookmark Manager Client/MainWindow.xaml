@@ -444,7 +444,7 @@
         <Border Grid.Row="3"  Background="#80F6F6F6">
             <StackPanel Orientation="Horizontal" Margin="3">
                 <ui:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8C9;" FontSize="12" Foreground="Red"/>
-                <Label>Warning</Label>
+                <Label Content="{Binding EventMessage}"/>
             </StackPanel>
         </Border>
     </Grid>

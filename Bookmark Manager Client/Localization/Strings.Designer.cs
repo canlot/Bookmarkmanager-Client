@@ -349,6 +349,33 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Could&apos;t download icon ähnelt.
+        /// </summary>
+        public static string EventErrorDownloadIcon {
+            get {
+                return ResourceManager.GetString("EventErrorDownloadIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Could&apos;t get page title ähnelt.
+        /// </summary>
+        public static string EventErrorDownloadTitle {
+            get {
+                return ResourceManager.GetString("EventErrorDownloadTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Icon download ähnelt.
+        /// </summary>
+        public static string EventInfoDownloadIcon {
+            get {
+                return ResourceManager.GetString("EventInfoDownloadIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Host ähnelt.
         /// </summary>
         public static string HostString {

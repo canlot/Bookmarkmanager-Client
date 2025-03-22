@@ -7,8 +7,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Threading;
 using Bookmark_Manager_Client.Commands;
 using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.Model;
@@ -18,7 +20,7 @@ using Windows.Security.Credentials;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged, IObjectReceiver<LogEvent>
     {
         object categorylock = new object ();
         object bookmarklock = new object ();
@@ -46,6 +48,16 @@ namespace Bookmark_Manager_Client.ViewModel
             set
             {
                 bookmarks = value;
+                OnPropertyChanged();
+            }
+        }
+        private string eventMessage;
+        public string EventMessage
+        {
+            get => eventMessage;
+            set
+            {
+                eventMessage = value;
                 OnPropertyChanged();
             }
         }
@@ -172,7 +184,9 @@ namespace Bookmark_Manager_Client.ViewModel
             BindingOperations.EnableCollectionSynchronization(Categories, categorylock);
             BindingOperations.EnableCollectionSynchronization(Bookmarks, bookmarklock);
 
-            
+            ObjectRepository.EventDispatcher.RegisterReceiver<LogEvent>(this);
+
+
             changeUserControlCommand = new ChangeUserControlCommand(this);
             //Task.Run(async () => await GetTopCategoriesWithChildAsync());
             //Task.Run(() => GetTopCategoriesWithChildAsync());
@@ -233,6 +247,14 @@ namespace Bookmark_Manager_Client.ViewModel
             {
 
             }
+        }
+
+        public void Receive(LogEvent rObject)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                this.EventMessage = rObject.Message;
+            });
         }
     }
 }

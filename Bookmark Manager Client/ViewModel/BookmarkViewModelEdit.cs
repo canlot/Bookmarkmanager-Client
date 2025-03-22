@@ -1,4 +1,5 @@
-﻿using Bookmark_Manager_Client.Model;
+﻿using Bookmark_Manager_Client.Localization;
+using Bookmark_Manager_Client.Model;
 using Bookmark_Manager_Client.Utils;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,8 @@ namespace Bookmark_Manager_Client.ViewModel
                 }
                 catch (HttpRequestException e)
                 {
-
+                    var errString = Localizationprovider.Instance["EventErrorDownloadTitle"];
+                    ObjectRepository.EventDispatcher.Send(new LogEvent { EventType = EventType.Error, Message = errString + ": " + e.Message });
                 }
                 finally { cancellationTokenSource.Cancel(); IsWebLoading = false; }
             });

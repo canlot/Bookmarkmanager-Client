@@ -39,6 +39,7 @@ namespace Bookmark_Manager_Client
             }
         }
         
+        public static EventDispatcher EventDispatcher { get; } = new EventDispatcher();
 
         static ObjectRepository()
         {

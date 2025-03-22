@@ -264,4 +264,13 @@
   <data name="UsersWithAccessString" xml:space="preserve">
     <value>Berechtigte Benutzer</value>
   </data>
+  <data name="EventInfoDownloadIcon" xml:space="preserve">
+    <value>Icon wird heruntergeladen</value>
+  </data>
+  <data name="EventErrorDownloadIcon" xml:space="preserve">
+    <value>Icon konnte nicht heruntergeladen werden</value>
+  </data>
+  <data name="EventErrorDownloadTitle" xml:space="preserve">
+    <value>Beim Abrufen des Titels ist ein Fehler aufgetreten</value>
+  </data>
 </root>
