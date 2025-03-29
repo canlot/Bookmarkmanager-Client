@@ -46,6 +46,7 @@ namespace Bookmark_Manager_Client.ViewModel
 
         public CategoryViewModelNew()
         {
+            ObjectRepository.LogEvent.Clear();
             RemoveUserFromListCommand = new RemoveUserFromListCommand(PermittedUsers);
             var user = ObjectRepository.DataProvider.CurrentUser;
             PermittedUsers.Add(user);

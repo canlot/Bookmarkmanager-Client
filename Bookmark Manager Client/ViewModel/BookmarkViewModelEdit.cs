@@ -16,6 +16,10 @@ namespace Bookmark_Manager_Client.ViewModel
 {
     public class BookmarkViewModelEdit : INotifyPropertyChanged
     {
+        public BookmarkViewModelEdit()
+        {
+            ObjectRepository.LogEvent.Clear();
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
@@ -79,7 +83,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 catch (HttpRequestException e)
                 {
                     var errString = Localizationprovider.Instance["EventErrorDownloadTitle"];
-                    ObjectRepository.EventDispatcher.Send(new LogEvent { EventType = EventType.Error, Message = errString + ": " + e.Message });
+                    ObjectRepository.LogEvent.Log(EventType.Error, errString + ": " + e.Message);
                 }
                 finally { cancellationTokenSource.Cancel(); IsWebLoading = false; }
             });
@@ -98,11 +102,12 @@ namespace Bookmark_Manager_Client.ViewModel
             try
             {
                 var iconPath = IconUtils.DownloadIcon(Url);
+                ObjectRepository.LogEvent.Log(EventType.Informational, Localizationprovider.Instance["EventInfoDownloadIcon"]);
                 await ObjectRepository.DataProvider.UploadIconAsync(MainViewModel.SelectedBookmark, iconPath);
             }
             catch (Exception e) 
             {
-
+                ObjectRepository.LogEvent.Log(EventType.Error, Localizationprovider.Instance["EventErrorDownloadIcon"]);
             }
 
             var bookmark = MainViewModel.Bookmarks.Single(x => x.ID == MainViewModel.SelectedBookmark.ID);

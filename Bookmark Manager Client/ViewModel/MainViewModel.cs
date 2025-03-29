@@ -20,7 +20,7 @@ using Windows.Security.Credentials;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged, IObjectReceiver<LogEvent>
+    public class MainViewModel : INotifyPropertyChanged, IObjectReceiver<EventMessage>
     {
         object categorylock = new object ();
         object bookmarklock = new object ();
@@ -177,6 +177,7 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public void SetDefaultView()
         {
+            ObjectRepository.LogEvent.Clear();
             ChangeUserControlCommand.Execute("Browser");
         }
         public MainViewModel() 
@@ -184,6 +185,7 @@ namespace Bookmark_Manager_Client.ViewModel
             BindingOperations.EnableCollectionSynchronization(Categories, categorylock);
             BindingOperations.EnableCollectionSynchronization(Bookmarks, bookmarklock);
 
+            ObjectRepository.LogEvent.Clear();
             ObjectRepository.EventDispatcher.RegisterReceiver<LogEvent>(this);
 
 
@@ -249,7 +251,7 @@ namespace Bookmark_Manager_Client.ViewModel
             }
         }
 
-        public void Receive(LogEvent rObject)
+        public void Receive(EventMessage rObject)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {

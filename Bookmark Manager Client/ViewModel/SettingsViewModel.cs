@@ -83,7 +83,7 @@ namespace Bookmark_Manager_Client.ViewModel
 
         public SettingsViewModel() 
         {
-            
+            ObjectRepository.LogEvent.Clear();
         }
 
         public void Exit() => MainViewModel.SetDefaultView();

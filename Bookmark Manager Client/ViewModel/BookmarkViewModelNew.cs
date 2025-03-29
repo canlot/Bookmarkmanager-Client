@@ -55,10 +55,7 @@ namespace Bookmark_Manager_Client.ViewModel
 
         public BookmarkViewModelNew()
         {
-            //Tags.Add("Test");
-            //Tags.Add("Was");
-            //Tags.Add("Geht");
-
+            ObjectRepository.LogEvent.Clear();
         }
 
         private void grabTitleFromWeb(string url)
@@ -90,7 +87,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 catch (HttpRequestException e)
                 {
                     var errString = Localizationprovider.Instance["EventErrorDownloadTitle"];
-                    ObjectRepository.EventDispatcher.Send(new LogEvent { EventType = EventType.Error, Message = errString + ": " + e.Message });
+                    ObjectRepository.LogEvent.Log(EventType.Error, errString + ": " + e.Message);
                 }
                 finally { cancellationTokenSource.Cancel(); IsWebLoading = false; }
             });
@@ -116,13 +113,13 @@ namespace Bookmark_Manager_Client.ViewModel
             {
                 var iconPath = IconUtils.DownloadIcon(Url);
                 var message = Localizationprovider.Instance["EventInfoDownloadIcon"];
-                ObjectRepository.EventDispatcher.Send(new LogEvent { EventType = EventType.Informational, Message = message });
+                ObjectRepository.LogEvent.Log(EventType.Informational, message);
                 await ObjectRepository.DataProvider.UploadIconAsync(bookmark, iconPath);
             }
             catch (Exception e)
             {
                 var message = Localizationprovider.Instance["EventErrorDownloadIcon"];
-                ObjectRepository.EventDispatcher.Send(new LogEvent { EventType = EventType.Error, Message = message });
+                ObjectRepository.LogEvent.Log(EventType.Error, message);
             }
 
             MainViewModel.Bookmarks.Add(bookmark);

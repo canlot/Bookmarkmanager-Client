@@ -61,6 +61,7 @@ namespace Bookmark_Manager_Client.ViewModel
 
         public CategoryViewModelEdit()
         {
+            ObjectRepository.LogEvent.Clear();
             RemoveUserFromListCommand = new RemoveUserFromListCommand(PermittedUsers);
             BindingOperations.EnableCollectionSynchronization(PermittedUsers, permissionLock);
         }
