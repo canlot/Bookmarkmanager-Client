@@ -80,20 +80,14 @@ namespace Bookmark_Manager_Client.DataProvider
             {
                 Authenticator = new JwtAuthenticator(answer.Content)
             };
-            //var jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
 
-            //jsonSerializerOptions.Converters.Add(new DateTimeConverterUsingDateTimeParse());
-
-
-
-            //client = new RestClient(options, configureSerialization: s => s.UseSystemTextJson(jsonSerializerOptions));
             client = new RestClient(options);
             try
             {
                 currentUser = await getCurrentUserAsync();
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -110,16 +104,6 @@ namespace Bookmark_Manager_Client.DataProvider
             return await client.GetAsync<User>(request);
         }
 
-        private async Task<RestResponse<T>> MakeRequestAsync<T>(Func<Task<RestResponse<T>>> func)
-        {
-            retry:
-            var result = await func();
-            if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized) 
-            {
-                goto retry;
-            }
-            return result;
-        }
 
         private async Task<RestResponse<T>> MakeRequestAsync<T>(RestRequest request)
         {
@@ -128,8 +112,8 @@ namespace Bookmark_Manager_Client.DataProvider
 
             while(true)
             {
+                
                 var response = await client.ExecuteAsync<T>(request);
-
                 if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
                     if(trys < retryMax)
@@ -142,7 +126,12 @@ namespace Bookmark_Manager_Client.DataProvider
                         return response;
                 }
                 
-                return response;
+                if (!response.IsSuccessful)
+                {
+                    
+                }
+                else
+                    return response;
             }
             
         }
@@ -263,7 +252,7 @@ namespace Bookmark_Manager_Client.DataProvider
         }
         public async Task<bool> ChangePermissionsAsync(ICollection<User> users, Category category)
         {
-            var request = new RestRequest("/categories/" + category.ID + "/permissions/");
+            var request = new RestRequest("/categories/" + category.ID + "/permissions/", Method.Put);
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(users);
 
