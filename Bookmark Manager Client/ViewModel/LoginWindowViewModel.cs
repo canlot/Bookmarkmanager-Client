@@ -23,6 +23,7 @@ namespace Bookmark_Manager_Client.ViewModel
 
         public LoginWindowViewModel() 
         {
+            ObjectRepository.LogEvent.Clear();
             LoadSettings();
         }
 

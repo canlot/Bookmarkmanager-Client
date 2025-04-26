@@ -378,9 +378,9 @@ namespace Bookmark_Manager_Client.DataProvider
             try
             {
                 var response = await MakeRequestAsync<List<User>>(request);
-
-                if (response.IsSuccessStatusCode)
-                    return response.Data;
+                var handler = new ResponseHandler<List<User>>(response);
+                if (handler.Handle())
+                    return handler.SuccesfullResponseObject;
                 else
                     return null;
                 

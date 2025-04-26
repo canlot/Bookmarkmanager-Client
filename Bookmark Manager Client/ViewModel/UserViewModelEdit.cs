@@ -25,6 +25,7 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public UserViewModelEdit(SettingsViewModel vm)
         {
+            ObjectRepository.LogEvent.Clear();
             settingsViewModel = vm;
             Email = vm.SelectedUser.Email;
             Username = vm.SelectedUser.Name;

@@ -25,6 +25,7 @@ namespace Bookmark_Manager_Client.ViewModel
         }
         public UserViewModelAdd(SettingsViewModel vm)
         {
+            ObjectRepository.LogEvent.Clear();
             settingsViewModel = vm;
         }
         private string email;

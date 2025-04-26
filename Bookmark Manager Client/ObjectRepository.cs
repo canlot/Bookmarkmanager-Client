@@ -40,6 +40,7 @@ namespace Bookmark_Manager_Client
         }
         
         public static EventDispatcher EventDispatcher { get; } = new EventDispatcher();
+        public static LogEvent LogEvent { get; } = new LogEvent();
 
         static ObjectRepository()
         {
