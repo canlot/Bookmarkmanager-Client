@@ -30,7 +30,7 @@ namespace Bookmark_Manager_Client
                 Message = message,
                 EventType = eventType
             };
-            ObjectRepository.EventDispatcher.Send(eventMessage);
+            ObjectRepository.EventDispatcher.Send<EventMessage>(eventMessage);
         }
         public void Clear()
         {

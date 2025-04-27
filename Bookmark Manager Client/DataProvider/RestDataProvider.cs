@@ -85,6 +85,7 @@ namespace Bookmark_Manager_Client.DataProvider
             try
             {
                 currentUser = await getCurrentUserAsync();
+                ObjectRepository.LogEvent.Log(EventType.Informational, "Login succesfull");
                 return true;
             }
             catch
@@ -101,6 +102,7 @@ namespace Bookmark_Manager_Client.DataProvider
         {
             var request = new RestRequest("/currentuser", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
+
             return await client.GetAsync<User>(request);
         }
 
@@ -175,6 +177,7 @@ namespace Bookmark_Manager_Client.DataProvider
             var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");
             var response = await MakeRequestAsync<List<Bookmark>>(request);
+            ObjectRepository.LogEvent.Log(EventType.Informational, "Get Bookmarks succesfull");
             return response.Data;
         
         }

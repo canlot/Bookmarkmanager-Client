@@ -167,7 +167,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0"  SnapsToDevicePixels="True" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" Background="#fdfdfd" >
             <Grid>
@@ -442,10 +442,16 @@
             </Grid>
         </DockPanel>
         <Border Grid.Row="3"  Background="#80F6F6F6">
-            <StackPanel Orientation="Horizontal" Margin="3">
-                <ui:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8C9;" FontSize="12" Foreground="Red"/>
-                <Label Content="{Binding EventMessage}"/>
-            </StackPanel>
+            <Grid Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ui:FontIcon x:Name="StatusIcon" Grid.Column="0" FontFamily="Segoe MDL2 Assets" Glyph="{Binding StatusIcon}" FontSize="12" Foreground="{Binding StatusIconColor}" />
+                <Label Grid.Column="1" Content="{Binding EventMessage}" />
+                <Button Grid.Column="2" Margin="5" FontSize="10" Content="Weitere Info" HorizontalAlignment="Right" IsEnabled="False"/>
+            </Grid>
         </Border>
     </Grid>
 </Window>

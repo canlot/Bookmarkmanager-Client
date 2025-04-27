@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Common;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -10,12 +11,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Threading;
 using Bookmark_Manager_Client.Commands;
 using Bookmark_Manager_Client.Controller;
 using Bookmark_Manager_Client.Model;
 using Bookmark_Manager_Client.UserControls;
 using Bookmark_Manager_Client.Utils;
+using HandyControl.Tools;
+using ModernWpf.Controls;
 using Windows.Security.Credentials;
 
 namespace Bookmark_Manager_Client.ViewModel
@@ -27,89 +31,54 @@ namespace Bookmark_Manager_Client.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+        private string statusIcon;
+
+        public string StatusIcon { get => statusIcon; set { statusIcon = value; OnPropertyChanged(); } }
+
+        //private FontIcon statusIcon;
+
+        //public FontIcon StatusIcon { get => statusIcon; set { statusIcon = value; OnPropertyChanged(); } }
+
+        private SolidColorBrush statusIconColor;
+
+        public SolidColorBrush StatusIconColor { get => statusIconColor;  set { statusIconColor = value; OnPropertyChanged(); } }
+
 
         private ObservableCollection<Category> categories = new ObservableCollection<Category>();
-        public ObservableCollection<Category> Categories 
-        { 
-            get => categories; 
-            set
-            {
-                categories = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<Category> Categories { get => categories; set { categories = value; OnPropertyChanged(); } }
+        
         private Category selectedCategory;
         public Category SelectedCategory { get => selectedCategory; set { selectedCategory = value; OnPropertyChanged(); } }
 
         private ObservableCollection<Bookmark> bookmarks = new ObservableCollection<Bookmark>();
-        public ObservableCollection<Bookmark> Bookmarks
-        {
-            get => bookmarks;
-            set
-            {
-                bookmarks = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<Bookmark> Bookmarks { get => bookmarks; set { bookmarks = value; OnPropertyChanged(); } }
+
         private string eventMessage;
-        public string EventMessage
-        {
-            get => eventMessage;
-            set
-            {
-                eventMessage = value;
-                OnPropertyChanged();
-            }
-        }
+        public string EventMessage { get => eventMessage; set { eventMessage = value; OnPropertyChanged(); } }
+
         private UserControl detailsUserControl;
-        public UserControl DetailsUserControl 
-        { 
-            get => detailsUserControl; 
-            set
-            {
-                detailsUserControl = value;
-                OnPropertyChanged();
-            }
-        }
+        public UserControl DetailsUserControl { get => detailsUserControl; set { detailsUserControl = value; OnPropertyChanged(); } }
+
         private ChangeUserControlCommand changeUserControlCommand;
-        public ChangeUserControlCommand ChangeUserControlCommand 
-        {
-            get => changeUserControlCommand; 
-            set
-            {
-                changeUserControlCommand = value;
-                OnPropertyChanged();
-            }
-        }
+        public ChangeUserControlCommand ChangeUserControlCommand { get => changeUserControlCommand; set { changeUserControlCommand = value; OnPropertyChanged(); } }
+
         private Bookmark selectedBookmark;
-        public Bookmark SelectedBookmark
-        {
+        public Bookmark SelectedBookmark 
+        { 
             get => selectedBookmark;
-            set
-            {
-                selectedBookmark = value;
-                ChangeUserControlCommand.Execute("BrowserUserControl");
-                OnPropertyChanged();
-            }
+            set { selectedBookmark = value; ChangeUserControlCommand.Execute("BrowserUserControl"); OnPropertyChanged(); }
         }
+
         private List<Bookmark> selectedBookmarksCopySource = new List<Bookmark>();
-        public List<Bookmark> SelectedBookmarksCopySource
-        {
-            get { return selectedBookmarksCopySource; }
-            set { selectedBookmarksCopySource = value;}
-        }
+        public List<Bookmark> SelectedBookmarksCopySource { get { return selectedBookmarksCopySource; } set { selectedBookmarksCopySource = value; } }
+
         private Category categoryCopySource;
-        public Category CategoryCopySource
-        {
-            get { return categoryCopySource; }
-            set { categoryCopySource = value;}
-        }
+        public Category CategoryCopySource { get { return categoryCopySource; } set { categoryCopySource = value; } }
+
         private Category categoryCopyDestination;
-        public Category CategoryCopyDestination
-        {
-            get { return categoryCopyDestination; }
-            set { categoryCopyDestination = value;}
-        }
+        public Category CategoryCopyDestination { get { return categoryCopyDestination; } set { categoryCopyDestination = value;} }
+
+
 
         public Category GetParentCategory(Category childCategory)
         {
@@ -186,7 +155,7 @@ namespace Bookmark_Manager_Client.ViewModel
             BindingOperations.EnableCollectionSynchronization(Bookmarks, bookmarklock);
 
             ObjectRepository.LogEvent.Clear();
-            ObjectRepository.EventDispatcher.RegisterReceiver<LogEvent>(this);
+            ObjectRepository.EventDispatcher.RegisterReceiver<EventMessage>(this);
 
 
             changeUserControlCommand = new ChangeUserControlCommand(this);
@@ -255,6 +224,16 @@ namespace Bookmark_Manager_Client.ViewModel
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+                switch(rObject.EventType)
+                {
+                    case EventType.None:
+                        break;
+                    case EventType.Informational:
+                        StatusIcon = "&#xE946;";
+                        StatusIconColor = System.Windows.Media.Brushes.Blue;
+                        break;
+
+                }
                 this.EventMessage = rObject.Message;
             });
         }
