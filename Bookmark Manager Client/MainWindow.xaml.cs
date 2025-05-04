@@ -50,28 +50,12 @@ namespace Bookmark_Manager_Client
             }
             
         }
-
-        private void ButtonRemoveCategory_Click(object sender, RoutedEventArgs e)
-        {
-            if(treeViewCategory.SelectedItem != null)
-            {
-                MessageBoxResult result = MessageBox.Show("Damit werden alle Unterkategorien und dazugehörigen Lesezeichen gelöscht, bist du sicher?", "Wirklich löschen?", 
-                    MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-                if(result == MessageBoxResult.Yes)
-                {
-                    //controller.DeleteCategory((Category)treeViewCategory.SelectedItem);
-                }
-
-            }
-        }
-        
+      
 
 
         private void listBoxBookmarks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Bookmark bookmark = (Bookmark)listBoxBookmarks.SelectedItem;
-            //if (bookmark == null) return;
-            //WebBrowser.LoadUrl(bookmark.Url);
+
             
         }
 
@@ -139,7 +123,6 @@ namespace Bookmark_Manager_Client
         {
             var vm = this.DataContext as MainViewModel;
             
-            //vm.SelectedBookmarksCopySource = (List<Bookmark>)listBoxBookmarks.SelectedItems;
             vm.SelectedBookmarksCopySource.Clear();
             foreach(var bookmark in listBoxBookmarks.SelectedItems)
             {

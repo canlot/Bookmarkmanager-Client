@@ -35,9 +35,6 @@ namespace Bookmark_Manager_Client.ViewModel
 
         public string StatusIcon { get => statusIcon; set { statusIcon = value; OnPropertyChanged(); } }
 
-        //private FontIcon statusIcon;
-
-        //public FontIcon StatusIcon { get => statusIcon; set { statusIcon = value; OnPropertyChanged(); } }
 
         private SolidColorBrush statusIconColor;
 
@@ -159,8 +156,6 @@ namespace Bookmark_Manager_Client.ViewModel
 
 
             changeUserControlCommand = new ChangeUserControlCommand(this);
-            //Task.Run(async () => await GetTopCategoriesWithChildAsync());
-            //Task.Run(() => GetTopCategoriesWithChildAsync());
 
 
         }
@@ -227,12 +222,24 @@ namespace Bookmark_Manager_Client.ViewModel
                 switch(rObject.EventType)
                 {
                     case EventType.None:
+                        StatusIcon = "";
                         break;
                     case EventType.Informational:
-                        StatusIcon = "&#xE946;";
+                        StatusIcon = "\ue88f";
                         StatusIconColor = System.Windows.Media.Brushes.Blue;
                         break;
-
+                    case EventType.Warning:
+                        StatusIcon = "\ue002";
+                        StatusIconColor = System.Windows.Media.Brushes.Orange;
+                        break;
+                    case EventType.Error:
+                        StatusIcon = "\ue000";
+                        StatusIconColor = System.Windows.Media.Brushes.Red;
+                        break;
+                    case EventType.Critical:
+                        StatusIcon = "\ue99a";
+                        StatusIconColor = System.Windows.Media.Brushes.DarkRed;
+                        break;
                 }
                 this.EventMessage = rObject.Message;
             });

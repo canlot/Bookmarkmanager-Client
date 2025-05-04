@@ -18,6 +18,7 @@ namespace Bookmark_Manager_Client
     {
         public string Message { get; set; }
         public EventType EventType { get; set; }
+        public Exception Exceptions { get; set; }
     }
     public class LogEvent
     {

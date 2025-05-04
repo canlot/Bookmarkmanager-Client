@@ -34,7 +34,7 @@ namespace Bookmark_Manager_Client.ViewModel
             Email = ObjectRepository.AppConfiguration.Email;
             //Password = ObjectRepository.AppConfiguration.Password;
 
-#if (DEBUG == false)
+//#if (DEBUG == false)
             try
             {
                 PasswordVault vault = new Windows.Security.Credentials.PasswordVault();
@@ -42,7 +42,7 @@ namespace Bookmark_Manager_Client.ViewModel
                 Password = credential.Password;
             }
             catch (Exception ex) { }
-#endif
+//#endif
         }
 
 

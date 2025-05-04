@@ -172,7 +172,7 @@ namespace Bookmark_Manager_Client.DataProvider
 
         }
 
-        public async Task<IList<Bookmark>> GetBookmarksAsync( uint id)
+        public async Task<IList<Bookmark>> GetBookmarksAsync(uint id)
         {
             var request = new RestRequest("categories/" + id.ToString() + "/bookmarks/", Method.Get);
             request.AddHeader("Cache-Control", "no-cache");

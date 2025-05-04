@@ -34,7 +34,7 @@
         <converter:DateTimeConverter x:Key="DateTimeConverter"/>
         
 
-        <!--<Style TargetType="ListBoxItem" BasedOn="{StaticResource DefaultListBoxItemStyleCustom}" />-->
+        <!--<Style TargetType="ListBoxItem" BasedOn="{StaticResource DefaultListBoxItemStyleCustom}" /> -->
 
         <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Fill" Color="#FF595959"/>
         <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Stroke" Color="#FF262626"/>
@@ -444,12 +444,12 @@
         <Border Grid.Row="3"  Background="#80F6F6F6">
             <Grid Margin="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <ui:FontIcon x:Name="StatusIcon" Grid.Column="0" FontFamily="Segoe MDL2 Assets" Glyph="{Binding StatusIcon}" FontSize="12" Foreground="{Binding StatusIconColor}" />
-                <Label Grid.Column="1" Content="{Binding EventMessage}" />
+                <Label Grid.Column="0" Margin="5" FontFamily="{StaticResource MaterialFont}" FontSize="21" VerticalAlignment="Center" Foreground="{Binding StatusIconColor}" Content="{Binding StatusIcon}" d:Content="&#xE946;" SnapsToDevicePixels="True" ></Label>
+                <Label Grid.Column="1" Content="{Binding EventMessage}" VerticalAlignment="Center"/>
                 <Button Grid.Column="2" Margin="5" FontSize="10" Content="Weitere Info" HorizontalAlignment="Right" IsEnabled="False"/>
             </Grid>
         </Border>

@@ -23,6 +23,7 @@
             <converters:ParentIdToReadOnlyStateConverter x:Key="ParentIdToReadOnlyStateConverter" />
             <converters:BoolInverterConverter x:Key="BoolInverterConverter" />
             <loc:Localizationprovider x:Key="LocalizationProvider" />
+            <FontFamily x:Key="MaterialFont">/Resources/MaterialIcons-Regular.ttf#Material Icons</FontFamily>
             <!-- Other app resources here -->
         </ResourceDictionary>
     </Application.Resources>
