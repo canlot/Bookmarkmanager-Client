@@ -111,6 +111,7 @@
     <Compile Include="DataProvider\ResponseHandler.cs" />
     <Compile Include="DataProvider\RestDataProvider.cs" />
     <Compile Include="EventDispatcher.cs" />
+    <Compile Include="Exceptions\CommunicationException.cs" />
     <Compile Include="IObjectReceiver.cs" />
     <Compile Include="Localization\Localizationprovider.cs" />
     <Compile Include="Localization\Strings.de-DE.Designer.cs">
