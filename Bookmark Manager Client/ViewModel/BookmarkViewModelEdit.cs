@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -75,8 +76,9 @@ namespace Bookmark_Manager_Client.ViewModel
                     {
                         response.EnsureSuccessStatusCode();
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        Title = Regex.Match(responseBody, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>",
+                        var title = Regex.Match(responseBody, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>",
                         RegexOptions.IgnoreCase).Groups["Title"].Value;
+                        Title = HttpUtility.HtmlDecode(title);
                     }
 
                 }

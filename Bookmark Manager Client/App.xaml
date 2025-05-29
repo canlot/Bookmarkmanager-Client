@@ -19,7 +19,8 @@
                 <ResourceDictionary Source="./Resources/IconResource.xaml"/>
                 <ResourceDictionary Source="./Resources/CustomStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <viewmodel:MainViewModel x:Key="MainViewModel"  />
+            <ResourceDictionary x:Key="IconsDictionary" Source="./Resources/IconsDictionary.xaml"/>
+            <viewmodel:MainViewModel x:Key="MainViewModel" IconsDictionary="{StaticResource IconsDictionary}"  />
             <converters:ParentIdToReadOnlyStateConverter x:Key="ParentIdToReadOnlyStateConverter" />
             <converters:BoolInverterConverter x:Key="BoolInverterConverter" />
             <loc:Localizationprovider x:Key="LocalizationProvider" />

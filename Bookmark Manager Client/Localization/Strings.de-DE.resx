@@ -273,4 +273,7 @@
   <data name="EventErrorDownloadTitle" xml:space="preserve">
     <value>Beim Abrufen des Titels ist ein Fehler aufgetreten</value>
   </data>
+  <data name="CategoryIconString" xml:space="preserve">
+    <value>Icon</value>
+  </data>
 </root>

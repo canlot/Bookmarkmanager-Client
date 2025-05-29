@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Media.Animation;
 using System.Threading;
 using System.Windows.Data;
 using Bookmark_Manager_Client.Commands;
+using System.Windows.Media;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -32,6 +33,8 @@ namespace Bookmark_Manager_Client.ViewModel
                 var category = MainViewModel.SelectedCategory;
                 CategoryName = category.Name;
                 categoryDescription = category.Description;
+                Icons = MainViewModel.Icons;
+
                 addPermittedUserToList(category.ID);
 
                 if(category.ParentID == 0)
@@ -43,6 +46,10 @@ namespace Bookmark_Manager_Client.ViewModel
             }
         }
 
+        private DrawingImage icon;
+        public DrawingImage Icon { get { return icon; } set { icon = value; OnPropertyChanged(); } }
+
+
         private bool isTopCategory;
         public bool IsTopCategory { get => isTopCategory; private set { isTopCategory = value; OnPropertyChanged(); } }
 
@@ -51,8 +58,10 @@ namespace Bookmark_Manager_Client.ViewModel
 
         private string categoryDescription;
         public string CategoryDescription { get => categoryDescription; set { categoryDescription = value; OnPropertyChanged(); } }
-        
-        
+
+        private ObservableCollection<IconElement> icons = new ObservableCollection<IconElement>();
+        public ObservableCollection<IconElement> Icons { get { return icons; } set { icons = value; OnPropertyChanged(); } }
+
 
         private ObservableCollection<User> permittedUsers = new ObservableCollection<User>();
         public ObservableCollection<User> PermittedUsers { get => permittedUsers; set { permittedUsers = value; OnPropertyChanged(); } }

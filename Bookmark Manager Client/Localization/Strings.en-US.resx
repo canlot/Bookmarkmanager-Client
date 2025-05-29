@@ -273,4 +273,7 @@
   <data name="EventErrorDownloadTitle" xml:space="preserve">
     <value>Could't get page title</value>
   </data>
+  <data name="CategoryIconString" xml:space="preserve">
+    <value>Icon</value>
+  </data>
 </root>

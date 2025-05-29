@@ -8,6 +8,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
@@ -28,6 +30,9 @@ namespace Bookmark_Manager_Client.ViewModel
         private string categoryDescription;
         public string CategoryDescription { get => categoryDescription; set { categoryDescription = value; OnPropertyChanged(); } }
 
+        private ObservableCollection<IconElement> icons = new ObservableCollection<IconElement>();
+        public ObservableCollection<IconElement> Icons { get { return icons; } set { icons = value; OnPropertyChanged(); } }
+
         private MainViewModel mainViewModel;
         public MainViewModel MainViewModel 
         {
@@ -36,10 +41,38 @@ namespace Bookmark_Manager_Client.ViewModel
             {
                 mainViewModel = value;
                 parentCategory = MainViewModel.SelectedCategory;
+                Icons = MainViewModel.Icons;
+                IconsView = CollectionViewSource.GetDefaultView(Icons);
+                IconsView.Filter = iconFilter;
                 if (MainViewModel.SelectedCategory == null) IsTopCategory = true;
                 OnPropertyChanged();
             }
         }
+
+        private IconElement icon;
+        public IconElement Icon { get { return icon; } set { icon = value; OnPropertyChanged(); }  }
+
+        public ICollectionView IconsView { get; set; }
+
+        private string searchIconString;
+        public string SearchIconString { get { return searchIconString; } set { searchIconString = value; IconsView.Refresh(); OnPropertyChanged(); } }
+
+        private bool iconFilter(object element)
+        {
+            if (element is null)
+                return false;
+            if (string.IsNullOrEmpty(SearchIconString))
+                return true;
+            if (element is IconElement)
+            {
+                var icon = (IconElement)element;
+                if (icon.IconTitle.ToLower().Contains(SearchIconString.ToLower()))
+                    return true;
+                return false;
+            }
+            return false;
+        }
+
         private ObservableCollection<User> permittedUsers = new ObservableCollection<User>();
         public ObservableCollection<User> PermittedUsers { get => permittedUsers; set { permittedUsers = value; OnPropertyChanged(); } }
         public RemoveUserFromListCommand RemoveUserFromListCommand { get; set; }

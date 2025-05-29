@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,6 +21,7 @@ using Bookmark_Manager_Client.UserControls;
 using Bookmark_Manager_Client.Utils;
 using HandyControl.Tools;
 using ModernWpf.Controls;
+using Windows.Data.Html;
 using Windows.Security.Credentials;
 
 namespace Bookmark_Manager_Client.ViewModel
@@ -75,7 +77,19 @@ namespace Bookmark_Manager_Client.ViewModel
         private Category categoryCopyDestination;
         public Category CategoryCopyDestination { get { return categoryCopyDestination; } set { categoryCopyDestination = value;} }
 
+        private ResourceDictionary iconsDictionary = new ResourceDictionary();
+        public ResourceDictionary IconsDictionary { get { return iconsDictionary; } set { iconsDictionary = value; populateIcons(); } } 
 
+        private ObservableCollection<Model.IconElement> icons = new ObservableCollection<Model.IconElement>();
+        public ObservableCollection<Model.IconElement> Icons { get { return icons; } set { icons = value; OnPropertyChanged(); } }
+
+
+        private void populateIcons()
+        {
+            foreach (var element in IconsDictionary.Values)
+                if (element is Model.IconElement)
+                    Icons.Add(element as Model.IconElement);
+        }
 
         public Category GetParentCategory(Category childCategory)
         {

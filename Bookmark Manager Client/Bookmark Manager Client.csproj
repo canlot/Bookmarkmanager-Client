@@ -130,6 +130,7 @@
       <DependentUpon>Strings.en-US.resx</DependentUpon>
     </Compile>
     <Compile Include="LogEvent.cs" />
+    <Compile Include="Model\IconElement.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="ObjectRepository.cs" />
     <Compile Include="PortValidationRule.cs" />
@@ -209,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\IconResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\IconsDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -340,6 +345,9 @@
     </PackageReference>
     <PackageReference Include="SkiaSharp">
       <Version>3.116.1</Version>
+    </PackageReference>
+    <PackageReference Include="VirtualizingWrapPanel">
+      <Version>2.2.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

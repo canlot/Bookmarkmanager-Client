@@ -7,6 +7,7 @@
              xmlns:vm="clr-namespace:Bookmark_Manager_Client.ViewModel"
              xmlns:local="clr-namespace:Bookmark_Manager_Client"
              xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
+             xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
              xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -26,6 +27,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -69,12 +71,56 @@
                       IsEnabled="{Binding IsTopCategory, Converter={StaticResource BoolInverterConverter}}" 
                       VerticalContentAlignment="Center" />
         </Border>
-        
         <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
-            <Label Content="{loc:Localization UsersWithAccessString}" Style="{StaticResource LabelStyle}"/>
+            <Label Content="{loc:Localization CategoryIconString}" Style="{StaticResource LabelStyle}"/>
         </Border>
         <Border Grid.Row="4" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
         <Border Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="{Binding Icon.Icon}" Grid.Column="0" Grid.Row="0" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="5" Text="{Binding SearchIconString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Expander Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="5" >
+                    <ListBox Margin="5" ItemsSource="{Binding IconsView}" MaxHeight="300" SelectedItem="{Binding Icon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <ScrollViewer VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                                    <ItemsPresenter />
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <vwp:VirtualizingWrapPanel SpacingMode="StartAndEndOnly" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style  TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Icon }" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Expander>
+            </Grid>
+        </Border>
+        <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="{loc:Localization UsersWithAccessString}" Style="{StaticResource LabelStyle}"/>
+        </Border>
+        <Border Grid.Row="5" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
             <Border>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -117,9 +163,9 @@
                 </Grid>
             </Border>
         </Border>
-        <Button x:Name="ButtonSave" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="4" 
+        <Button x:Name="ButtonSave" Margin="10" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" 
                 Style="{StaticResource AccentButtonStyle}" Content="{loc:Localization ButtonSaveString}" Click="ButtonSave_Click"/>
-        <Button x:Name="ButtonAbort" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="6" 
+        <Button x:Name="ButtonAbort" Margin="10" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="7" 
                 Grid.ColumnSpan="5" Content="{loc:Localization ButtonCancelString}" Click="ButtonAbort_Click"/>
     </Grid>
 </UserControl>

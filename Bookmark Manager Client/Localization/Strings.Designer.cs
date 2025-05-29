@@ -268,6 +268,15 @@ namespace Bookmark_Manager_Client.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Icon ähnelt.
+        /// </summary>
+        public static string CategoryIconString {
+            get {
+                return ResourceManager.GetString("CategoryIconString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Top category ähnelt.
         /// </summary>
         public static string CategoryIsTopString {
