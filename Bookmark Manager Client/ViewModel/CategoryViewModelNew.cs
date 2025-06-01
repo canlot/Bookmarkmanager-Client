@@ -31,10 +31,12 @@ namespace Bookmark_Manager_Client.ViewModel
             {
                 mainViewModel = value;
                 parentCategory = MainViewModel.SelectedCategory;
+
                 Icons = MainViewModel.Icons;
                 selectIcon();
                 IconsView = CollectionViewSource.GetDefaultView(Icons);
                 IconsView.Filter = iconFilter;
+
                 if (MainViewModel.SelectedCategory == null) IsTopCategory = true;
                 OnPropertyChanged();
             }

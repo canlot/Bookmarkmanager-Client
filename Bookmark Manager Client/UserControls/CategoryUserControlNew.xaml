@@ -121,7 +121,11 @@
                                     </ListBox.ItemContainerStyle>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <Image Source="{Binding Icon }" />
+                                            <Image Source="{Binding Icon }" >
+                                                <ToolTipService.ToolTip>
+                                                    <ToolTip Content="{Binding IconTitle}"/>
+                                                </ToolTipService.ToolTip>
+                                            </Image>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>

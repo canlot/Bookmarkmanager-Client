@@ -294,8 +294,6 @@
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" HorizontalAlignment="Stretch" Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" >
                     <TreeView  x:Name="treeViewCategory" Margin="10,10" ItemsSource="{Binding Categories}" SelectedItemChanged="treeViewCategory_SelectedItemChanged"  HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource TreeViewItemStyle1}" >
-
-
                         <TreeView.ItemTemplate >
                             <HierarchicalDataTemplate ItemsSource="{Binding ChildCategories}">
                                 <Border x:Name="brd" BorderBrush="{StaticResource BorderColor}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Padding="2" >
