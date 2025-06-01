@@ -36,6 +36,10 @@ namespace Bookmark_Manager_Client.Model
         private string description;
         public string Description { get => description; set { description = value; OnPropertyChanged(); } }
 
+        private string iconName;
+        public string IconName { get { return iconName; } set { iconName = value; OnPropertyChanged(); } }
+
+
         private bool shared;
         public bool Shared { get => shared; set { shared = value; OnPropertyChanged(); } }
 

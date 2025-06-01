@@ -102,6 +102,7 @@
     <Compile Include="Commands\RemoveUserFromListCommand.cs" />
     <Compile Include="Converters\BoolInverterConverter.cs" />
     <Compile Include="Converters\DateTimeConverter.cs" />
+    <Compile Include="Converters\IconNameToDrawingImageConverter.cs" />
     <Compile Include="Converters\ParentIdToStateConverter.cs" />
     <Compile Include="DataProvider\FakeDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Utils\IconUtils.cs" />
     <Compile Include="ViewModel\BookmarkViewModelEdit.cs" />
     <Compile Include="ViewModel\BookmarkViewModelNew.cs" />
+    <Compile Include="ViewModel\CategoryViewModelBase.cs" />
     <Compile Include="ViewModel\CategoryViewModelEdit.cs" />
     <Compile Include="ViewModel\CategoryViewModelNew.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />

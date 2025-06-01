@@ -16,10 +16,8 @@ using System.Windows.Media;
 
 namespace Bookmark_Manager_Client.ViewModel
 {
-    public class CategoryViewModelEdit : INotifyPropertyChanged
+    public class CategoryViewModelEdit : CategoryViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         object permissionLock = new object();
 
@@ -32,8 +30,13 @@ namespace Bookmark_Manager_Client.ViewModel
                 mainViewModel = value;
                 var category = MainViewModel.SelectedCategory;
                 CategoryName = category.Name;
-                categoryDescription = category.Description;
+                CategoryDescription = category.Description;
+                IconName = category.IconName;
+
                 Icons = MainViewModel.Icons;
+                selectIcon();
+                IconsView = CollectionViewSource.GetDefaultView(Icons);
+                IconsView.Filter = iconFilter;
 
                 addPermittedUserToList(category.ID);
 
@@ -46,25 +49,11 @@ namespace Bookmark_Manager_Client.ViewModel
             }
         }
 
-        private DrawingImage icon;
-        public DrawingImage Icon { get { return icon; } set { icon = value; OnPropertyChanged(); } }
 
 
         private bool isTopCategory;
         public bool IsTopCategory { get => isTopCategory; private set { isTopCategory = value; OnPropertyChanged(); } }
 
-        private string categoryName;
-        public string CategoryName { get => categoryName; set { categoryName = value; OnPropertyChanged(); } }
-
-        private string categoryDescription;
-        public string CategoryDescription { get => categoryDescription; set { categoryDescription = value; OnPropertyChanged(); } }
-
-        private ObservableCollection<IconElement> icons = new ObservableCollection<IconElement>();
-        public ObservableCollection<IconElement> Icons { get { return icons; } set { icons = value; OnPropertyChanged(); } }
-
-
-        private ObservableCollection<User> permittedUsers = new ObservableCollection<User>();
-        public ObservableCollection<User> PermittedUsers { get => permittedUsers; set { permittedUsers = value; OnPropertyChanged(); } }
 
         public RemoveUserFromListCommand RemoveUserFromListCommand { get; set; }
 
@@ -75,14 +64,7 @@ namespace Bookmark_Manager_Client.ViewModel
             BindingOperations.EnableCollectionSynchronization(PermittedUsers, permissionLock);
         }
         
-        public void AddPermittedUser(User user)
-        {
-            if (PermittedUsers.IndexOf(user) == -1)
-            {
-                lock(permissionLock)
-                    PermittedUsers.Add(user);
-            }
-        }
+        
         private void addPermittedUserToList(uint categoryId)
         {
             Task.Run(async () =>
@@ -105,6 +87,7 @@ namespace Bookmark_Manager_Client.ViewModel
             var category = MainViewModel.SelectedCategory;
             category.Name = CategoryName;
             category.Description = CategoryDescription;
+            category.IconName = Icon.IconTitle;
 
             if (!await ObjectRepository.DataProvider.ChangeCategoryAsync(category))
                 return false;

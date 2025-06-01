@@ -15,7 +15,11 @@ namespace Bookmark_Manager_Client.Configurators
         public static string GlobalConfigurationPath = ".";
         private static string AppConfigurationFilePath
         {
+#if (DEBUG == false)
             get => GlobalConfigurationPath + "\\" + "config.ini";
+#elif (DEBUG == true)
+            get => GlobalConfigurationPath + "\\" + "debug_config.ini";
+#endif
         }
         private string clientCachePath;
 
@@ -40,16 +44,10 @@ namespace Bookmark_Manager_Client.Configurators
             set { uploadPath = value; }
         }
 
-        public string Host
-        {
-            get;
-            set;
-        }
-        public int Port
-        {
-            get;
-            set;
-        }
+        public string Host { get; set; }
+
+        public int Port { get; set; }
+
         public bool SSL
         {
             get;

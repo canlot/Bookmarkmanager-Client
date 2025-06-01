@@ -8,6 +8,7 @@
              xmlns:local="clr-namespace:Bookmark_Manager_Client"
              xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
              xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
+             xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -51,6 +52,66 @@
             <TextBox x:Name="DescriptionTextBox" Text="{Binding CategoryDescription}" VerticalContentAlignment="Center" />
         </Border>
 
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
+            <Label Content="{loc:Localization CategoryIconString}" Style="{StaticResource LabelStyle}"/>
+        </Border>
+        <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource ColumnStyleCenter}"/>
+        <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource ColumnStyleRight}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.Row="0">
+                    <Image Source="{Binding Icon.Icon}" Margin="-2"  />
+                    <ui:FlyoutService.Flyout >
+                        <ui:Flyout Placement="Bottom" >
+                            <ui:Flyout.FlyoutPresenterStyle>
+                                <Style TargetType="ui:FlyoutPresenter">
+                                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+                                    <Setter Property="IsTabStop" Value="True"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ui:Flyout.FlyoutPresenterStyle>
+                            <StackPanel Orientation="Vertical">
+                                <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="5" Text="{Binding SearchIconString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ListBox Margin="5" ItemsSource="{Binding IconsView}" Height="300" SelectedItem="{Binding Icon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                    <ListBox.Template>
+                                        <ControlTemplate>
+                                            <ScrollViewer VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <vwp:VirtualizingWrapPanel SpacingMode="StartAndEndOnly" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style  TargetType="{x:Type ListBoxItem}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Icon }" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
+                </Button>
+
+            </Grid>
+        </Border>
 
         <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">
             <Label Content="{loc:Localization UsersWithAccessString}" Style="{StaticResource LabelStyle}"/>

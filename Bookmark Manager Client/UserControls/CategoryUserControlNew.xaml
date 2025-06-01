@@ -85,35 +85,52 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Image Source="{Binding Icon.Icon}" Grid.Column="0" Grid.Row="0" Margin="5"/>
-                <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="5" Text="{Binding SearchIconString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Expander Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="5" >
-                    <ListBox Margin="5" ItemsSource="{Binding IconsView}" MaxHeight="300" SelectedItem="{Binding Icon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <ListBox.Template>
-                            <ControlTemplate>
-                                <ScrollViewer VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
-                                    <ItemsPresenter />
-                                </ScrollViewer>
-                            </ControlTemplate>
-                        </ListBox.Template>
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <vwp:VirtualizingWrapPanel SpacingMode="StartAndEndOnly" />
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemContainerStyle>
-                            <Style  TargetType="{x:Type ListBoxItem}">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding Icon }" />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Expander>
+                <Button Grid.Column="0" Grid.Row="0">
+                    <Image Source="{Binding Icon.Icon}" Margin="-2"  >
+                        
+                    </Image>
+                    <ui:FlyoutService.Flyout >
+                        <ui:Flyout Placement="Bottom" >
+                            <ui:Flyout.FlyoutPresenterStyle>
+                                <Style TargetType="ui:FlyoutPresenter">
+                                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+                                    <Setter Property="IsTabStop" Value="True"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ui:Flyout.FlyoutPresenterStyle>
+                            <StackPanel Orientation="Vertical">
+                                <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="5" Text="{Binding SearchIconString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ListBox Margin="5" ItemsSource="{Binding IconsView}" Height="300" SelectedItem="{Binding Icon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                    <ListBox.Template>
+                                        <ControlTemplate>
+                                            <ScrollViewer VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <vwp:VirtualizingWrapPanel SpacingMode="StartAndEndOnly" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style  TargetType="{x:Type ListBoxItem}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Icon }" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                            
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
+                </Button>
+               
             </Grid>
         </Border>
         <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ColumnStyleLeft}">

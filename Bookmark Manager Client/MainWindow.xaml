@@ -32,7 +32,7 @@
         </Style>
 
         <converter:DateTimeConverter x:Key="DateTimeConverter"/>
-        
+        <converter:IconNameToDrawingImageConverter x:Key="IconConverter"/>
 
         <!--<Style TargetType="ListBoxItem" BasedOn="{StaticResource DefaultListBoxItemStyleCustom}" /> -->
 
@@ -313,8 +313,8 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        
-                                        <Image Source="{StaticResource FolderImage}" Height="20" Margin="5" Grid.Column="0"/>
+
+                                        <Image Source="{Binding Path=IconName, Converter={StaticResource IconConverter},ConverterParameter={StaticResource IconsDictionary}}" Height="20" Margin="5" Grid.Column="0"/>
                                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Segoe UI" 
                                                        FontSize="12" FontWeight="Bold" Grid.Column="1" Foreground="{DynamicResource SystemControlForegroundChromeBlackMediumBrush}"></TextBlock>
                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="3">
