@@ -62,7 +62,7 @@
         Grid.ColumnSpan="5" Content="{loc:Localization ButtonCancelString}" Click="ButtonAbort_Click"/>
             </Grid>
         </TabItem>
-        <TabItem Header="{loc:Localization UserManagementString}">
+        <TabItem Header="{loc:Localization UserManagementString}" Visibility="{Binding CurrentUser.Administrator}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>

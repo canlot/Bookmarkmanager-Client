@@ -24,6 +24,9 @@ namespace Bookmark_Manager_Client.ViewModel
                 mainViewModel = value;
             }
         }
+
+        public User CurrentUser => ObjectRepository.DataProvider.CurrentUser;
+
         private string host;
         public string Host { get => host; set { host = value; OnPropertyChanged(); } }
 
