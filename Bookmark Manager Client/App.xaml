@@ -23,6 +23,7 @@
             <viewmodel:MainViewModel x:Key="MainViewModel" IconsDictionary="{StaticResource IconsDictionary}"  />
             <converters:ParentIdToReadOnlyStateConverter x:Key="ParentIdToReadOnlyStateConverter" />
             <converters:BoolInverterConverter x:Key="BoolInverterConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <loc:Localizationprovider x:Key="LocalizationProvider" />
             <FontFamily x:Key="MaterialFont">/Resources/MaterialIcons-Regular.ttf#Material Icons</FontFamily>
             <!-- Other app resources here -->
