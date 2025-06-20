@@ -10,6 +10,7 @@
         xmlns:controller="clr-namespace:Bookmark_Manager_Client.Controller"
         xmlns:converter="clr-namespace:Bookmark_Manager_Client.Converters"
         xmlns:model="clr-namespace:Bookmark_Manager_Client.Model"
+        xmlns:uc="clr-namespace:Bookmark_Manager_Client.UserControls"
         DataContext="{StaticResource MainViewModel}"
         mc:Ignorable="d"
         Title="Bookmark Manager" Height="800" Width="1000" 
@@ -86,7 +87,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="TreeViewItemStyle1" TargetType="{x:Type TreeViewItem}">
+        <Style x:Key="TreeViewItemStyle1" TargetType="{x:Type TreeViewItem}" >
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
             <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
@@ -176,37 +177,28 @@
                     <ColumnDefinition Width="3*" MaxWidth="1000"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0"  HorizontalAlignment="Left" CornerRadius="5"  BorderThickness="1" Margin="5" >
-                    <StackPanel Margin="5" Orientation="Horizontal" >
+                    <ui:SimpleStackPanel Margin="5" Orientation="Horizontal" >
+                        
+                        <uc:MenuButtonControl
+                            Icon="{StaticResource CategoryAddImage}" 
+                            Text="{loc:Localization ButtonCategoryCreateString}"
+                            Command="{Binding ChangeUserControlCommand}"
+                            CommandParameter="CategoryUserControlNew"/>
+                        
+                        <uc:MenuButtonControl
+                            Icon="{StaticResource CategoryEditImage}" 
+                            Text="{loc:Localization ButtonCategoryEditString}"
+                            Command="{Binding ChangeUserControlCommand}"
+                            CommandParameter="CategoryUserControlEdit"/>
 
-                        <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" 
-                            BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Command="{Binding ChangeUserControlCommand}" 
-                            CommandParameter="CategoryUserControlNew">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="{StaticResource CategoryAddImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}"  />
-                                <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
-                                   TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0" 
-                                   SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonCategoryCreateString}"/>
-                                </Grid>
-                        </Button>
-                        <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" 
-                            Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" 
-                            Command="{Binding ChangeUserControlCommand}" CommandParameter="CategoryUserControlEdit">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="{StaticResource CategoryEditImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}" />
-                                <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
-                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonCategoryEditString}"/>
-                            </Grid>
-                        </Button>
-                        <Button x:Name="CategoryDeleteButton" Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" Click="CategoryDeleteButton_Click"
+                        <uc:MenuButtonControl
+                            Icon="{StaticResource CategoryDeleteImage}"
+                            Text="{loc:Localization ButtonCategoryDeleteString}"
+                            Command="{Binding ChangeUserControlCommand}"
+                            />
+                        
+                        <Button x:Name="CategoryDeleteButton" Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" 
+                                Click="CategoryDeleteButton_Click"
                             Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -219,63 +211,38 @@
                                        SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonCategoryDeleteString}"/>
                             </Grid>
                         </Button>
+                        
+                        
                         <Border VerticalAlignment="Stretch" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
-                        <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Command="{Binding ChangeUserControlCommand}" CommandParameter="BookmarkUserControlNew">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="{StaticResource LinkAddImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}"/>
-                                <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
-                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonBookmarkCreateString}"/>
-                            </Grid>
-                        </Button>
-                        <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" 
-                            Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}"
-                            Command="{Binding ChangeUserControlCommand}" CommandParameter="BookmarkUserControlEdit">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="{StaticResource LinkEditImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}"/>
-                                <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
-                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonBookmarkEditString}"/>
-                            </Grid>
-                        </Button>
-                        <Button x:Name="BookmarkDeleteButton" Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}" Foreground="{DynamicResource AppBarButtonForeground}" 
-                            BorderBrush="{DynamicResource AppBarButtonBorderBrush}" Click="BookmarkDeleteButton_Click">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="{StaticResource LinkDeleteImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}"/>
-                                <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
-                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonBookmarkDeleteString}"/>
-                            </Grid>
-                        </Button>
-                        <Border VerticalAlignment="Stretch" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
-                        <Button Width="{StaticResource MenuButtonWidth}"  Background="{DynamicResource AppBarButtonBackground}"
-                                Command="{Binding ChangeUserControlCommand}" CommandParameter="SettingsUserControl"
-                                Foreground="{DynamicResource AppBarButtonForeground}" BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="{StaticResource SettingsImage}" SnapsToDevicePixels="True" Width="{StaticResource MenuButtonImageWidth}"/>
-                                <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" 
-                                       TextWrapping="Wrap" FontFamily="{DynamicResource ContentControlThemeFontFamily}" Margin="5,0,5,0"
-                                       SnapsToDevicePixels="True" FontSize="{StaticResource FontSize}" Text="{loc:Localization ButtonSettingsString}"/>
-                            </Grid>
-                        </Button>
 
-                    </StackPanel>
+                        <uc:MenuButtonControl 
+                            Icon="{StaticResource LinkAddImage}" 
+                            Text="{loc:Localization ButtonBookmarkCreateString}"
+                            Command="{Binding ChangeUserControlCommand}"
+                            CommandParameter="BookmarkUserControlNew"/>
+
+                        <uc:MenuButtonControl
+                            Icon="{StaticResource LinkEditImage}" 
+                            Text="{loc:Localization ButtonBookmarkEditString}"
+                            Command="{Binding ChangeUserControlCommand}"
+                            CommandParameter="BookmarkUserControlEdit"/>
+
+                        <uc:MenuButtonControl
+                            Icon="{StaticResource LinkDeleteImage}" 
+                            Text="{loc:Localization ButtonBookmarkDeleteString}"
+                            Command="{Binding ChangeUserControlCommand}"
+                            CommandParameter="BookmarkUserControlDelete"/>
+                        
+                        <Border VerticalAlignment="Stretch" BorderBrush="{StaticResource BorderColor}" BorderThickness="0.5" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
+
+                        <uc:MenuButtonControl
+                            Icon="{StaticResource SettingsImage}" 
+                            Text="{loc:Localization ButtonSettingsString}"
+                            Command="{Binding ChangeUserControlCommand}"
+                            CommandParameter="SettingsUserControl"/>
+                        
+
+                    </ui:SimpleStackPanel>
                 </Border>
                 <Border Grid.Column="1" Margin="10" >
                     <ui:AutoSuggestBox x:Name="SearchBox" Grid.Column="1" Margin="15" VerticalAlignment="Center" 
@@ -294,7 +261,7 @@
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" HorizontalAlignment="Stretch" Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" >
                     <TreeView  x:Name="treeViewCategory" Margin="10,10" ItemsSource="{Binding Categories}" SelectedItemChanged="treeViewCategory_SelectedItemChanged"  HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource TreeViewItemStyle1}" >
-                        <TreeView.ItemTemplate >
+                        <TreeView.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding ChildCategories}">
                                 <Border x:Name="brd" BorderBrush="{StaticResource BorderColor}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Padding="2" >
                                     <Border.ContextMenu>

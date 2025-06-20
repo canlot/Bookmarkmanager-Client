@@ -159,6 +159,9 @@
     <Compile Include="UserControls\CategoryUserControlNew.xaml.cs">
       <DependentUpon>CategoryUserControlNew.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\MenuButtonControl.xaml.cs">
+      <DependentUpon>MenuButtonControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>
@@ -245,6 +248,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\CategoryUserControlNew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MenuButtonControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Bookmark_Manager_Client.UserControls.MenuButtonControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Bookmark_Manager_Client.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+    <UserControl.Resources>
+        <sys:Double x:Key="MenuButtonImageWidth">32</sys:Double>
+        <sys:Double x:Key="MenuButtonWidth">100</sys:Double>
+        <sys:Double x:Key="FontSize">12</sys:Double>
+    </UserControl.Resources>
+    <Button
+        Width="{StaticResource MenuButtonWidth}" 
+        Background="{DynamicResource AppBarButtonBackground}"
+        BorderBrush="{DynamicResource AppBarButtonBorderBrush}"
+        CommandParameter="{Binding CommandParameter, RelativeSource={RelativeSource AncestorType=UserControl}}"
+        Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" 
+                   Source="{Binding Icon, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+               SnapsToDevicePixels="True" 
+                   Width="{StaticResource MenuButtonImageWidth}"  />
+            <TextBlock Grid.Row="1" 
+                       VerticalAlignment="Stretch" 
+                       HorizontalAlignment="Stretch" 
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" 
+                       FontFamily="{DynamicResource ContentControlThemeFontFamily}" 
+                       Margin="5,0,5,0"
+                       SnapsToDevicePixels="True"
+                       FontSize="{StaticResource FontSize}" 
+                       Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        </Grid>
+    </Button>
+</UserControl>
