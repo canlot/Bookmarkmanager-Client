@@ -8,13 +8,14 @@
              d:DesignHeight="450" d:DesignWidth="800"
              xmlns:loc="clr-namespace:Bookmark_Manager_Client.Localization"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+             VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"
+             HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
     <UserControl.Resources>
         <sys:Double x:Key="MenuButtonImageWidth">32</sys:Double>
         <sys:Double x:Key="MenuButtonWidth">100</sys:Double>
         <sys:Double x:Key="FontSize">12</sys:Double>
     </UserControl.Resources>
-    <Button
+    <Button VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"
         Width="{StaticResource MenuButtonWidth}" 
         Background="{DynamicResource AppBarButtonBackground}"
         BorderBrush="{DynamicResource AppBarButtonBorderBrush}"
